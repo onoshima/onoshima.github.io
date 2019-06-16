@@ -18,7 +18,7 @@
       <pubDate>Thu, 13 Jun 2019 20:37:10 +0900</pubDate>
       
       <guid>https://onoshima.github.io/posts/test/</guid>
-      <description>これはテスト投稿です。</description>
+      <description>これはテスト投稿です。 # パッケージを読み込み library(psych) # 記述統計を表示 describe(dat) # 繰り返し for (ite in 1:12){ x[ite] &amp;lt;- rnorm(1) }</description>
     </item>
     
     <item>
