@@ -7,9 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright> &amp;copy; Takahiro Onoshima</copyright>
+    <lastBuildDate>Mon, 17 Jun 2019 07:16:54 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>アセスメント</title>
+      <link>https://onoshima.github.io/categories/%E3%82%A2%E3%82%BB%E3%82%B9%E3%83%A1%E3%83%B3%E3%83%88/</link>
+      <pubDate>Mon, 17 Jun 2019 07:16:54 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/categories/%E3%82%A2%E3%82%BB%E3%82%B9%E3%83%A1%E3%83%B3%E3%83%88/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

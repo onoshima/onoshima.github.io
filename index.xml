@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright> &amp;copy; Takahiro Onoshima</copyright>
-    <lastBuildDate>Thu, 13 Jun 2019 20:37:10 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 17 Jun 2019 07:16:54 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cross-battery approachの調べもの記録</title>
+      <link>https://onoshima.github.io/posts/xba1/</link>
+      <pubDate>Mon, 17 Jun 2019 07:16:54 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/posts/xba1/</guid>
+      <description>Essentials of Cross-battery Assessment（Flanagan, 2013）のはじめの方を少し読んだのでメモを残す。 XBAとは Cross-battery Assessment（XBA）アプローチとは, すごく単純に言うと複数の認知検査, 到達テスト, 神経心理学検査を組み合わせることで, 心理アセスメントの実践家がより, 体系的で, 信頼性があり, 理論に基づいた検査の解釈ができるようにすることを目指すアプローチのことである。 XBAアプローチは, CHC理論</description>
+    </item>
     
     <item>
       <title>Test</title>
@@ -27,7 +36,7 @@
       <pubDate>Tue, 11 Jun 2019 19:06:36 +0900</pubDate>
       
       <guid>https://onoshima.github.io/posts/works/</guid>
-      <description>研究テーマ 見習いPsychometricianで心理測定に関心があります。現在は連続変数の離散化によって生じる相関係数のバイアスについて調べています。修士課程の途中までは自閉スペクトラム症児者の支援についての研究をしており、教育領域での発達障害児の支援も細々とやっています。 論文 小野島昂洋. (2018). 錯視を用いた自閉スペクトラム症の視覚研究の動向と課題. 早稲田大学教育学会紀要, 19, 23–30. 小野島昂洋・梅永</description>
+      <description>研究テーマ 見習いPsychometricianで心理測定に関心があります。現在は連続変数の離散化によって生じる相関係数のバイアスについて調べています。修士課程の途中までは自閉スペクトラム症児者の支援についての研究をしており、教育領域での発達障害児の支援も細々とやっています。 論文 小野島昂洋. (2019). 積木模様検査の歴史とmoveを応用した研究に関する考察. 早稲田大学教育学会紀要, 20, 32–37. 小野島昂洋・梅</description>
     </item>
     
     <item>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>アセスメント on Takahiro Onoshima&#39;s website</title>
+    <link>https://onoshima.github.io/categories/%E3%82%A2%E3%82%BB%E3%82%B9%E3%83%A1%E3%83%B3%E3%83%88/</link>
+    <description>Recent content in アセスメント on Takahiro Onoshima&#39;s website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright> &amp;copy; Takahiro Onoshima</copyright>
+    <lastBuildDate>Mon, 17 Jun 2019 07:16:54 +0900</lastBuildDate>
+    
+	<atom:link href="https://onoshima.github.io/categories/%E3%82%A2%E3%82%BB%E3%82%B9%E3%83%A1%E3%83%B3%E3%83%88/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Cross-battery approachの調べもの記録</title>
+      <link>https://onoshima.github.io/posts/xba1/</link>
+      <pubDate>Mon, 17 Jun 2019 07:16:54 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/posts/xba1/</guid>
+      <description>Essentials of Cross-battery Assessment（Flanagan, 2013）のはじめの方を少し読んだのでメモを残す。 XBAとは Cross-battery Assessment（XBA）アプローチとは, すごく単純に言うと複数の認知検査, 到達テスト, 神経心理学検査を組み合わせることで, 心理アセスメントの実践家がより, 体系的で, 信頼性があり, 理論に基づいた検査の解釈ができるようにすることを目指すアプローチのことである。 XBAアプローチは, CHC理論</description>
+    </item>
+    
+  </channel>
+</rss>
