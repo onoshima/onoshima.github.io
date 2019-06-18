@@ -8,12 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  ubuntu &ndash; Takahiro Onoshima&#39;s website
+  Ubuntu 18.04にCiscoAnyconnectを入れたときのメモ &ndash; Takahiro Onoshima&#39;s website
 
     </title>
     
     
-    <meta name="description" property="og:description" content="">
+    <meta name="description" property="og:description" content="大学のVPN接続にCiscoのソフトウェアを入れる必要があったのだが, 大学のマニュアルにはWindows用とMac用のインストール手順しか乗っておらず, ubuntuへの導入については色々と調べる必要があった。結果的に次のサイトで見つけたコードをターミナルに打ち込んだら問題なく導入された。 sudo apt-get update sudo apt-get install network-manager-openconnect sudo apt install libpangox-1.0-0 sudo apt-get install lib32z1 lib32ncurses5 cd ~ &amp;amp;&amp;amp; mkdir download-anyconnect cd download-anyconnect &amp;amp;&amp;amp; wget http://www.isthe.com/for-you-only/anyconnect/OLD/anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz tar -xzvf anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz cd /anyconnect-4.3.05017/vpn/ sudo ./vpn_install.sh sudo systemctl daemon-reload 参照：How to install Cisco Anyconnect on Ubuntu 18.04 64-Bit.|">
     
 
     <meta name="apple-mobile-web-app-title" content="Takahiro Onoshima&#39;s website">
@@ -93,24 +93,12 @@
       <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
         
 
-<div>
-
-  <h1>ubuntu</h1>
-  <p>これはubuntuフォルダのindexファイルです。</p>
-
-
-  
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Ubuntu 18.04にCiscoAnyconnectを入れたときのメモ</div>
+  </div>
+  <div class="Subhead-description">
     
-    
-<div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
-  <div class="Subhead mb-2">
-    <div class="Subhead-heading">
-      <a href="/ubuntu/190618cisco/">
-        <div class="h2 mt-1 mb-1">Ubuntu 18.04にCiscoAnyconnectを入れたときのメモ</div>
-      </a>
-    </div>
-    <div class="Subhead-description">
-      
 
 
 <a href='/categories/ubuntu' class="muted-link">
@@ -124,28 +112,45 @@
 </a>
 
 
-      <div class="float-md-right">
-        <span>2019-06-18</span>
-      </div>
-    </div>
-  </div>
-  <div class="text-gray">
+
     
-    大学のVPN接続にCiscoのソフトウェアを入れる必要があったのだが, 大学のマニュアルにはWindows用とMac用のインストール手順しか乗っておらず, ubuntuへの導入については色々と調べる必要があった。結果的に次のサイトで見つけたコードをターミナルに打ち込んだら問題なく導入された。 sudo apt-get update sudo apt-get install network-manager-openconnect sudo apt install libpangox-1.0-0 sudo apt-get install lib32z1 lib32ncurses5 cd ~ &amp;&amp; mkdir download-anyconnect cd download-anyconnect &amp;&amp; wget http://www.isthe.com/for-you-only/anyconnect/OLD/anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz tar -xzvf anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz cd /anyconnect-4.3.05017/vpn/ sudo ./vpn_install.sh sudo systemctl daemon-reload 参照：How to install Cisco Anyconnect on Ubuntu 18.04 64-Bit.
-    <a class="muted-link" href="/ubuntu/190618cisco/">…</a>
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-06-18. Published at: 2019-06-18.">
+        
+          Lastmod: 2019-06-18
+        
+      </span>
+    </div>
+    
   </div>
 </div>
-
+<article>
   
+  <section class="pb-6 mb-3 border-bottom">
+    <p>大学のVPN接続にCiscoのソフトウェアを入れる必要があったのだが, 大学のマニュアルにはWindows用とMac用のインストール手順しか乗っておらず, ubuntuへの導入については色々と調べる必要があった。結果的に次のサイトで見つけたコードをターミナルに打ち込んだら問題なく導入された。</p>
 
-  
-  
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update
+sudo apt-get install network-manager-openconnect
+sudo apt install libpangox-1.0-0
+sudo apt-get install lib32z1 lib32ncurses5
+cd ~ <span style="color:#f92672">&amp;&amp;</span> mkdir download-anyconnect
+cd download-anyconnect <span style="color:#f92672">&amp;&amp;</span> wget http://www.isthe.com/for-you-only/anyconnect/OLD/anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz
+tar -xzvf anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz
+cd /anyconnect-4.3.05017/vpn/
+sudo ./vpn_install.sh
 
+sudo systemctl daemon-reload</code></pre></div>
 
+<p>参照：<a href="https://bestvpndotblog.wordpress.com/2018/05/08/how-to-install-cisco-anyconnect-on-ubuntu-18-04-64-bit/">How to install Cisco Anyconnect on Ubuntu 18.04 64-Bit.</a></p>
 
+  </section>
 
-</div>
-
+  <section>
+    
+      
+    
+  </section>
+</article>
 
       </div>
 
@@ -153,40 +158,17 @@
         <aside class="pr-3">
           
   
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Ubuntu 18.04にCiscoAnyconnectを入れたときのメモ</b>
+      
+    </div>
+  
 
-  <div class="Box Box--blue p-2 mb-3 mt-5">
-    <a href="/tags/" class="link-gray-dark">
-      <h4>Tags</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/tags/ciscoanyconnect" class="link-gray text-emphasized css-truncate-target"><span class="">Ciscoanyconnect</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
-
-
-
-  <div class="Box Box--blue p-2 mb-3">
-    <a href="/categories/" class="link-gray-dark">
-      <h4>Categories</h4>
-    </a>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/ubuntu" class="link-gray text-emphasized css-truncate-target"><span class="">Ubuntu</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-    <span class="css-truncate no-wrap m-1 pl-1">
-      <a href="/categories/%e3%82%a2%e3%82%bb%e3%82%b9%e3%83%a1%e3%83%b3%e3%83%88" class="link-gray text-emphasized css-truncate-target"><span class="">アセスメント</span></a>
-      <span class="text-right Counter">1</span>
-    </span>
-    
-  </div>
-
-
+  
+    <div>
+      
+    </div>
+  
 
         </aside>
       </div>

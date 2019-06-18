@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  Categories &ndash; Takahiro Onoshima&#39;s website
+  ubuntu &ndash; Takahiro Onoshima&#39;s website
 
     </title>
     
@@ -95,39 +95,46 @@
 
 <div>
 
-  <h1>Categories</h1>
+  <h1>ubuntu</h1>
   
 
   
-  <div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-2">
     
-    <div class="mb-2">
-      <a href="/categories/ubuntu/" class="link-gray-dark"><span class="h2">ubuntu</span></a>
-      <span class="text-right Counter Counter--gray">1</span>
+    
+<div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
+  <div class="Subhead mb-2">
+    <div class="Subhead-heading">
+      <a href="/ubuntu/190618cisco/">
+        <div class="h2 mt-1 mb-1">Ubuntu 18.04にCiscoAnyconnectを入れたときのメモ</div>
+      </a>
     </div>
-    <div class="text-gray">
-      
-      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/ubuntu/190618cisco/" role="button">Ubuntu 18.04にCiscoAnyconnectを入れたときのメモ</a>
+    <div class="Subhead-description">
       
 
-      
+
+<a href='/categories/ubuntu' class="muted-link">
+  <span class="Label Label--gray-darker">ubuntu</span>
+</a>
+
+
+
+<a href='/tags/ciscoanyconnect' class="muted-link">
+  <span class="Label Label--gray">CiscoAnyconnect</span>
+</a>
+
+
+      <div class="float-md-right">
+        <span>2019-06-18</span>
+      </div>
     </div>
   </div>
-  
-  <div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-2">
+  <div class="text-gray">
     
-    <div class="mb-2">
-      <a href="/categories/%E3%82%A2%E3%82%BB%E3%82%B9%E3%83%A1%E3%83%B3%E3%83%88/" class="link-gray-dark"><span class="h2">アセスメント</span></a>
-      <span class="text-right Counter Counter--gray">1</span>
-    </div>
-    <div class="text-gray">
-      
-      <a class="btn btn-transparent bg-blue-light link-gray mb-2" href="/posts/xba1/" role="button">Cross-battery approachの調べもの記録</a>
-      
-
-      
-    </div>
+    大学のVPN接続にCiscoのソフトウェアを入れる必要があったのだが, 大学のマニュアルにはWindows用とMac用のインストール手順しか乗っておらず, ubuntuへの導入については色々と調べる必要があった。結果的に次のサイトで見つけたコードをターミナルに打ち込んだら問題なく導入された。 sudo apt-get update sudo apt-get install network-manager-openconnect sudo apt install libpangox-1.0-0 sudo apt-get install lib32z1 lib32ncurses5 cd ~ &amp;&amp; mkdir download-anyconnect cd download-anyconnect &amp;&amp; wget http://www.isthe.com/for-you-only/anyconnect/OLD/anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz tar -xzvf anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz cd /anyconnect-4.3.05017/vpn/ sudo ./vpn_install.sh sudo systemctl daemon-reload 参照：How to install Cisco Anyconnect on Ubuntu 18.04 64-Bit.
+    <a class="muted-link" href="/ubuntu/190618cisco/">…</a>
   </div>
+</div>
+
   
 
   
