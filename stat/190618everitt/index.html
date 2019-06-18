@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  テトラコリック相関の初期 &ndash; Takahiro Onoshima&#39;s website
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="テトラコリック相関係数関連の論文を読んだメモ。テトラコリック相関を計算するときに便利な表を作ったぞという話。 書誌情報 Everitt, P. F. (1910). Tables of the tetrachoric functions for fourfold correlation talbes. Biometrika, 7(4), 437–451. https://doi.org/10.1093/biomet/7.4.437 テーブルの説明 Pearson(1900)が発表したテトラコリック相関では以下のようなクロス表を想定して相関係数を求める。 左の図の実線はx軸とy軸である。点線が表す平面が二変量正規分布を切って4つの区画a,b,c,dに分けられてると考|">
+    
+
+    <meta name="apple-mobile-web-app-title" content="Takahiro Onoshima&#39;s website">
+    
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://onoshima.github.io">
+    Takahiro Onoshima&#39;s website
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io">
+      
+      <span>Home</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/profile/">
+      
+      <span>Profile</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/works/">
+      
+      <span>Works</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/stat/">
+      
+      <span>Stat</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/ubuntu/">
+      
+      <span>Ubuntu</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/posts/">
+      
+      <span>Posts</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">テトラコリック相関の初期</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/stat' class="muted-link">
+  <span class="Label Label--gray-darker">stat</span>
+</a>
+
+
+
+<a href='/tags/tetrachoric-correlation' class="muted-link">
+  <span class="Label Label--gray">tetrachoric correlation</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-06-18. Published at: 2019-06-18.">
+        
+          Lastmod: 2019-06-18
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
+
+<p>テトラコリック相関係数関連の論文を読んだメモ。テトラコリック相関を計算するときに便利な表を作ったぞという話。</p>
+
+<h2 id="書誌情報">書誌情報</h2>
+
+<blockquote>
+<p>Everitt, P. F. (1910). Tables of the tetrachoric functions for fourfold correlation talbes. <em>Biometrika, 7</em>(4), 437–451. <a href="https://doi.org/10.1093/biomet/7.4.437">https://doi.org/10.1093/biomet/7.4.437</a></p>
+</blockquote>
+
+<h2 id="テーブルの説明">テーブルの説明</h2>
+
+<p>Pearson(1900)が発表したテトラコリック相関では以下のようなクロス表を想定して相関係数を求める。
+<img src="/images/everitt_p437.png" alt="Everitt 437ページ" title="Everitt p.437" /></p>
+
+<p>左の図の実線はx軸とy軸である。点線が表す平面が二変量正規分布を切って4つの区画a,b,c,dに分けられてると考える。周辺確率を用いてhとkの値を求めることができる。</p>
+
+<p>さて, この表から相関係数が求めるには以下の式が使われる。</p>
+
+<p>$$ \frac{d}{N} = \frac{b+d}{N} \cdot \frac{c+d}{N}+S _ {1}^{\infty} (\frac{r^n}{n!}HK\bar{v} _ {n-1}\bar{w} _ {n-1}) \tag{1}$$</p>
+
+<p>ここでHとKは正規曲線の縦座標（確率密度）である（Sは今の $\Sigma$ ）。$\bar{v}と\bar{w}$ は以下の式で与えられる。</p>
+
+<p>$$
+\bar{v} = h\bar{v} _ {n-1} - (n-1)\bar{v} _ {n-2}, \bar{v} _ 0 = 1, \bar{v} _ 1 = h
+$$
+$$
+\bar{w} = k\bar{w} _ {n-1} - (n-1)\bar{w} _ {n-2}, \bar{w}_0 = 1, \bar{w} _ 1 = k
+$$
+これらを用いて,</p>
+
+<p>$$\tau_n = \frac{H\bar{v} _ s{n-1}}{\sqrt{n!}}
+$$
+$$
+\tau_n&rsquo; = \frac{K\bar{w} _ {n-1}}{\sqrt{n!}}
+$$
+とすると最初の(1)式は以下のように書き換えることができる。</p>
+
+<p>$$ \frac{d}{N} = \frac{b+d}{N}\cdot \frac{c+d}{N} + S_{1}^{\infty}(\tau_n \tau_n&rsquo;r^n) \tag{ 2 } $$</p>
+
+<p>この論文では, $\tau_6$までの数表が乗っていて, 相関表からテトラコリック相関rを簡単に求められるようになっている。</p>
+
+<h2 id="テーブル利用の実際">テーブル利用の実際</h2>
+
+<p>論文では例として次のようなテーブルが挙げられている</p>
+
+<p>こんな感じの2×2の表を使う。</p>
+
+<table>
+<thead>
+<tr>
+<th>1668 (a)</th>
+<th>131 (b)</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td><strong>137 (c )</strong></td>
+<td><strong>64 (d)</strong></td>
+</tr>
+</tbody>
+</table>
+
+<p>この値を用いて, 論文巻末の表を見ると,次のように値が求まる。</p>
+
+<table>
+<thead>
+<tr>
+<th>$\tau _ 1$</th>
+<th>$\tau _ 2$</th>
+<th>$\tau _ 3$</th>
+<th>$\tau _ 4$</th>
+<th>$\tau _ 5$</th>
+<th>$\tau _ 6$</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>0.17228</td>
+<td>0.15787</td>
+<td>0.04779</td>
+<td>-0.06018</td>
+<td>-0.06693</td>
+<td>0.00854</td>
+</tr>
+
+<tr>
+<td>0.17614</td>
+<td>0.159276</td>
+<td>0.04567</td>
+<td>-0.06275</td>
+<td>-0.06652</td>
+<td>0.01111</td>
+</tr>
+</tbody>
+</table>
+
+<p>これを用いると(1)式に代入すると,</p>
+
+<p>$$
+0.032000 = 0.009799+0.030345r+0.025142r^2+0.002183r^3+0.003776r^4+0.004452r^5+0.000095r^5 \tag{3}
+$$
+となる。
+あとはこの方程式を解けば$r=0.501$のようにテトラコリック相関係数が求まるそうである。（論文だとニュートン法で解いたと書いてある）</p>
+
+<h2 id="rで実験">Rで実験</h2>
+
+<p>データをまず入力。
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">dat <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">matrix</span>(<span style="color:#66d9ef">c</span>(<span style="color:#ae81ff">1668</span>,<span style="color:#ae81ff">137</span>,<span style="color:#ae81ff">131</span>,<span style="color:#ae81ff">64</span>),<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>)</code></pre></div></p>
+
+<p>周辺頻度からhとkおよびHとKを計算する。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">N <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">sum</span>(dat)
+b_plus_d_byN <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">colSums</span>(dat)[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">/</span>N
+<span style="color:#75715e">## 0.0975</span>
+c_plus_d_byN <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">rowSums</span>(dat)[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">/</span>N
+<span style="color:#75715e">## 0.1005</span>
+
+h <span style="color:#f92672">&lt;-</span> qnorm(b_plus_d_byN, lower.tail <span style="color:#f92672">=</span> F)
+k <span style="color:#f92672">&lt;-</span> qnorm(c_plus_d_byN, lower.tail <span style="color:#f92672">=</span> F)
+
+H <span style="color:#f92672">&lt;-</span> dnorm(h)
+<span style="color:#75715e">## 0.1722765</span>
+K <span style="color:#f92672">&lt;-</span> dnorm(k)
+<span style="color:#75715e">## 0.1761384</span></code></pre></div>
+
+<p>τを求める計算式を作る。愚直に数式を入力する。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">tau <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">numeric</span>(<span style="color:#ae81ff">6</span>)
+v_bar <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">numeric</span>(<span style="color:#ae81ff">6</span>)
+
+<span style="color:#66d9ef">for</span>(n <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">6</span>){
+  <span style="color:#66d9ef">if</span>(n<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>){
+    v_bar[n] <span style="color:#f92672">&lt;-</span> h
+    tau[n] <span style="color:#f92672">&lt;-</span> (H<span style="color:#f92672">*</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">/</span><span style="color:#66d9ef">sqrt</span>(<span style="color:#66d9ef">factorial</span>(n))
+  } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (n<span style="color:#f92672">==</span><span style="color:#ae81ff">2</span>){
+    v_bar[n] <span style="color:#f92672">&lt;-</span> h<span style="color:#f92672">^</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>
+    tau[n] <span style="color:#f92672">&lt;-</span> H <span style="color:#f92672">*</span> v_bar[n<span style="color:#ae81ff">-1</span>] <span style="color:#f92672">/</span><span style="color:#66d9ef">sqrt</span>(<span style="color:#66d9ef">factorial</span>(n))
+  } <span style="color:#66d9ef">else</span>{
+    v_bar[n] <span style="color:#f92672">&lt;-</span> h <span style="color:#f92672">*</span> v_bar[n<span style="color:#ae81ff">-1</span>] <span style="color:#f92672">-</span> (n<span style="color:#ae81ff">-1</span>) <span style="color:#f92672">*</span> v_bar[n<span style="color:#ae81ff">-2</span>]
+    tau[n] <span style="color:#f92672">&lt;-</span> (H <span style="color:#f92672">*</span> v_bar[n<span style="color:#ae81ff">-1</span>])<span style="color:#f92672">/</span><span style="color:#66d9ef">sqrt</span>(<span style="color:#66d9ef">factorial</span>(n))  
+  }
+}
+<span style="color:#75715e">## tauの中身</span>
+[<span style="color:#ae81ff">1</span>]  <span style="color:#ae81ff">0.172276537</span>  <span style="color:#ae81ff">0.157867340</span>  <span style="color:#ae81ff">0.047785511</span> <span style="color:#ae81ff">-0.060181440</span> <span style="color:#ae81ff">-0.066934070</span>  <span style="color:#ae81ff">0.008538122</span></code></pre></div>
+
+<p>同じ要領で, もう一つの方のtauも求めて(3)式を作る。Rでニュートン法を使う際には<code>polyroot()</code>の関数を用いる。この関数では, 多項式の係数を並べたベクトルを引数として与えると, 多項式=0となる解を計算してくれる。
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># dat[2,2]/Nは(2)式の左辺を右辺に移行したもの</span>
+coef_vec <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">c</span>(b_plus_d_byN <span style="color:#f92672">*</span> c_plus_d_byN <span style="color:#f92672">-</span> dat[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>]<span style="color:#f92672">/</span>N, tau <span style="color:#f92672">*</span> tau2 )
+<span style="color:#66d9ef">round</span>(<span style="color:#66d9ef">polyroot</span>(coef_vector),<span style="color:#ae81ff">3</span>)
+<span style="color:#75715e"># 結果のベクトル</span>
+[<span style="color:#ae81ff">1</span>]  <span style="color:#ae81ff">0.502+0.00i</span>  <span style="color:#ae81ff">-1.544+0.67i</span>  <span style="color:#ae81ff">-1.544-0.67i</span>   <span style="color:#ae81ff">0.866-1.68i</span>   <span style="color:#ae81ff">0.866+1.68i</span>
+<span style="color:#ae81ff">-46.007+0.00i</span></code></pre></div></p>
+
+<p>1番目の引数に論文とほぼ同じ数値である$r=0.502$があり, テトラコリック相関が求まったことが分かる。</p>
+
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>テトラコリック相関の初期</b>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#書誌情報">書誌情報</a></li>
+<li><a href="#テーブルの説明">テーブルの説明</a></li>
+<li><a href="#テーブル利用の実際">テーブル利用の実際</a></li>
+<li><a href="#rで実験">Rで実験</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy; Takahiro Onoshima &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+
+
+      </div>
+    </div>
+
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+  </body>
+</html>
