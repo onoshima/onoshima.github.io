@@ -7,15 +7,24 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright> &amp;copy; Takahiro Onoshima</copyright>
-    <lastBuildDate>Tue, 18 Jun 2019 15:10:22 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 19 Jun 2019 21:59:21 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>R</title>
+      <link>https://onoshima.github.io/tags/r/</link>
+      <pubDate>Wed, 19 Jun 2019 21:59:21 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>tetrachoric correlation</title>
       <link>https://onoshima.github.io/tags/tetrachoric-correlation/</link>
-      <pubDate>Tue, 18 Jun 2019 15:10:22 +0900</pubDate>
+      <pubDate>Wed, 19 Jun 2019 21:59:21 +0900</pubDate>
       
       <guid>https://onoshima.github.io/tags/tetrachoric-correlation/</guid>
       <description></description>

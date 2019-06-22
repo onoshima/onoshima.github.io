@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  テトラコリック相関係数を求める関数の自作 &ndash; Takahiro Onoshima&#39;s website
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="先日テトラコリック相関係数を求める方法についての記事を書いた。 テトラコリック相関の初期 それに基づいてRでテトラコリック相関係数を求める関数を自作した。 Rでの関数化 作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということをorder=という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。 tetrachoric &amp;lt;- function(cor.table, order=6){ #必要な数値を代入 N|">
+    
+
+    <meta name="apple-mobile-web-app-title" content="Takahiro Onoshima&#39;s website">
+    
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://onoshima.github.io">
+    Takahiro Onoshima&#39;s website
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io">
+      
+      <span>Home</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/profile/">
+      
+      <span>Profile</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/works/">
+      
+      <span>Works</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/stat/">
+      
+      <span>Stat</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/ubuntu/">
+      
+      <span>Ubuntu</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/posts/">
+      
+      <span>Posts</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">テトラコリック相関係数を求める関数の自作</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/stat' class="muted-link">
+  <span class="Label Label--gray-darker">stat</span>
+</a>
+
+
+
+<a href='/tags/tetrachoric-correlation' class="muted-link">
+  <span class="Label Label--gray">tetrachoric correlation</span>
+</a>
+
+<a href='/tags/r' class="muted-link">
+  <span class="Label Label--gray">R</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-06-22. Published at: 2019-06-19.">
+        
+          Lastmod: 2019-06-22
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
+
+<p>先日テトラコリック相関係数を求める方法についての記事を書いた。</p>
+
+<p><a href="https://onoshima.github.io/stat/190618Everitt">テトラコリック相関の初期</a></p>
+
+<p>それに基づいてRでテトラコリック相関係数を求める関数を自作した。</p>
+
+<h2 id="rでの関数化">Rでの関数化</h2>
+
+<p>作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということを<code>order=</code>という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">tetrachoric <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">function</span>(cor.table, order<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>){
+
+  <span style="color:#75715e">#必要な数値を代入</span>
+  N <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">sum</span>(cor.table)
+  prop.bd <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">colSums</span>(<span style="color:#66d9ef">prop.table</span>(cor.table))[<span style="color:#ae81ff">2</span>]
+  prop.cd <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">rowSums</span>(<span style="color:#66d9ef">prop.table</span>(cor.table))[<span style="color:#ae81ff">2</span>]
+  h <span style="color:#f92672">&lt;-</span> qnorm(prop.bd, lower.tail <span style="color:#f92672">=</span> F)
+  H <span style="color:#f92672">&lt;-</span> dnorm(h)
+  k <span style="color:#f92672">&lt;-</span> qnorm(prop.cd, lower.tail <span style="color:#f92672">=</span> F)
+  K <span style="color:#f92672">&lt;-</span> dnorm(k)
+  tau <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">numeric</span>(<span style="color:#66d9ef">order</span>)
+  theta <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">numeric</span>(<span style="color:#66d9ef">order</span>)
+  v_bar <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">numeric</span>(<span style="color:#66d9ef">order</span>)
+  w_bar <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">numeric</span>(<span style="color:#66d9ef">order</span>)
+
+  <span style="color:#75715e">#テトラコリック関数</span>
+  <span style="color:#66d9ef">for</span>(n <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#66d9ef">order</span>){
+    <span style="color:#66d9ef">if</span>(n<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>){
+      v_bar[n] <span style="color:#f92672">&lt;-</span> h
+      w_bar[n] <span style="color:#f92672">&lt;-</span> k
+      tau[n] <span style="color:#f92672">&lt;-</span> H
+      theta[n] <span style="color:#f92672">&lt;-</span> K
+    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (n<span style="color:#f92672">==</span><span style="color:#ae81ff">2</span>){
+      v_bar[n] <span style="color:#f92672">&lt;-</span> h<span style="color:#f92672">^</span><span style="color:#ae81ff">2-1</span>
+      w_bar[n] <span style="color:#f92672">&lt;-</span> k<span style="color:#f92672">^</span><span style="color:#ae81ff">2-1</span>
+      tau[n] <span style="color:#f92672">&lt;-</span> H<span style="color:#f92672">*</span>h<span style="color:#f92672">/</span><span style="color:#66d9ef">sqrt</span>(<span style="color:#ae81ff">2</span>)
+      theta[n] <span style="color:#f92672">&lt;-</span> K<span style="color:#f92672">*</span>k<span style="color:#f92672">/</span><span style="color:#66d9ef">sqrt</span>(<span style="color:#ae81ff">2</span>)
+    } <span style="color:#66d9ef">else</span> {
+      v_bar[n] <span style="color:#f92672">&lt;-</span> h <span style="color:#f92672">*</span> v_bar[n<span style="color:#ae81ff">-1</span>] <span style="color:#f92672">-</span> (n<span style="color:#ae81ff">-1</span>) <span style="color:#f92672">*</span> v_bar[n<span style="color:#ae81ff">-2</span>]
+      w_bar[n] <span style="color:#f92672">&lt;-</span> k <span style="color:#f92672">*</span> w_bar[n<span style="color:#ae81ff">-1</span>] <span style="color:#f92672">-</span> (n<span style="color:#ae81ff">-1</span>) <span style="color:#f92672">*</span> w_bar[n<span style="color:#ae81ff">-2</span>]
+      tau[n] <span style="color:#f92672">&lt;-</span>  H<span style="color:#f92672">*</span>v_bar[n<span style="color:#ae81ff">-1</span>]<span style="color:#f92672">/</span><span style="color:#66d9ef">sqrt</span>(<span style="color:#66d9ef">factorial</span>(n))
+      theta[n] <span style="color:#f92672">&lt;-</span> K<span style="color:#f92672">*</span>w_bar[n<span style="color:#ae81ff">-1</span>]<span style="color:#f92672">/</span><span style="color:#66d9ef">sqrt</span>(<span style="color:#66d9ef">factorial</span>(n))
+    }
+  }
+
+  <span style="color:#75715e"># 相関を計算</span>
+  coef_vec <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">c</span>(prop.bd <span style="color:#f92672">*</span> prop.cd <span style="color:#f92672">-</span> cor.table[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>]<span style="color:#f92672">/</span>N, tau <span style="color:#f92672">*</span> theta)
+  res <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">Re</span>(<span style="color:#66d9ef">polyroot</span>(coef_vec)[<span style="color:#ae81ff">1</span>])
+  <span style="color:#66d9ef">return</span>(res)
+}</code></pre></div>
+
+<h2 id="性能評価の数値実験">性能評価の数値実験</h2>
+
+<p>この関数がどの程度正確に相関係数を推定できるか実験してみる。母相関を0.8とする2変量標準正規分布からN=1000の乱数を発生させて, それを $ h=0.3, k=-0.2 $ の閾値でそれぞれ2値化する。例えば, 身長と体重の2変量が, それぞれ【高い,低い】【重い,軽い】のように2値データとして手に入った状態を想定すると良い。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#f92672">library</span>(mvtnorm)
+dat <span style="color:#f92672">&lt;-</span> rmvnorm(<span style="color:#ae81ff">1000</span>, mean<span style="color:#f92672">=</span><span style="color:#66d9ef">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>), sigma<span style="color:#f92672">=</span><span style="color:#66d9ef">matrix</span>(<span style="color:#66d9ef">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0.8</span>,<span style="color:#ae81ff">0.8</span>,<span style="color:#ae81ff">1</span>),<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>))
+height <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">cut</span>(dat[,<span style="color:#ae81ff">1</span>], breaks<span style="color:#f92672">=</span><span style="color:#66d9ef">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>,<span style="color:#ae81ff">0.3</span>,<span style="color:#66d9ef">Inf</span>),labels<span style="color:#f92672">=</span><span style="color:#66d9ef">c</span>(<span style="color:#e6db74">&#34;低い&#34;</span>, <span style="color:#e6db74">&#34;高い&#34;</span>))
+weight <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">cut</span>(dat[,<span style="color:#ae81ff">2</span>], breaks<span style="color:#f92672">=</span><span style="color:#66d9ef">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>,<span style="color:#ae81ff">-0.2</span>,<span style="color:#66d9ef">Inf</span>),labels<span style="color:#f92672">=</span><span style="color:#66d9ef">c</span>(<span style="color:#e6db74">&#34;軽い&#34;</span>, <span style="color:#e6db74">&#34;重い&#34;</span>))
+
+<span style="color:#75715e"># こんな感じの相関表になる</span>
+<span style="color:#66d9ef">table</span>(height, weight)
+      weight
+height 軽い 重い
+  低い  <span style="color:#ae81ff">400</span>  <span style="color:#ae81ff">237</span>
+  高い   <span style="color:#ae81ff">27</span>  <span style="color:#ae81ff">336</span></code></pre></div>
+
+<p>このような2値データのペアの相関係数を計算すると当然離散化前より絶対値が低下していることが分かるが, テトラコリック相関係数ではもとの値に近い値を推定できている。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">cor(dat[,<span style="color:#ae81ff">1</span>], dat[,<span style="color:#ae81ff">2</span>]) <span style="color:#75715e"># 離散化前の相関</span>
+[<span style="color:#ae81ff">1</span>] <span style="color:#ae81ff">0.7930115</span>
+cor(<span style="color:#66d9ef">as.numeric</span>(height),<span style="color:#66d9ef">as.numeric</span>(weight)) <span style="color:#75715e"># 離散化後の相関</span>
+[<span style="color:#ae81ff">1</span>] <span style="color:#ae81ff">0.4956164</span>
+tetrachoric(<span style="color:#66d9ef">table</span>(height, weight)) <span style="color:#75715e"># テトラコリック相関</span>
+[<span style="color:#ae81ff">1</span>] <span style="color:#ae81ff">0.7463495</span>
+ </code></pre></div>
+
+<p>さて, これと同様の手続きを10000回繰り返し, テトラコリック相関係数はどの程度もとの相関を再現できるかを以下のコードで確かめた。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">## 繰り返しの回数</span>
+n.iteration <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10000</span>
+
+<span style="color:#75715e">##保存用ベクトル</span>
+tetra <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">numeric</span>(n.iteration)
+cont <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">numeric</span>(n.iteration)
+pearson <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">numeric</span>(n.iteration)
+
+<span style="color:#66d9ef">for</span>(ite <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>n.iteration){
+  dat <span style="color:#f92672">&lt;-</span> rmvnorm(<span style="color:#ae81ff">1000</span>, mean<span style="color:#f92672">=</span><span style="color:#66d9ef">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>), sigma<span style="color:#f92672">=</span><span style="color:#66d9ef">matrix</span>(<span style="color:#66d9ef">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0.8</span>,<span style="color:#ae81ff">0.8</span>,<span style="color:#ae81ff">1</span>),<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>))
+  height <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">cut</span>(dat[,<span style="color:#ae81ff">1</span>], breaks<span style="color:#f92672">=</span><span style="color:#66d9ef">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>,<span style="color:#ae81ff">0.3</span>,<span style="color:#66d9ef">Inf</span>),labels<span style="color:#f92672">=</span><span style="color:#66d9ef">c</span>(<span style="color:#e6db74">&#34;低い&#34;</span>, <span style="color:#e6db74">&#34;高い&#34;</span>))
+  weight <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">cut</span>(dat[,<span style="color:#ae81ff">2</span>], breaks<span style="color:#f92672">=</span><span style="color:#66d9ef">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>,<span style="color:#ae81ff">-0.2</span>,<span style="color:#66d9ef">Inf</span>),labels<span style="color:#f92672">=</span><span style="color:#66d9ef">c</span>(<span style="color:#e6db74">&#34;軽い&#34;</span>, <span style="color:#e6db74">&#34;重い&#34;</span>))
+
+  cont[ite] <span style="color:#f92672">&lt;-</span> cor(dat)[<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>]
+  pearson[ite] <span style="color:#f92672">&lt;-</span> cor(<span style="color:#66d9ef">as.numeric</span>(height),<span style="color:#66d9ef">as.numeric</span>(weight))
+  tetra[ite] <span style="color:#f92672">&lt;-</span> tetrachoric(<span style="color:#66d9ef">table</span>(height, weight))  
+}</code></pre></div>
+
+<p>結果は次の画像の通りである。
+<img src="/images/tetra_res.png" alt="数値実験結果" /></p>
+
+<p>図中のContというのが連続変量のまま相関係数を計算したもの, Pearsonが離散化した変数でそのままピアソンの積率相関を求めたもの, Tetraがテトラコリック相関係数を求めたものである。TetraとPearsonを比べると, Pearsonが0.5-06付近まで相関係数の絶対値が低下しているのに対して, Tetraは母相関である0.8のあたりを概ね正確に推定していることが分かる。</p>
+
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>テトラコリック相関係数を求める関数の自作</b>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#rでの関数化">Rでの関数化</a></li>
+<li><a href="#性能評価の数値実験">性能評価の数値実験</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy; Takahiro Onoshima &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+
+
+      </div>
+    </div>
+
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+  </body>
+</html>
