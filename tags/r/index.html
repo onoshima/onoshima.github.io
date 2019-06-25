@@ -71,6 +71,13 @@
     
     
     
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/r/">
+      
+      <span>R</span>
+    </a>
+    
+    
+    
     <a class="UnderlineNav-item " href="https://onoshima.github.io/ubuntu/">
       
       <span>Ubuntu</span>
@@ -80,7 +87,7 @@
     
     <a class="UnderlineNav-item " href="https://onoshima.github.io/posts/">
       
-      <span>Posts</span>
+      <span>Others</span>
     </a>
     
     
@@ -97,6 +104,47 @@
 
   <h1>R</h1>
   
+
+  
+    
+    
+<div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
+  <div class="Subhead mb-2">
+    <div class="Subhead-heading">
+      <a href="/r/filter/">
+        <div class="h2 mt-1 mb-1">tidyrを使ったデータの整理</div>
+      </a>
+    </div>
+    <div class="Subhead-description">
+      
+
+
+<a href='/categories/r' class="muted-link">
+  <span class="Label Label--gray-darker">R</span>
+</a>
+
+
+
+<a href='/tags/tidyverse' class="muted-link">
+  <span class="Label Label--gray">tidyverse</span>
+</a>
+
+<a href='/tags/r' class="muted-link">
+  <span class="Label Label--gray">R</span>
+</a>
+
+
+      <div class="float-md-right">
+        <span>2019-06-25</span>
+      </div>
+    </div>
+  </div>
+  <div class="text-gray">
+    
+    データ整理にtidyverseを使った際の覚書。まずデータフレームをas_tibble()でtidy用の形式にする。 library(tidyverse) air &lt;- airquality tidy.air &lt;- as_tibble(air) 条件に合うケースの抽出 filter()関数を使うと良いらしい。 ## 条件に合う行を抽出 air.May &lt;- tidy.air %&gt;% filter(Month==5) #5月のデータのみ取り出す Ozone.mean &lt;- mean(air$Ozone, na.rm=T) air.high.Ozone &lt;- tidy.air %&gt;% # オゾンが平均より高いケースを取り出す filter(Ozone &gt; Ozone.mean) air.high.Ozone.May &lt;- tidy.air %&gt;% #複合条件もOK filter(Ozone &gt; Ozone.mean, Month==5) 抽出されたケースを見ると, オゾンの値が平均（43くらい）より
+    <a class="muted-link" href="/r/filter/">…</a>
+  </div>
+</div>
 
   
     
@@ -169,12 +217,17 @@
     
     <span class="css-truncate no-wrap m-1 pl-1">
       <a href="/tags/r" class="link-gray text-emphasized css-truncate-target"><span class="">R</span></a>
-      <span class="text-right Counter">1</span>
+      <span class="text-right Counter">2</span>
     </span>
     
     <span class="css-truncate no-wrap m-1 pl-1">
       <a href="/tags/tetrachoric-correlation" class="link-gray text-emphasized css-truncate-target"><span class="">Tetrachoric correlation</span></a>
       <span class="text-right Counter">2</span>
+    </span>
+    
+    <span class="css-truncate no-wrap m-1 pl-1">
+      <a href="/tags/tidyverse" class="link-gray text-emphasized css-truncate-target"><span class="">Tidyverse</span></a>
+      <span class="text-right Counter">1</span>
     </span>
     
   </div>
@@ -186,6 +239,11 @@
     <a href="/categories/" class="link-gray-dark">
       <h4>Categories</h4>
     </a>
+    
+    <span class="css-truncate no-wrap m-1 pl-1">
+      <a href="/categories/r" class="link-gray text-emphasized css-truncate-target"><span class="">R</span></a>
+      <span class="text-right Counter">1</span>
+    </span>
     
     <span class="css-truncate no-wrap m-1 pl-1">
       <a href="/categories/stat" class="link-gray text-emphasized css-truncate-target"><span class="">Stat</span></a>
