@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright> &amp;copy; Takahiro Onoshima</copyright>
-    <lastBuildDate>Tue, 25 Jun 2019 16:38:21 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 03 Jul 2019 07:10:40 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ブートストラップについての調べもの</title>
+      <link>https://onoshima.github.io/r/boot/</link>
+      <pubDate>Wed, 03 Jul 2019 07:10:40 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/r/boot/</guid>
+      <description>Rでブートストラップについて調べたときの記録。 ブートストラップとは 大雑把に言えば, 統計量とかの分布を調べたりするために一つの標本から新しい標本（ブートストラップ標本）を何個も作ることのようだ。パラメトリックとノンパラメトリックがある。 今回扱うのはノンパラメトリックの方。 自作関数によるブートストラップ ブートストラップ標本を作るときには, もとの標本から同じサイズで復元抽出を行う。復元抽出とは要するに,</description>
+    </item>
     
     <item>
       <title>tidyrを使ったデータの整理</title>

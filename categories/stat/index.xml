@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright> &amp;copy; Takahiro Onoshima</copyright>
-    <lastBuildDate>Wed, 19 Jun 2019 21:59:21 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 01 Jul 2019 07:28:27 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/categories/stat/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Pearson1922</title>
+      <link>https://onoshima.github.io/stat/pearson1922/</link>
+      <pubDate>Mon, 01 Jul 2019 07:28:27 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/stat/pearson1922/</guid>
+      <description>イントロ broad categoriesの問題。 - method of mean square contingency table (p.127)でclass incex correrationsをcorrectについて触れている(1913の論文かな)。これは満足のいく結果（周辺分布がとってもunequalでかつ相関が.85以上のように高くなければ。 - Ritchie-Scottがポリコリック相関について書いている。 weighted mean of the possible tetrachoric valuesを用いるがそれはlaboriousで実際的でない。</description>
+    </item>
     
     <item>
       <title>テトラコリック相関係数を求める関数の自作</title>
