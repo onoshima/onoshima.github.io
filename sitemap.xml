@@ -44,23 +44,6 @@
   </url>
   
   <url>
-    <loc>https://onoshima.github.io/stat/pearson1922/</loc>
-    <lastmod>2019-07-01T08:10:27+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://onoshima.github.io/tags/polychoric-correlation/</loc>
-    <lastmod>2019-07-01T08:10:27+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://onoshima.github.io/categories/stat/</loc>
-    <lastmod>2019-07-01T08:10:27+09:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://onoshima.github.io/r/filter/</loc>
     <lastmod>2019-06-25T17:06:25+09:00</lastmod>
   </url>
@@ -68,6 +51,12 @@
   <url>
     <loc>https://onoshima.github.io/tags/tidyverse/</loc>
     <lastmod>2019-06-25T17:06:25+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/categories/stat/</loc>
+    <lastmod>2019-06-22T11:57:51+09:00</lastmod>
     <priority>0</priority>
   </url>
   
