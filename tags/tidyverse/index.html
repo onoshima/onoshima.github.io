@@ -139,6 +139,7 @@
       </div>
     </div>
   </div>
+
   <div class="text-gray">
     
     データ整理にtidyverseを使った際の覚書。まずデータフレームをas_tibble()でtidy用の形式にする。 library(tidyverse) air &lt;- airquality tidy.air &lt;- as_tibble(air) 条件に合うケースの抽出 filter()関数を使うと良いらしい。 ## 条件に合う行を抽出 air.May &lt;- tidy.air %&gt;% filter(Month==5) #5月のデータのみ取り出す Ozone.mean &lt;- mean(air$Ozone, na.rm=T) air.high.Ozone &lt;- tidy.air %&gt;% # オゾンが平均より高いケースを取り出す filter(Ozone &gt; Ozone.mean) air.high.Ozone.May &lt;- tidy.air %&gt;% #複合条件もOK filter(Ozone &gt; Ozone.mean, Month==5) 抽出されたケースを見ると, オゾンの値が平均（43くらい）より
