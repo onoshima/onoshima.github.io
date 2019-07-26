@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright> &amp;copy; Takahiro Onoshima</copyright>
-    <lastBuildDate>Wed, 03 Jul 2019 07:10:40 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 26 Jul 2019 13:47:56 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,9 +15,18 @@
     <item>
       <title>R</title>
       <link>https://onoshima.github.io/tags/r/</link>
-      <pubDate>Wed, 03 Jul 2019 07:10:40 +0900</pubDate>
+      <pubDate>Fri, 26 Jul 2019 13:47:56 +0900</pubDate>
       
       <guid>https://onoshima.github.io/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>apply</title>
+      <link>https://onoshima.github.io/tags/apply/</link>
+      <pubDate>Fri, 26 Jul 2019 13:47:56 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/apply/</guid>
       <description></description>
     </item>
     
