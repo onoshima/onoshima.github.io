@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>apply on Takahiro Onoshima&#39;s website</title>
+    <title>apply on Takahiro Onoshima&#39;s website | 小野島昂洋のページ</title>
     <link>https://onoshima.github.io/tags/apply/</link>
-    <description>Recent content in apply on Takahiro Onoshima&#39;s website</description>
+    <description>Recent content in apply on Takahiro Onoshima&#39;s website | 小野島昂洋のページ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <copyright> &amp;copy; Takahiro Onoshima</copyright>
+    <copyright> &amp;copy; 2019 Takahiro Onoshima</copyright>
     <lastBuildDate>Fri, 26 Jul 2019 13:47:56 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/apply/index.xml" rel="self" type="application/rss+xml" />
@@ -14,10 +14,10 @@
     
     <item>
       <title>Rのlapply関数に関するメモ</title>
-      <link>https://onoshima.github.io/r/laaply/</link>
+      <link>https://onoshima.github.io/stat/laaply/</link>
       <pubDate>Fri, 26 Jul 2019 13:47:56 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/r/laaply/</guid>
+      <guid>https://onoshima.github.io/stat/laaply/</guid>
       <description>lapplyおよびparallelパッケージのmclapplyについて調べた際の記録。 lapplyとは Rで同一の関数を複数のオブジェクトを対象に行うときには, forで繰り返しのループで書くよりも, apply()ファミリーを用いて並列的に処理したほうが早いと言われる。lapplyは, 与えられたリストに対して同一の関数を適用する。lapplyだと戻り値はリストで, sapplyだと戻り値はベクトルである</description>
     </item>
     

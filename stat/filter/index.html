@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  tidyrを使ったデータの整理 &ndash; Takahiro Onoshima&#39;s website | 小野島昂洋のページ
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="データ整理にtidyverseを使った際の覚書。まずデータフレームをas_tibble()でtidy用の形式にする。 library(tidyverse) air &amp;lt;- airquality tidy.air &amp;lt;- as_tibble(air) 条件に合うケースの抽出 filter()関数を使うと良いらしい。 ## 条件に合う行を抽出 air.May &amp;lt;- tidy.air %&amp;gt;% filter(Month==5) #5月のデータのみ取り出す Ozone.mean &amp;lt;- mean(air$Ozone, na.rm=T) air.high.Ozone &amp;lt;- tidy.air %&amp;gt;% # オゾンが平均より高いケースを取り出す filter(Ozone &amp;gt; Ozone.mean) air.high.Ozone.May &amp;lt;- tidy.air %&amp;gt;% #複合条件もOK filter(Ozone &amp;gt; Ozone.mean, Month==5) 抽出されたケースを見ると, オゾンの値が平均（43くらい）より|">
+    
+
+    <meta name="apple-mobile-web-app-title" content="Takahiro Onoshima&#39;s website | 小野島昂洋のページ">
+    
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://onoshima.github.io">
+    Takahiro Onoshima&#39;s website | 小野島昂洋のページ
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io">
+      
+      <span>Home</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/profile/">
+      
+      <span>Profile</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/works/">
+      
+      <span>Works</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/stat/">
+      
+      <span>Stat/R</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/posts/">
+      
+      <span>Others</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">tidyrを使ったデータの整理</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/r' class="muted-link">
+  <span class="Label Label--gray-darker">R</span>
+</a>
+
+
+
+<a href='/tags/tidyverse' class="muted-link">
+  <span class="Label Label--gray">tidyverse</span>
+</a>
+
+<a href='/tags/r' class="muted-link">
+  <span class="Label Label--gray">R</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-06-25. Published at: 2019-06-25.">
+        
+          Lastmod: 2019-06-25
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
+
+<p>データ整理に<code>tidyverse</code>を使った際の覚書。まずデータフレームを<code>as_tibble()</code>でtidy用の形式にする。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#f92672">library</span>(tidyverse)
+
+air <span style="color:#f92672">&lt;-</span> airquality
+tidy.air <span style="color:#f92672">&lt;-</span> as_tibble(air)</code></pre></div>
+
+<h2 id="条件に合うケースの抽出">条件に合うケースの抽出</h2>
+
+<p><code>filter()</code>関数を使うと良いらしい。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">## 条件に合う行を抽出</span>
+air.May <span style="color:#f92672">&lt;-</span> tidy.air <span style="color:#f92672">%&gt;%</span>
+  filter(Month<span style="color:#f92672">==</span><span style="color:#ae81ff">5</span>) <span style="color:#75715e">#5月のデータのみ取り出す</span>
+
+Ozone.mean <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">mean</span>(air<span style="color:#f92672">$</span>Ozone, na.rm<span style="color:#f92672">=</span>T)
+
+air.high.Ozone <span style="color:#f92672">&lt;-</span> tidy.air <span style="color:#f92672">%&gt;%</span> <span style="color:#75715e"># オゾンが平均より高いケースを取り出す</span>
+  filter(Ozone <span style="color:#f92672">&gt;</span> Ozone.mean)
+
+air.high.Ozone.May <span style="color:#f92672">&lt;-</span> tidy.air <span style="color:#f92672">%&gt;%</span> <span style="color:#75715e">#複合条件もOK</span>
+  filter(Ozone <span style="color:#f92672">&gt;</span> Ozone.mean, Month<span style="color:#f92672">==</span><span style="color:#ae81ff">5</span>)</code></pre></div>
+
+<p>抽出されたケースを見ると, オゾンの値が平均（43くらい）よりも高いケースのみのデータセットが出来上がっている。</p>
+
+<p><img src="/images/filter.png" alt="抽出されたケース" /></p>
+
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>tidyrを使ったデータの整理</b>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#条件に合うケースの抽出">条件に合うケースの抽出</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy; 2019 Takahiro Onoshima &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+
+
+      </div>
+    </div>
+
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+  </body>
+</html>

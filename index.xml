@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Takahiro Onoshima&#39;s website</title>
+    <title>Takahiro Onoshima&#39;s website | 小野島昂洋のページ</title>
     <link>https://onoshima.github.io/</link>
-    <description>Recent content on Takahiro Onoshima&#39;s website</description>
+    <description>Recent content on Takahiro Onoshima&#39;s website | 小野島昂洋のページ</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <copyright> &amp;copy; Takahiro Onoshima</copyright>
+    <copyright> &amp;copy; 2019 Takahiro Onoshima</copyright>
     <lastBuildDate>Fri, 26 Jul 2019 13:47:56 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/index.xml" rel="self" type="application/rss+xml" />
@@ -14,28 +14,28 @@
     
     <item>
       <title>Rのlapply関数に関するメモ</title>
-      <link>https://onoshima.github.io/r/laaply/</link>
+      <link>https://onoshima.github.io/stat/laaply/</link>
       <pubDate>Fri, 26 Jul 2019 13:47:56 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/r/laaply/</guid>
+      <guid>https://onoshima.github.io/stat/laaply/</guid>
       <description>lapplyおよびparallelパッケージのmclapplyについて調べた際の記録。 lapplyとは Rで同一の関数を複数のオブジェクトを対象に行うときには, forで繰り返しのループで書くよりも, apply()ファミリーを用いて並列的に処理したほうが早いと言われる。lapplyは, 与えられたリストに対して同一の関数を適用する。lapplyだと戻り値はリストで, sapplyだと戻り値はベクトルである</description>
     </item>
     
     <item>
       <title>ブートストラップについての調べもの</title>
-      <link>https://onoshima.github.io/r/boot/</link>
+      <link>https://onoshima.github.io/stat/boot/</link>
       <pubDate>Wed, 03 Jul 2019 07:10:40 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/r/boot/</guid>
+      <guid>https://onoshima.github.io/stat/boot/</guid>
       <description>Rでブートストラップについて調べたときの記録。 ブートストラップとは 大雑把に言えば, 統計量とかの分布を調べたりするために一つの標本から新しい標本（ブートストラップ標本）を何個も作ることのようだ。パラメトリックとノンパラメトリックがある。 今回扱うのはノンパラメトリックの方。 自作関数によるブートストラップ ブートストラップ標本を作るときには, もとの標本から同じサイズで復元抽出を行う。復元抽出とは要するに,</description>
     </item>
     
     <item>
       <title>tidyrを使ったデータの整理</title>
-      <link>https://onoshima.github.io/r/filter/</link>
+      <link>https://onoshima.github.io/stat/filter/</link>
       <pubDate>Tue, 25 Jun 2019 16:38:21 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/r/filter/</guid>
+      <guid>https://onoshima.github.io/stat/filter/</guid>
       <description>データ整理にtidyverseを使った際の覚書。まずデータフレームをas_tibble()でtidy用の形式にする。 library(tidyverse) air &amp;lt;- airquality tidy.air &amp;lt;- as_tibble(air) 条件に合うケースの抽出 filter()関数を使うと良いらしい。 ## 条件に合う行を抽出 air.May &amp;lt;- tidy.air %&amp;gt;% filter(Month==5) #5月のデータのみ取り出す Ozone.mean &amp;lt;- mean(air$Ozone, na.rm=T) air.high.Ozone &amp;lt;- tidy.air %&amp;gt;% # オゾンが平均より高いケースを取り出す filter(Ozone &amp;gt; Ozone.mean) air.high.Ozone.May &amp;lt;- tidy.air %&amp;gt;% #複合条件もOK filter(Ozone &amp;gt; Ozone.mean, Month==5) 抽出されたケースを見ると, オゾンの値が平均（43くらい）より</description>
     </item>
     
@@ -59,10 +59,10 @@
     
     <item>
       <title>Ubuntu 18.04にCiscoAnyconnectを入れたときのメモ</title>
-      <link>https://onoshima.github.io/ubuntu/190618cisco/</link>
+      <link>https://onoshima.github.io/posts/190618cisco/</link>
       <pubDate>Tue, 18 Jun 2019 10:48:11 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/ubuntu/190618cisco/</guid>
+      <guid>https://onoshima.github.io/posts/190618cisco/</guid>
       <description>大学のVPN接続にCiscoのソフトウェアを入れる必要があったのだが, 大学のマニュアルにはWindows用とMac用のインストール手順しか乗っておらず, ubuntuへの導入については色々と調べる必要があった。結果的に次のサイトで見つけたコードをターミナルに打ち込んだら問題なく導入された。 sudo apt-get update sudo apt-get install network-manager-openconnect sudo apt install libpangox-1.0-0 sudo apt-get install lib32z1 lib32ncurses5 cd ~ &amp;amp;&amp;amp; mkdir download-anyconnect cd download-anyconnect &amp;amp;&amp;amp; wget http://www.isthe.com/for-you-only/anyconnect/OLD/anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz tar -xzvf anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz cd /anyconnect-4.3.05017/vpn/ sudo ./vpn_install.sh sudo systemctl daemon-reload 参照：How to install Cisco Anyconnect on Ubuntu 18.04 64-Bit.</description>
     </item>
     
