@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  apply &ndash; Takahiro Onoshima&#39;s website | 小野島昂洋のページ
+  ベクタ画像 &ndash; Takahiro Onoshima&#39;s website | 小野島昂洋のページ
 
     </title>
     
@@ -88,7 +88,7 @@
 
 <div>
 
-  <h1>apply</h1>
+  <h1>ベクタ画像</h1>
   
 
   
@@ -97,17 +97,13 @@
 <div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
   <div class="Subhead mb-2">
     <div class="Subhead-heading">
-      <a href="/stat/laaply/">
-        <div class="h2 mt-1 mb-1">Rのlapply関数に関するメモ</div>
+      <a href="/stat/pdf/">
+        <div class="h2 mt-1 mb-1">Rでベクタ画像を作る際のメモ</div>
       </a>
     </div>
     <div class="Subhead-description">
       
 
-
-<a href='/categories/r' class="muted-link">
-  <span class="Label Label--gray-darker">R</span>
-</a>
 
 
 
@@ -115,21 +111,21 @@
   <span class="Label Label--gray">R</span>
 </a>
 
-<a href='/tags/apply' class="muted-link">
-  <span class="Label Label--gray">apply</span>
+<a href='/tags/%E3%83%99%E3%82%AF%E3%82%BF%E7%94%BB%E5%83%8F' class="muted-link">
+  <span class="Label Label--gray">ベクタ画像</span>
 </a>
 
 
       <div class="float-md-right">
-        <span>2019-07-26</span>
+        <span>2019-07-30</span>
       </div>
     </div>
   </div>
 
   <div class="text-gray">
     
-    lapplyおよびparallelパッケージのmclapplyについて調べた際の記録。 lapplyとは Rで同一の関数を複数のオブジェクトを対象に行うときには, forで繰り返しのループで書くよりも, apply()ファミリーを用いて並列的に処理したほうが早いと言われる。lapplyは, 与えられたリストに対して同一の関数を適用する。lapplyだと戻り値はリストで, sapplyだと戻り値はベクトルである
-    <a class="muted-link" href="/stat/laaply/">…</a>
+    Rでベクタ画像を作成する際に色々調べたメモ。 ベクタ画像の作り方 postscriptでデバイスを開いて次のようにすると良い。 postscript(&#34;eps_sample1.eps&#34;, width=7, height=7, paper=&#34;special&#34;, onefile = F, horizontal = F) plot(1:10, main=&#34;eps file&#34;) dev.off() widthとheightはインチ指定で描画する領域。paperはその外側の領域で&rdquo;a4&rdquo;とかサイズを指定するそうだけれど純粋に描いた領域の画像が欲しい場合は&rdquo;special&rdquo;を指定しておくと良いらしい。
+    <a class="muted-link" href="/stat/pdf/">…</a>
   </div>
 </div>
 

@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright> &amp;copy; 2019 Takahiro Onoshima</copyright>
-    <lastBuildDate>Fri, 26 Jul 2019 13:47:56 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 30 Jul 2019 18:20:19 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Rでベクタ画像を作る際のメモ</title>
+      <link>https://onoshima.github.io/stat/pdf/</link>
+      <pubDate>Tue, 30 Jul 2019 18:20:19 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/stat/pdf/</guid>
+      <description>Rでベクタ画像を作成する際に色々調べたメモ。 ベクタ画像の作り方 postscriptでデバイスを開いて次のようにすると良い。 postscript(&amp;#34;eps_sample1.eps&amp;#34;, width=7, height=7, paper=&amp;#34;special&amp;#34;, onefile = F, horizontal = F) plot(1:10, main=&amp;#34;eps file&amp;#34;) dev.off() widthとheightはインチ指定で描画する領域。paperはその外側の領域で&amp;rdquo;a4&amp;rdquo;とかサイズを指定するそうだけれど純粋に描いた領域の画像が欲しい場合は&amp;rdquo;special&amp;rdquo;を指定しておくと良いらしい。</description>
+    </item>
     
     <item>
       <title>Rのlapply関数に関するメモ</title>

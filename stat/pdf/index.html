@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  Rでベクタ画像を作る際のメモ &ndash; Takahiro Onoshima&#39;s website | 小野島昂洋のページ
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="Rでベクタ画像を作成する際に色々調べたメモ。 ベクタ画像の作り方 postscriptでデバイスを開いて次のようにすると良い。 postscript(&amp;#34;eps_sample1.eps&amp;#34;, width=7, height=7, paper=&amp;#34;special&amp;#34;, onefile = F, horizontal = F) plot(1:10, main=&amp;#34;eps file&amp;#34;) dev.off() widthとheightはインチ指定で描画する領域。paperはその外側の領域で&amp;rdquo;a4&amp;rdquo;とかサイズを指定するそうだけれど純粋に描いた領域の画像が欲しい場合は&amp;rdquo;special&amp;rdquo;を指定しておくと良いらしい。|">
+    
+
+    <meta name="apple-mobile-web-app-title" content="Takahiro Onoshima&#39;s website | 小野島昂洋のページ">
+    
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://onoshima.github.io">
+    Takahiro Onoshima&#39;s website | 小野島昂洋のページ
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io">
+      
+      <span>Home</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/profile/">
+      
+      <span>Profile</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/works/">
+      
+      <span>Works</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/stat/">
+      
+      <span>Stat/R</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/posts/">
+      
+      <span>Others</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Rでベクタ画像を作る際のメモ</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+<a href='/tags/r' class="muted-link">
+  <span class="Label Label--gray">R</span>
+</a>
+
+<a href='/tags/%E3%83%99%E3%82%AF%E3%82%BF%E7%94%BB%E5%83%8F' class="muted-link">
+  <span class="Label Label--gray">ベクタ画像</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-07-30. Published at: 2019-07-30.">
+        
+          Lastmod: 2019-07-30
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
+
+<p>Rでベクタ画像を作成する際に色々調べたメモ。</p>
+
+<h2 id="ベクタ画像の作り方">ベクタ画像の作り方</h2>
+
+<p>postscriptでデバイスを開いて次のようにすると良い。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">postscript(<span style="color:#e6db74">&#34;eps_sample1.eps&#34;</span>,
+           width<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>, paper<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;special&#34;</span>, onefile <span style="color:#f92672">=</span> F,
+           horizontal <span style="color:#f92672">=</span> F)
+plot(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>, main<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;eps file&#34;</span>)
+dev.off()</code></pre></div>
+
+<p>widthとheightはインチ指定で描画する領域。paperはその外側の領域で&rdquo;a4&rdquo;とかサイズを指定するそうだけれど純粋に描いた領域の画像が欲しい場合は&rdquo;special&rdquo;を指定しておくと良いらしい。</p>
+
+<p><img src="/images/pdf_sample1.eps" alt="eps1" /></p>
+
+<p>onefileは1つのファイルに2つ以上の画像を埋め込むとかどうたらの設定らしいが, 指定しないで作ったら私の環境だとよく分からない余白が発生した。Rwikiによれば, horizontalを指定しておかないとLaTeXに取り込んだ際によくないことが起こるらしい。</p>
+
+<h2 id="フォントについて">フォントについて</h2>
+
+<p>フォントを変更したいときは,引数で<code>family=&quot;Times&quot;</code>のように指定してやると良い。</p>
+
+<p><img src="/images/pdf_sample3.eps" alt="eps3" /></p>
+
+<p>postscriptでどんなフォントが使えるかが知りたければ, &lsquo;postscriptFonts()&lsquo;の引数で見ることができる。Japan1というのがあるのでそれを選べば日本語が出力できる。（私のUbuntuの環境だとできるがMacだとなぜかできない。）</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">postscript(<span style="color:#e6db74">&#34;eps_sample4.eps&#34;</span>,
+           width<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>, paper<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;special&#34;</span>, onefile <span style="color:#f92672">=</span> F,
+           horizontal <span style="color:#f92672">=</span> F,
+           family<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Japan1&#34;</span>)
+plot(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>, main<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;日本語のフォント&#34;</span>)
+dev.off()</code></pre></div>
+
+<p><img src="/images/pdf_sample4.eps" alt="eps4" /></p>
+
+<h2 id="フォントの埋め込み">フォントの埋め込み</h2>
+
+<p>こうして作られたepsファイルはフォントが埋め込まれていないため, 当該のフォントが入っていない環境では表示されなくなってしまう。そこで出来上がった画像にフォントを埋め込む必要がある。といっても、関数一発でできるので難しいことはない。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">embedFonts(<span style="color:#e6db74">&#34;eps_sample1.eps&#34;</span>, format <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;eps2write&#34;</span>)</code></pre></div>
+
+<h2 id="参考にしたサイト">参考にしたサイト</h2>
+
+<p><a href="http://noucobi.com/r/reps.html">Rのポストスクリプト画像（eps・psファイル）出力</a></p>
+
+<p><a href="http://www.okadajp.org/RWiki/?R%E3%81%AB%E3%82%88%E3%82%8B%E3%83%9D%E3%82%B9%E3%83%88%E3%82%B9%E3%82%AF%E3%83%AA%E3%83%97%E3%83%88%E7%94%BB%E5%83%8F%E3%81%AELaTeX%E3%81%A7%E3%81%AE%E5%88%A9%E7%94%A8">R による EPS 画像の作成とその LATEX への取り込み</a></p>
+
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Rでベクタ画像を作る際のメモ</b>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#ベクタ画像の作り方">ベクタ画像の作り方</a></li>
+<li><a href="#フォントについて">フォントについて</a></li>
+<li><a href="#フォントの埋め込み">フォントの埋め込み</a></li>
+<li><a href="#参考にしたサイト">参考にしたサイト</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy; 2019 Takahiro Onoshima &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+
+
+      </div>
+    </div>
+
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+  </body>
+</html>
