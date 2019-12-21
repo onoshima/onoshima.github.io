@@ -7,10 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright> &amp;copy; 2019 Takahiro Onoshima</copyright>
-    <lastBuildDate>Wed, 19 Jun 2019 21:59:21 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 21 Dec 2019 16:12:33 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/categories/stat/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>2群のプリポストデータに関して</title>
+      <link>https://onoshima.github.io/stat/prepost/</link>
+      <pubDate>Sat, 21 Dec 2019 16:12:33 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/stat/prepost/</guid>
+      <description>2群のプリポストデータ 理由はよくわからないのだけれど, 知り合いから2群の差についてのプリポストデータの分析について聞かれることが多い。何かしらの介入の効果を検討したいらしく、統制群と介入群の2つに分けて, それぞれの群で介入前と介入後のデータを取るみたいな状況を想定しているようだ。 こうした場合に適切な分析手法については吉田（2006）が論じており, （1）ポスト-プリの差得点を取り, その差得点（変化量</description>
+    </item>
     
     <item>
       <title>テトラコリック相関係数を求める関数の自作</title>

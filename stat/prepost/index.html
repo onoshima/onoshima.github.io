@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  2群のプリポストデータに関して &ndash; Takahiro Onoshima&#39;s website | 小野島昂洋のページ
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="2群のプリポストデータ 理由はよくわからないのだけれど, 知り合いから2群の差についてのプリポストデータの分析について聞かれることが多い。何かしらの介入の効果を検討したいらしく、統制群と介入群の2つに分けて, それぞれの群で介入前と介入後のデータを取るみたいな状況を想定しているようだ。 こうした場合に適切な分析手法については吉田（2006）が論じており, （1）ポスト-プリの差得点を取り, その差得点（変化量|">
+    
+
+    <meta name="apple-mobile-web-app-title" content="Takahiro Onoshima&#39;s website | 小野島昂洋のページ">
+    
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://onoshima.github.io">
+    Takahiro Onoshima&#39;s website | 小野島昂洋のページ
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io">
+      
+      <span>Home</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/profile/">
+      
+      <span>Profile</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/works/">
+      
+      <span>Works</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/stat/">
+      
+      <span>Stat/R</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/posts/">
+      
+      <span>Others</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">2群のプリポストデータに関して</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/r' class="muted-link">
+  <span class="Label Label--gray-darker">R</span>
+</a>
+
+<a href='/categories/stat' class="muted-link">
+  <span class="Label Label--gray-darker">Stat</span>
+</a>
+
+
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2019-12-21. Published at: 2019-12-21.">
+        
+          Lastmod: 2019-12-21
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
+
+<h2 id="2群のプリポストデータ">2群のプリポストデータ</h2>
+
+<p>理由はよくわからないのだけれど, 知り合いから2群の差についてのプリポストデータの分析について聞かれることが多い。何かしらの介入の効果を検討したいらしく、統制群と介入群の2つに分けて, それぞれの群で介入前と介入後のデータを取るみたいな状況を想定しているようだ。</p>
+
+<p>こうした場合に適切な分析手法については吉田（2006）が論じており, （1）ポスト-プリの差得点を取り, その差得点（変化量）を従属変数としてt検定を行う, （2）プリ得点を共変量とした共分散分析（ANCOVA）を行う, の2種類が推奨されている。</p>
+
+<p>2要因（群×時期）の分散分析を行う例が散見されるが, これはこの分析において見たいのが交互作用のみで主効果の分析が意味をなさないので冗長だとされている。なお, この2要因分散分析の結果得られた交互作用のF値は, (1)の手法で得られたt統計量の2乗に一致することが知られているそうである。</p>
+
+<h2 id="実際のデータを使った例">実際のデータを使った例</h2>
+
+<p>実際のデータといっても『やさしく学べる統計学』にあるサンプルデータを使う。データはcsv形式で, 青山学院の寺尾先生のホームページのシラバスからダウンロードできる。</p>
+
+<p><a href="http://www.cc.aoyama.ac.jp/~t41338/lecture/aoyama/stat2e/stat2e_top.html">http://www.cc.aoyama.ac.jp/~t41338/lecture/aoyama/stat2e/stat2e_top.html</a></p>
+
+<p>データの中身の一部を取りだすとこんな感じ。1列目に被験者番号, 2列目に群の情報, 3列目にプリ得点, 4列目にポスト得点。なんの介入なのかは知らないけれどこんな形でデータが得られたとする。統制群と介入群は8名ずつである。</p>
+
+<table class="table table-condensed">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> sub </th>
+   <th style="text-align:right;"> group </th>
+   <th style="text-align:right;"> pre </th>
+   <th style="text-align:right;"> post </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> control </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:right;"> 40 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:right;"> control </td>
+   <td style="text-align:right;"> 40 </td>
+   <td style="text-align:right;"> 23 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:right;"> control </td>
+   <td style="text-align:right;"> 47 </td>
+   <td style="text-align:right;"> 33 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:right;"> exp </td>
+   <td style="text-align:right;"> 35 </td>
+   <td style="text-align:right;"> 36 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> exp </td>
+   <td style="text-align:right;"> 42 </td>
+   <td style="text-align:right;"> 52 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> exp </td>
+   <td style="text-align:right;"> 42 </td>
+   <td style="text-align:right;"> 52 </td>
+  </tr>
+</tbody>
+</table>
+
+<p>箱ひげ図で表してみると次のような感じ。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># データセットをlong型にして必要な列をfactorに変換</span>
+dat.long<span style="color:#f92672">&lt;-</span> dat <span style="color:#f92672">%&gt;%</span>
+  gather(key <span style="color:#f92672">=</span> time, value <span style="color:#f92672">=</span> value, <span style="color:#f92672">-</span><span style="color:#66d9ef">c</span>(group,<span style="color:#66d9ef">sub</span>)) <span style="color:#f92672">%&gt;%</span>
+  mutate(sub <span style="color:#f92672">=</span> <span style="color:#66d9ef">as.factor</span>(<span style="color:#66d9ef">sub</span>),group <span style="color:#f92672">=</span> <span style="color:#66d9ef">as.factor</span>(group), time<span style="color:#f92672">=</span> <span style="color:#66d9ef">factor</span>(time, levels<span style="color:#f92672">=</span><span style="color:#66d9ef">c</span>(<span style="color:#e6db74">&#34;pre&#34;</span>,<span style="color:#e6db74">&#34;post&#34;</span>)))
+
+<span style="color:#75715e">## データの可視化</span>
+ggplot(data<span style="color:#f92672">=</span>dat.long, aes(x<span style="color:#f92672">=</span>group,y<span style="color:#f92672">=</span>value)) <span style="color:#f92672">+</span>
+  geom_boxplot() <span style="color:#f92672">+</span>
+  facet_wrap(<span style="color:#f92672">~</span>time)</code></pre></div>
+
+<p><img src="/images/prepost1.png" alt="boxplot" /></p>
+
+<h3 id="差の変数のt検定">差の変数のt検定</h3>
+
+<p>まず, （1）の方法を試してみる。 「post-pre」の変数を作ってそれからt検定を行う。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 差の得点を作ってt検定</span>
+newdat <span style="color:#f92672">&lt;-</span> dat <span style="color:#f92672">%&gt;%</span> 
+  mutate(difference <span style="color:#f92672">=</span> post<span style="color:#f92672">-</span>pre) <span style="color:#f92672">%&gt;%</span>
+  mutate(group <span style="color:#f92672">=</span> <span style="color:#66d9ef">as.factor</span>(group))
+
+res.t <span style="color:#f92672">&lt;-</span> t.test(
+  filter(newdat,group<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;control&#34;</span>)<span style="color:#f92672">%&gt;%</span>pull(var<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;difference&#34;</span>),
+  filter(newdat,group<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;exp&#34;</span>)<span style="color:#f92672">%&gt;%</span>pull(var<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;difference&#34;</span>),
+  var.equal <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>
+)</code></pre></div>
+
+<p>結果は次のような感じ。
+<img src="/images/prepost2.png" alt="result_ttest.png" /></p>
+
+<p>t値は-2.3771で, 5%水準で有意とのこと。</p>
+
+<h3 id="事前得点を共変量にして共分散分析">事前得点を共変量にして共分散分析</h3>
+
+<p>今度は(2)の方法を試してみる。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 事前の値を統制変数とした共分散分析</span>
+res.ancova <span style="color:#f92672">&lt;-</span> lm(post<span style="color:#f92672">~</span>group<span style="color:#f92672">+</span>pre, data<span style="color:#f92672">=</span>newdat)
+<span style="color:#66d9ef">summary</span>(res.ancova)</code></pre></div>
+
+<p>結果は次の通り。</p>
+
+<p><img src="/images/prepost3.png" alt="result_ancova.png" /></p>
+
+<p>群による回帰係数が21.3574であり, このことは, 統制群と実験群では切片が21異なることを表している。1%水準で有意である。このことは次の図を見た方がわかりやすいかもしれない。</p>
+
+<p><img src="/images/prepost4.png" alt="result_ancova.png" /></p>
+
+<h3 id="2要因分散分析の場合">2要因分散分析の場合</h3>
+
+<p>では, 推奨されない方法である2要因分散分析を試してみることにする。群の要因については対応がないが, 時間の要因については対応ありのデータなのでそれを指定して分析を行う。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res.anova <span style="color:#f92672">&lt;-</span> aov(value<span style="color:#f92672">~</span>group<span style="color:#f92672">*</span>time<span style="color:#f92672">+</span>Error(<span style="color:#66d9ef">sub</span>), data<span style="color:#f92672">=</span>dat.long)
+<span style="color:#66d9ef">summary</span>(res.anova)</code></pre></div>
+
+<p>結果は次のとおりで, 交互作用は5%で有意になっている。すなわち, 時間の要因の効果は群によって異なるという結果である。</p>
+
+<p><img src="/images/prepost5.png" alt="result_anova.png" /></p>
+
+<p>ここで得られた, F値の5.651という値であるが, 最初に述べたように(1)で行った変化量についてのt検定で得られたt値を2乗した数値と一致する。</p>
+
+<p><img src="/images/prepost6.png" alt="tsquare" /></p>
+
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>2群のプリポストデータに関して</b>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#2群のプリポストデータ">2群のプリポストデータ</a></li>
+<li><a href="#実際のデータを使った例">実際のデータを使った例</a>
+<ul>
+<li><a href="#差の変数のt検定">差の変数のt検定</a></li>
+<li><a href="#事前得点を共変量にして共分散分析">事前得点を共変量にして共分散分析</a></li>
+<li><a href="#2要因分散分析の場合">2要因分散分析の場合</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy; 2019 Takahiro Onoshima &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+
+
+      </div>
+    </div>
+
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+  </body>
+</html>
