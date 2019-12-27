@@ -4,32 +4,37 @@
   
   <url>
     <loc>https://onoshima.github.io/stat/prepost/</loc>
-    <lastmod>2019-12-21T17:36:42+09:00</lastmod>
+    <lastmod>2019-12-21T17:36:41+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://onoshima.github.io/categories/</loc>
-    <lastmod>2019-12-21T17:36:42+09:00</lastmod>
+    <lastmod>2019-12-21T17:36:41+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://onoshima.github.io/categories/r/</loc>
-    <lastmod>2019-12-21T17:36:42+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://onoshima.github.io/categories/stat/</loc>
-    <lastmod>2019-12-21T17:36:42+09:00</lastmod>
+    <lastmod>2019-12-21T17:36:41+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://onoshima.github.io/</loc>
-    <lastmod>2019-12-21T17:36:42+09:00</lastmod>
+    <lastmod>2019-12-21T17:36:41+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/categories/stat/</loc>
+    <lastmod>2019-12-21T17:36:41+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://onoshima.github.io/tags/r/</loc>
     <lastmod>2019-07-30T23:49:12+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -40,16 +45,13 @@
   <url>
     <loc>https://onoshima.github.io/tags/</loc>
     <lastmod>2019-07-30T23:49:12+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://onoshima.github.io/tags/%E3%83%99%E3%82%AF%E3%82%BF%E7%94%BB%E5%83%8F/</loc>
     <lastmod>2019-07-30T23:49:12+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://onoshima.github.io/tags/apply/</loc>
-    <lastmod>2019-07-26T14:48:20+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -58,8 +60,15 @@
   </url>
   
   <url>
+    <loc>https://onoshima.github.io/tags/apply/</loc>
+    <lastmod>2019-07-26T14:48:20+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>https://onoshima.github.io/tags/bootstrap/</loc>
     <lastmod>2019-07-03T08:10:20+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -75,11 +84,13 @@
   <url>
     <loc>https://onoshima.github.io/tags/tidyverse/</loc>
     <lastmod>2019-06-25T17:06:25+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://onoshima.github.io/tags/tetrachoric-correlation/</loc>
     <lastmod>2019-06-22T11:57:51+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -95,16 +106,18 @@
   <url>
     <loc>https://onoshima.github.io/tags/ciscoanyconnect/</loc>
     <lastmod>2019-06-18T10:56:39+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://onoshima.github.io/categories/ubuntu/</loc>
-    <lastmod>2019-06-18T10:56:39+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://onoshima.github.io/posts/190618cisco/</loc>
     <lastmod>2019-06-18T10:56:39+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/categories/ubuntu/</loc>
+    <lastmod>2019-06-18T10:56:39+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
