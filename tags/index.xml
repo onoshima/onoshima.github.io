@@ -7,10 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright> &amp;copy; 2019 Takahiro Onoshima</copyright>
-    <lastBuildDate>Tue, 30 Jul 2019 18:20:19 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 27 Dec 2019 21:37:22 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Cronbach&#39;s alpha</title>
+      <link>https://onoshima.github.io/tags/cronbachs-alpha/</link>
+      <pubDate>Fri, 27 Dec 2019 21:37:22 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/cronbachs-alpha/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reliability</title>
+      <link>https://onoshima.github.io/tags/reliability/</link>
+      <pubDate>Fri, 27 Dec 2019 21:37:22 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/reliability/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>R</title>

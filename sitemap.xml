@@ -3,32 +3,55 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://onoshima.github.io/stat/prepost/</loc>
-    <lastmod>2019-12-27T20:18:51+09:00</lastmod>
+    <loc>https://onoshima.github.io/categories/</loc>
+    <lastmod>2019-12-28T20:42:05+09:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://onoshima.github.io/categories/</loc>
-    <lastmod>2019-12-27T20:18:51+09:00</lastmod>
+    <loc>https://onoshima.github.io/tags/cronbachs-alpha/</loc>
+    <lastmod>2019-12-28T20:42:05+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://onoshima.github.io/categories/r/</loc>
-    <lastmod>2019-12-27T20:18:51+09:00</lastmod>
+    <lastmod>2019-12-28T20:42:05+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/tags/</loc>
+    <lastmod>2019-12-28T20:42:05+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://onoshima.github.io/</loc>
-    <lastmod>2019-12-27T20:18:51+09:00</lastmod>
+    <lastmod>2019-12-28T20:42:05+09:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/tags/reliability/</loc>
+    <lastmod>2019-12-28T20:42:05+09:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>https://onoshima.github.io/categories/stat/</loc>
-    <lastmod>2019-12-27T20:18:51+09:00</lastmod>
+    <lastmod>2019-12-28T20:42:05+09:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/stat/cronbach/</loc>
+    <lastmod>2019-12-28T20:42:05+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/stat/prepost/</loc>
+    <lastmod>2019-12-27T20:18:51+09:00</lastmod>
   </url>
   
   <url>
@@ -40,12 +63,6 @@
   <url>
     <loc>https://onoshima.github.io/stat/pdf/</loc>
     <lastmod>2019-07-30T23:49:12+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://onoshima.github.io/tags/</loc>
-    <lastmod>2019-07-30T23:49:12+09:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
