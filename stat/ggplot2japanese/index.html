@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  ggplot2でpdfを出力する &ndash; Takahiro Onoshima&#39;s website | 小野島昂洋のページ
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="ggplot2でpdf出力 # ggplot2 pdf出力 library(tidyverse) dat &amp;lt;- as_tibble(iris) dat_long &amp;lt;- dat %&amp;gt;% gather(key=&amp;#34;part&amp;#34;, value=&amp;#34;value&amp;#34;,-Species) %&amp;gt;% mutate(part = as.factor(part)) p &amp;lt;- ggplot(dat_long, aes(x=Species, y=value, fill=Species)) &#43; geom_boxplot() &#43; facet_wrap(~part) # pdfに出力 pdf(&amp;#34;figure/iris.pdf&amp;#34;, width=7, height=7) print(p) dev.off() ※ 画像web表示のためにpng形式. 日本語ファイルを出力 pdfで使うフォントを指定してやるとよい. pdfで何のフォントが使えるかを知りたい時はnames(pdfFonts())とか打つと良い. # 日本語を使う p1 &amp;lt;- p &#43; ggtitle(&amp;#34;日本語タイトル&amp;#34;) &#43; theme(plot.title=element_text(family=&amp;#34;Japan1GothicBBB&amp;#34;)) pdf(&amp;#34;figure/iris_ja.pdf&amp;#34;, width=7, height=7) print(p1) dev.off() ※ 画像w|">
+    
+
+    <meta name="apple-mobile-web-app-title" content="Takahiro Onoshima&#39;s website | 小野島昂洋のページ">
+    
+    
+    
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://onoshima.github.io">
+    Takahiro Onoshima&#39;s website | 小野島昂洋のページ
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io">
+      
+      <span>Home</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/profile/">
+      
+      <span>Profile</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/works/">
+      
+      <span>Works</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/stat/">
+      
+      <span>Stat/R</span>
+    </a>
+    
+    
+    
+    <a class="UnderlineNav-item " href="https://onoshima.github.io/posts/">
+      
+      <span>Others</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">ggplot2でpdfを出力する</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+<a href='/categories/r' class="muted-link">
+  <span class="Label Label--gray-darker">R</span>
+</a>
+
+<a href='/categories/stat' class="muted-link">
+  <span class="Label Label--gray-darker">Stat</span>
+</a>
+
+
+
+<a href='/tags/ggplot2' class="muted-link">
+  <span class="Label Label--gray">ggplot2</span>
+</a>
+
+<a href='/tags/pdf' class="muted-link">
+  <span class="Label Label--gray">pdf</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-01-12. Published at: 2020-01-12.">
+        
+          Lastmod: 2020-01-12
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
+
+<h2 id="ggplot2でpdf出力">ggplot2でpdf出力</h2>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># ggplot2 pdf出力</span>
+<span style="color:#f92672">library</span>(tidyverse)
+dat <span style="color:#f92672">&lt;-</span> as_tibble(iris)
+
+dat_long <span style="color:#f92672">&lt;-</span> dat <span style="color:#f92672">%&gt;%</span>
+  gather(key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;part&#34;</span>, value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;value&#34;</span>,<span style="color:#f92672">-</span>Species) <span style="color:#f92672">%&gt;%</span>
+  mutate(part <span style="color:#f92672">=</span> <span style="color:#66d9ef">as.factor</span>(part))
+p <span style="color:#f92672">&lt;-</span> ggplot(dat_long, aes(x<span style="color:#f92672">=</span>Species, y<span style="color:#f92672">=</span>value, fill<span style="color:#f92672">=</span>Species)) <span style="color:#f92672">+</span>
+  geom_boxplot() <span style="color:#f92672">+</span>
+  facet_wrap(<span style="color:#f92672">~</span>part)
+
+<span style="color:#75715e"># pdfに出力</span>
+pdf(<span style="color:#e6db74">&#34;figure/iris.pdf&#34;</span>, width<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>)
+<span style="color:#66d9ef">print</span>(p)
+dev.off()</code></pre></div>
+
+<p><img src="/images/iris.png" alt="iris" />
+※ 画像web表示のためにpng形式.</p>
+
+<h2 id="日本語ファイルを出力">日本語ファイルを出力</h2>
+
+<p>pdfで使うフォントを指定してやるとよい. pdfで何のフォントが使えるかを知りたい時は<code>names(pdfFonts())</code>とか打つと良い.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 日本語を使う</span>
+p1 <span style="color:#f92672">&lt;-</span> p <span style="color:#f92672">+</span>
+  ggtitle(<span style="color:#e6db74">&#34;日本語タイトル&#34;</span>) <span style="color:#f92672">+</span>
+  theme(plot.title<span style="color:#f92672">=</span>element_text(family<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Japan1GothicBBB&#34;</span>))
+pdf(<span style="color:#e6db74">&#34;figure/iris_ja.pdf&#34;</span>, width<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>)
+<span style="color:#66d9ef">print</span>(p1)
+dev.off()</code></pre></div>
+
+<p><img src="/images/iris_ja.png" alt="iris" />
+※ 画像web表示のためにpng形式.</p>
+
+<p>フォントが入っていない環境でも同じように表示するために, 以下のようにしてフォントを埋め込んでおくと良いらしい.
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">embedFonts(<span style="color:#e6db74">&#34;figure/iris.pdf&#34;</span>)</code></pre></div></p>
+
+  </section>
+
+  <section>
+    
+      
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>ggplot2でpdfを出力する</b>
+      <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#ggplot2でpdf出力">ggplot2でpdf出力</a></li>
+<li><a href="#日本語ファイルを出力">日本語ファイルを出力</a></li>
+</ul></li>
+</ul>
+</nav>
+    </div>
+  
+
+  
+    <div>
+      
+    </div>
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    &copy; 2019 Takahiro Onoshima &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
+
+
+      </div>
+    </div>
+
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+  </body>
+</html>

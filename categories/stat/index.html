@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  stat &ndash; Takahiro Onoshima&#39;s website | 小野島昂洋のページ
+  Stat &ndash; Takahiro Onoshima&#39;s website | 小野島昂洋のページ
 
     </title>
     
@@ -88,8 +88,54 @@
 
 <div>
 
-  <h1>stat</h1>
+  <h1>Stat</h1>
   
+
+  
+    
+    
+<div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
+  <div class="Subhead mb-2">
+    <div class="Subhead-heading">
+      <a href="/stat/ggplot2japanese/">
+        <div class="h2 mt-1 mb-1">ggplot2でpdfを出力する</div>
+      </a>
+    </div>
+    <div class="Subhead-description">
+      
+
+
+<a href='/categories/r' class="muted-link">
+  <span class="Label Label--gray-darker">R</span>
+</a>
+
+<a href='/categories/stat' class="muted-link">
+  <span class="Label Label--gray-darker">Stat</span>
+</a>
+
+
+
+<a href='/tags/ggplot2' class="muted-link">
+  <span class="Label Label--gray">ggplot2</span>
+</a>
+
+<a href='/tags/pdf' class="muted-link">
+  <span class="Label Label--gray">pdf</span>
+</a>
+
+
+      <div class="float-md-right">
+        <span>2020-01-12</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-gray">
+    
+    ggplot2でpdf出力 # ggplot2 pdf出力 library(tidyverse) dat &lt;- as_tibble(iris) dat_long &lt;- dat %&gt;% gather(key=&#34;part&#34;, value=&#34;value&#34;,-Species) %&gt;% mutate(part = as.factor(part)) p &lt;- ggplot(dat_long, aes(x=Species, y=value, fill=Species)) + geom_boxplot() + facet_wrap(~part) # pdfに出力 pdf(&#34;figure/iris.pdf&#34;, width=7, height=7) print(p) dev.off() ※ 画像web表示のためにpng形式. 日本語ファイルを出力 pdfで使うフォントを指定してやるとよい. pdfで何のフォントが使えるかを知りたい時はnames(pdfFonts())とか打つと良い. # 日本語を使う p1 &lt;- p + ggtitle(&#34;日本語タイトル&#34;) + theme(plot.title=element_text(family=&#34;Japan1GothicBBB&#34;)) pdf(&#34;figure/iris_ja.pdf&#34;, width=7, height=7) print(p1) dev.off() ※ 画像w
+    <a class="muted-link" href="/stat/ggplot2japanese/">…</a>
+  </div>
+</div>
 
   
     
@@ -299,6 +345,16 @@
     </span>
     
     <span class="css-truncate no-wrap m-1 pl-1">
+      <a href="/tags/ggplot2" class="link-gray text-emphasized css-truncate-target"><span class="">Ggplot2</span></a>
+      <span class="text-right Counter">1</span>
+    </span>
+    
+    <span class="css-truncate no-wrap m-1 pl-1">
+      <a href="/tags/pdf" class="link-gray text-emphasized css-truncate-target"><span class="">Pdf</span></a>
+      <span class="text-right Counter">1</span>
+    </span>
+    
+    <span class="css-truncate no-wrap m-1 pl-1">
       <a href="/tags/r" class="link-gray text-emphasized css-truncate-target"><span class="">R</span></a>
       <span class="text-right Counter">5</span>
     </span>
@@ -335,12 +391,12 @@
     
     <span class="css-truncate no-wrap m-1 pl-1">
       <a href="/categories/r" class="link-gray text-emphasized css-truncate-target"><span class="">R</span></a>
-      <span class="text-right Counter">5</span>
+      <span class="text-right Counter">6</span>
     </span>
     
     <span class="css-truncate no-wrap m-1 pl-1">
       <a href="/categories/stat" class="link-gray text-emphasized css-truncate-target"><span class="">Stat</span></a>
-      <span class="text-right Counter">4</span>
+      <span class="text-right Counter">5</span>
     </span>
     
     <span class="css-truncate no-wrap m-1 pl-1">
