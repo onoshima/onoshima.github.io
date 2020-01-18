@@ -129,6 +129,7 @@
       </div>
     </div>
   </div>
+
   <div class="text-gray">
     
     ggplot2でpdf出力 # ggplot2 pdf出力 library(tidyverse) dat &lt;- as_tibble(iris) dat_long &lt;- dat %&gt;% gather(key=&#34;part&#34;, value=&#34;value&#34;,-Species) %&gt;% mutate(part = as.factor(part)) p &lt;- ggplot(dat_long, aes(x=Species, y=value, fill=Species)) + geom_boxplot() + facet_wrap(~part) # pdfに出力 pdf(&#34;figure/iris.pdf&#34;, width=7, height=7) print(p) dev.off() ※ 画像web表示のためにpng形式. 日本語ファイルを出力 pdfで使うフォントを指定してやるとよい. pdfで何のフォントが使えるかを知りたい時はnames(pdfFonts())とか打つと良い. # 日本語を使う p1 &lt;- p + ggtitle(&#34;日本語タイトル&#34;) + theme(plot.title=element_text(family=&#34;Japan1GothicBBB&#34;)) pdf(&#34;figure/iris_ja.pdf&#34;, width=7, height=7) print(p1) dev.off() ※ 画像w
@@ -174,6 +175,7 @@
       </div>
     </div>
   </div>
+
   <div class="text-gray">
     
     尺度の作成論文などでは信頼性係数が報告される。信頼性係数には様々な種類があるが, その中でもっともよく使われるのがクロンバックのαである。クロンバックのαは次の計算式で求められる。 $$ a = \frac{n}{n-1} \left( 1- \frac{\Sigma^n _{i=1}Var(X_i)}{Var(X)}\right) \tag{1} $$ ここで, $n$は項目数, $X_i$は$i$番目の項目の得点である。$X$はテストの合計得点である。 Rでクロンバックのαの求めるには Rでクロンバックのαを求めるためには複数のやり方がある。 http://www.okadajp.org/RWiki/?%CE%B1%E4%BF%82%E6%95%B0%EF%BC%8C%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%AE%97%E5%87%BA とりあえずここ
@@ -211,6 +213,7 @@
       </div>
     </div>
   </div>
+
   <div class="text-gray">
     
     2群のプリポストデータ 理由はよくわからないのだけれど, 知り合いから2群のプリポストデータの分析について聞かれることが多い。何かしらの介入の効果を検討したいらしく、統制群と介入群の2つに分けて, それぞれの群で介入前と介入後のデータを取るみたいな状況を想定しているようだ。 こうした場合に適切な分析手法については吉田（2006）が論じており, （1）ポスト-プリの差得点を取り, その差得点（変化量）を従属変数
@@ -252,6 +255,7 @@
       </div>
     </div>
   </div>
+
   <div class="text-gray">
     
     先日テトラコリック相関係数を求める方法についての記事を書いた。 テトラコリック相関の初期 それに基づいてRでテトラコリック相関係数を求める関数を自作した。 Rでの関数化 作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということをorder=という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。 tetrachoric &lt;- function(cor.table, order=6){ #必要な数値を代入 N
@@ -289,6 +293,7 @@
       </div>
     </div>
   </div>
+
   <div class="text-gray">
     
     テトラコリック相関係数関連の論文を読んだメモ。テトラコリック相関を計算するときに便利な表を作ったぞという話。 書誌情報 Everitt, P. F. (1910). Tables of the tetrachoric functions for fourfold correlation talbes. Biometrika, 7(4), 437–451. https://doi.org/10.1093/biomet/7.4.437 テーブルの説明 Pearson(1900)が発表したテトラコリック相関では以下のようなクロス表を想定して相関係数を求める。 (p.437) 左の図の実線はx軸とy軸である。点線が表す平面が二変量正規分布を切って4つの区画a,b,c,dに分けられてると
@@ -416,6 +421,15 @@
     <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
     <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
   </span>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
 
 
       </div>

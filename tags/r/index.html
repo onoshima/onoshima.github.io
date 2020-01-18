@@ -121,6 +121,7 @@
       </div>
     </div>
   </div>
+
   <div class="text-gray">
     
     Rでベクタ画像を作成する際に色々調べたメモ。 ベクタ画像の作り方 postscriptでデバイスを開いて次のようにすると良い。 postscript(&#34;eps_sample1.eps&#34;, width=7, height=7, paper=&#34;special&#34;, onefile = F, horizontal = F) plot(1:10, main=&#34;eps file&#34;) dev.off() widthとheightはインチ指定で描画する領域。paperはその外側の領域で&rdquo;a4&rdquo;とかサイズを指定するそうだけれど純粋に描いた領域の画像が欲しい場合は&rdquo;special&rdquo;を指定しておくと良いらしい。
@@ -162,6 +163,7 @@
       </div>
     </div>
   </div>
+
   <div class="text-gray">
     
     lapplyおよびparallelパッケージのmclapplyについて調べた際の記録。 lapplyとは Rで同一の関数を複数のオブジェクトを対象に行うときには, forで繰り返しのループで書くよりも, apply()ファミリーを用いて並列的に処理したほうが早いと言われる。lapplyは, 与えられたリストに対して同一の関数を適用する。lapplyだと戻り値はリストで, sapplyだと戻り値はベクトルである
@@ -203,6 +205,7 @@
       </div>
     </div>
   </div>
+
   <div class="text-gray">
     
     Rでブートストラップについて調べたときの記録。 ブートストラップとは 大雑把に言えば, 統計量とかの分布を調べたりするために一つの標本から新しい標本（ブートストラップ標本）を何個も作ることのようだ。パラメトリックとノンパラメトリックがある。 今回扱うのはノンパラメトリックの方。 自作関数によるブートストラップ ブートストラップ標本を作るときには, もとの標本から同じサイズで復元抽出を行う。復元抽出とは要するに,
@@ -244,6 +247,7 @@
       </div>
     </div>
   </div>
+
   <div class="text-gray">
     
     データ整理にtidyverseを使った際の覚書。まずデータフレームをas_tibble()でtidy用の形式にする。 library(tidyverse) air &lt;- airquality tidy.air &lt;- as_tibble(air) 条件に合うケースの抽出 filter()関数を使うと良いらしい。 ## 条件に合う行を抽出 air.May &lt;- tidy.air %&gt;% filter(Month==5) #5月のデータのみ取り出す Ozone.mean &lt;- mean(air$Ozone, na.rm=T) air.high.Ozone &lt;- tidy.air %&gt;% # オゾンが平均より高いケースを取り出す filter(Ozone &gt; Ozone.mean) air.high.Ozone.May &lt;- tidy.air %&gt;% #複合条件もOK filter(Ozone &gt; Ozone.mean, Month==5) 抽出されたケースを見ると, オゾンの値が平均（43くらい）より
@@ -285,6 +289,7 @@
       </div>
     </div>
   </div>
+
   <div class="text-gray">
     
     先日テトラコリック相関係数を求める方法についての記事を書いた。 テトラコリック相関の初期 それに基づいてRでテトラコリック相関係数を求める関数を自作した。 Rでの関数化 作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということをorder=という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。 tetrachoric &lt;- function(cor.table, order=6){ #必要な数値を代入 N
@@ -412,6 +417,15 @@
     <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
     <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
   </span>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [['$','$']]
+      }
+    });
+  </script>
+
 
 
       </div>
