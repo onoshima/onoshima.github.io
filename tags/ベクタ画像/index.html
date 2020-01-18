@@ -121,7 +121,6 @@
       </div>
     </div>
   </div>
-
   <div class="text-gray">
     
     Rでベクタ画像を作成する際に色々調べたメモ。 ベクタ画像の作り方 postscriptでデバイスを開いて次のようにすると良い。 postscript(&#34;eps_sample1.eps&#34;, width=7, height=7, paper=&#34;special&#34;, onefile = F, horizontal = F) plot(1:10, main=&#34;eps file&#34;) dev.off() widthとheightはインチ指定で描画する領域。paperはその外側の領域で&rdquo;a4&rdquo;とかサイズを指定するそうだけれど純粋に描いた領域の画像が欲しい場合は&rdquo;special&rdquo;を指定しておくと良いらしい。
@@ -249,15 +248,6 @@
     <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
     <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
   </span>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$']]
-      }
-    });
-  </script>
-
 
 
       </div>

@@ -129,7 +129,6 @@
       </div>
     </div>
   </div>
-
   <div class="text-gray">
     
     ggplot2でpdf出力 # ggplot2 pdf出力 library(tidyverse) dat &lt;- as_tibble(iris) dat_long &lt;- dat %&gt;% gather(key=&#34;part&#34;, value=&#34;value&#34;,-Species) %&gt;% mutate(part = as.factor(part)) p &lt;- ggplot(dat_long, aes(x=Species, y=value, fill=Species)) + geom_boxplot() + facet_wrap(~part) # pdfに出力 pdf(&#34;figure/iris.pdf&#34;, width=7, height=7) print(p) dev.off() ※ 画像web表示のためにpng形式. 日本語ファイルを出力 pdfで使うフォントを指定してやるとよい. pdfで何のフォントが使えるかを知りたい時はnames(pdfFonts())とか打つと良い. # 日本語を使う p1 &lt;- p + ggtitle(&#34;日本語タイトル&#34;) + theme(plot.title=element_text(family=&#34;Japan1GothicBBB&#34;)) pdf(&#34;figure/iris_ja.pdf&#34;, width=7, height=7) print(p1) dev.off() ※ 画像w
@@ -257,15 +256,6 @@
     <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
     <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
   </span>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$']]
-      }
-    });
-  </script>
-
 
 
       </div>

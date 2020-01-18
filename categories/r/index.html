@@ -129,7 +129,6 @@
       </div>
     </div>
   </div>
-
   <div class="text-gray">
     
     ggplot2でpdf出力 # ggplot2 pdf出力 library(tidyverse) dat &lt;- as_tibble(iris) dat_long &lt;- dat %&gt;% gather(key=&#34;part&#34;, value=&#34;value&#34;,-Species) %&gt;% mutate(part = as.factor(part)) p &lt;- ggplot(dat_long, aes(x=Species, y=value, fill=Species)) + geom_boxplot() + facet_wrap(~part) # pdfに出力 pdf(&#34;figure/iris.pdf&#34;, width=7, height=7) print(p) dev.off() ※ 画像web表示のためにpng形式. 日本語ファイルを出力 pdfで使うフォントを指定してやるとよい. pdfで何のフォントが使えるかを知りたい時はnames(pdfFonts())とか打つと良い. # 日本語を使う p1 &lt;- p + ggtitle(&#34;日本語タイトル&#34;) + theme(plot.title=element_text(family=&#34;Japan1GothicBBB&#34;)) pdf(&#34;figure/iris_ja.pdf&#34;, width=7, height=7) print(p1) dev.off() ※ 画像w
@@ -175,7 +174,6 @@
       </div>
     </div>
   </div>
-
   <div class="text-gray">
     
     尺度の作成論文などでは信頼性係数が報告される。信頼性係数には様々な種類があるが, その中でもっともよく使われるのがクロンバックのαである。クロンバックのαは次の計算式で求められる。 $$ a = \frac{n}{n-1} \left( 1- \frac{\Sigma^n _{i=1}Var(X_i)}{Var(X)}\right) \tag{1} $$ ここで, $n$は項目数, $X_i$は$i$番目の項目の得点である。$X$はテストの合計得点である。 Rでクロンバックのαの求めるには Rでクロンバックのαを求めるためには複数のやり方がある。 http://www.okadajp.org/RWiki/?%CE%B1%E4%BF%82%E6%95%B0%EF%BC%8C%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%AE%97%E5%87%BA とりあえずここ
@@ -213,7 +211,6 @@
       </div>
     </div>
   </div>
-
   <div class="text-gray">
     
     2群のプリポストデータ 理由はよくわからないのだけれど, 知り合いから2群のプリポストデータの分析について聞かれることが多い。何かしらの介入の効果を検討したいらしく、統制群と介入群の2つに分けて, それぞれの群で介入前と介入後のデータを取るみたいな状況を想定しているようだ。 こうした場合に適切な分析手法については吉田（2006）が論じており, （1）ポスト-プリの差得点を取り, その差得点（変化量）を従属変数
@@ -255,7 +252,6 @@
       </div>
     </div>
   </div>
-
   <div class="text-gray">
     
     lapplyおよびparallelパッケージのmclapplyについて調べた際の記録。 lapplyとは Rで同一の関数を複数のオブジェクトを対象に行うときには, forで繰り返しのループで書くよりも, apply()ファミリーを用いて並列的に処理したほうが早いと言われる。lapplyは, 与えられたリストに対して同一の関数を適用する。lapplyだと戻り値はリストで, sapplyだと戻り値はベクトルである
@@ -297,7 +293,6 @@
       </div>
     </div>
   </div>
-
   <div class="text-gray">
     
     Rでブートストラップについて調べたときの記録。 ブートストラップとは 大雑把に言えば, 統計量とかの分布を調べたりするために一つの標本から新しい標本（ブートストラップ標本）を何個も作ることのようだ。パラメトリックとノンパラメトリックがある。 今回扱うのはノンパラメトリックの方。 自作関数によるブートストラップ ブートストラップ標本を作るときには, もとの標本から同じサイズで復元抽出を行う。復元抽出とは要するに,
@@ -339,7 +334,6 @@
       </div>
     </div>
   </div>
-
   <div class="text-gray">
     
     データ整理にtidyverseを使った際の覚書。まずデータフレームをas_tibble()でtidy用の形式にする。 library(tidyverse) air &lt;- airquality tidy.air &lt;- as_tibble(air) 条件に合うケースの抽出 filter()関数を使うと良いらしい。 ## 条件に合う行を抽出 air.May &lt;- tidy.air %&gt;% filter(Month==5) #5月のデータのみ取り出す Ozone.mean &lt;- mean(air$Ozone, na.rm=T) air.high.Ozone &lt;- tidy.air %&gt;% # オゾンが平均より高いケースを取り出す filter(Ozone &gt; Ozone.mean) air.high.Ozone.May &lt;- tidy.air %&gt;% #複合条件もOK filter(Ozone &gt; Ozone.mean, Month==5) 抽出されたケースを見ると, オゾンの値が平均（43くらい）より
@@ -467,15 +461,6 @@
     <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
     <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
   </span>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$']]
-      }
-    });
-  </script>
-
 
 
       </div>

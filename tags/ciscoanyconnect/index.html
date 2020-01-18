@@ -121,7 +121,6 @@
       </div>
     </div>
   </div>
-
   <div class="text-gray">
     
     大学のVPN接続にCiscoのソフトウェアを入れる必要があったのだが, 大学のマニュアルにはWindows用とMac用のインストール手順しか乗っておらず, ubuntuへの導入については色々と調べる必要があった。結果的に次のサイトで見つけたコードをターミナルに打ち込んだら問題なく導入された。 sudo apt-get update sudo apt-get install network-manager-openconnect sudo apt install libpangox-1.0-0 sudo apt-get install lib32z1 lib32ncurses5 cd ~ &amp;&amp; mkdir download-anyconnect cd download-anyconnect &amp;&amp; wget http://www.isthe.com/for-you-only/anyconnect/OLD/anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz tar -xzvf anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz cd /anyconnect-4.3.05017/vpn/ sudo ./vpn_install.sh sudo systemctl daemon-reload 参照：How to install Cisco Anyconnect on Ubuntu 18.04 64-Bit.
@@ -249,15 +248,6 @@
     <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
     <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
   </span>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        inlineMath: [['$','$']]
-      }
-    });
-  </script>
-
 
 
       </div>
