@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>RstudioでGithubの鍵認証設定</title>
+      <link>https://onoshima.github.io/stat/rstudiogithub/</link>
+      <pubDate>Sat, 25 Jan 2020 14:04:09 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/stat/rstudiogithub/</guid>
+      <description>R studioの鍵認証についての備忘録。またやることになったらおそらく忘れるので。 やったこと RstudioのToos &amp;gt; Global Option &amp;gt; Git/SVNでView public keyをクリック 表示される公開鍵をコピー Githubの自分のページ &amp;gt; Settings &amp;gt; SSH and GPG keysから右上のNew SSH kayというボタンをクリック 適当な名前をつけて先ほどの公開鍵をペースト 参考にしたもの http://dragstar.hatenablog.com/entry/2016/04/26/185546</description>
+    </item>
+    
+    <item>
       <title>ggplot2でpdfを出力する</title>
       <link>https://onoshima.github.io/stat/ggplot2japanese/</link>
       <pubDate>Sun, 12 Jan 2020 23:12:22 +0900</pubDate>
