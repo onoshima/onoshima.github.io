@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
       
-  pdf &ndash; Takahiro Onoshima&#39;s website | 小野島昂洋のページ
+  gitHub &ndash; Takahiro Onoshima&#39;s website | 小野島昂洋のページ
 
     </title>
     
@@ -88,7 +88,7 @@
 
 <div>
 
-  <h1>pdf</h1>
+  <h1>gitHub</h1>
   
 
   
@@ -97,8 +97,8 @@
 <div class="rounded-2 box-shadow-medium px-3 pb-2 pt-2 mb-3">
   <div class="Subhead mb-2">
     <div class="Subhead-heading">
-      <a href="/stat/ggplot2japanese/">
-        <div class="h2 mt-1 mb-1">ggplot2でpdfを出力する</div>
+      <a href="/stat/rstudiogithub/">
+        <div class="h2 mt-1 mb-1">RstudioでGithubの鍵認証設定</div>
       </a>
     </div>
     <div class="Subhead-description">
@@ -109,31 +109,27 @@
   <span class="Label Label--gray-darker">R</span>
 </a>
 
-<a href='/categories/stat' class="muted-link">
-  <span class="Label Label--gray-darker">Stat</span>
+
+
+<a href='/tags/github' class="muted-link">
+  <span class="Label Label--gray">gitHub</span>
 </a>
 
-
-
-<a href='/tags/ggplot2' class="muted-link">
-  <span class="Label Label--gray">ggplot2</span>
-</a>
-
-<a href='/tags/pdf' class="muted-link">
-  <span class="Label Label--gray">pdf</span>
+<a href='/tags/rstudio' class="muted-link">
+  <span class="Label Label--gray">Rstudio</span>
 </a>
 
 
       <div class="float-md-right">
-        <span>2020-01-12</span>
+        <span>2020-01-25</span>
       </div>
     </div>
   </div>
 
   <div class="text-gray">
     
-    ggplot2でpdf出力 # ggplot2 pdf出力 library(tidyverse) dat &lt;- as_tibble(iris) dat_long &lt;- dat %&gt;% gather(key=&#34;part&#34;, value=&#34;value&#34;,-Species) %&gt;% mutate(part = as.factor(part)) p &lt;- ggplot(dat_long, aes(x=Species, y=value, fill=Species)) + geom_boxplot() + facet_wrap(~part) # pdfに出力 pdf(&#34;figure/iris.pdf&#34;, width=7, height=7) print(p) dev.off() ※ 画像web表示のためにpng形式. 日本語ファイルを出力 pdfで使うフォントを指定してやるとよい. pdfで何のフォントが使えるかを知りたい時はnames(pdfFonts())とか打つと良い. # 日本語を使う p1 &lt;- p + ggtitle(&#34;日本語タイトル&#34;) + theme(plot.title=element_text(family=&#34;Japan1GothicBBB&#34;)) pdf(&#34;figure/iris_ja.pdf&#34;, width=7, height=7) print(p1) dev.off() ※ 画像w
-    <a class="muted-link" href="/stat/ggplot2japanese/">…</a>
+    R studioの鍵認証についての備忘録。またやることになったらおそらく忘れるので。 やったこと RstudioのToos &gt; Global Option &gt; Git/SVNでView public keyをクリック 表示される公開鍵をコピー Githubの自分のページ &gt; Settings &gt; SSH and GPG keysから右上のNew SSH kayというボタンをクリック 適当な名前をつけて先ほどの公開鍵をペースト 参考にしたもの http://dragstar.hatenablog.com/entry/2016/04/26/185546
+    <a class="muted-link" href="/stat/rstudiogithub/">…</a>
   </div>
 </div>
 
