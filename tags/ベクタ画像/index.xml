@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ベクタ画像 on Takahiro Onoshima&#39;s website | 小野島昂洋のページ</title>
+    <title>ベクタ画像 on Takahiro ONOSHIMA&#39;s website</title>
     <link>https://onoshima.github.io/tags/%E3%83%99%E3%82%AF%E3%82%BF%E7%94%BB%E5%83%8F/</link>
-    <description>Recent content in ベクタ画像 on Takahiro Onoshima&#39;s website | 小野島昂洋のページ</description>
+    <description>Recent content in ベクタ画像 on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <copyright> &amp;copy; 2019 Takahiro Onoshima</copyright>
     <lastBuildDate>Tue, 30 Jul 2019 18:20:19 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/%E3%83%99%E3%82%AF%E3%82%BF%E7%94%BB%E5%83%8F/index.xml" rel="self" type="application/rss+xml" />
@@ -18,7 +17,7 @@
       <pubDate>Tue, 30 Jul 2019 18:20:19 +0900</pubDate>
       
       <guid>https://onoshima.github.io/stat/pdf/</guid>
-      <description>Rでベクタ画像を作成する際に色々調べたメモ。 ベクタ画像の作り方 postscriptでデバイスを開いて次のようにすると良い。 postscript(&amp;#34;eps_sample1.eps&amp;#34;, width=7, height=7, paper=&amp;#34;special&amp;#34;, onefile = F, horizontal = F) plot(1:10, main=&amp;#34;eps file&amp;#34;) dev.off() widthとheightはインチ指定で描画する領域。paperはその外側の領域で&amp;rdquo;a4&amp;rdquo;とかサイズを指定するそうだけれど純粋に描いた領域の画像が欲しい場合は&amp;rdquo;special&amp;rdquo;を指定しておくと良いらしい。</description>
+      <description></description>
     </item>
     
   </channel>

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>統計関連の記事 on Takahiro Onoshima&#39;s website | 小野島昂洋のページ</title>
+    <title>STAT/R on Takahiro ONOSHIMA&#39;s website</title>
     <link>https://onoshima.github.io/stat/</link>
-    <description>Recent content in 統計関連の記事 on Takahiro Onoshima&#39;s website | 小野島昂洋のページ</description>
+    <description>Recent content in STAT/R on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <copyright> &amp;copy; 2019 Takahiro Onoshima</copyright>
     
 	<atom:link href="https://onoshima.github.io/stat/index.xml" rel="self" type="application/rss+xml" />
     
@@ -17,7 +16,7 @@
       <pubDate>Sun, 12 Jan 2020 23:12:22 +0900</pubDate>
       
       <guid>https://onoshima.github.io/stat/ggplot2japanese/</guid>
-      <description>ggplot2でpdf出力 # ggplot2 pdf出力 library(tidyverse) dat &amp;lt;- as_tibble(iris) dat_long &amp;lt;- dat %&amp;gt;% gather(key=&amp;#34;part&amp;#34;, value=&amp;#34;value&amp;#34;,-Species) %&amp;gt;% mutate(part = as.factor(part)) p &amp;lt;- ggplot(dat_long, aes(x=Species, y=value, fill=Species)) + geom_boxplot() + facet_wrap(~part) # pdfに出力 pdf(&amp;#34;figure/iris.pdf&amp;#34;, width=7, height=7) print(p) dev.off() ※ 画像web表示のためにpng形式. 日本語ファイルを出力 pdfで使うフォントを指定してやるとよい. pdfで何のフォントが使えるかを知りたい時はnames(pdfFonts())とか打つと良い. # 日本語を使う p1 &amp;lt;- p + ggtitle(&amp;#34;日本語タイトル&amp;#34;) + theme(plot.title=element_text(family=&amp;#34;Japan1GothicBBB&amp;#34;)) pdf(&amp;#34;figure/iris_ja.pdf&amp;#34;, width=7, height=7) print(p1) dev.off() ※ 画像w</description>
+      <description></description>
     </item>
     
     <item>
@@ -26,7 +25,7 @@
       <pubDate>Fri, 27 Dec 2019 21:37:22 +0900</pubDate>
       
       <guid>https://onoshima.github.io/stat/cronbach/</guid>
-      <description>尺度の作成論文などでは信頼性係数が報告される。信頼性係数には様々な種類があるが, その中でもっともよく使われるのがクロンバックのαである。クロンバックのαは次の計算式で求められる。 $$ a = \frac{n}{n-1} \left( 1- \frac{\Sigma^n _{i=1}Var(X_i)}{Var(X)}\right) \tag{1} $$ ここで, $n$は項目数, $X_i$は$i$番目の項目の得点である。$X$はテストの合計得点である。 Rでクロンバックのαの求めるには Rでクロンバックのαを求めるためには複数のやり方がある。 http://www.okadajp.org/RWiki/?%CE%B1%E4%BF%82%E6%95%B0%EF%BC%8C%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%AE%97%E5%87%BA とりあえずここ</description>
+      <description></description>
     </item>
     
     <item>
@@ -35,7 +34,7 @@
       <pubDate>Sat, 21 Dec 2019 16:12:33 +0900</pubDate>
       
       <guid>https://onoshima.github.io/stat/prepost/</guid>
-      <description>2群のプリポストデータ 理由はよくわからないのだけれど, 知り合いから2群のプリポストデータの分析について聞かれることが多い。何かしらの介入の効果を検討したいらしく、統制群と介入群の2つに分けて, それぞれの群で介入前と介入後のデータを取るみたいな状況を想定しているようだ。 こうした場合に適切な分析手法については吉田（2006）が論じており, （1）ポスト-プリの差得点を取り, その差得点（変化量）を従属変数</description>
+      <description></description>
     </item>
     
     <item>
@@ -44,7 +43,7 @@
       <pubDate>Tue, 30 Jul 2019 18:20:19 +0900</pubDate>
       
       <guid>https://onoshima.github.io/stat/pdf/</guid>
-      <description>Rでベクタ画像を作成する際に色々調べたメモ。 ベクタ画像の作り方 postscriptでデバイスを開いて次のようにすると良い。 postscript(&amp;#34;eps_sample1.eps&amp;#34;, width=7, height=7, paper=&amp;#34;special&amp;#34;, onefile = F, horizontal = F) plot(1:10, main=&amp;#34;eps file&amp;#34;) dev.off() widthとheightはインチ指定で描画する領域。paperはその外側の領域で&amp;rdquo;a4&amp;rdquo;とかサイズを指定するそうだけれど純粋に描いた領域の画像が欲しい場合は&amp;rdquo;special&amp;rdquo;を指定しておくと良いらしい。</description>
+      <description></description>
     </item>
     
     <item>
@@ -53,7 +52,7 @@
       <pubDate>Fri, 26 Jul 2019 13:47:56 +0900</pubDate>
       
       <guid>https://onoshima.github.io/stat/laaply/</guid>
-      <description>lapplyおよびparallelパッケージのmclapplyについて調べた際の記録。 lapplyとは Rで同一の関数を複数のオブジェクトを対象に行うときには, forで繰り返しのループで書くよりも, apply()ファミリーを用いて並列的に処理したほうが早いと言われる。lapplyは, 与えられたリストに対して同一の関数を適用する。lapplyだと戻り値はリストで, sapplyだと戻り値はベクトルである</description>
+      <description></description>
     </item>
     
     <item>
@@ -62,7 +61,7 @@
       <pubDate>Wed, 03 Jul 2019 07:10:40 +0900</pubDate>
       
       <guid>https://onoshima.github.io/stat/boot/</guid>
-      <description>Rでブートストラップについて調べたときの記録。 ブートストラップとは 大雑把に言えば, 統計量とかの分布を調べたりするために一つの標本から新しい標本（ブートストラップ標本）を何個も作ることのようだ。パラメトリックとノンパラメトリックがある。 今回扱うのはノンパラメトリックの方。 自作関数によるブートストラップ ブートストラップ標本を作るときには, もとの標本から同じサイズで復元抽出を行う。復元抽出とは要するに,</description>
+      <description></description>
     </item>
     
     <item>
@@ -71,7 +70,7 @@
       <pubDate>Tue, 25 Jun 2019 16:38:21 +0900</pubDate>
       
       <guid>https://onoshima.github.io/stat/filter/</guid>
-      <description>データ整理にtidyverseを使った際の覚書。まずデータフレームをas_tibble()でtidy用の形式にする。 library(tidyverse) air &amp;lt;- airquality tidy.air &amp;lt;- as_tibble(air) 条件に合うケースの抽出 filter()関数を使うと良いらしい。 ## 条件に合う行を抽出 air.May &amp;lt;- tidy.air %&amp;gt;% filter(Month==5) #5月のデータのみ取り出す Ozone.mean &amp;lt;- mean(air$Ozone, na.rm=T) air.high.Ozone &amp;lt;- tidy.air %&amp;gt;% # オゾンが平均より高いケースを取り出す filter(Ozone &amp;gt; Ozone.mean) air.high.Ozone.May &amp;lt;- tidy.air %&amp;gt;% #複合条件もOK filter(Ozone &amp;gt; Ozone.mean, Month==5) 抽出されたケースを見ると, オゾンの値が平均（43くらい）より</description>
+      <description></description>
     </item>
     
     <item>
@@ -80,7 +79,7 @@
       <pubDate>Wed, 19 Jun 2019 21:59:21 +0900</pubDate>
       
       <guid>https://onoshima.github.io/stat/190619tetra/</guid>
-      <description>先日テトラコリック相関係数を求める方法についての記事を書いた。 テトラコリック相関の初期 それに基づいてRでテトラコリック相関係数を求める関数を自作した。 Rでの関数化 作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということをorder=という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。 tetrachoric &amp;lt;- function(cor.table, order=6){ #必要な数値を代入 N</description>
+      <description></description>
     </item>
     
     <item>
@@ -89,7 +88,7 @@
       <pubDate>Tue, 18 Jun 2019 15:10:22 +0900</pubDate>
       
       <guid>https://onoshima.github.io/stat/190618everitt/</guid>
-      <description>テトラコリック相関係数関連の論文を読んだメモ。テトラコリック相関を計算するときに便利な表を作ったぞという話。 書誌情報 Everitt, P. F. (1910). Tables of the tetrachoric functions for fourfold correlation talbes. Biometrika, 7(4), 437–451. https://doi.org/10.1093/biomet/7.4.437 テーブルの説明 Pearson(1900)が発表したテトラコリック相関では以下のようなクロス表を想定して相関係数を求める。 (p.437) 左の図の実線はx軸とy軸である。点線が表す平面が二変量正規分布を切って4つの区画a,b,c,dに分けられてると</description>
+      <description></description>
     </item>
     
   </channel>

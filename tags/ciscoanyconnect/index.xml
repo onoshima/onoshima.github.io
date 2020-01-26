@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>CiscoAnyconnect on Takahiro Onoshima&#39;s website | 小野島昂洋のページ</title>
+    <title>CiscoAnyconnect on Takahiro ONOSHIMA&#39;s website</title>
     <link>https://onoshima.github.io/tags/ciscoanyconnect/</link>
-    <description>Recent content in CiscoAnyconnect on Takahiro Onoshima&#39;s website | 小野島昂洋のページ</description>
+    <description>Recent content in CiscoAnyconnect on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <copyright> &amp;copy; 2019 Takahiro Onoshima</copyright>
     <lastBuildDate>Tue, 18 Jun 2019 10:48:11 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/ciscoanyconnect/index.xml" rel="self" type="application/rss+xml" />
@@ -18,7 +17,7 @@
       <pubDate>Tue, 18 Jun 2019 10:48:11 +0900</pubDate>
       
       <guid>https://onoshima.github.io/posts/190618cisco/</guid>
-      <description>大学のVPN接続にCiscoのソフトウェアを入れる必要があったのだが, 大学のマニュアルにはWindows用とMac用のインストール手順しか乗っておらず, ubuntuへの導入については色々と調べる必要があった。結果的に次のサイトで見つけたコードをターミナルに打ち込んだら問題なく導入された。 sudo apt-get update sudo apt-get install network-manager-openconnect sudo apt install libpangox-1.0-0 sudo apt-get install lib32z1 lib32ncurses5 cd ~ &amp;amp;&amp;amp; mkdir download-anyconnect cd download-anyconnect &amp;amp;&amp;amp; wget http://www.isthe.com/for-you-only/anyconnect/OLD/anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz tar -xzvf anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz cd /anyconnect-4.3.05017/vpn/ sudo ./vpn_install.sh sudo systemctl daemon-reload 参照：How to install Cisco Anyconnect on Ubuntu 18.04 64-Bit.</description>
+      <description></description>
     </item>
     
   </channel>

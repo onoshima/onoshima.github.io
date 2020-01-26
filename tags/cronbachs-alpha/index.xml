@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Cronbach&#39;s alpha on Takahiro Onoshima&#39;s website | 小野島昂洋のページ</title>
+    <title>Cronbach&#39;s alpha on Takahiro ONOSHIMA&#39;s website</title>
     <link>https://onoshima.github.io/tags/cronbachs-alpha/</link>
-    <description>Recent content in Cronbach&#39;s alpha on Takahiro Onoshima&#39;s website | 小野島昂洋のページ</description>
+    <description>Recent content in Cronbach&#39;s alpha on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <copyright> &amp;copy; 2019 Takahiro Onoshima</copyright>
     <lastBuildDate>Fri, 27 Dec 2019 21:37:22 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/cronbachs-alpha/index.xml" rel="self" type="application/rss+xml" />
@@ -18,7 +17,7 @@
       <pubDate>Fri, 27 Dec 2019 21:37:22 +0900</pubDate>
       
       <guid>https://onoshima.github.io/stat/cronbach/</guid>
-      <description>尺度の作成論文などでは信頼性係数が報告される。信頼性係数には様々な種類があるが, その中でもっともよく使われるのがクロンバックのαである。クロンバックのαは次の計算式で求められる。 $$ a = \frac{n}{n-1} \left( 1- \frac{\Sigma^n _{i=1}Var(X_i)}{Var(X)}\right) \tag{1} $$ ここで, $n$は項目数, $X_i$は$i$番目の項目の得点である。$X$はテストの合計得点である。 Rでクロンバックのαの求めるには Rでクロンバックのαを求めるためには複数のやり方がある。 http://www.okadajp.org/RWiki/?%CE%B1%E4%BF%82%E6%95%B0%EF%BC%8C%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%AE%97%E5%87%BA とりあえずここ</description>
+      <description></description>
     </item>
     
   </channel>
