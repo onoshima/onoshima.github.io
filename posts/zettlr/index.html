@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Ubuntu 18.04にCiscoAnyconnectを入れたときのメモ - Takahiro ONOSHIMA&#39;s website</title>
+	<title>Zettlr関係の備忘録 - Takahiro ONOSHIMA&#39;s website</title>
 	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
 	<meta name="description" content="">
 	
@@ -80,12 +80,12 @@
 <main class="main" role="main">
 	<article class="post">
 		<header class="post__header">
-			<h1 class="post__title">Ubuntu 18.04にCiscoAnyconnectを入れたときのメモ</h1>
+			<h1 class="post__title">Zettlr関係の備忘録</h1>
 			<div class="post__meta meta">
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
-	<time class="meta__text" datetime="2019-06-18T10:48:11">June 18, 2019</time>
-	<time class="meta__text" datetime="2020-02-01T19:49:45"> (Last Modified: February 01, 2020)</time>
+	<time class="meta__text" datetime="2020-02-01T18:17:51">February 01, 2020</time>
+	<time class="meta__text" datetime="2020-02-01T19:48:32"> (Last Modified: February 01, 2020)</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -97,25 +97,66 @@
 <div class="post__toc toc">
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
-		
+		<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#zettlrとは">Zettlrとは</a></li>
+<li><a href="#インストール関係">インストール関係</a></li>
+<li><a href="#設定関連">設定関連</a></li>
+<li><a href="#その他の機能">その他の機能</a></li>
+</ul></li>
+</ul>
+</nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
-			<p>大学のVPN接続にCiscoのソフトウェアを入れる必要があったのだが, 大学のマニュアルにはWindows用とMac用のインストール手順しか乗っておらず, ubuntuへの導入については色々と調べる必要があった。結果的に次のサイトで見つけたコードをターミナルに打ち込んだら問題なく導入された。</p>
+			
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update
-sudo apt-get install network-manager-openconnect
-sudo apt install libpangox-1.0-0
-sudo apt-get install lib32z1 lib32ncurses5
-cd ~ <span style="color:#f92672">&amp;&amp;</span> mkdir download-anyconnect
-cd download-anyconnect <span style="color:#f92672">&amp;&amp;</span> wget http://www.isthe.com/for-you-only/anyconnect/OLD/anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz
-tar -xzvf anyconnect-predeploy-linux-64-4.3.05017-k9.tar.gz
-cd /anyconnect-4.3.05017/vpn/
-sudo ./vpn_install.sh
+<p>私が家で使っているパソコンWordが強烈に重くてタイプしてから画面に表示されるまでにえらく時間がかかるので, 自分用のいろいろなものはMarkdownで打っています. で, Markdownエディタを色々と試して見ているのですが, その中で見つけたzettlrというものがよさそうなのでその関連のメモ.</p>
 
-sudo systemctl daemon-reload</code></pre></div>
+<h2 id="zettlrとは">Zettlrとは</h2>
 
-<p>参照：<a href="https://bestvpndotblog.wordpress.com/2018/05/08/how-to-install-cisco-anyconnect-on-ubuntu-18-04-64-bit/">How to install Cisco Anyconnect on Ubuntu 18.04 64-Bit.</a></p>
+<p>論文執筆のために設計されたMarkdownエディタのようです. 開発しているのはドイツの社会学者の方だそうです. オープンソースでマルチプラットフォームです.
+<a href="https://tomochemist.com/2019/02/21/post-279/">https://tomochemist.com/2019/02/21/post-279/</a></p>
+
+<h2 id="インストール関係">インストール関係</h2>
+
+<p>公式のダウンロードページからいけます.</p>
+
+<p><a href="https://www.zettlr.com/download">https://www.zettlr.com/download</a></p>
+
+<p>Macなら brew caskでいけました.</p>
+
+<pre><code>$ brew tap caskroom/cask
+$ brew cask install Zettlr
+</code></pre>
+
+<p>Ubuntu18.04では, インストーラをダウンロードして問題なく動いています.</p>
+
+<h2 id="設定関連">設定関連</h2>
+
+<p>日本語を含むファイルをpdf出力するのに少し苦戦しました.</p>
+
+<p><a href="https://qiita.com/sky_y/items/15bf7737f4b37da50372">https://qiita.com/sky_y/items/15bf7737f4b37da50372</a></p>
+
+<p>上記のサイトを参考に, BXjsclsクラスを使う戦略をとり「設定＞高度な設定＞pandocコマンド」の部分を変更してみます. デフォルトだと以下のものが入っています.</p>
+
+<pre><code>pandoc &quot;$infile$&quot; -f markdown $outflag$ $tpl$ $toc$ $tocdepth$ $citeproc$ $standalone$ --pdf-engine=xelatex -o &quot;$outfile$&quot;
+</code></pre>
+
+<p>それを以下のように変えると, とりあえず日本語を含むものでも出力できるようになりました.</p>
+
+<pre><code>pandoc &quot;$infile$&quot; -f markdown $outflag$ $toc$ $tocdepth$ $citeproc$ -o &quot;$outfile$&quot; $standalone$ --pdf-engine=xelatex -V documentclass=bxjsarticle -V classoption=pandoc
+</code></pre>
+
+<p>Ubunts18.04だとこれで問題なかったのですが, MacだとIPAフォントが入っていないと怒られました. <code>brew cask install font-ipaexfont</code>してもそんなファイルないよと断られたので, 以下から直接ダウンロードしてフォントブックに入れると無事に日本語ファイルが出力できるようになりました. 消し去った$tpl$がなんなのかはよく分かりませんが&hellip;</p>
+
+<p><a href="https://ja.osdn.net/projects/ipafonts/releases/">https://ja.osdn.net/projects/ipafonts/releases/</a></p>
+
+<h2 id="その他の機能">その他の機能</h2>
+
+<p>引用文献リストとかも簡単に追加できるみたいなのですが, あまり弄っていないので弄ったらその記録を残すと思います.</p>
 
 		</div>
 	</article>
