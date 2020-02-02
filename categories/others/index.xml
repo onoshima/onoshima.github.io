@@ -6,10 +6,19 @@
     <description>Recent content in others on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 01 Feb 2020 18:17:51 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 02 Feb 2020 19:01:51 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/categories/others/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>TikZで遊んでみた</title>
+      <link>https://onoshima.github.io/posts/tikz/</link>
+      <pubDate>Sun, 02 Feb 2020 19:01:51 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/posts/tikz/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Zettlr関係の備忘録</title>

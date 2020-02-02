@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>TikZで遊んでみた - Takahiro ONOSHIMA&#39;s website</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="Takahiro ONOSHIMA&#39;s website" rel="home">
+				<div class="logo__title">Takahiro ONOSHIMA&#39;s website</div>
+				<div class="logo__tagline">小野島昂洋の個人サイト</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/profile/">
+				
+				<span class="menu__text">Profile</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/works/">
+				
+				<span class="menu__text">Works</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/stat/">
+				
+				<span class="menu__text">STAT/R</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/">
+				
+				<span class="menu__text">Others</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">TikZで遊んでみた</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-02-02T19:01:51">February 02, 2020</time>
+	<time class="meta__text" datetime="2020-02-02T19:40:56"> (Last Modified: February 02, 2020)</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/others/" rel="category">others</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#tikzとは">TikZとは</a></li>
+<li><a href="#因子分析のパス図を書いてみる">因子分析のパス図を書いてみる</a></li>
+</ul></li>
+</ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			
+
+<p>きれいなパス図を描きたいと思ってTikZを試してみたときの記録.</p>
+
+<h2 id="tikzとは">TikZとは</h2>
+
+<p>LaTeXで動くパッケージで図形をコマンドで描けるものらしい. 以下のサイトが日本語で簡単な説明している.</p>
+
+<p><a href="https://guides.lib.kyushu-u.ac.jp/c.php?g=774891&amp;p=5559083">https://guides.lib.kyushu-u.ac.jp/c.php?g=774891&amp;p=5559083</a></p>
+
+<p>もっと潜在変数を含めた心理学よりの説明をしているのだと以下のQ&amp;Aとかを参考にした.</p>
+
+<p><a href="https://tex.stackexchange.com/questions/397610/latent-variable-model-with-tikz">https://tex.stackexchange.com/questions/397610/latent-variable-model-with-tikz</a></p>
+
+<h2 id="因子分析のパス図を書いてみる">因子分析のパス図を書いてみる</h2>
+
+<p>とりあえず<code>\node</code>やら<code>\draw</code>やら<code>\path</code>やらで必要なものを定義して, あとは<code>[ ]</code>に必要なオプションを入れて微調整する感じ. 繰り返し処理とかを使えば, もっと短くなるらしいが, とりあえず最初なのでとりあえずコピペ多用でやってみた. <code>lavaan</code>のパッケージにも入っている有名な知能検査の因子分析のもの.</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex"><span style="color:#66d9ef">\documentclass</span><span style="color:#a6e22e">[tikz,border=10pt]</span>{standalone}
+<span style="color:#66d9ef">\usetikzlibrary</span>{shapes, arrows}
+<span style="color:#66d9ef">\begin</span>{document}
+
+<span style="color:#66d9ef">\begin</span>{tikzpicture}
+  <span style="color:#75715e">% node ovserved
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">\node</span> (X1) at (0,0) [rectangle, draw]{<span style="color:#e6db74">$</span>X_<span style="color:#ae81ff">1</span><span style="color:#e6db74">$</span>};
+  <span style="color:#66d9ef">\node</span> (X2) at (1,0) [rectangle, draw]{<span style="color:#e6db74">$</span>X_<span style="color:#ae81ff">2</span><span style="color:#e6db74">$</span>};
+  <span style="color:#66d9ef">\node</span> (X3) at (2,0) [rectangle, draw]{<span style="color:#e6db74">$</span>X_<span style="color:#ae81ff">3</span><span style="color:#e6db74">$</span>};
+  <span style="color:#66d9ef">\node</span> (X4) at (3,0) [rectangle, draw]{<span style="color:#e6db74">$</span>X_<span style="color:#ae81ff">4</span><span style="color:#e6db74">$</span>};
+  <span style="color:#66d9ef">\node</span> (X5) at (4,0) [rectangle, draw]{<span style="color:#e6db74">$</span>X_<span style="color:#ae81ff">5</span><span style="color:#e6db74">$</span>};
+  <span style="color:#66d9ef">\node</span> (X6) at (5,0) [rectangle, draw]{<span style="color:#e6db74">$</span>X_<span style="color:#ae81ff">6</span><span style="color:#e6db74">$</span>};
+  <span style="color:#66d9ef">\node</span> (X7) at (6,0) [rectangle, draw]{<span style="color:#e6db74">$</span>X_<span style="color:#ae81ff">7</span><span style="color:#e6db74">$</span>};
+  <span style="color:#66d9ef">\node</span> (X8) at (7,0) [rectangle, draw]{<span style="color:#e6db74">$</span>X_<span style="color:#ae81ff">8</span><span style="color:#e6db74">$</span>};
+  <span style="color:#66d9ef">\node</span> (X9) at (8,0) [rectangle, draw]{<span style="color:#e6db74">$</span>X_<span style="color:#ae81ff">9</span><span style="color:#e6db74">$</span>};
+
+  <span style="color:#75715e">% node latene
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">\node</span> (visual) at (1,1.5) [ellipse, draw]{<span style="color:#e6db74">$</span>visual<span style="color:#e6db74">$</span>};
+  <span style="color:#66d9ef">\node</span> (textual) at (4,1.5) [ellipse, draw]{<span style="color:#e6db74">$</span>textual<span style="color:#e6db74">$</span>};
+  <span style="color:#66d9ef">\node</span> (speed) at (7,1.5) [ellipse, draw]{<span style="color:#e6db74">$</span>speed<span style="color:#e6db74">$</span>};
+
+  <span style="color:#75715e">% node error
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">\node</span> (e1) at (0,-1) {<span style="color:#66d9ef">\scriptsize</span> *};
+  <span style="color:#66d9ef">\node</span> (e2) at (1,-1) {<span style="color:#66d9ef">\scriptsize</span> *};
+  <span style="color:#66d9ef">\node</span> (e3) at (2,-1) {<span style="color:#66d9ef">\scriptsize</span> *};
+  <span style="color:#66d9ef">\node</span> (e4) at (3,-1) {<span style="color:#66d9ef">\scriptsize</span> *};
+  <span style="color:#66d9ef">\node</span> (e5) at (4,-1) {<span style="color:#66d9ef">\scriptsize</span> *};
+  <span style="color:#66d9ef">\node</span> (e6) at (5,-1) {<span style="color:#66d9ef">\scriptsize</span> *};
+  <span style="color:#66d9ef">\node</span> (e7) at (6,-1) {<span style="color:#66d9ef">\scriptsize</span> *};
+  <span style="color:#66d9ef">\node</span> (e8) at (7,-1) {<span style="color:#66d9ef">\scriptsize</span> *};
+  <span style="color:#66d9ef">\node</span> (e9) at (8,-1) {<span style="color:#66d9ef">\scriptsize</span> *};
+
+  <span style="color:#75715e">% factor loading
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (visual) -- (X1) node [midway, left] {<span style="color:#66d9ef">\scriptsize</span> 1};
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (visual) -- (X2) node [midway, left] {*};
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (visual) -- (X3) node [midway, left] {*};
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (textual) -- (X4) node [midway, left] {<span style="color:#66d9ef">\scriptsize</span> 1};
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (textual) -- (X5) node [midway, left] {*};
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (textual) -- (X6) node [midway, left] {*};
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (speed) -- (X7) node [midway, left] {<span style="color:#66d9ef">\scriptsize</span> 1};
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (speed) -- (X8) node [midway, left] {*};
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (speed) -- (X9) node [midway, left] {*};
+
+  <span style="color:#75715e">% factor covariance
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">\path</span><span style="color:#a6e22e">[triangle 60-triangle 60]</span> (visual) edge [bend left] node [below]{*} (textual);
+  <span style="color:#66d9ef">\path</span><span style="color:#a6e22e">[triangle 60-triangle 60]</span> (textual) edge [bend left] node [below]{*} (speed);
+  <span style="color:#66d9ef">\path</span><span style="color:#a6e22e">[triangle 60-triangle 60]</span> (visual.north) edge [bend left] node [above]{*} (speed.north);
+
+  <span style="color:#75715e">% path from error
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (e1) -- (X1);
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (e2) -- (X2);
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (e3) -- (X3);
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (e4) -- (X4);
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (e5) -- (X5);
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (e6) -- (X6);
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (e7) -- (X7);
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (e8) -- (X8);
+  <span style="color:#66d9ef">\draw</span><span style="color:#a6e22e">[-triangle 60]</span> (e9) -- (X9);
+
+
+<span style="color:#66d9ef">\end</span>{tikzpicture}
+<span style="color:#66d9ef">\end</span>{document}</code></pre></div>
+
+<p>結果は以下の通り.</p>
+
+<p><img src="/images/tikz.png" alt="結果のパス図" /></p>
+
+<p>結構きれいに描けるし微調整もできる. 慣れればもう少しコンパクトに描けるかしら.</p>
+
+		</div>
+	</article>
+</main>
+
+
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Takahiro ONOSHIMA.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+</body>
+</html>
