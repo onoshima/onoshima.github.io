@@ -85,7 +85,7 @@
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
 	<time class="meta__text" datetime="2020-02-01T18:17:51">February 01, 2020</time>
-	<time class="meta__text" datetime="2020-02-01T19:48:32"> (Last Modified: February 01, 2020)</time>
+	<time class="meta__text" datetime="2020-02-09T22:02:13"> (Last Modified: February 09, 2020)</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -104,7 +104,7 @@
 <li><a href="#zettlrとは">Zettlrとは</a></li>
 <li><a href="#インストール関係">インストール関係</a></li>
 <li><a href="#設定関連">設定関連</a></li>
-<li><a href="#その他の機能">その他の機能</a></li>
+<li><a href="#引用機能-2020-2-10追記">引用機能（2020/2/10追記）</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -150,13 +150,33 @@ $ brew cask install Zettlr
 <pre><code>pandoc &quot;$infile$&quot; -f markdown $outflag$ $toc$ $tocdepth$ $citeproc$ -o &quot;$outfile$&quot; $standalone$ --pdf-engine=xelatex -V documentclass=bxjsarticle -V classoption=pandoc
 </code></pre>
 
-<p>Ubunts18.04だとこれで問題なかったのですが, MacだとIPAフォントが入っていないと怒られました. <code>brew cask install font-ipaexfont</code>してもそんなファイルないよと断られたので, 以下から直接ダウンロードしてフォントブックに入れると無事に日本語ファイルが出力できるようになりました. 消し去った$tpl$がなんなのかはよく分かりませんが&hellip;</p>
+<p>Ubuntu18.04だとこれで問題なかったのですが, MacだとIPAフォントが入っていないと怒られました. <code>brew cask install font-ipaexfont</code>してもそんなファイルないよと断られたので, 以下から直接ダウンロードしてフォントブックに入れると無事に日本語ファイルが出力できるようになりました. 消し去った$tpl$がなんなのかはよく分かりませんが&hellip;</p>
 
 <p><a href="https://ja.osdn.net/projects/ipafonts/releases/">https://ja.osdn.net/projects/ipafonts/releases/</a></p>
 
-<h2 id="その他の機能">その他の機能</h2>
+<h2 id="引用機能-2020-2-10追記">引用機能（2020/2/10追記）</h2>
 
-<p>引用文献リストとかも簡単に追加できるみたいなのですが, あまり弄っていないので弄ったらその記録を残すと思います.</p>
+<p>Documentationにしたがって引用機能を試してみました. 手順は以下の通り.</p>
+
+<ol>
+<li>BetterBibTexプラグインをZoteroに入れる</li>
+<li>Zoteroから文献全てをエクスポートする（その際フォーマットはBetter CSL JSONを選択）</li>
+<li>Zettlrの設定&gt;エクスポートのタブから今出力した文献のjsonファイルを選択する</li>
+</ol>
+
+<p>これで準備OKです.</p>
+
+<p>引用するときは, @からはじめるとcitation keysの候補を挙げてくれるのでそこから選ぶだけです.例えば, @spearmanと打つと文献リストからSpearmanの文献が次のように候補に出てくるので, 選択するとcitation keyが挿入されます.</p>
+
+<p><img src="/images/zettlrcite.png" alt="citation key" /></p>
+
+<p>citation keyを入れたものは対応する文献が文献リストに現れます.</p>
+
+<p><img src="/images/zettlrcite2.png" alt="文献リスト" /></p>
+
+<p>Zoteroからエクスポートするときに, Keep updatedにチェックを入れておくとzoteroのファイルをいじった際に勝手にZettlrの文献リストも更新してくれるそうです.超便利.</p>
+
+<p>文献引用のスタイルなども設定できるようですので試してみたらまた追記します.</p>
 
 		</div>
 	</article>
