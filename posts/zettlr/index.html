@@ -85,7 +85,7 @@
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
 	<time class="meta__text" datetime="2020-02-01T18:17:51">February 01, 2020</time>
-	<time class="meta__text" datetime="2020-02-09T22:02:13"> (Last Modified: February 09, 2020)</time>
+	<time class="meta__text" datetime="2020-02-10T20:25:59"> (Last Modified: February 10, 2020)</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -104,7 +104,8 @@
 <li><a href="#zettlrとは">Zettlrとは</a></li>
 <li><a href="#インストール関係">インストール関係</a></li>
 <li><a href="#設定関連">設定関連</a></li>
-<li><a href="#引用機能-2020-2-10追記">引用機能（2020/2/10追記）</a></li>
+<li><a href="#引用機能-2020-2-9追記">引用機能（2020/2/9追記）</a></li>
+<li><a href="#引用のスタイルを変更する-2020-2-10追記">引用のスタイルを変更する（2020/2/10追記）</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -113,7 +114,7 @@
 <div class="content post__content clearfix">
 			
 
-<p>私が家で使っているパソコンWordが強烈に重くてタイプしてから画面に表示されるまでにえらく時間がかかるので, 自分用のいろいろなものはMarkdownで打っています. で, Markdownエディタを色々と試して見ているのですが, その中で見つけたzettlrというものがよさそうなのでその関連のメモ.</p>
+<p>私が家で使っているパソコンWordが強烈に重くてタイプしてから画面に表示されるまでにえらく時間がかかるので, 自分用のいろいろなものはMarkdownで打っています. それでMarkdownエディタを色々と試して見ているのですが, その中で見つけたZettlrというものがよさそうなのでその関連のメモ.</p>
 
 <h2 id="zettlrとは">Zettlrとは</h2>
 
@@ -132,7 +133,7 @@
 $ brew cask install Zettlr
 </code></pre>
 
-<p>Ubuntu18.04では, インストーラをダウンロードして問題なく動いています.</p>
+<p>Ubuntu18.04ではインストーラをダウンロードしてインストールすれば問題なく動いています.</p>
 
 <h2 id="設定関連">設定関連</h2>
 
@@ -154,7 +155,7 @@ $ brew cask install Zettlr
 
 <p><a href="https://ja.osdn.net/projects/ipafonts/releases/">https://ja.osdn.net/projects/ipafonts/releases/</a></p>
 
-<h2 id="引用機能-2020-2-10追記">引用機能（2020/2/10追記）</h2>
+<h2 id="引用機能-2020-2-9追記">引用機能（2020/2/9追記）</h2>
 
 <p>Documentationにしたがって引用機能を試してみました. 手順は以下の通り.</p>
 
@@ -176,7 +177,27 @@ $ brew cask install Zettlr
 
 <p>Zoteroからエクスポートするときに, Keep updatedにチェックを入れておくとzoteroのファイルをいじった際に勝手にZettlrの文献リストも更新してくれるそうです.超便利.</p>
 
-<p>文献引用のスタイルなども設定できるようですので試してみたらまた追記します.</p>
+<h2 id="引用のスタイルを変更する-2020-2-10追記">引用のスタイルを変更する（2020/2/10追記）</h2>
+
+<p>Documentationにしたがって引用のスタイルを変更してみました. 手順は以下の通り.</p>
+
+<ol>
+<li><a href="https://www.zotero.org/styles">Zotero Syle Repository</a>から好みの引用のスタイルのデータをゲットします. 今回はPLOS ONEにしてみます.</li>
+<li>Zettlrの設定＞エクスポートのタブの右下の方にあるCSLスタイルというところでゲットしたファイルを指定します.</li>
+<li>これで設定終了. HTMLやらPDFとかを吐き出すとPLOS ONE使用になっているはずです.</li>
+</ol>
+
+<p>ためしに以下のように引用してみます.</p>
+
+<p><img src="/images/citestyle1.png" alt="引用スタイル1" /></p>
+
+<p>PDFにしてみると次のような感じ.</p>
+
+<p><img src="/images/citestyle2.png" alt="引用スタイル2" /></p>
+
+<p>文献リストもちゃんと変わっています.</p>
+
+<p><img src="/images/citestyle3.png" alt="引用スタイル2" /></p>
 
 		</div>
 	</article>
