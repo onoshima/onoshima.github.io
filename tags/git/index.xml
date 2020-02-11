@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Takahiro ONOSHIMA&#39;s website</title>
+    <link>https://onoshima.github.io/tags/git/</link>
+    <description>Recent content in git on Takahiro ONOSHIMA&#39;s website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Tue, 11 Feb 2020 17:30:47 +0900</lastBuildDate>
+    
+	<atom:link href="https://onoshima.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>gitで一部のファイルを特定のコミットに戻すとき</title>
+      <link>https://onoshima.github.io/posts/git_use/</link>
+      <pubDate>Tue, 11 Feb 2020 17:30:47 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/posts/git_use/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

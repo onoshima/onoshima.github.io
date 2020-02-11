@@ -6,17 +6,17 @@
     <description>Recent content in Tags on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 25 Jan 2020 14:04:09 +0900</lastBuildDate>
+    <lastBuildDate>Tue, 11 Feb 2020 17:30:47 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Rstudio</title>
-      <link>https://onoshima.github.io/tags/rstudio/</link>
-      <pubDate>Sat, 25 Jan 2020 14:04:09 +0900</pubDate>
+      <title>git</title>
+      <link>https://onoshima.github.io/tags/git/</link>
+      <pubDate>Tue, 11 Feb 2020 17:30:47 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/tags/rstudio/</guid>
+      <guid>https://onoshima.github.io/tags/git/</guid>
       <description></description>
     </item>
     
@@ -26,6 +26,15 @@
       <pubDate>Sat, 25 Jan 2020 14:04:09 +0900</pubDate>
       
       <guid>https://onoshima.github.io/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rstudio</title>
+      <link>https://onoshima.github.io/tags/rstudio/</link>
+      <pubDate>Sat, 25 Jan 2020 14:04:09 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/rstudio/</guid>
       <description></description>
     </item>
     
@@ -66,20 +75,20 @@
     </item>
     
     <item>
-      <title>R</title>
-      <link>https://onoshima.github.io/tags/r/</link>
-      <pubDate>Fri, 26 Jul 2019 13:47:56 +0900</pubDate>
-      
-      <guid>https://onoshima.github.io/tags/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>apply</title>
       <link>https://onoshima.github.io/tags/apply/</link>
       <pubDate>Fri, 26 Jul 2019 13:47:56 +0900</pubDate>
       
       <guid>https://onoshima.github.io/tags/apply/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>https://onoshima.github.io/tags/r/</link>
+      <pubDate>Fri, 26 Jul 2019 13:47:56 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/r/</guid>
       <description></description>
     </item>
     
