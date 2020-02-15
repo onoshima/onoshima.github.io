@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>Hugoで記事中に数式を書く際の_問題</title>
+      <link>https://onoshima.github.io/posts/underscore/</link>
+      <pubDate>Sat, 15 Feb 2020 16:32:13 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/posts/underscore/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>gitで一部のファイルを特定のコミットに戻すとき</title>
       <link>https://onoshima.github.io/posts/git_use/</link>
       <pubDate>Tue, 11 Feb 2020 17:30:47 +0900</pubDate>
