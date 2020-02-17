@@ -98,76 +98,53 @@
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#lapplyとは">lapplyとは</a></li>
-<li><a href="#例-異なる長さのベクトルの平均">例：異なる長さのベクトルの平均</a></li>
-<li><a href="#mclapplyとは">mclapplyとは</a></li>
-<li><a href="#速度の比較">速度の比較</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#lapplyとは">lapplyとは</a></li>
+    <li><a href="#例異なる長さのベクトルの平均">例：異なる長さのベクトルの平均</a></li>
+    <li><a href="#mclapplyとは">mclapplyとは</a></li>
+    <li><a href="#速度の比較">速度の比較</a></li>
+  </ul>
 </nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
-			
-
-<p>lapplyおよびparallelパッケージのmclapplyについて調べた際の記録。</p>
-
+			<p>lapplyおよびparallelパッケージのmclapplyについて調べた際の記録。</p>
 <h2 id="lapplyとは">lapplyとは</h2>
-
 <p>Rで同一の関数を複数のオブジェクトを対象に行うときには, forで繰り返しのループで書くよりも, apply()ファミリーを用いて並列的に処理したほうが早いと言われる。lapplyは, 与えられたリストに対して同一の関数を適用する。lapplyだと戻り値はリストで, sapplyだと戻り値はベクトルである。</p>
-
-<h2 id="例-異なる長さのベクトルの平均">例：異なる長さのベクトルの平均</h2>
-
+<h2 id="例異なる長さのベクトルの平均">例：異なる長さのベクトルの平均</h2>
 <p>実際に例を見てみると理解が早いかもしれない。長さが10, 100, 1000のベクトルからなるリストそれぞれの平均を求めるには次のように入力する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">list</span>(<span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">10</span>), <span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">100</span>), <span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">1000</span>))
 
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">x <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">list</span>(rnorm(<span style="color:#ae81ff">10</span>), rnorm(<span style="color:#ae81ff">100</span>), rnorm(<span style="color:#ae81ff">1000</span>))
-
-<span style="color:#66d9ef">lapply</span>(x, <span style="color:#66d9ef">mean</span>) <span style="color:#75715e"># 戻り値はリスト</span>
-<span style="color:#66d9ef">sapply</span>(x, <span style="color:#66d9ef">mean</span>) <span style="color:#75715e"># 戻り値はベクトル</span></code></pre></div>
-
-<p><img src="/images/lapply.png" alt="lapply結果" />
-<img src="/images/sapply.png" alt="sapply結果" /></p>
-
+<span style="color:#a6e22e">lapply</span>(x, mean) <span style="color:#75715e"># 戻り値はリスト</span>
+<span style="color:#a6e22e">sapply</span>(x, mean) <span style="color:#75715e"># 戻り値はベクトル</span></code></pre></div>
+<p><img src="/images/lapply.png" alt="lapply結果">
+<img src="/images/sapply.png" alt="sapply結果"></p>
 <h2 id="mclapplyとは">mclapplyとは</h2>
-
-<p>lapplyではリストのそれぞれに並列の処理を行うことができることが分かったが, 複数のリストオブジェクトに対して並列的に処理を行いたいという場面もあるかもしれない。そうした際には&rsquo;parallel&rsquo;というパッケージの&rsquo;mclapply&rsquo;という関数が使えるらしい。</p>
-
+<p>lapplyではリストのそれぞれに並列の処理を行うことができることが分かったが, 複数のリストオブジェクトに対して並列的に処理を行いたいという場面もあるかもしれない。そうした際には&rsquo;parallel'というパッケージの&rsquo;mclapply'という関数が使えるらしい。</p>
 <p>使い方は次のとおり。で繰り返す回数と, 処理する関数を指定するとよいようだ。</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">replist <span style="color:#f92672">&lt;-</span> parallel<span style="color:#f92672">::</span>mclapply(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1000</span>, <span style="color:#66d9ef">function</span>(x){
-  replicates <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">list</span>(<span style="color:#66d9ef">mean</span>(rnorm(<span style="color:#ae81ff">10</span>)), <span style="color:#66d9ef">mean</span>(rnorm(<span style="color:#ae81ff">100</span>)),<span style="color:#66d9ef">mean</span>(rnorm(<span style="color:#ae81ff">1000</span>)))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">replist <span style="color:#f92672">&lt;-</span> parallel<span style="color:#f92672">::</span><span style="color:#a6e22e">mclapply</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">function</span>(x){
+  replicates <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">list</span>(<span style="color:#a6e22e">mean</span>(<span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">10</span>)), <span style="color:#a6e22e">mean</span>(<span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">100</span>)),<span style="color:#a6e22e">mean</span>(<span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">1000</span>)))
 })</code></pre></div>
-
 <p>戻り値はネストされたリストである。例えば, ネストされたリストを次のように行列の形に直せば, 異なるサンプルサイズにおける標本平均値のばらつきなども分かる。</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">replicates <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">matrix</span>(<span style="color:#66d9ef">unlist</span>(replist), <span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">3</span>, byrow<span style="color:#f92672">=</span>T)
-boxplot(replicates, names<span style="color:#f92672">=</span><span style="color:#66d9ef">c</span>(<span style="color:#e6db74">&#34;size10&#34;</span>, <span style="color:#e6db74">&#34;size100&#34;</span>, <span style="color:#e6db74">&#34;size1000&#34;</span>))</code></pre></div>
-
-<p><img src="/images/mclapply.png" alt="mclapply結果" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">replicates <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">unlist</span>(replist), <span style="color:#ae81ff">1000</span>, <span style="color:#ae81ff">3</span>, byrow<span style="color:#f92672">=</span>T)
+<span style="color:#a6e22e">boxplot</span>(replicates, names<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">size10&#34;</span>, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">size100&#34;</span>, <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">size1000&#34;</span>))</code></pre></div>
+<p><img src="/images/mclapply.png" alt="mclapply結果"></p>
 <h2 id="速度の比較">速度の比較</h2>
-
 <p>本当にforのループよりも早いか調べてみる。今の処理を100,000回繰り返してみて速度を測ることにする。</p>
-
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">t.loop <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">proc.time</span>()
-x <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">list</span>()
-<span style="color:#66d9ef">for</span> (i <span style="color:#66d9ef">in</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">100000</span>){
-  x[[i]] <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">list</span>(<span style="color:#66d9ef">mean</span>(rnorm(<span style="color:#ae81ff">10</span>)), <span style="color:#66d9ef">mean</span>(rnorm(<span style="color:#ae81ff">100</span>)), <span style="color:#66d9ef">mean</span>(rnorm(<span style="color:#ae81ff">1000</span>)))
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">t.loop <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">proc.time</span>()
+x <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">list</span>()
+<span style="color:#a6e22e">for </span>(i in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">100000</span>){
+  x[[i]] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">list</span>(<span style="color:#a6e22e">mean</span>(<span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">10</span>)), <span style="color:#a6e22e">mean</span>(<span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">100</span>)), <span style="color:#a6e22e">mean</span>(<span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">1000</span>)))
 }
-t.loop <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">proc.time</span>() <span style="color:#f92672">-</span> t.loop
+t.loop <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">proc.time</span>() <span style="color:#f92672">-</span> t.loop
 
-t.lapply <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">proc.time</span>()
-replist <span style="color:#f92672">&lt;-</span> parallel<span style="color:#f92672">::</span>mclapply(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">100000</span>, <span style="color:#66d9ef">function</span>(x){
-  replicate <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">lapply</span>(<span style="color:#66d9ef">list</span>(rnorm(<span style="color:#ae81ff">10</span>),rnorm(<span style="color:#ae81ff">100</span>), rnorm(<span style="color:#ae81ff">1000</span>)),<span style="color:#66d9ef">mean</span>)
+t.lapply <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">proc.time</span>()
+replist <span style="color:#f92672">&lt;-</span> parallel<span style="color:#f92672">::</span><span style="color:#a6e22e">mclapply</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">100000</span>, <span style="color:#a6e22e">function</span>(x){
+  replicate <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lapply</span>(<span style="color:#a6e22e">list</span>(<span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">10</span>),<span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">100</span>), <span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">1000</span>)),mean)
 })
-t.lapply <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">proc.time</span>() <span style="color:#f92672">-</span> t.lapply</code></pre></div>
-
+t.lapply <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">proc.time</span>() <span style="color:#f92672">-</span> t.lapply</code></pre></div>
 <p>結果は次の通りで, lapplyによる並列処理の方が早いようだ。</p>
-
-<p><img src="/images/lapplytime.png" alt="lapply速度比較" /></p>
+<p><img src="/images/lapplytime.png" alt="lapply速度比較"></p>
 
 		</div>
 		<footer class="post__footer">
