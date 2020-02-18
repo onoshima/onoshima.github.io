@@ -98,33 +98,44 @@
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
-  <ul>
-    <li><a href="#条件に合うケースの抽出">条件に合うケースの抽出</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#条件に合うケースの抽出">条件に合うケースの抽出</a></li>
+</ul></li>
+</ul>
 </nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
-			<p>データ整理に<code>tidyverse</code>を使った際の覚書。まずデータフレームを<code>as_tibble()</code>でtidy用の形式にする。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(tidyverse)
+			
+
+<p>データ整理に<code>tidyverse</code>を使った際の覚書。まずデータフレームを<code>as_tibble()</code>でtidy用の形式にする。</p>
+
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#f92672">library</span>(tidyverse)
 
 air <span style="color:#f92672">&lt;-</span> airquality
-tidy.air <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as_tibble</span>(air)</code></pre></div>
+tidy.air <span style="color:#f92672">&lt;-</span> as_tibble(air)</code></pre></div>
+
 <h2 id="条件に合うケースの抽出">条件に合うケースの抽出</h2>
+
 <p><code>filter()</code>関数を使うと良いらしい。</p>
+
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">## 条件に合う行を抽出</span>
 air.May <span style="color:#f92672">&lt;-</span> tidy.air <span style="color:#f92672">%&gt;%</span>
-  <span style="color:#a6e22e">filter</span>(Month<span style="color:#f92672">==</span><span style="color:#ae81ff">5</span>) <span style="color:#75715e">#5月のデータのみ取り出す</span>
+  filter(Month<span style="color:#f92672">==</span><span style="color:#ae81ff">5</span>) <span style="color:#75715e">#5月のデータのみ取り出す</span>
 
-Ozone.mean <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(air<span style="color:#f92672">$</span>Ozone, na.rm<span style="color:#f92672">=</span>T)
+Ozone.mean <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">mean</span>(air<span style="color:#f92672">$</span>Ozone, na.rm<span style="color:#f92672">=</span>T)
 
 air.high.Ozone <span style="color:#f92672">&lt;-</span> tidy.air <span style="color:#f92672">%&gt;%</span> <span style="color:#75715e"># オゾンが平均より高いケースを取り出す</span>
-  <span style="color:#a6e22e">filter</span>(Ozone <span style="color:#f92672">&gt;</span> Ozone.mean)
+  filter(Ozone <span style="color:#f92672">&gt;</span> Ozone.mean)
 
 air.high.Ozone.May <span style="color:#f92672">&lt;-</span> tidy.air <span style="color:#f92672">%&gt;%</span> <span style="color:#75715e">#複合条件もOK</span>
-  <span style="color:#a6e22e">filter</span>(Ozone <span style="color:#f92672">&gt;</span> Ozone.mean, Month<span style="color:#f92672">==</span><span style="color:#ae81ff">5</span>)</code></pre></div>
+  filter(Ozone <span style="color:#f92672">&gt;</span> Ozone.mean, Month<span style="color:#f92672">==</span><span style="color:#ae81ff">5</span>)</code></pre></div>
+
 <p>抽出されたケースを見ると, オゾンの値が平均（43くらい）よりも高いケースのみのデータセットが出来上がっている。</p>
-<p><img src="/images/filter.png" alt="抽出されたケース"></p>
+
+<p><img src="/images/filter.png" alt="抽出されたケース" /></p>
 
 		</div>
 		<footer class="post__footer">
@@ -159,5 +170,14 @@ air.high.Ozone.May <span style="color:#f92672">&lt;-</span> tidy.air <span style
 <script async defer src="/js/menu.js"></script>
 <script src="/js/custom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']]
+  }
+});
+</script>
+
 </body>
 </html>

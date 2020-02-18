@@ -90,7 +90,7 @@
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>, <a class="meta__link" href="/categories/stat/" rel="category">stat</a>
+	<span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>, <a class="meta__link" href="/categories/stat/" rel="category">Stat</a>
 	</span>
 </div></div>
 		</header>
@@ -98,56 +98,188 @@
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
-  <ul>
-    <li><a href="#rでクロンバックのαの求めるには">Rでクロンバックのαの求めるには</a></li>
-    <li><a href="#相関係数からクロンバックのαを求める">相関係数からクロンバックのαを求める</a></li>
-  </ul>
+<ul>
+<li>
+<ul>
+<li><a href="#rでクロンバックのαの求めるには">Rでクロンバックのαの求めるには</a></li>
+<li><a href="#相関係数からクロンバックのαを求める">相関係数からクロンバックのαを求める</a></li>
+</ul></li>
+</ul>
 </nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
-			<p>尺度の作成論文などでは信頼性係数が報告される。信頼性係数には様々な種類があるが, その中でもっともよく使われるのがクロンバックのαである。クロンバックのαは次の計算式で求められる。</p>
+			
+
+<p>尺度の作成論文などでは信頼性係数が報告される。信頼性係数には様々な種類があるが, その中でもっともよく使われるのがクロンバックのαである。クロンバックのαは次の計算式で求められる。</p>
+
 <p>$$ a = \frac{n}{n-1} \left( 1- \frac{\Sigma^n _{i=1}Var(X_i)}{Var(X)}\right) \tag{1} $$</p>
+
 <p>ここで, $n$は項目数, $X_i$は$i$番目の項目の得点である。$X$はテストの合計得点である。</p>
+
 <h2 id="rでクロンバックのαの求めるには">Rでクロンバックのαの求めるには</h2>
+
 <p>Rでクロンバックのαを求めるためには複数のやり方がある。</p>
+
 <p><a href="http://www.okadajp.org/RWiki/?%CE%B1%E4%BF%82%E6%95%B0%EF%BC%8C%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%AE%97%E5%87%BA">http://www.okadajp.org/RWiki/?%CE%B1%E4%BF%82%E6%95%B0%EF%BC%8C%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%AE%97%E5%87%BA</a></p>
+
 <p>とりあえずここではpsychパッケージに含まれるalpha()関数を使ってみることにする。データは同じパッケージに含まれるbfiを用いる。このデータはビッグファイブ理論が想定する因子を測定する質問紙で1因子につき5項目合計25項目からなる。サンプルサイズは2800である。今回は最初の10項目だけ使う。</p>
+
 <p>データの中身はこんな感じ。6件法である。</p>
-<!-- raw HTML omitted -->
+
+<table class="table table-condensed">
+ <thead>
+  <tr>
+   <th style="text-align:right;"> skim_type </th>
+   <th style="text-align:right;"> skim_variable </th>
+   <th style="text-align:right;"> n_missing </th>
+   <th style="text-align:right;"> complete_rate </th>
+   <th style="text-align:right;"> numeric.mean </th>
+   <th style="text-align:right;"> numeric.sd </th>
+   <th style="text-align:right;"> numeric.hist </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> numeric </td>
+   <td style="text-align:right;"> A1 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 0.9942857 </td>
+   <td style="text-align:right;"> 2.413434 </td>
+   <td style="text-align:right;"> 1.407737 </td>
+   <td style="text-align:right;"> ▇▂▂▁▁ </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> numeric </td>
+   <td style="text-align:right;"> A2 </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:right;"> 0.9903571 </td>
+   <td style="text-align:right;"> 4.802380 </td>
+   <td style="text-align:right;"> 1.172020 </td>
+   <td style="text-align:right;"> ▂▁▅▇▇ </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> numeric </td>
+   <td style="text-align:right;"> A3 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:right;"> 0.9907143 </td>
+   <td style="text-align:right;"> 4.603821 </td>
+   <td style="text-align:right;"> 1.301834 </td>
+   <td style="text-align:right;"> ▂▂▅▇▆ </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> numeric </td>
+   <td style="text-align:right;"> A4 </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 0.9932143 </td>
+   <td style="text-align:right;"> 4.699748 </td>
+   <td style="text-align:right;"> 1.479633 </td>
+   <td style="text-align:right;"> ▂▁▃▅▇ </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> numeric </td>
+   <td style="text-align:right;"> A5 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 0.9942857 </td>
+   <td style="text-align:right;"> 4.560345 </td>
+   <td style="text-align:right;"> 1.258512 </td>
+   <td style="text-align:right;"> ▂▂▅▇▆ </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> numeric </td>
+   <td style="text-align:right;"> C1 </td>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:right;"> 0.9925000 </td>
+   <td style="text-align:right;"> 4.502339 </td>
+   <td style="text-align:right;"> 1.241347 </td>
+   <td style="text-align:right;"> ▂▂▅▇▅ </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> numeric </td>
+   <td style="text-align:right;"> C2 </td>
+   <td style="text-align:right;"> 24 </td>
+   <td style="text-align:right;"> 0.9914286 </td>
+   <td style="text-align:right;"> 4.369957 </td>
+   <td style="text-align:right;"> 1.318347 </td>
+   <td style="text-align:right;"> ▃▂▆▇▅ </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> numeric </td>
+   <td style="text-align:right;"> C3 </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:right;"> 0.9928571 </td>
+   <td style="text-align:right;"> 4.303957 </td>
+   <td style="text-align:right;"> 1.288552 </td>
+   <td style="text-align:right;"> ▃▂▆▇▅ </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> numeric </td>
+   <td style="text-align:right;"> C4 </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:right;"> 0.9907143 </td>
+   <td style="text-align:right;"> 2.553353 </td>
+   <td style="text-align:right;"> 1.375118 </td>
+   <td style="text-align:right;"> ▇▂▂▁▁ </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> numeric </td>
+   <td style="text-align:right;"> C5 </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 0.9942857 </td>
+   <td style="text-align:right;"> 3.296695 </td>
+   <td style="text-align:right;"> 1.628542 </td>
+   <td style="text-align:right;"> ▇▂▅▃▂ </td>
+  </tr>
+</tbody>
+</table>
+
 <p>さて, このデータに対してクロンバックのαを求めるにはalpha()関数を用いるのだが, データが逆転項目を含んでいるのでそれを処理しなければいけない。6件法なので6から項目を引くと出てくる。ここではのちの話の都合で欠損を含むデータを除外している。</p>
+
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 逆転項目の処理して必要な項目だけ取り出す</span>
 new <span style="color:#f92672">&lt;-</span> dat <span style="color:#f92672">%&gt;%</span>
-  <span style="color:#a6e22e">mutate</span>(A1<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span><span style="color:#f92672">-</span>A1, C4<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span><span style="color:#f92672">-</span>C4, C5<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span><span style="color:#f92672">-</span>C5) <span style="color:#f92672">%&gt;%</span>
-  <span style="color:#a6e22e">select</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>) <span style="color:#f92672">%&gt;%</span>
-  <span style="color:#a6e22e">filter</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A1), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A2), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A3), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A4), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A5),
-         <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C1), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C2), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C3), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C4), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C5))</code></pre></div>
+  mutate(A1<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span><span style="color:#f92672">-</span>A1, C4<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span><span style="color:#f92672">-</span>C4, C5<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span><span style="color:#f92672">-</span>C5) <span style="color:#f92672">%&gt;%</span>
+  select(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>) <span style="color:#f92672">%&gt;%</span>
+  filter(<span style="color:#f92672">!</span><span style="color:#66d9ef">is.na</span>(A1), <span style="color:#f92672">!</span><span style="color:#66d9ef">is.na</span>(A2), <span style="color:#f92672">!</span><span style="color:#66d9ef">is.na</span>(A3), <span style="color:#f92672">!</span><span style="color:#66d9ef">is.na</span>(A4), <span style="color:#f92672">!</span><span style="color:#66d9ef">is.na</span>(A5),
+         <span style="color:#f92672">!</span><span style="color:#66d9ef">is.na</span>(C1), <span style="color:#f92672">!</span><span style="color:#66d9ef">is.na</span>(C2), <span style="color:#f92672">!</span><span style="color:#66d9ef">is.na</span>(C3), <span style="color:#f92672">!</span><span style="color:#66d9ef">is.na</span>(C4), <span style="color:#f92672">!</span><span style="color:#66d9ef">is.na</span>(C5))</code></pre></div>
+
 <p>逆転項目の処理が済んだところで, alpha()関数を使ってみる。</p>
+
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># クロンバックαを計算</span>
-res <span style="color:#f92672">&lt;-</span> psych<span style="color:#f92672">::</span><span style="color:#a6e22e">alpha</span>(new)</code></pre></div>
-<p><img src="/images/cronbach1.png" alt="cronbach1"></p>
+res <span style="color:#f92672">&lt;-</span> psych<span style="color:#f92672">::</span>alpha(new)</code></pre></div>
+
+<p><img src="/images/cronbach1.png" alt="cronbach1" /></p>
+
 <p>αの値が出てくるだけでなくて, 各項目をなくした際にαがどのように変化するかの値も出てくる。これらは尺度作成の際には役に立つだろう。</p>
+
 <h2 id="相関係数からクロンバックのαを求める">相関係数からクロンバックのαを求める</h2>
+
 <p>ところで岡田（2015）によれば, クロンバックのαは相関係数行列から求めることもできるようである。</p>
+
 <p><a href="https://www.jstage.jst.go.jp/article/arepj/54/0/54_71/_article/-char/ja/">https://www.jstage.jst.go.jp/article/arepj/54/0/54_71/_article/-char/ja/</a></p>
+
 <p>相関係数行列からクロンバックのαは次の式で求められる。</p>
+
 <p>$$ a = \frac{n\bar{r}}{1+(n-1) \bar{r}} \tag{2} $$</p>
+
 <p>ここでnは項目数で, $\bar{r}$は項目間の相関係数の平均である。さきほどのデータを用いて, 同様の結果が得られるが試してみる。相関係数行列を求めて, 上記の式に当てはめてみる。</p>
+
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 相関係数からα計算計算</span>
-cormtx <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor</span>(new[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>], use <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">complete.obs&#34;</span>)
-rbar <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(cormtx<span style="color:#a6e22e">[lower.tri</span>(cormtx)])
+cormtx <span style="color:#f92672">&lt;-</span> cor(new[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>], use <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;complete.obs&#34;</span>)
+rbar <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">mean</span>(cormtx[<span style="color:#66d9ef">lower.tri</span>(cormtx)])
 n <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
 alpha_computed_cormtx<span style="color:#f92672">&lt;-</span> (n <span style="color:#f92672">*</span> rbar) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> (n<span style="color:#ae81ff">-1</span>)<span style="color:#f92672">*</span>rbar)
 
 <span style="color:#75715e"># &gt; alpha_computed_cormtx</span>
 <span style="color:#75715e"># [1] 0.7397363</span></code></pre></div>
+
 <p>ここで得られた値は先ほどのalpha()関数の出力のstd.alphaという値と一致している。いつか使うかもしれないからこれを関数化しておくことにする。</p>
+
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 相関係数行列からαを求める感数</span>
-alpha.cor <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(x){
-  n <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(x)
-  rbar <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(x<span style="color:#a6e22e">[lower.tri</span>(x)])
+alpha.cor <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">function</span>(x){
+  n <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">ncol</span>(x)
+  rbar <span style="color:#f92672">&lt;-</span> <span style="color:#66d9ef">mean</span>(x[<span style="color:#66d9ef">lower.tri</span>(x)])
   alpha <span style="color:#f92672">&lt;-</span> (n <span style="color:#f92672">*</span> rbar) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> (n<span style="color:#ae81ff">-1</span>)<span style="color:#f92672">*</span>rbar)
-  <span style="color:#a6e22e">return</span>(alpha)
+  <span style="color:#66d9ef">return</span>(alpha)
 }
 
 <span style="color:#75715e">#&gt; alpha.cor(cormtx)</span>
@@ -186,5 +318,14 @@ alpha.cor <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">f
 <script async defer src="/js/menu.js"></script>
 <script src="/js/custom.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']]
+  }
+});
+</script>
+
 </body>
 </html>
