@@ -90,49 +90,37 @@
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/stat/" rel="category">Stat</a>
+	<span class="meta__text"><a class="meta__link" href="/categories/stat/" rel="category">stat</a>
 	</span>
 </div></div>
 		</header>
 <div class="post__toc toc">
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
-		
+		<nav id="TableOfContents"></nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
 			<p>尺度が開発される際には信頼性と妥当性についての検討が必要とされます。信頼性の指標としてはクロンバックのαが報告されることが多いのですが，巷でαの値が0.8以上あると望ましいとかなんとか言われていたりします。</p>
-
 <p>例えば次のサイトではこんな風に書かれています。</p>
-
 <blockquote>
 <p>α係数の目安は0.80以上です。0.90を超えれば、かなりの信頼性と言えます。</p>
 </blockquote>
-
 <p><a href="http://www.u-gakugei.ac.jp/~kishilab/validity-reliability.htm">http://www.u-gakugei.ac.jp/~kishilab/validity-reliability.htm</a></p>
-
 <p>また別のサイトではこんな風に書かれています。</p>
-
 <blockquote>
 <p>通常、アルファ係数が0.8以上であれば一貫性があると見なされます。</p>
 </blockquote>
-
 <p><a href="https://bellcurve.jp/statistics/blog/12206.html">https://bellcurve.jp/statistics/blog/12206.html</a></p>
-
 <p>ところで，この0.8だの0.9だのの出どころについて調べてみると，英語で書かれたもののいくつかはNunnally(1978)というものを引用しています。これは次の本みたいです。</p>
-
 <p><a href="https://www.amazon.co.jp/Psychometric-Theory-McGraw-Hill-Psychology-Nunnally/dp/0070474656">https://www.amazon.co.jp/Psychometric-Theory-McGraw-Hill-Psychology-Nunnally/dp/0070474656</a></p>
-
 <p>では，そこには何が書いてあるのかと図書館でみてみますと以下のような記述でした。長いけど引用しておきます。</p>
-
 <blockquote>
-<p>What a satisfactory level of reliability is depends on how a measure is being used. In the early stages of research on predictor tests or hypotesized measures of a construct, one saves time and energy by working with instruments that have ony modest reliability, for which purpose reliabilities of .70 or higher will suffice. If significant correlations are found, corrections for attenuation will estimate how much the correlations will increase when reliabilities of measures are increased. If those corrected values look promising, it will be worth the time and effort to increase items and reuce measurement error in other ways.<br />
-  　　For basic research, it can be argued that increasing reliabilities much beyound .80 is often wasteful of time and funds. At that level correlations are attenuated very little by measurement error. To obtain a higher reliability, say, of .90, strenuous efforts at standardization in addition to increasing the number of items might be required. Thus the more reliable test might be excessively time-consuming to construct, administer, and score.<br />
-  　　In contrast to the standards in basic research, in many applied settings a reliabiity of .80 is not nearly high enough. In basic research, the concern is with the differences in means for different experimental treatments, for which purposes a reliability of .80 for the different measures involved is adequate. In many applied problems, a great deal hihges on the exact score made by a person on a test. If, for example, in a particular school system children with IQs below 70 are placed in special classes, it makes a great deal of difference whether the child has an IQ of 65 or 75 on a particular test. (Of course, other standards would be applied in addition to the IQ test.) If a college is able to admit only one-third of the students who apply, whether a student is in the upper third may depend on only a few score points on aptitude test. In such instances it is frightening to think that any measurement error is permitted. Even with a reliability of . 90, the standard error of measurement is almost one-third as large as the standard deviation of test scores. In those applied settings where important decisions are made with respect to specific test scores, a reliability of .90 is the minimum that should be tolerated, and a reliability of .95 should be considered the desirable standard. (pp.245-6)</p>
+<p>What a satisfactory level of reliability is depends on how a measure is being used. In the early stages of research on predictor tests or hypotesized measures of a construct, one saves time and energy by working with instruments that have ony modest reliability, for which purpose reliabilities of .70 or higher will suffice. If significant correlations are found, corrections for attenuation will estimate how much the correlations will increase when reliabilities of measures are increased. If those corrected values look promising, it will be worth the time and effort to increase items and reuce measurement error in other ways.<br>
+　　For basic research, it can be argued that increasing reliabilities much beyound .80 is often wasteful of time and funds. At that level correlations are attenuated very little by measurement error. To obtain a higher reliability, say, of .90, strenuous efforts at standardization in addition to increasing the number of items might be required. Thus the more reliable test might be excessively time-consuming to construct, administer, and score. <br>
+　　In contrast to the standards in basic research, in many applied settings a reliabiity of .80 is not nearly high enough. In basic research, the concern is with the differences in means for different experimental treatments, for which purposes a reliability of .80 for the different measures involved is adequate. In many applied problems, a great deal hihges on the exact score made by a person on a test. If, for example, in a particular school system children with IQs below 70 are placed in special classes, it makes a great deal of difference whether the child has an IQ of 65 or 75 on a particular test. (Of course, other standards would be applied in addition to the IQ test.) If a college is able to admit only one-third of the students who apply, whether a student is in the upper third may depend on only a few score points on aptitude test. In such instances it is frightening to think that any measurement error is permitted. Even with a reliability of . 90, the standard error of measurement is almost one-third as large as the standard deviation of test scores. In those applied settings where important decisions are made with respect to specific test scores, a reliability of .90 is the minimum that should be tolerated, and a reliability of .95 should be considered the desirable standard. (pp.245-6)</p>
 </blockquote>
-
 <p>「尺度が使われる文脈により異なるよ」という至極まっとうなことが書かれていました。</p>
-
 <p>p値の話でも，効果量の話でも，SEMのfit indiceの話でもみんなそうですけれど，こういう基準の数値ってオリジナルの文脈から離れて一人歩きするよなぁとか思いました。</p>
 
 		</div>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Takahiro ONOSHIMA&#39;s website</title>
@@ -10,6 +10,15 @@
     
 	<atom:link href="https://onoshima.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R</title>
+      <link>https://onoshima.github.io/tags/r/</link>
+      <pubDate>Mon, 17 Feb 2020 20:43:28 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/r/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>reliability</title>
@@ -89,15 +98,6 @@
       <pubDate>Fri, 26 Jul 2019 13:47:56 +0900</pubDate>
       
       <guid>https://onoshima.github.io/tags/apply/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R</title>
-      <link>https://onoshima.github.io/tags/r/</link>
-      <pubDate>Fri, 26 Jul 2019 13:47:56 +0900</pubDate>
-      
-      <guid>https://onoshima.github.io/tags/r/</guid>
       <description></description>
     </item>
     

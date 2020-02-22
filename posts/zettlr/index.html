@@ -85,7 +85,7 @@
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
 	<time class="meta__text" datetime="2020-02-01T18:17:51">February 01, 2020</time>
-	<time class="meta__text" datetime="2020-02-18T19:36:17"> (Last Modified: February 18, 2020)</time>
+	<time class="meta__text" datetime="2020-02-22T13:04:57"> (Last Modified: February 22, 2020)</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -98,108 +98,64 @@
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#zettlrとは">Zettlrとは</a></li>
-<li><a href="#インストール関係">インストール関係</a></li>
-<li><a href="#設定関連">設定関連</a></li>
-<li><a href="#引用機能-2020-2-9追記">引用機能（2020/2/9追記）</a></li>
-<li><a href="#引用のスタイルを変更する-2020-2-10追記">引用のスタイルを変更する（2020/2/10追記）</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#zettlrとは">Zettlrとは</a></li>
+    <li><a href="#インストール関係">インストール関係</a></li>
+    <li><a href="#設定関連">設定関連</a></li>
+    <li><a href="#引用機能202029追記">引用機能（2020/2/9追記）</a></li>
+    <li><a href="#引用のスタイルを変更する2020210追記">引用のスタイルを変更する（2020/2/10追記）</a></li>
+  </ul>
 </nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
-			
-
-<p>私が家で使っているパソコンWordが強烈に重くてタイプしてから画面に表示されるまでにえらく時間がかかるので, 自分用のいろいろなものはMarkdownで打っています. それでMarkdownエディタを色々と試して見ているのですが, その中で見つけたZettlrというものがよさそうなのでその関連のメモ.</p>
-
+			<p>私が家で使っているパソコンWordが強烈に重くてタイプしてから画面に表示されるまでにえらく時間がかかるので．自分用のいろいろなものはMarkdownで打っています．それでMarkdownエディタを色々と試して見ているのですが．その中で見つけたZettlrというものがよさそうなのでその関連のメモ．</p>
 <h2 id="zettlrとは">Zettlrとは</h2>
-
-<p>論文執筆のために設計されたMarkdownエディタのようです. 開発しているのはドイツの社会学者の方だそうです. オープンソースでマルチプラットフォームです.
+<p>論文執筆のために設計されたMarkdownエディタのようです．開発しているのはドイツの社会学者の方だそうです．オープンソースでマルチプラットフォームです．
 <a href="https://tomochemist.com/2019/02/21/post-279/">https://tomochemist.com/2019/02/21/post-279/</a></p>
-
 <h2 id="インストール関係">インストール関係</h2>
-
-<p>公式のダウンロードページからいけます.</p>
-
+<p>公式のダウンロードページからいけます．</p>
 <p><a href="https://www.zettlr.com/download">https://www.zettlr.com/download</a></p>
-
-<p>Macなら brew caskでいけました.</p>
-
+<p>Macなら brew caskでいけました．</p>
 <pre><code>$ brew tap caskroom/cask
 $ brew cask install Zettlr
-</code></pre>
-
-<p>Ubuntu18.04ではインストーラをダウンロードしてインストールすれば問題なく動いています.</p>
-
+</code></pre><p>Ubuntu18.04ではインストーラをダウンロードしてインストールすれば問題なく動いています．</p>
 <h2 id="設定関連">設定関連</h2>
-
-<p>日本語を含むファイルをpdf出力するのに少し苦戦しました.</p>
-
+<p>日本語を含むファイルをpdf出力するのに少し苦戦しました．</p>
 <p><a href="https://qiita.com/sky_y/items/15bf7737f4b37da50372">https://qiita.com/sky_y/items/15bf7737f4b37da50372</a></p>
-
-<p>上記のサイトを参考に, BXjsclsクラスを使う戦略をとり「設定＞高度な設定＞pandocコマンド」の部分を変更してみます. デフォルトだと以下のものが入っています.</p>
-
+<p>上記のサイトを参考に，BXjsclsクラスを使う戦略をとり「設定＞高度な設定＞pandocコマンド」の部分を変更してみます．デフォルトだと以下のものが入っています.</p>
 <pre><code>pandoc &quot;$infile$&quot; -f markdown $outflag$ $tpl$ $toc$ $tocdepth$ $citeproc$ $standalone$ --pdf-engine=xelatex -o &quot;$outfile$&quot;
-</code></pre>
-
-<p>それを以下のように変えると, とりあえず日本語を含むものでも出力できるようになりました.</p>
-
+</code></pre><p>それを以下のように変えると, とりあえず日本語を含むものでも出力できるようになりました.</p>
 <pre><code>pandoc &quot;$infile$&quot; -f markdown $outflag$ $toc$ $tocdepth$ $citeproc$ -o &quot;$outfile$&quot; $standalone$ --pdf-engine=xelatex -V documentclass=bxjsarticle -V classoption=pandoc
-</code></pre>
-
-<p>Ubuntu18.04だとこれで問題なかったのですが,  <del>MacだとIPAフォントが入っていないと怒られましたbrew cask installfont-ipaexfontしてもそんなファイルないよと断られたので,</del> (20200218追記) <code>brew install homebrew/cask-fonts/font-ipaexfont</code> でいけました。homebrewの使い方を把握していないだけでした。</p>
-
-<p>以下から直接ダウンロードしてフォントブックに入れると無事に日本語ファイルが出力できるようになりました. 消し去った$tpl$がなんなのかはよく分かりませんが&hellip;</p>
-
+</code></pre><p>Ubuntu18.04だとこれで問題なかったのですが,  <del>MacだとIPAフォントが入っていないと怒られましたbrew cask installfont-ipaexfontしてもそんなファイルないよと断られたので,</del> (20200218追記) <code>brew install homebrew/cask-fonts/font-ipaexfont</code> でいけました。homebrewの使い方を把握していないだけでした。</p>
+<p>以下から直接ダウンロードしてフォントブックに入れると無事に日本語ファイルが出力できるようになりました．消し去った$tpl$がなんなのかはよく分かりませんが&hellip;</p>
 <p><a href="https://ja.osdn.net/projects/ipafonts/releases/">https://ja.osdn.net/projects/ipafonts/releases/</a></p>
-
-<h2 id="引用機能-2020-2-9追記">引用機能（2020/2/9追記）</h2>
-
-<p>Documentationにしたがって引用機能を試してみました. 手順は以下の通り.</p>
-
+<h2 id="引用機能202029追記">引用機能（2020/2/9追記）</h2>
+<p>Documentationにしたがって引用機能を試してみました．手順は以下の通り.</p>
 <ol>
 <li>BetterBibTexプラグインをZoteroに入れる</li>
 <li>Zoteroから文献全てをエクスポートする（その際フォーマットはBetter CSL JSONを選択）</li>
 <li>Zettlrの設定&gt;エクスポートのタブから今出力した文献のjsonファイルを選択する</li>
 </ol>
-
-<p>これで準備OKです.</p>
-
-<p>引用するときは, @からはじめるとcitation keysの候補を挙げてくれるのでそこから選ぶだけです.例えば, @spearmanと打つと文献リストからSpearmanの文献が次のように候補に出てくるので, 選択するとcitation keyが挿入されます.</p>
-
-<p><img src="/images/zettlrcite.png" alt="citation key" /></p>
-
-<p>citation keyを入れたものは対応する文献が文献リストに現れます.</p>
-
-<p><img src="/images/zettlrcite2.png" alt="文献リスト" /></p>
-
-<p>Zoteroからエクスポートするときに, Keep updatedにチェックを入れておくとzoteroのファイルをいじった際に勝手にZettlrの文献リストも更新してくれるそうです.超便利.</p>
-
-<h2 id="引用のスタイルを変更する-2020-2-10追記">引用のスタイルを変更する（2020/2/10追記）</h2>
-
-<p>Documentationにしたがって引用のスタイルを変更してみました. 手順は以下の通り.</p>
-
+<p>これで準備OKです．</p>
+<p>引用するときは， @からはじめるとcitation keysの候補を挙げてくれるのでそこから選ぶだけです．例えば, @spearmanと打つと文献リストからSpearmanの文献が次のように候補に出てくるので，選択するとcitation keyが挿入されます．</p>
+<p><img src="/images/zettlrcite.png" alt="citation key"></p>
+<p>citation keyを入れたものは対応する文献が文献リストに現れます．</p>
+<p><img src="/images/zettlrcite2.png" alt="文献リスト"></p>
+<p>Zoteroからエクスポートするときに, Keep updatedにチェックを入れておくとzoteroのファイルをいじった際に勝手にZettlrの文献リストも更新してくれるそうです．超便利．</p>
+<h2 id="引用のスタイルを変更する2020210追記">引用のスタイルを変更する（2020/2/10追記）</h2>
+<p>Documentationにしたがって引用のスタイルを変更してみました．手順は以下の通り．</p>
 <ol>
-<li><a href="https://www.zotero.org/styles">Zotero Syle Repository</a>から好みの引用のスタイルのデータをゲットします. 今回はPLOS ONEにしてみます.</li>
-<li>Zettlrの設定＞エクスポートのタブの右下の方にあるCSLスタイルというところでゲットしたファイルを指定します.</li>
-<li>これで設定終了. HTMLやらPDFとかを吐き出すとPLOS ONE使用になっているはずです.</li>
+<li><a href="https://www.zotero.org/styles">Zotero Syle Repository</a>から好みの引用のスタイルのデータをゲットします．今回はPLOS ONEにしてみます．</li>
+<li>Zettlrの設定＞エクスポートのタブの右下の方にあるCSLスタイルというところでゲットしたファイルを指定します．</li>
+<li>これで設定終了．HTMLやらPDFとかを吐き出すとPLOS ONE使用になっているはずです．</li>
 </ol>
-
-<p>ためしに以下のように引用してみます.</p>
-
-<p><img src="/images/citestyle1.png" alt="引用スタイル1" /></p>
-
-<p>PDFにしてみると次のような感じ.</p>
-
-<p><img src="/images/citestyle2.png" alt="引用スタイル2" /></p>
-
-<p>文献リストもちゃんと変わっています.</p>
-
-<p><img src="/images/citestyle3.png" alt="引用スタイル2" /></p>
+<p>ためしに以下のように引用してみます．</p>
+<p><img src="/images/citestyle1.png" alt="引用スタイル1"></p>
+<p>PDFにしてみると次のような感じ．</p>
+<p><img src="/images/citestyle2.png" alt="引用スタイル2"></p>
+<p>文献リストもちゃんと変わっています．</p>
+<p><img src="/images/citestyle3.png" alt="引用スタイル2"></p>
 
 		</div>
 	</article>

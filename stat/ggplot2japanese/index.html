@@ -90,7 +90,7 @@
 
 <div class="meta__item-categories meta__item">
 	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
-	<span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>, <a class="meta__link" href="/categories/stat/" rel="category">Stat</a>
+	<span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>, <a class="meta__link" href="/categories/stat/" rel="category">stat</a>
 	</span>
 </div></div>
 		</header>
@@ -98,57 +98,45 @@
 	<div class="toc__title">Page content</div>
 	<div class="toc__menu">
 		<nav id="TableOfContents">
-<ul>
-<li>
-<ul>
-<li><a href="#ggplot2でpdf出力">ggplot2でpdf出力</a></li>
-<li><a href="#日本語ファイルを出力">日本語ファイルを出力</a></li>
-</ul></li>
-</ul>
+  <ul>
+    <li><a href="#ggplot2でpdf出力">ggplot2でpdf出力</a></li>
+    <li><a href="#日本語ファイルを出力">日本語ファイルを出力</a></li>
+  </ul>
 </nav>
 	</div>
 </div>
 <div class="content post__content clearfix">
-			
-
-<h2 id="ggplot2でpdf出力">ggplot2でpdf出力</h2>
-
+			<h2 id="ggplot2でpdf出力">ggplot2でpdf出力</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># ggplot2 pdf出力</span>
-<span style="color:#f92672">library</span>(tidyverse)
-dat <span style="color:#f92672">&lt;-</span> as_tibble(iris)
+<span style="color:#a6e22e">library</span>(tidyverse)
+dat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as_tibble</span>(iris)
 
 dat_long <span style="color:#f92672">&lt;-</span> dat <span style="color:#f92672">%&gt;%</span>
-  gather(key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;part&#34;</span>, value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;value&#34;</span>,<span style="color:#f92672">-</span>Species) <span style="color:#f92672">%&gt;%</span>
-  mutate(part <span style="color:#f92672">=</span> <span style="color:#66d9ef">as.factor</span>(part))
-p <span style="color:#f92672">&lt;-</span> ggplot(dat_long, aes(x<span style="color:#f92672">=</span>Species, y<span style="color:#f92672">=</span>value, fill<span style="color:#f92672">=</span>Species)) <span style="color:#f92672">+</span>
-  geom_boxplot() <span style="color:#f92672">+</span>
-  facet_wrap(<span style="color:#f92672">~</span>part)
+  <span style="color:#a6e22e">gather</span>(key<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;part&#34;</span>, value<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;value&#34;</span>,<span style="color:#f92672">-</span>Species) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">mutate</span>(part <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.factor</span>(part))
+p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(dat_long, <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>Species, y<span style="color:#f92672">=</span>value, fill<span style="color:#f92672">=</span>Species)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_boxplot</span>() <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">facet_wrap</span>(<span style="color:#f92672">~</span>part)
 
 <span style="color:#75715e"># pdfに出力</span>
-pdf(<span style="color:#e6db74">&#34;figure/iris.pdf&#34;</span>, width<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>)
-<span style="color:#66d9ef">print</span>(p)
-dev.off()</code></pre></div>
-
-<p><img src="/images/iris.png" alt="iris" />
+<span style="color:#a6e22e">pdf</span>(<span style="color:#e6db74">&#34;figure/iris.pdf&#34;</span>, width<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>)
+<span style="color:#a6e22e">print</span>(p)
+<span style="color:#a6e22e">dev.off</span>()</code></pre></div>
+<p><img src="/images/iris.png" alt="iris">
 ※ 画像web表示のためにpng形式.</p>
-
 <h2 id="日本語ファイルを出力">日本語ファイルを出力</h2>
-
 <p>pdfで使うフォントを指定してやるとよい. pdfで何のフォントが使えるかを知りたい時は<code>names(pdfFonts())</code>とか打つと良い.</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 日本語を使う</span>
 p1 <span style="color:#f92672">&lt;-</span> p <span style="color:#f92672">+</span>
-  ggtitle(<span style="color:#e6db74">&#34;日本語タイトル&#34;</span>) <span style="color:#f92672">+</span>
-  theme(plot.title<span style="color:#f92672">=</span>element_text(family<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Japan1GothicBBB&#34;</span>))
-pdf(<span style="color:#e6db74">&#34;figure/iris_ja.pdf&#34;</span>, width<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>)
-<span style="color:#66d9ef">print</span>(p1)
-dev.off()</code></pre></div>
-
-<p><img src="/images/iris_ja.png" alt="iris" />
+  <span style="color:#a6e22e">ggtitle</span>(<span style="color:#e6db74">&#34;日本語タイトル&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme</span>(plot.title<span style="color:#f92672">=</span><span style="color:#a6e22e">element_text</span>(family<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Japan1GothicBBB&#34;</span>))
+<span style="color:#a6e22e">pdf</span>(<span style="color:#e6db74">&#34;figure/iris_ja.pdf&#34;</span>, width<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">7</span>)
+<span style="color:#a6e22e">print</span>(p1)
+<span style="color:#a6e22e">dev.off</span>()</code></pre></div>
+<p><img src="/images/iris_ja.png" alt="iris">
 ※ 画像web表示のためにpng形式.</p>
-
 <p>フォントが入っていない環境でも同じように表示するために, 以下のようにしてフォントを埋め込んでおくと良いらしい.
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">embedFonts(<span style="color:#e6db74">&#34;figure/iris.pdf&#34;</span>)</code></pre></div></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">embedFonts</span>(<span style="color:#e6db74">&#34;figure/iris.pdf&#34;</span>)</code></pre></div></p>
 
 		</div>
 		<footer class="post__footer">
