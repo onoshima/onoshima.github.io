@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 17 Feb 2020 20:43:28 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 07 Mar 2020 20:58:44 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>api</title>
+      <link>https://onoshima.github.io/tags/api/</link>
+      <pubDate>Sat, 07 Mar 2020 20:58:44 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/api/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>e-Stat</title>
+      <link>https://onoshima.github.io/tags/e-stat/</link>
+      <pubDate>Sat, 07 Mar 2020 20:58:44 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/e-stat/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>R</title>

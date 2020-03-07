@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>RからeStatのAPIを使ってみる - Takahiro ONOSHIMA&#39;s website</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="Takahiro ONOSHIMA&#39;s website" rel="home">
+				<div class="logo__title">Takahiro ONOSHIMA&#39;s website</div>
+				<div class="logo__tagline">小野島昂洋の個人サイト</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/profile/">
+				
+				<span class="menu__text">Profile</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/works/">
+				
+				<span class="menu__text">Works</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/stat/">
+				
+				<span class="menu__text">STAT/R</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/">
+				
+				<span class="menu__text">Others</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">RからeStatのAPIを使ってみる</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-03-07T20:58:44">March 07, 2020</time>
+	<time class="meta__text" datetime="2020-03-07T21:28:42"> (Last Modified: March 07, 2020)</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#e-statのアプリケーションidの取得">e-StatのアプリケーションIDの取得</a></li>
+    <li><a href="#認証情報の管理">認証情報の管理</a></li>
+    <li><a href="#特別支援学校高等部の進路">特別支援学校高等部の進路</a></li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<p>Rからe-StatのAPIを使ったときのメモ．以下のサイトの言う通りにやってみただけ．</p>
+<p><a href="https://qiita.com/nozma/items/f88f5cc60ab63461deae">https://qiita.com/nozma/items/f88f5cc60ab63461deae</a></p>
+<h2 id="e-statのアプリケーションidの取得">e-StatのアプリケーションIDの取得</h2>
+<p>使うためには，アプリケーションIDというものを取得しないとならない．</p>
+<p><a href="https://www.e-stat.go.jp/api/api-info/api-guide">https://www.e-stat.go.jp/api/api-info/api-guide</a></p>
+<p>上のサイトの指示通りに，ユーザー登録してマイページよりアプリケーションIDを発行する．</p>
+<h2 id="認証情報の管理">認証情報の管理</h2>
+<p><code>keyring</code>というパッケージを使うと，ソースコードの中にIDとか書かなくてすむらしい．便利．</p>
+<p><a href="https://qiita.com/nozma/items/9f4a638906471d125e96">https://qiita.com/nozma/items/9f4a638906471d125e96</a></p>
+<h2 id="特別支援学校高等部の進路">特別支援学校高等部の進路</h2>
+<p>試しに，文科省の「学校基本調査」から特別支援学校高等部で知的障害の進路の情報をとって，グラフにしてみたのがこちら．統計表をダウンロードしてから<code>dplyr</code>を使って整形していく流れ．実際の数と割合をグラフにしてみた．</p>
+<p><img src="/images/graduate_hs.png" alt="高等部卒業生の進路"></p>
+<p><img src="/images/graduate_hs_per.png" alt="高等部卒業生の進路パーセント"></p>
+<p>使ったコードは以下のもの．なぜか平成23年度から25年度はひとまとまりで提供されていたり，平成22年度とそれ以降で列名が違ったりと下処理が面倒くさかったです．</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(pacman)
+<span style="color:#a6e22e">p_load</span>(keyring, httr, listviewer, rlist, pipeR, dplyr, stringr, ggplot2, stringi,
+       readr, ggthemes)
+keyring<span style="color:#f92672">::</span><span style="color:#a6e22e">key_set</span>(<span style="color:#e6db74">&#34;e-stat&#34;</span>)
+
+<span style="color:#75715e">## 統計表を検索してお目当ての表を特定</span>
+response <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">GET</span>(
+  url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://api.e-stat.go.jp/rest/2.1/app/json/getStatsList&#34;</span>,
+  query <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(
+    appId <span style="color:#f92672">=</span> keyring<span style="color:#f92672">::</span><span style="color:#a6e22e">key_get</span>(<span style="color:#e6db74">&#34;e-stat&#34;</span>),
+    searchWord <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;障害種 AND 状況別 AND 高等部&#34;</span>
+  )
+)
+
+res_content <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">content</span>(response)
+<span style="color:#a6e22e">jsonedit</span>(res_content)
+
+id_table <span style="color:#f92672">&lt;-</span> res_content<span style="color:#f92672">$</span>GET_STATS_LIST<span style="color:#f92672">$</span>DATALIST_INF<span style="color:#f92672">$</span>TABLE_INF <span style="color:#f92672">%&gt;&gt;%</span>
+  <span style="color:#a6e22e">list.select</span>(
+    id <span style="color:#f92672">=</span> `@id`,
+    year <span style="color:#f92672">=</span> STATISTICS_NAME_SPEC<span style="color:#f92672">$</span>TABULATION_SUB_CATEGORY1,
+    table_name <span style="color:#f92672">=</span> TITLE_SPEC<span style="color:#f92672">$</span>TABLE_NAME) <span style="color:#f92672">%&gt;&gt;%</span>
+  <span style="color:#a6e22e">list.stack</span>()
+id_list <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">pull</span>(id_table, id)
+
+res <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">tibble</span>()
+
+<span style="color:#a6e22e">for </span>(id in id_list){
+  dat_year <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">GET</span>(
+    url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;https://api.e-stat.go.jp/rest/2.1/app/getSimpleStatsData&#34;</span>,
+    query <span style="color:#f92672">=</span> <span style="color:#a6e22e">list</span>(
+      appId <span style="color:#f92672">=</span> keyring<span style="color:#f92672">::</span><span style="color:#a6e22e">key_get</span>(<span style="color:#e6db74">&#34;e-stat&#34;</span>),
+      statsDataId <span style="color:#f92672">=</span> id
+    )
+  )
+
+  content_year <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">content</span>(dat_year)
+
+  dat_year <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">read.csv</span>(text <span style="color:#f92672">=</span> <span style="color:#a6e22e">sub</span>(<span style="color:#e6db74">&#39;(?s).*&#34;VALUE&#34;\n&#39;</span>, <span style="color:#e6db74">&#34;&#34;</span>, content_year, perl <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>))
+  dat <span style="color:#f92672">&lt;-</span> dat_year <span style="color:#f92672">%&gt;%</span>
+    <span style="color:#a6e22e">rename</span>(<span style="color:#e6db74">&#34;disability&#34;</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">contains</span>(<span style="color:#e6db74">&#34;障害種&#34;</span>),
+           <span style="color:#e6db74">&#34;sex&#34;</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">contains</span>(<span style="color:#e6db74">&#34;性別&#34;</span>),
+           <span style="color:#e6db74">&#34;path&#34;</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">contains</span>(<span style="color:#e6db74">&#34;状況&#34;</span>),
+           <span style="color:#e6db74">&#34;year&#34;</span><span style="color:#f92672">=</span><span style="color:#a6e22e">contains</span>(<span style="color:#e6db74">&#34;年次&#34;</span>)) <span style="color:#f92672">%&gt;%</span>
+    <span style="color:#a6e22e">mutate</span>(path<span style="color:#f92672">=</span><span style="color:#a6e22e">as.character</span>(path)) <span style="color:#f92672">%&gt;%</span>
+    <span style="color:#a6e22e">filter</span>(disability<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;知的障害&#34;</span>) <span style="color:#f92672">%&gt;%</span>
+    <span style="color:#a6e22e">filter</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">str_detect</span>(sex, <span style="color:#e6db74">&#34;男&#34;</span> )) <span style="color:#f92672">%&gt;%</span>
+    <span style="color:#a6e22e">filter</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">str_detect</span>(sex, <span style="color:#e6db74">&#34;女&#34;</span> )) <span style="color:#f92672">%&gt;%</span>
+    <span style="color:#a6e22e">filter</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">str_detect</span>(path,<span style="color:#e6db74">&#34;再掲&#34;</span>)) <span style="color:#f92672">%&gt;%</span>
+    <span style="color:#a6e22e">filter</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">str_detect</span>(path, <span style="color:#e6db74">&#34;％&#34;</span>)) <span style="color:#f92672">%&gt;%</span>
+    <span style="color:#a6e22e">filter</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">str_detect</span>(path, <span style="color:#e6db74">&#34;除く&#34;</span>)) <span style="color:#f92672">%&gt;%</span>
+    <span style="color:#a6e22e">filter</span>(path <span style="color:#f92672">!=</span><span style="color:#e6db74">&#34;計&#34;</span>) <span style="color:#f92672">%&gt;%</span>
+    <span style="color:#a6e22e">mutate_if</span>(is.factor, as.character) <span style="color:#f92672">%&gt;%</span>
+    <span style="color:#a6e22e">mutate</span>(value<span style="color:#f92672">=</span><span style="color:#a6e22e">as.character</span>(value))
+
+  <span style="color:#a6e22e">if</span>(<span style="color:#a6e22e">is.null</span>(dat<span style="color:#f92672">$</span>year)){dat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mutate</span>(dat, year<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;2010年&#34;</span>)}
+
+  dat <span style="color:#f92672">&lt;-</span> dat <span style="color:#f92672">%&gt;%</span>
+    <span style="color:#a6e22e">select</span>(year ,path, value)
+
+  res<span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">bind_rows</span>(res, dat)
+}  
+
+res <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">arrange</span>(res, year) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">mutate</span>(value<span style="color:#f92672">=</span><span style="color:#a6e22e">as.integer</span>(value))
+
+<span style="color:#a6e22e">write_csv</span>(res,<span style="color:#e6db74">&#34;path_hs.csv&#34;</span>)
+
+<span style="color:#75715e">## ここから積み上げグラフを作る</span>
+dat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">read_csv</span>(<span style="color:#e6db74">&#34;path_hs.csv&#34;</span>, col_types <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cci&#34;</span>)
+lev <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;大学等進学者（A）&#34;</span>,
+        <span style="color:#e6db74">&#34;専修学校（専門課程）進学者（B）&#34;</span>,
+        <span style="color:#e6db74">&#34;専修学校（一般課程）等入学者（C）&#34;</span>,
+        <span style="color:#e6db74">&#34;公共職業能力開発施設等入学者（D）&#34;</span>,
+        <span style="color:#e6db74">&#34;就職者&#34;</span>,
+        <span style="color:#e6db74">&#34;左記以外の者&#34;</span>,
+        <span style="color:#e6db74">&#34;不詳・死亡の者&#34;</span>)
+dat_mo <span style="color:#f92672">&lt;-</span> dat <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">mutate</span>(year<span style="color:#f92672">=</span><span style="color:#a6e22e">as.factor</span>(year),path<span style="color:#f92672">=</span><span style="color:#a6e22e">factor</span>(path,levels <span style="color:#f92672">=</span> lev))
+
+p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(dat_mo, <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>year, y<span style="color:#f92672">=</span>value, fill<span style="color:#f92672">=</span>path)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_bar</span>(stat <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;identity&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">labs</span>(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;年度&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;人数&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme_gdocs</span>(base_family<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;HiraKakuPro-W3&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_fill_gdocs</span>(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;卒業後の状況&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">ggtitle</span>(<span style="color:#e6db74">&#34;特別支援学校高等部卒業後の状況（知的障害）&#34;</span>)<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">labs</span>(caption<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;出典「文部科学省　学校基本調査」&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme</span>(plot.caption<span style="color:#f92672">=</span><span style="color:#a6e22e">element_text</span>(size<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span>, hjust<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,))
+<span style="color:#a6e22e">print</span>(p)
+<span style="color:#a6e22e">ggsave</span>(<span style="color:#e6db74">&#34;images/graduate_hs.png&#34;</span>,p, width<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>)
+
+<span style="color:#75715e">## 割合のグラフ</span>
+dat_per <span style="color:#f92672">&lt;-</span> dat_mo <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">group_by</span>(year) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">mutate</span>(total <span style="color:#f92672">=</span> <span style="color:#a6e22e">sum</span>(value)) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">mutate</span>(percent<span style="color:#f92672">=</span><span style="color:#a6e22e">round</span>(<span style="color:#ae81ff">100</span><span style="color:#f92672">*</span>(value<span style="color:#f92672">/</span>total),<span style="color:#ae81ff">3</span>))
+br <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">100</span>, <span style="color:#ae81ff">10</span>)
+p1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(dat_per, <span style="color:#a6e22e">aes</span>(x<span style="color:#f92672">=</span>year, y<span style="color:#f92672">=</span>percent, fill<span style="color:#f92672">=</span>path)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_bar</span>(stat <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;identity&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_y_continuous</span>(breaks<span style="color:#f92672">=</span>br) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">labs</span>(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;年度&#34;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;割合（％）&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme_gdocs</span>(base_family<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;HiraKakuPro-W3&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_fill_gdocs</span>(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;卒業後の状況&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">ggtitle</span>(<span style="color:#e6db74">&#34;特別支援学校高等部卒業後の状況（知的障害）&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">labs</span>(caption<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;出典「文部科学省　学校基本調査」&#34;</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme</span>(plot.caption<span style="color:#f92672">=</span><span style="color:#a6e22e">element_text</span>(size<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span>, hjust<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>,))
+<span style="color:#a6e22e">print</span>(p1)
+<span style="color:#a6e22e">ggsave</span>(<span style="color:#e6db74">&#34;images/graduate_hs_per.png&#34;</span>,p1, width<span style="color:#f92672">=</span><span style="color:#ae81ff">10</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, dpi<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>)</code></pre></div>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/e-stat/" rel="tag">e-Stat</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/api/" rel="tag">api</a></li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Takahiro ONOSHIMA.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']]
+  }
+});
+</script>
+
+</body>
+</html>
