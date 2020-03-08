@@ -6,7 +6,7 @@
     <description>Recent content in Categories on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 07 Mar 2020 20:58:44 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 08 Mar 2020 16:50:26 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,9 +14,18 @@
     <item>
       <title>R</title>
       <link>https://onoshima.github.io/categories/r/</link>
-      <pubDate>Sat, 07 Mar 2020 20:58:44 +0900</pubDate>
+      <pubDate>Sun, 08 Mar 2020 16:50:26 +0900</pubDate>
       
       <guid>https://onoshima.github.io/categories/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>stat</title>
+      <link>https://onoshima.github.io/categories/stat/</link>
+      <pubDate>Sun, 08 Mar 2020 16:50:26 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/categories/stat/</guid>
       <description></description>
     </item>
     
@@ -26,15 +35,6 @@
       <pubDate>Sat, 22 Feb 2020 13:05:54 +0900</pubDate>
       
       <guid>https://onoshima.github.io/categories/others/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>stat</title>
-      <link>https://onoshima.github.io/categories/stat/</link>
-      <pubDate>Mon, 17 Feb 2020 20:43:28 +0900</pubDate>
-      
-      <guid>https://onoshima.github.io/categories/stat/</guid>
       <description></description>
     </item>
     

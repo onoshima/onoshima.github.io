@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>RからeStatのAPIを使ってみる（その2） - Takahiro ONOSHIMA&#39;s website</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="Takahiro ONOSHIMA&#39;s website" rel="home">
+				<div class="logo__title">Takahiro ONOSHIMA&#39;s website</div>
+				<div class="logo__tagline">小野島昂洋の個人サイト</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/profile/">
+				
+				<span class="menu__text">Profile</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/works/">
+				
+				<span class="menu__text">Works</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/stat/">
+				
+				<span class="menu__text">STAT/R</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/">
+				
+				<span class="menu__text">Others</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">RからeStatのAPIを使ってみる（その2）</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-03-08T16:50:26">March 08, 2020</time>
+	<time class="meta__text" datetime="2020-03-08T17:05:35"> (Last Modified: March 08, 2020)</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/stat/" rel="category">stat</a>, <a class="meta__link" href="/categories/r/" rel="category">R</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#不登校の児童生徒の数">不登校の児童生徒の数</a></li>
+    <li><a href="#使ったコード">使ったコード</a></li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<h2 id="はじめに">はじめに</h2>
+<p>Rからe-Statを使うお勉強の記録．<a href="https://qiita.com/yutannihilation">@yutannihilation</a> さん作成の<code>estatapi</code>というパッケージがあり，それを使ったらとても楽だった．使い方は以下のページに書いてある．</p>
+<p><a href="https://qiita.com/kazutan/items/9c0b2dd0f055fde45cda">https://qiita.com/kazutan/items/9c0b2dd0f055fde45cda</a></p>
+<h2 id="不登校の児童生徒の数">不登校の児童生徒の数</h2>
+<p>今回は，文部科学省の「児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査」という調査を使ってみて，都道府県別1000人あたりの不登校児童の数をグラフにしてみた．日本地図については谷村先生作成の<code>NipponMap</code>というパッケージを使った．使い方は以下のサイトを参考にした．</p>
+<p><a href="https://oku.edu.mie-u.ac.jp/~okumura/stat/nippon.html">https://oku.edu.mie-u.ac.jp/~okumura/stat/nippon.html</a></p>
+<p><img src="/images/scref_es2017.png" alt="小学生の不登校児童">
+<img src="/images/scref_jhs2017.png" alt="中学生の不登校生徒"></p>
+<h2 id="使ったコード">使ったコード</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(pacman)
+<span style="color:#a6e22e">p_load</span>(estatapi, keyring,dplyr, stringr,NipponMap,RColorBrewer)
+<span style="color:#a6e22e">key_set</span>(<span style="color:#e6db74">&#34;e-stat&#34;</span>)
+
+<span style="color:#75715e">#　統計表の検索 00400304は児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査</span>
+statsList <span style="color:#f92672">&lt;-</span>
+  <span style="color:#a6e22e">estat_getStatsList</span>(
+    appId <span style="color:#f92672">=</span> <span style="color:#a6e22e">key_get</span>(<span style="color:#e6db74">&#34;e-stat&#34;</span>),
+    searchWord <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>,
+    statsCode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;00400304&#34;</span>
+  )
+<span style="color:#a6e22e">str</span>(statsList)
+
+lists <span style="color:#f92672">&lt;-</span> statsList <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">str_detect</span>(TITLE, <span style="color:#e6db74">&#34;不登校児童生徒数&#34;</span>))
+id_vector <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">pull</span>(lists, <span style="color:#e6db74">&#34;@id&#34;</span>)
+
+<span style="color:#75715e"># メタ情報</span>
+meta_info <span style="color:#f92672">&lt;-</span>
+  <span style="color:#a6e22e">estat_getMetaInfo</span>(appId <span style="color:#f92672">=</span> <span style="color:#a6e22e">key_get</span>(<span style="color:#e6db74">&#34;e-stat&#34;</span>), statsDataId <span style="color:#f92672">=</span> id_vector[1])
+<span style="color:#a6e22e">names</span>(meta_info)
+
+<span style="color:#75715e"># 実際のデータを取得</span>
+df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estat_getStatsData</span>(
+  appId <span style="color:#f92672">=</span> <span style="color:#a6e22e">key_get</span>(<span style="color:#e6db74">&#34;e-stat&#34;</span>),
+  statsDataId <span style="color:#f92672">=</span> id_vector[1],
+  cdCat02 <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;120&#34;</span>, <span style="color:#e6db74">&#34;140&#34;</span>), <span style="color:#75715e">#小学校と中学校</span>
+  cdArea <span style="color:#f92672">=</span> meta_info<span style="color:#f92672">$</span>area<span style="color:#f92672">$</span><span style="color:#e6db74">&#34;@code&#34;</span>[2<span style="color:#f92672">:</span><span style="color:#ae81ff">48</span>]　<span style="color:#75715e">#1番目は全国なので除外</span>
+)
+
+df2017 <span style="color:#f92672">&lt;-</span> df <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">rename</span>(<span style="color:#e6db74">&#34;year&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;時間軸(年度次)&#34;</span>) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">filter</span>(year <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;2017年度&#34;</span>,  学校種類 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;小学校&#34;</span>, cat01_code <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;120&#34;</span>)
+df2017_jhs <span style="color:#f92672">&lt;-</span> df <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">rename</span>(<span style="color:#e6db74">&#34;year&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;時間軸(年度次)&#34;</span>) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">filter</span>(year <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;2017年度&#34;</span>,  学校種類 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;中学校&#34;</span>, cat01_code <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;120&#34;</span>)
+
+<span style="color:#75715e"># 小学生をplot</span>
+kenmei <span style="color:#f92672">&lt;-</span> df2017<span style="color:#f92672">$</span>地域
+
+br <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">1</span>)
+color <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">brewer.pal</span>(<span style="color:#ae81ff">6</span>, <span style="color:#e6db74">&#34;Reds&#34;</span>)
+cols <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">cut</span>(df2017<span style="color:#f92672">$</span>value, breaks <span style="color:#f92672">=</span> br, labels <span style="color:#f92672">=</span> color))
+<span style="color:#a6e22e">names</span>(cols) <span style="color:#f92672">=</span> kenmei
+leg <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;3-4人&#34;</span>,<span style="color:#e6db74">&#34;4-5人&#34;</span>, <span style="color:#e6db74">&#34;5-6人&#34;</span>,<span style="color:#e6db74">&#34;6-7人&#34;</span>, <span style="color:#e6db74">&#34;7-8人&#34;</span>, <span style="color:#e6db74">&#34;8-9人&#34;</span>)
+
+<span style="color:#a6e22e">png</span>(<span style="color:#e6db74">&#34;images/scref_es2017.png&#34;</span>, width<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, res<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>,units<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;in&#34;</span>)
+<span style="color:#a6e22e">par</span>(family <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HiraKakuProN-W3&#34;</span>)
+<span style="color:#a6e22e">JapanPrefMap</span>(col <span style="color:#f92672">=</span> cols)
+<span style="color:#a6e22e">title</span>(<span style="color:#e6db74">&#34;小学生1000人あたりの不登校児童数（2017年度）&#34;</span>, sub<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;出典「児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査」&#34;</span>)
+<span style="color:#a6e22e">legend</span>(<span style="color:#e6db74">&#34;right&#34;</span>,legend<span style="color:#f92672">=</span>leg , fill <span style="color:#f92672">=</span> color)
+<span style="color:#a6e22e">dev.off</span>()
+
+<span style="color:#75715e"># 中学生をplot</span>
+<span style="color:#a6e22e">max</span>(df2017_jhs<span style="color:#f92672">$</span>value)
+br <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">5</span>)
+color <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">brewer.pal</span>(<span style="color:#ae81ff">6</span>, <span style="color:#e6db74">&#34;Greens&#34;</span>)
+cols <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">cut</span>(df2017_jhs<span style="color:#f92672">$</span>value, breaks <span style="color:#f92672">=</span> br, labels <span style="color:#f92672">=</span> color))
+<span style="color:#a6e22e">names</span>(cols) <span style="color:#f92672">=</span> kenmei
+leg <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;20-25人&#34;</span>,<span style="color:#e6db74">&#34;25-30人&#34;</span>, <span style="color:#e6db74">&#34;30-35人&#34;</span>,<span style="color:#e6db74">&#34;35-40人&#34;</span>, <span style="color:#e6db74">&#34;40-45人&#34;</span>)
+
+<span style="color:#a6e22e">png</span>(<span style="color:#e6db74">&#34;images/scref_jhs2017.png&#34;</span>, width<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, res<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>,units<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;in&#34;</span>)
+<span style="color:#a6e22e">par</span>(family <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HiraKakuProN-W3&#34;</span>)
+<span style="color:#a6e22e">JapanPrefMap</span>(col <span style="color:#f92672">=</span> cols)
+<span style="color:#a6e22e">title</span>(<span style="color:#e6db74">&#34;中学生1000人あたりの不登校生徒数（2017年度）&#34;</span>, sub<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;出典「児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査」&#34;</span>)
+<span style="color:#a6e22e">legend</span>(<span style="color:#e6db74">&#34;right&#34;</span>,legend<span style="color:#f92672">=</span>leg , fill <span style="color:#f92672">=</span> color[1<span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>])
+<span style="color:#a6e22e">dev.off</span>()</code></pre></div>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/e-stat/" rel="tag">e-Stat</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/api/" rel="tag">API</a></li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Takahiro ONOSHIMA.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']]
+  }
+});
+</script>
+
+</body>
+</html>

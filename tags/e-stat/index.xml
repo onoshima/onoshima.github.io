@@ -6,10 +6,19 @@
     <description>Recent content in e-Stat on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 07 Mar 2020 20:58:44 +0900</lastBuildDate>
+    <lastBuildDate>Sun, 08 Mar 2020 16:50:26 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/e-stat/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>RからeStatのAPIを使ってみる（その2）</title>
+      <link>https://onoshima.github.io/stat/restat_packages/</link>
+      <pubDate>Sun, 08 Mar 2020 16:50:26 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/stat/restat_packages/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>RからeStatのAPIを使ってみる</title>
