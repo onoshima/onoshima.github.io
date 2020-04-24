@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>non-normalな乱数を発生するパッケージあれこれ</title>
+      <link>https://onoshima.github.io/stat/nonnormal/</link>
+      <pubDate>Fri, 24 Apr 2020 10:27:42 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/stat/nonnormal/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>カテゴリカルデータをlavaanでSEMする際の細かい話</title>
       <link>https://onoshima.github.io/stat/wlsmv/</link>
       <pubDate>Thu, 16 Apr 2020 20:04:15 +0900</pubDate>

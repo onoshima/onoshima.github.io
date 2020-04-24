@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 16 Apr 2020 20:04:15 +0900</lastBuildDate>
+    <lastBuildDate>Fri, 24 Apr 2020 10:27:42 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>nonnormal distribution</title>
+      <link>https://onoshima.github.io/tags/nonnormal-distribution/</link>
+      <pubDate>Fri, 24 Apr 2020 10:27:42 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/nonnormal-distribution/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>lavaan</title>
@@ -39,11 +48,11 @@
     </item>
     
     <item>
-      <title>zetero</title>
-      <link>https://onoshima.github.io/tags/zetero/</link>
+      <title>zotero</title>
+      <link>https://onoshima.github.io/tags/zotero/</link>
       <pubDate>Thu, 09 Apr 2020 20:54:52 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/tags/zetero/</guid>
+      <guid>https://onoshima.github.io/tags/zotero/</guid>
       <description></description>
     </item>
     

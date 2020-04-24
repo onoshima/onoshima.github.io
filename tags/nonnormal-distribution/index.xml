@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nonnormal distribution on Takahiro ONOSHIMA&#39;s website</title>
+    <link>https://onoshima.github.io/tags/nonnormal-distribution/</link>
+    <description>Recent content in nonnormal distribution on Takahiro ONOSHIMA&#39;s website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Fri, 24 Apr 2020 10:27:42 +0900</lastBuildDate>
+    
+	<atom:link href="https://onoshima.github.io/tags/nonnormal-distribution/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>non-normalな乱数を発生するパッケージあれこれ</title>
+      <link>https://onoshima.github.io/stat/nonnormal/</link>
+      <pubDate>Fri, 24 Apr 2020 10:27:42 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/stat/nonnormal/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
