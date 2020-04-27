@@ -11,6 +11,15 @@
     
     
     <item>
+      <title>lavaanでMplusのカテゴリカル因子分析を再現する</title>
+      <link>https://onoshima.github.io/stat/mplus_lavaan/</link>
+      <pubDate>Mon, 27 Apr 2020 13:13:05 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/stat/mplus_lavaan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>non-normalな乱数を発生するパッケージあれこれ</title>
       <link>https://onoshima.github.io/stat/nonnormal/</link>
       <pubDate>Fri, 24 Apr 2020 10:27:42 +0900</pubDate>

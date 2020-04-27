@@ -6,33 +6,33 @@
     <description>Recent content in Tags on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 24 Apr 2020 10:27:42 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 27 Apr 2020 13:13:05 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>nonnormal distribution</title>
-      <link>https://onoshima.github.io/tags/nonnormal-distribution/</link>
-      <pubDate>Fri, 24 Apr 2020 10:27:42 +0900</pubDate>
-      
-      <guid>https://onoshima.github.io/tags/nonnormal-distribution/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>lavaan</title>
       <link>https://onoshima.github.io/tags/lavaan/</link>
-      <pubDate>Thu, 16 Apr 2020 20:04:15 +0900</pubDate>
+      <pubDate>Mon, 27 Apr 2020 13:13:05 +0900</pubDate>
       
       <guid>https://onoshima.github.io/tags/lavaan/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>Mplus</title>
+      <link>https://onoshima.github.io/tags/mplus/</link>
+      <pubDate>Mon, 27 Apr 2020 13:13:05 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/mplus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>SEM</title>
       <link>https://onoshima.github.io/tags/sem/</link>
-      <pubDate>Thu, 16 Apr 2020 20:04:15 +0900</pubDate>
+      <pubDate>Mon, 27 Apr 2020 13:13:05 +0900</pubDate>
       
       <guid>https://onoshima.github.io/tags/sem/</guid>
       <description></description>
@@ -41,9 +41,18 @@
     <item>
       <title>WLSMV</title>
       <link>https://onoshima.github.io/tags/wlsmv/</link>
-      <pubDate>Thu, 16 Apr 2020 20:04:15 +0900</pubDate>
+      <pubDate>Mon, 27 Apr 2020 13:13:05 +0900</pubDate>
       
       <guid>https://onoshima.github.io/tags/wlsmv/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nonnormal distribution</title>
+      <link>https://onoshima.github.io/tags/nonnormal-distribution/</link>
+      <pubDate>Fri, 24 Apr 2020 10:27:42 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/nonnormal-distribution/</guid>
       <description></description>
     </item>
     

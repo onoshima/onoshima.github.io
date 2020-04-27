@@ -6,10 +6,19 @@
     <description>Recent content in WLSMV on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 16 Apr 2020 20:04:15 +0900</lastBuildDate>
+    <lastBuildDate>Mon, 27 Apr 2020 13:13:05 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/wlsmv/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>lavaanでMplusのカテゴリカル因子分析を再現する</title>
+      <link>https://onoshima.github.io/stat/mplus_lavaan/</link>
+      <pubDate>Mon, 27 Apr 2020 13:13:05 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/stat/mplus_lavaan/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>カテゴリカルデータをlavaanでSEMする際の細かい話</title>
