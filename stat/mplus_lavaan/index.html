@@ -85,7 +85,7 @@
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
 	<time class="meta__text" datetime="2020-04-27T13:13:05">April 27, 2020</time>
-	<time class="meta__text" datetime="2020-04-27T15:03:25"> (Last Modified: April 27, 2020)</time>
+	<time class="meta__text" datetime="2020-04-27T15:29:50"> (Last Modified: April 27, 2020)</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -110,7 +110,7 @@
 <div class="content post__content clearfix">
 			<p>Mplusで行われたシミュレーションをRで再現しようとした際に調べたことの記録．Mplusにおける<code>ESTIMATOR=WLSMV</code>とlavaanで<code>estimator=&quot;WLSMV&quot;</code>にした際の挙動について．</p>
 <h2 id="データ">データ</h2>
-<p>Rの<code>psych</code>のパッケージに入っている<code>bfi</code>の質問紙データの一部（A1-A5の項目まで）を利用した．なぜ一部かというとMplusのデモ版だと使える変数の数に制限があるためである．とりあえずcsvにして書き出す．Mplusだとデータファイルは変数名を含めないようなので<code>col_names=FALSE</code>にする．欠損値処理につても考えないために今回はリストワイズ削除．N=2709の5項目（すべて6件法）のデータを使う．</p>
+<p>Rの<code>psych</code>のパッケージに入っている<code>bfi</code>の質問紙データの一部（A1-A5の項目まで）を利用した．なぜ一部かというとMplusのデモ版だと使える変数の数に制限があるためである．とりあえずcsvにして書き出す．Mplusだとデータファイルは変数名を含めないようなので<code>col_names=FALSE</code>にする．欠損値処理についても考えないために今回はリストワイズ削除．N=2709の5項目（すべて6件法）のデータを使う．</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(readr)
 <span style="color:#a6e22e">library</span>(lavaan)
 bfiA <span style="color:#f92672">&lt;-</span> psych<span style="color:#f92672">::</span>bfi[1<span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>]
@@ -288,10 +288,73 @@ Weighted Root Mean Square Residual:
   WRMR                                           1.455       1.455
 
 </code></pre><p>モデルフィットについてはほぼ一致していて（ずれていても.001程度），実用上問題なさそうである．ただSRMRだけMplusでは0.022でlavaanでは0.031とそこそこずれている．原因はよく分からない．</p>
+<p>次にパラメータの推定値．</p>
+<pre><code>Parameter Estimates:
+
+  Information                                 Expected
+  Information saturated (h1) model        Unstructured
+  Standard errors                           Robust.sem
+
+Latent Variables:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)
+  F1 =~                                               
+    A1                0.436    0.018   24.488    0.000
+    A2               -0.718    0.013  -56.137    0.000
+    A3               -0.810    0.012  -69.503    0.000
+    A4               -0.515    0.017  -29.764    0.000
+    A5               -0.668    0.013  -50.381    0.000
+
+Intercepts:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)
+   .A1                0.000                           
+   .A2                0.000                           
+   .A3                0.000                           
+   .A4                0.000                           
+   .A5                0.000                           
+    F1                0.000                           
+
+Thresholds:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)
+    A1|t1            -0.441    0.025  -17.665    0.000
+    A1|t2             0.321    0.025   13.095    0.000
+    A1|t3             0.739    0.027   27.740    0.000
+    A1|t4             1.232    0.032   38.426    0.000
+    A1|t5             1.893    0.049   38.908    0.000
+    A2|t1            -2.112    0.058  -36.101    0.000
+    A2|t2            -1.526    0.038  -40.540    0.000
+    A2|t3            -1.184    0.031  -37.771    0.000
+    A2|t4            -0.475    0.025  -18.915    0.000
+    A2|t5             0.485    0.025   19.294    0.000
+    A3|t1            -1.840    0.047  -39.403    0.000
+    A3|t2            -1.309    0.033  -39.292    0.000
+    A3|t3            -0.952    0.029  -33.395    0.000
+    A3|t4            -0.323    0.025  -13.171    0.000
+    A3|t5             0.610    0.026   23.650    0.000
+    A4|t1            -1.668    0.041  -40.432    0.000
+    A4|t2            -1.143    0.031  -37.129    0.000
+    A4|t3            -0.867    0.028  -31.307    0.000
+    A4|t4            -0.366    0.025  -14.812    0.000
+    A4|t5             0.236    0.024    9.690    0.000
+    A5|t1            -2.018    0.054  -37.440    0.000
+    A5|t2            -1.345    0.034  -39.619    0.000
+    A5|t3            -0.911    0.028  -32.413    0.000
+    A5|t4            -0.245    0.024  -10.073    0.000
+    A5|t5             0.685    0.026   26.094    0.000
+
+Variances:
+                   Estimate  Std.Err  z-value  P(&gt;|z|)
+   .A1                0.810                           
+   .A2                0.485                           
+   .A3                0.344                           
+   .A4                0.735                           
+   .A5                0.554                           
+    F1                1.000                           
+
+</code></pre><p>こちらもほぼほぼ一致している．</p>
 <h2 id="mplusの昔の挙動">Mplusの昔の挙動</h2>
 <p>Mplusはversionが5までと6以降ではWLSMVの指す内容が違うらしい．具体的には検定統計量はversion 5までは，mean and variance adjusted test statistic (Satterthwaite type)で算出するのに対して6以降はcaled and shifted test statisticであるようだ．</p>
 <p><a href="https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf">https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf</a></p>
-<p>Mplusで古いバージョンの挙動をさせるためにはANALYSISコマンドで<code>SATTERTHWAITE=ON</code>にすると良いようだ．lavaanでこれを再現するには&rsquo;estimator=&quot;WLSMVS&rdquo;&lsquo;にすると良い．</p>
+<p>Mplusで古いバージョンの挙動をさせるためにはANALYSISコマンドで<code>SATTERTHWAITE=ON</code>にすると良いようだ．lavaanでこれを再現するには<code>estimator=&quot;WLSMVS&quot;</code>にすると良い．</p>
 <p>Mplusでこれを行うと次のようになる．（推定値は変わらないのでモデルフィットの部分のみ）</p>
 <pre><code>MODEL FIT INFORMATION
 
