@@ -120,7 +120,7 @@
 <p><img src="/images/lapply.png" alt="lapply結果">
 <img src="/images/sapply.png" alt="sapply結果"></p>
 <h2 id="mclapplyとは">mclapplyとは</h2>
-<p>lapplyではリストのそれぞれに並列の処理を行うことができることが分かったが, 複数のリストオブジェクトに対して並列的に処理を行いたいという場面もあるかもしれない。そうした際には&rsquo;parallel'というパッケージの&rsquo;mclapply'という関数が使えるらしい。</p>
+<p>lapplyではリストのそれぞれに並列の処理を行うことができることが分かったが, 複数のリストオブジェクトに対して並列的に処理を行いたいという場面もあるかもしれない。そうした際には&rsquo;parallel&rsquo;というパッケージの&rsquo;mclapply&rsquo;という関数が使えるらしい。</p>
 <p>使い方は次のとおり。で繰り返す回数と, 処理する関数を指定するとよいようだ。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">replist <span style="color:#f92672">&lt;-</span> parallel<span style="color:#f92672">::</span><span style="color:#a6e22e">mclapply</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1000</span>, <span style="color:#a6e22e">function</span>(x){
   replicates <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">list</span>(<span style="color:#a6e22e">mean</span>(<span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">10</span>)), <span style="color:#a6e22e">mean</span>(<span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">100</span>)),<span style="color:#a6e22e">mean</span>(<span style="color:#a6e22e">rnorm</span>(<span style="color:#ae81ff">1000</span>)))
