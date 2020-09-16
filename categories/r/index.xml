@@ -6,10 +6,19 @@
     <description>Recent content in R on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Mon, 27 Apr 2020 13:13:05 +0900</lastBuildDate>
+    <lastBuildDate>Wed, 16 Sep 2020 15:13:32 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/categories/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>EFAから計算したωとCFAから計算したω</title>
+      <link>https://onoshima.github.io/stat/omega_efacfa/</link>
+      <pubDate>Wed, 16 Sep 2020 15:13:32 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/stat/omega_efacfa/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>lavaanでMplusのカテゴリカル因子分析を再現する</title>

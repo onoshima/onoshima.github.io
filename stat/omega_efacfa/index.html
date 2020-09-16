@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>EFAから計算したωとCFAから計算したω - Takahiro ONOSHIMA&#39;s website</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="Takahiro ONOSHIMA&#39;s website" rel="home">
+				<div class="logo__title">Takahiro ONOSHIMA&#39;s website</div>
+				<div class="logo__tagline">小野島昂洋の個人サイト</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/profile/">
+				
+				<span class="menu__text">Profile</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/works/">
+				
+				<span class="menu__text">Works</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/stat/">
+				
+				<span class="menu__text">STAT/R</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/">
+				
+				<span class="menu__text">Others</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">EFAから計算したωとCFAから計算したω</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-09-16T15:13:32">September 16, 2020</time>
+	<time class="meta__text" datetime="2020-09-16T19:00:58"> (Last Modified: September 16, 2020)</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>, <a class="meta__link" href="/categories/stat/" rel="category">stat</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#2つのω係数について">2つのω係数について</a></li>
+    <li><a href="#探索的因子分析による方法">探索的因子分析による方法</a></li>
+    <li><a href="#確認的因子分析によるもの">確認的因子分析によるもの</a></li>
+    <li><a href="#omegasem関数について">omegaSem関数について</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<h2 id="2つのω係数について">2つのω係数について</h2>
+<p>信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ</p>
+<p>$$
+\omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\<br>
+\omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}+{\bf 1^{\prime} A A^{\prime}}}{{\rm Var}(X)}
+$$</p>
+<p>として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。</p>
+<p>Revelle &amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。</p>
+<p>使うデータは<code>Psych</code>パッケージに入ってる<code>Thurstone</code>というデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。</p>
+<p><a href="https://www.personality-project.org/r/html/bifactor.html">https://www.personality-project.org/r/html/bifactor.html</a></p>
+<h2 id="探索的因子分析による方法">探索的因子分析による方法</h2>
+<p>まずは，探索的因子分析でやってみる。<code>psych</code>所収の<code>omega</code>関数を使う。とても簡単。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
+<span style="color:#a6e22e">library</span>(lavaan)
+<span style="color:#a6e22e">library</span>(psych)
+<span style="color:#a6e22e">library</span>(knitr)
+
+<span style="color:#a6e22e">data</span>(<span style="color:#e6db74">&#34;Thurstone&#34;</span>) 
+res_efa  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">omega</span>(Thurstone)
+
+<span style="color:#a6e22e">kable</span>(<span style="color:#a6e22e">round</span>(res_efa<span style="color:#f92672">$</span>schmid<span style="color:#f92672">$</span>sl,<span style="color:#ae81ff">3</span>))</code></pre></div>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="right">g</th>
+<th align="right">F1*</th>
+<th align="right">F2*</th>
+<th align="right">F3*</th>
+<th align="right">h2</th>
+<th align="right">u2</th>
+<th align="right">p2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Sentences</td>
+<td align="right">0.709</td>
+<td align="right">0.560</td>
+<td align="right">-0.022</td>
+<td align="right">0.030</td>
+<td align="right">0.817</td>
+<td align="right">0.183</td>
+<td align="right">0.615</td>
+</tr>
+<tr>
+<td align="left">Vocabulary</td>
+<td align="right">0.726</td>
+<td align="right">0.553</td>
+<td align="right">0.042</td>
+<td align="right">-0.022</td>
+<td align="right">0.835</td>
+<td align="right">0.165</td>
+<td align="right">0.631</td>
+</tr>
+<tr>
+<td align="left">Sent.Completion</td>
+<td align="right">0.683</td>
+<td align="right">0.521</td>
+<td align="right">0.020</td>
+<td align="right">0.004</td>
+<td align="right">0.738</td>
+<td align="right">0.262</td>
+<td align="right">0.632</td>
+</tr>
+<tr>
+<td align="left">First.Letters</td>
+<td align="right">0.646</td>
+<td align="right">-0.001</td>
+<td align="right">0.558</td>
+<td align="right">0.002</td>
+<td align="right">0.729</td>
+<td align="right">0.271</td>
+<td align="right">0.573</td>
+</tr>
+<tr>
+<td align="left">Four.Letter.Words</td>
+<td align="right">0.622</td>
+<td align="right">-0.011</td>
+<td align="right">0.489</td>
+<td align="right">0.076</td>
+<td align="right">0.632</td>
+<td align="right">0.368</td>
+<td align="right">0.613</td>
+</tr>
+<tr>
+<td align="left">Suffixes</td>
+<td align="right">0.558</td>
+<td align="right">0.112</td>
+<td align="right">0.409</td>
+<td align="right">-0.060</td>
+<td align="right">0.495</td>
+<td align="right">0.505</td>
+<td align="right">0.629</td>
+</tr>
+<tr>
+<td align="left">Letter.Series</td>
+<td align="right">0.587</td>
+<td align="right">0.019</td>
+<td align="right">-0.009</td>
+<td align="right">0.617</td>
+<td align="right">0.725</td>
+<td align="right">0.275</td>
+<td align="right">0.475</td>
+</tr>
+<tr>
+<td align="left">Pedigrees</td>
+<td align="right">0.577</td>
+<td align="right">0.238</td>
+<td align="right">-0.033</td>
+<td align="right">0.339</td>
+<td align="right">0.505</td>
+<td align="right">0.495</td>
+<td align="right">0.659</td>
+</tr>
+<tr>
+<td align="left">Letter.Group</td>
+<td align="right">0.541</td>
+<td align="right">-0.037</td>
+<td align="right">0.139</td>
+<td align="right">0.459</td>
+<td align="right">0.524</td>
+<td align="right">0.476</td>
+<td align="right">0.558</td>
+</tr>
+</tbody>
+</table>
+<p>次のようなパス図も一緒に吐き出す。</p>
+<p><img src="/images/omega_efacfa.png" alt="パス図"></p>
+<p>ω係数は，$\omega_h = 0.74$と$\omega_t = 0.93$とのことである。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
+ Total, General and Subset omega for each subset
+                                                 g  F1<span style="color:#f92672">*</span>  F2<span style="color:#f92672">*</span>  F3<span style="color:#f92672">*</span>
+Omega total for total scores and subscales    <span style="color:#ae81ff">0.93</span> <span style="color:#ae81ff">0.92</span> <span style="color:#ae81ff">0.83</span> <span style="color:#ae81ff">0.79</span>
+Omega general for total scores and subscales  <span style="color:#ae81ff">0.74</span> <span style="color:#ae81ff">0.58</span> <span style="color:#ae81ff">0.50</span> <span style="color:#ae81ff">0.47</span>
+Omega group for total scores and subscales    <span style="color:#ae81ff">0.16</span> <span style="color:#ae81ff">0.34</span> <span style="color:#ae81ff">0.32</span> <span style="color:#ae81ff">0.32</span></code></pre></div>
+<p>これは先ほどの，SL変換後の因子負荷量から式通りに計算すると出てくる値である。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
+VarX <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(Thurstone) 
+c <span style="color:#f92672">&lt;-</span> res_efa<span style="color:#f92672">$</span>schmid<span style="color:#f92672">$</span>sl[,<span style="color:#e6db74">&#34;g&#34;</span>]
+A <span style="color:#f92672">&lt;-</span> res_efa<span style="color:#f92672">$</span>schmid<span style="color:#f92672">$</span>sl[,<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;F1*&#34;</span>,<span style="color:#e6db74">&#34;F2*&#34;</span>,<span style="color:#e6db74">&#34;F3*&#34;</span>)]
+
+nume1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(c <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(c)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">sum</span>(A <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(A))
+nume2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(c <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(c))
+nume1<span style="color:#f92672">/</span>VarX
+<span style="color:#75715e">#[1] 0.9308199</span>
+nume2<span style="color:#f92672">/</span>VarX
+<span style="color:#75715e">#[1] 0.7360703</span></code></pre></div>
+<h2 id="確認的因子分析によるもの">確認的因子分析によるもの</h2>
+<p>続いて確認的因子分析による方法を試してみる。<code>lavaan</code>でCFAをして因子負荷量行列を取り出す。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
+mo <span style="color:#f92672">&lt;-</span><span style="color:#e6db74">&#34;
+</span><span style="color:#e6db74">g =~ Sentences+Vocabulary+Sent.Completion+First.Letters+Four.Letter.Words+Suffixes+Letter.Series+Pedigrees+Letter.Group
+</span><span style="color:#e6db74">F1 =~ Sentences+Vocabulary+Sent.Completion
+</span><span style="color:#e6db74">F2 =~ First.Letters+Four.Letter.Words+Suffixes
+</span><span style="color:#e6db74">F3 =~ Letter.Series+Pedigrees+Letter.Group
+</span><span style="color:#e6db74">&#34;</span>
+
+res_cfa <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cfa</span>(mo, sample.cov<span style="color:#f92672">=</span>Thurstone, orthogonal<span style="color:#f92672">=</span>T, sample.nobs <span style="color:#f92672">=</span> <span style="color:#ae81ff">213</span>)
+lambda <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">inspect</span>(res_cfa,what<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;std&#34;</span>)<span style="color:#f92672">$</span>lambda
+<span style="color:#a6e22e">kable</span>(<span style="color:#a6e22e">round</span>(lambda,<span style="color:#ae81ff">3</span>))</code></pre></div>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="right">g</th>
+<th align="right">F1</th>
+<th align="right">F2</th>
+<th align="right">F3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Sentences</td>
+<td align="right">0.768</td>
+<td align="right">0.488</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
+</tr>
+<tr>
+<td align="left">Vocabulary</td>
+<td align="right">0.791</td>
+<td align="right">0.452</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
+</tr>
+<tr>
+<td align="left">Sent.Completion</td>
+<td align="right">0.754</td>
+<td align="right">0.404</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
+</tr>
+<tr>
+<td align="left">First.Letters</td>
+<td align="right">0.608</td>
+<td align="right">0.000</td>
+<td align="right">0.614</td>
+<td align="right">0.000</td>
+</tr>
+<tr>
+<td align="left">Four.Letter.Words</td>
+<td align="right">0.597</td>
+<td align="right">0.000</td>
+<td align="right">0.506</td>
+<td align="right">0.000</td>
+</tr>
+<tr>
+<td align="left">Suffixes</td>
+<td align="right">0.572</td>
+<td align="right">0.000</td>
+<td align="right">0.394</td>
+<td align="right">0.000</td>
+</tr>
+<tr>
+<td align="left">Letter.Series</td>
+<td align="right">0.567</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
+<td align="right">0.727</td>
+</tr>
+<tr>
+<td align="left">Pedigrees</td>
+<td align="right">0.662</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
+<td align="right">0.247</td>
+</tr>
+<tr>
+<td align="left">Letter.Group</td>
+<td align="right">0.530</td>
+<td align="right">0.000</td>
+<td align="right">0.000</td>
+<td align="right">0.409</td>
+</tr>
+</tbody>
+</table>
+<p>この推定値を使って，先ほどと同様にωを計算する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">c <span style="color:#f92672">&lt;-</span> lambda[,<span style="color:#e6db74">&#34;g&#34;</span>]
+A <span style="color:#f92672">&lt;-</span> lambda[,<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;F1&#34;</span>,<span style="color:#e6db74">&#34;F2&#34;</span>,<span style="color:#e6db74">&#34;F3&#34;</span>)]
+
+nume1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(c <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(c)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">sum</span>(A <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(A))
+nume2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(c <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(c))
+nume1<span style="color:#f92672">/</span>VarX
+<span style="color:#75715e">#[1] 0.9278556</span>
+nume2<span style="color:#f92672">/</span>VarX
+<span style="color:#75715e">#[1] 0.7891304</span></code></pre></div>
+<p>ω係数は，$\omega_h = 0.79$と$\omega_t = 0.93$とのことである。$\omega_h$については，EFAで計算した場合より若干高い値である。
+この結果は，Revelle &amp; Condon(2019)が次のように言っている通り。</p>
+<blockquote>
+<p>The bifactor solution (g) tends to produce slightly larger estimates than the Schmid-Leiman procedure(h) because it forces all the cross loadings of the lower level factors to be 0 (p.9).</p>
+</blockquote>
+<h2 id="omegasem関数について">omegaSem関数について</h2>
+<p>ところで<code>psych</code>には<code>omegaSem</code>という関数があり，直接的に確認的因子分析に基づくωを計算できるようである。
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
+<span style="color:#a6e22e">omegaSem</span>(Thurstone, n.obs<span style="color:#f92672">=</span><span style="color:#ae81ff">213</span>)
+
+<span style="color:#75715e">#Total, General and Subset omega for each subset</span>
+<span style="color:#75715e">#                                                 g  F1*  F2*  F3*</span>
+<span style="color:#75715e">#Omega total for total scores and subscales    0.93 0.92 0.82 0.80</span>
+<span style="color:#75715e">#Omega general for total scores and subscales  0.79 0.69 0.48 0.50</span>
+<span style="color:#75715e">#Omega group for total scores and subscales    0.14 0.23 0.35 0.31</span></code></pre></div></p>
+<p>関数の中身をしっかり除いた訳ではないから詳しくは分からないが，どうやら<code>omega</code>関数でSL変換による因子負荷量を得たあとに，その因子負荷量をもとにlavaanのモデル式を自動で書き出して，lavaanに突っ込んでいるようである。お手軽だけれどもCFAのモデルが変なモデルになっていないか確認しないと痛い目をみそうである（もっとも<code>omegaSem</code>関数を使うとパス図が描かれるからそこでチェックすれば良いだけの話だけど）</p>
+<h2 id="参考">参考</h2>
+<p>Revelle, W., &amp; Condon, D. M. (2019, August 5). Reliability From α to ω: A Tutorial. Psychological
+Assessment. Advance online publication. <a href="http://dx.doi.org/10.1037/pas0000754">http://dx.doi.org/10.1037/pas0000754</a></p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/coefficient-omega/" rel="tag">coefficient omega</a></li>
+		<li class="tags__item"><a class="tags__link btn" href="/tags/reliability/" rel="tag">reliability</a></li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Takahiro ONOSHIMA.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']]
+  }
+});
+</script>
+
+</body>
+</html>
