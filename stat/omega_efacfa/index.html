@@ -85,7 +85,7 @@
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
 	<time class="meta__text" datetime="2020-09-16T15:13:32">September 16, 2020</time>
-	<time class="meta__text" datetime="2020-09-16T19:00:58"> (Last Modified: September 16, 2020)</time>
+	<time class="meta__text" datetime="2020-09-17T10:06:11"> (Last Modified: September 17, 2020)</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -101,7 +101,7 @@
   <ul>
     <li><a href="#2つのω係数について">2つのω係数について</a></li>
     <li><a href="#探索的因子分析による方法">探索的因子分析による方法</a></li>
-    <li><a href="#確認的因子分析によるもの">確認的因子分析によるもの</a></li>
+    <li><a href="#確認的因子分析による方法">確認的因子分析による方法</a></li>
     <li><a href="#omegasem関数について">omegaSem関数について</a></li>
     <li><a href="#参考">参考</a></li>
   </ul>
@@ -113,7 +113,7 @@
 <p>信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ</p>
 <p>$$
 \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\<br>
-\omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}+{\bf 1^{\prime} A A^{\prime}}}{{\rm Var}(X)}
+\omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}+{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)}
 $$</p>
 <p>として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。</p>
 <p>Revelle &amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。</p>
@@ -257,7 +257,7 @@ nume1<span style="color:#f92672">/</span>VarX
 <span style="color:#75715e">#[1] 0.9308199</span>
 nume2<span style="color:#f92672">/</span>VarX
 <span style="color:#75715e">#[1] 0.7360703</span></code></pre></div>
-<h2 id="確認的因子分析によるもの">確認的因子分析によるもの</h2>
+<h2 id="確認的因子分析による方法">確認的因子分析による方法</h2>
 <p>続いて確認的因子分析による方法を試してみる。<code>lavaan</code>でCFAをして因子負荷量行列を取り出す。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
 mo <span style="color:#f92672">&lt;-</span><span style="color:#e6db74">&#34;
@@ -366,12 +366,12 @@ nume2<span style="color:#f92672">/</span>VarX
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
 <span style="color:#a6e22e">omegaSem</span>(Thurstone, n.obs<span style="color:#f92672">=</span><span style="color:#ae81ff">213</span>)
 
-<span style="color:#75715e">#Total, General and Subset omega for each subset</span>
-<span style="color:#75715e">#                                                 g  F1*  F2*  F3*</span>
-<span style="color:#75715e">#Omega total for total scores and subscales    0.93 0.92 0.82 0.80</span>
-<span style="color:#75715e">#Omega general for total scores and subscales  0.79 0.69 0.48 0.50</span>
-<span style="color:#75715e">#Omega group for total scores and subscales    0.14 0.23 0.35 0.31</span></code></pre></div></p>
-<p>関数の中身をしっかり除いた訳ではないから詳しくは分からないが，どうやら<code>omega</code>関数でSL変換による因子負荷量を得たあとに，その因子負荷量をもとにlavaanのモデル式を自動で書き出して，lavaanに突っ込んでいるようである。お手軽だけれどもCFAのモデルが変なモデルになっていないか確認しないと痛い目をみそうである（もっとも<code>omegaSem</code>関数を使うとパス図が描かれるからそこでチェックすれば良いだけの話だけど）</p>
+Total, General and Subset omega for each subset
+                                                 g  F1<span style="color:#f92672">*</span>  F2<span style="color:#f92672">*</span>  F3<span style="color:#f92672">*</span>
+Omega total for total scores and subscales    <span style="color:#ae81ff">0.93</span> <span style="color:#ae81ff">0.92</span> <span style="color:#ae81ff">0.82</span> <span style="color:#ae81ff">0.80</span>
+Omega general for total scores and subscales  <span style="color:#ae81ff">0.79</span> <span style="color:#ae81ff">0.69</span> <span style="color:#ae81ff">0.48</span> <span style="color:#ae81ff">0.50</span>
+Omega group for total scores and subscales    <span style="color:#ae81ff">0.14</span> <span style="color:#ae81ff">0.23</span> <span style="color:#ae81ff">0.35</span> <span style="color:#ae81ff">0.31</span></code></pre></div></p>
+<p>関数の中身をしっかり覗いた訳ではないから詳しくは分からないが，どうやら<code>omega</code>関数でSL変換による因子負荷量を得たあとに，その因子負荷量をもとにlavaanのモデル式を自動で書き出して，lavaanに突っ込んでいるようである。お手軽だけれどもCFAのモデルが変なモデルになっていないか確認しないと痛い目をみそうである（もっとも<code>omegaSem</code>関数を使うとパス図が描かれるからそこでチェックすれば良いだけの話だけど）</p>
 <h2 id="参考">参考</h2>
 <p>Revelle, W., &amp; Condon, D. M. (2019, August 5). Reliability From α to ω: A Tutorial. Psychological
 Assessment. Advance online publication. <a href="http://dx.doi.org/10.1037/pas0000754">http://dx.doi.org/10.1037/pas0000754</a></p>
