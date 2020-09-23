@@ -85,7 +85,7 @@
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
 	<time class="meta__text" datetime="2020-09-22T14:41:25">September 22, 2020</time>
-	<time class="meta__text" datetime="2020-09-22T16:57:01"> (Last Modified: September 22, 2020)</time>
+	<time class="meta__text" datetime="2020-09-23T09:49:52"> (Last Modified: September 23, 2020)</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -118,7 +118,7 @@
 <p>$$ R^* = D^{-1/2}( R- AA^\prime)D^{-1/2}　\tag{1}　$$</p>
 <p>と書けます。ここで $D$は，</p>
 <p>$$D = Diag(C^*) = Diag(R- AA^\prime)$$</p>
-<p>です。ここで，$R^*$のi行目，j列目の要素をとしたときに，偏相関行列の2乗の値の平均が</p>
+<p>です。ここで，$R^<em>$ のi行目，j列目の要素を $r ^</em> _{ij}$としたときに，偏相関行列の2乗の値の平均が</p>
 <p>$$ f_m = \frac{\sum \sum_{i \neq j} (r ^* _{ij})^2 }{p(p-1)}　\tag{2}$$</p>
 <p>として表されます。MAP基準とは，パターン行列のmの値を変えていきながらこの値を計算して，最小になる$f_m$の$m$を因子数として採択しようという方法です。</p>
 <h2 id="実際の数値例を確認">実際の数値例を確認</h2>
@@ -301,7 +301,7 @@ Rstar2 <span style="color:#f92672">&lt;-</span> d2 <span style="color:#f92672">%
 <span style="color:#a6e22e">diag</span>(Rstar2) <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
 <span style="color:#a6e22e">sum</span>(Rstar2^2)<span style="color:#f92672">/</span>(p<span style="color:#f92672">*</span>(p<span style="color:#ae81ff">-1</span>))
 [1] <span style="color:#ae81ff">0.03953237</span></code></pre></div>
-<p>さて，$f_1=0.114$で$f_2=0.40$ですので，比較すると$m=2$の方が小さい値です。これをさらに先まで繰り返して，一番小さい値を出す因子数を採択することになります。</p>
+<p>さて，$f_1=0.114$で$f_2=0.040$ですので，比較すると$m=2$の方が小さい値です。これをさらに先まで繰り返して，一番小さい値を出す因子数を採択することになります。</p>
 <h2 id="psychの関数">psychの関数</h2>
 <p><code>psych</code>の<code>vss</code>関数は，この手続きを全て自動でやってくれます。デフォルトでは8因子までですが，引数に<code>n=10</code>などと指定すれば，もっと多い因子数までの値を計算してくれます（あまり必要になることはないでしょうが）。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res.vss <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">vss</span>(R)
