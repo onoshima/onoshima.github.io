@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>因子分析の教科書における因子数の選択についての記述 - Takahiro ONOSHIMA&#39;s website</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="Takahiro ONOSHIMA&#39;s website" rel="home">
+				<div class="logo__title">Takahiro ONOSHIMA&#39;s website</div>
+				<div class="logo__tagline">小野島昂洋の個人サイト</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/profile/">
+				
+				<span class="menu__text">Profile</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/works/">
+				
+				<span class="menu__text">Works</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/stat/">
+				
+				<span class="menu__text">STAT/R</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/">
+				
+				<span class="menu__text">Others</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">因子分析の教科書における因子数の選択についての記述</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-09-23T14:59:29">September 23, 2020</time>
+	<time class="meta__text" datetime="2020-09-23T15:43:06"> (Last Modified: September 23, 2020)</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/stat/" rel="category">stat</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#brown-2006">Brown (2006)</a></li>
+    <li><a href="#raykov--marcoulides-2010">Raykov &amp; Marcoulides (2010)</a></li>
+    <li><a href="#tabachnick--fidell-2012">Tabachnick &amp; Fidell (2012)</a></li>
+    <li><a href="#irwing-booth--hughes-2018">Irwing, Booth, &amp; Hughes (2018)</a></li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<h2 id="はじめに">はじめに</h2>
+<p>必要があって因子分析や心理測定の教科書で探索的因子分析の際の因子数の推定法がどのように扱われているかを調べたものの記録。手元にあるものだけ。</p>
+<h2 id="brown-2006">Brown (2006)</h2>
+<p>Brown, T. A. (2006). Confirmatory factor analysis for applied research. The Guilford Press.</p>
+<p>因子分析の定評のある教科書（らしい）。大学院の授業で読んだ。基本は確認的因子分析の教科書なのだが，2章で探索的因子分析も扱っている。その中でFactor Selectionという節で（pp.23-30）因子数の推定について扱っている。</p>
+<p>よく使われている手法として，Kaiser-Guttmanルール，スクリーテスト，平行分析を紹介している。また，因子の推定法が最尤法のときには，適合度の情報も使えることを紹介している。</p>
+<h2 id="raykov--marcoulides-2010">Raykov &amp; Marcoulides (2010)</h2>
+<p>Raykov, T., &amp; Marcoulides, G. A. (2010). Introduction to Psychometric Theory. Routledge.</p>
+<p>因子分析は第3章で扱われており，因子数の探索は独立した節として3.8節で扱われている。紹介しているのはKaiser基準とスクリープロットとamount of explained varianceを紹介している。文献等の引用はなし。</p>
+<h2 id="tabachnick--fidell-2012">Tabachnick &amp; Fidell (2012)</h2>
+<p>Tabachnick, B. G., &amp; Fidell, L. S. (2012). Using Multivariate Statistics (6th Edition). Pearson.</p>
+<p>因子分析の教科書という訳でなく，多変量統計全般の教科書。13章で主成分分析と因子分析を扱っている。13.6.2のAdequay of Extraction and Number of Factorsという節で因子数についての取り扱いがある（pp648-）。</p>
+<p>手法についてのまとめは，Gorsuch (1983)（因子分析の教科書）かZwick and Velicer (1986)を見てねと言い，SPSSとSASで扱える手法に焦点を絞って紹介している。Kairser基準，スクリーテスト，平行分析，MAP基準を紹介している。さらに，Zwick &amp; Velicer (1986)のシミュレーションの結果も紹介して平行分析とMAPがうまくいくと紹介している。</p>
+<h2 id="irwing-booth--hughes-2018">Irwing, Booth, &amp; Hughes (2018)</h2>
+<p>Irwing, P., Booth, T., &amp; Hughes, D. J. (Eds.). (2018). The Wiley Handbook of Psychometric Testing: A Multidisciplinary Reference on Survey, Scale and Test Development. (New York). John Wiley &amp; Sons, Incorporated. <a href="https://doi.org/10.1002/9781118489772">https://doi.org/10.1002/9781118489772</a></p>
+<p>比較的新しめのハンドブック。1000ページを超える大著。この中の11章がまるまる因子数の問題について割かれている。ハンドブックだけあってKaiser基準，スクリーテスト，MAP，平行分析，平行分析の派生について詳しく引用付きで紹介している。</p>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/factor-analysis/" rel="tag">factor analysis</a></li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Takahiro ONOSHIMA.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']]
+  }
+});
+</script>
+
+</body>
+</html>
