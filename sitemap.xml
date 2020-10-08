@@ -3,6 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://onoshima.github.io/categories/</loc>
+    <lastmod>2020-10-08T21:24:07+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/tags/gt/</loc>
+    <lastmod>2020-10-08T21:24:07+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/stat/gt/</loc>
+    <lastmod>2020-10-08T21:24:07+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/categories/r/</loc>
+    <lastmod>2020-10-08T21:24:07+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/tags/</loc>
+    <lastmod>2020-10-08T21:24:07+09:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://onoshima.github.io/tags/anaconda/</loc>
     <lastmod>2020-10-08T16:37:14+09:00</lastmod>
   </url>
@@ -13,22 +38,12 @@
   </url>
   
   <url>
-    <loc>https://onoshima.github.io/categories/</loc>
-    <lastmod>2020-10-08T16:37:14+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://onoshima.github.io/categories/python/</loc>
     <lastmod>2020-10-08T16:37:14+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://onoshima.github.io/python/</loc>
-    <lastmod>2020-10-08T16:37:14+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://onoshima.github.io/tags/</loc>
     <lastmod>2020-10-08T16:37:14+09:00</lastmod>
   </url>
   
@@ -49,11 +64,6 @@
   
   <url>
     <loc>https://onoshima.github.io/tags/parallel-analysis/</loc>
-    <lastmod>2020-09-24T15:28:37+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://onoshima.github.io/categories/r/</loc>
     <lastmod>2020-09-24T15:28:37+09:00</lastmod>
   </url>
   

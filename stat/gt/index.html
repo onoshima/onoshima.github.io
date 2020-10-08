@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>gtパッケージについて - Takahiro ONOSHIMA&#39;s website</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="Takahiro ONOSHIMA&#39;s website" rel="home">
+				<div class="logo__title">Takahiro ONOSHIMA&#39;s website</div>
+				<div class="logo__tagline">小野島昂洋の個人サイト</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/profile/">
+				
+				<span class="menu__text">Profile</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/works/">
+				
+				<span class="menu__text">Works</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/stat/">
+				
+				<span class="menu__text">STAT/R</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/">
+				
+				<span class="menu__text">Others</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">gtパッケージについて</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-10-08T18:31:14">October 08, 2020</time>
+	<time class="meta__text" datetime="2020-10-08T21:24:07"> (Last Modified: October 08, 2020)</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents">
+  <ul>
+    <li><a href="#データの整形">データの整形</a></li>
+    <li><a href="#gt関数">gt関数</a></li>
+    <li><a href="#apaっぽい雰囲気を出す">APAっぽい雰囲気を出す</a></li>
+  </ul>
+</nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<p>Rに<code>gt</code>というパッケージがあります。これは，お手軽に表を作るためのパッケージです。使い方については以下の記事を見ると良いです。</p>
+<ul>
+<li><a href="https://qiita.com/yanami/items/8684640b20c86594fbec">https://qiita.com/yanami/items/8684640b20c86594fbec</a></li>
+<li><a href="https://qiita.com/yanami/items/117851de49024f5980d0">https://qiita.com/yanami/items/117851de49024f5980d0</a></li>
+</ul>
+<p>ここでは私の自分のための備忘録を残しています。</p>
+<h2 id="データの整形">データの整形</h2>
+<p>irisデータで実験してみる。表の表示に適するように前段階としてデータを整形する。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(gt)
+<span style="color:#a6e22e">library</span>(tidyverse)
+  
+dat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">tibble</span>(iris) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">group_by</span>(Species) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">summarise</span>(<span style="color:#a6e22e">across</span>(Sepal.Length<span style="color:#f92672">:</span>Petal.Width,mean)) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">pivot_longer</span>(col<span style="color:#f92672">=-</span>Species, names_to<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;S/P&#34;</span>,<span style="color:#e6db74">&#34;L/W&#34;</span>), names_sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;\\.&#34;</span>) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">pivot_wider</span>(names_from <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;L/W&#34;</span>)</code></pre></div>
+<p><img src="/images/gt1.png" alt="整形したデータ"></p>
+<h2 id="gt関数">gt関数</h2>
+<p>とりあえずこのままで，gt関数に突っ込んでみるとそれらしい表を出力してみす。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">gt</span>()</code></pre></div>
+<p><img src="/images/gt2.png" alt="そのままgt"></p>
+<p>表示する桁数が多いので減らしてみましょう。先ほど作ったものに桁数の設定を行う関数をたします。ここら辺の感覚はggplot的です。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">tab2 <span style="color:#f92672">&lt;-</span> tab1 <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">fmt_number</span>(
+    columns <span style="color:#f92672">=</span> <span style="color:#a6e22e">vars</span>(<span style="color:#e6db74">&#34;Length&#34;</span>, <span style="color:#e6db74">&#34;Width&#34;</span>),
+    decimals <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)
+tab2</code></pre></div>
+<p><img src="/images/gt3.png" alt="桁数減らした"></p>
+<p>今度はタイトルを足してみます。タイトルを設定する関数をパイプでつなぎます。ついでスタブ列の列名も足すことにします。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">tab3 <span style="color:#f92672">&lt;-</span> tab2 <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">tab_header</span>(
+    title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ここにタイトルが入るよ&#34;</span>,
+  ) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">tab_stubhead</span>(<span style="color:#e6db74">&#34;S/P&#34;</span>) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">tab_style</span>(
+    style<span style="color:#f92672">=</span><span style="color:#a6e22e">cell_text</span>(align<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;left&#34;</span>),
+    locations <span style="color:#f92672">=</span> <span style="color:#a6e22e">cells_title</span>(<span style="color:#e6db74">&#34;title&#34;</span>))
+tab3 </code></pre></div>
+<p><img src="/images/gt4.png" alt="タイトルつけた"></p>
+<p>ついでに注もつけてみます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">tab4 <span style="color:#f92672">&lt;-</span> tab3 <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">tab_footnote</span>(
+    footnote<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Sepalはがく片の意味で，Petalは花びらの意味だよ&#34;</span>,
+    location<span style="color:#f92672">=</span> <span style="color:#a6e22e">cells_stubhead</span>()
+    )
+tab4</code></pre></div>
+<p><img src="/images/gt5.png" alt="タイトルつけた"></p>
+<h2 id="apaっぽい雰囲気を出す">APAっぽい雰囲気を出す</h2>
+<p>ここまでで，表に必要な要素は大体整ったのですけれど，このままだと論文に投稿するような形になっていません。そこで以下のサイトを参考にしながらさらに細かい設定をしてAPA風の表のデザインにしてみます。</p>
+<ul>
+<li><a href="https://www.anthonyschmidt.co/post/2020-06-03-making-apa-tables-with-gt/">https://www.anthonyschmidt.co/post/2020-06-03-making-apa-tables-with-gt/</a></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">tab5 <span style="color:#f92672">&lt;-</span> tab4 <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">tab_options</span>(
+    table.border.top.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e">#タイトルの上の線を消す，</span>
+    table.border.bottom.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e">#注の下の線を消す</span>
+    heading.title.font.size <span style="color:#f92672">=</span> <span style="color:#a6e22e">px</span>(<span style="color:#ae81ff">16</span>), <span style="color:#75715e">#タイトルのフォントサイズをいい感じに</span>
+    row_group.border.bottom.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e">#セクション名の下の線を消す</span>
+    table_body.hlines.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e"># tableの中の水平線消す</span>
+    stub.border.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e"># stub列の中の線を消す</span>
+    column_labels.border.top.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, <span style="color:#75715e"># 変数名の行の線を黒く太く</span>
+    column_labels.border.top.color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>, 
+    column_labels.border.bottom.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>,
+    column_labels.border.bottom.color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>,
+    table_body.border.bottom.color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>, <span style="color:#75715e">#テーブルの下線を黒く</span>
+    table.width <span style="color:#f92672">=</span> <span style="color:#a6e22e">pct</span>(<span style="color:#ae81ff">60</span>), <span style="color:#75715e"># 程よく幅を広げる（数字で調整）</span>
+    table.background.color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span>,
+    row_group.border.top.color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>, <span style="color:#75715e">#セクション名の上の線を消す</span>
+    row_group.border.top.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e">#セクション名の上の線を細く</span>
+  ) <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">cols_align</span>(align<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>) <span style="color:#f92672">%&gt;%</span> 
+  <span style="color:#a6e22e">tab_style</span>(
+    style<span style="color:#f92672">=</span><span style="color:#a6e22e">list</span>(<span style="color:#a6e22e">cell_text</span>(align<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>)),<span style="color:#75715e">#列名を中央揃えに</span>
+    locations<span style="color:#f92672">=</span><span style="color:#a6e22e">cells_row_groups</span>()
+  )
+tab5</code></pre></div>
+<p>セルとか，列とか，タイトルとかを指定して，それぞれのパーツを指定していく感じです。結構細かいところまでできます。完成品はこちら。</p>
+<p><img src="/images/gt6.png" alt="APA風に"></p>
+<p>毎回，こんな作業をやるのは面倒なので，自分のよく使うような表のデザインは関数化しておくと良いでしょう。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">likeapa <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(x){<span style="color:#a6e22e">tab_options</span>(x,
+  table.border.top.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e">#タイトルの上の線を消す，</span>
+  table.border.bottom.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e">#注の下の線を消す</span>
+  heading.title.font.size <span style="color:#f92672">=</span> <span style="color:#a6e22e">px</span>(<span style="color:#ae81ff">16</span>), <span style="color:#75715e">#タイトルのフォントサイズをいい感じに</span>
+  row_group.border.bottom.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e">#セクション名の下の線を消す</span>
+  table_body.hlines.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e"># tableの中の水平線消す</span>
+  stub.border.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#75715e"># stub列の中の線を消す</span>
+  column_labels.border.top.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, <span style="color:#75715e"># 変数名の行の線を黒く太く</span>
+  column_labels.border.top.color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>, 
+  column_labels.border.bottom.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>,
+  column_labels.border.bottom.color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>,
+  table_body.border.bottom.color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>, <span style="color:#75715e">#テーブルの下線を黒く</span>
+  table.width <span style="color:#f92672">=</span> <span style="color:#a6e22e">pct</span>(<span style="color:#ae81ff">30</span>), <span style="color:#75715e"># 程よく幅を広げる（数字で調整）</span>
+  table.background.color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;white&#34;</span>,
+  row_group.border.top.color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;black&#34;</span>, <span style="color:#75715e">#セクション名の上の線を消す</span>
+  row_group.border.top.width <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#75715e">#セクション名の上の線を細く</span>
+) <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">cols_align</span>(align<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>) <span style="color:#f92672">%&gt;%</span>  <span style="color:#75715e"># スタブ以外の列名を中央揃えに</span>
+  <span style="color:#a6e22e">tab_style</span>(
+    style<span style="color:#f92672">=</span><span style="color:#a6e22e">list</span>(<span style="color:#a6e22e">cell_text</span>(align<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;center&#34;</span>)), <span style="color:#75715e"># グループ変数名を中央揃えに</span>
+    locations<span style="color:#f92672">=</span><span style="color:#a6e22e">cells_row_groups</span>()
+  )}
+
+tab4 <span style="color:#f92672">%&gt;%</span> likeapa</code></pre></div>
+<p>最後は図に保存しておしまいです。<code>gtsave</code>関数を使います。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">gtsave</span>(tab5, <span style="color:#e6db74">&#34;likeapa.pdf&#34;</span>)</code></pre></div>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/gt/" rel="tag">gt</a></li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Takahiro ONOSHIMA.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']]
+  }
+});
+</script>
+
+</body>
+</html>
