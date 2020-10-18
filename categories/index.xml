@@ -12,9 +12,18 @@
     
     
     <item>
+      <title>stat</title>
+      <link>https://onoshima.github.io/categories/stat/</link>
+      <pubDate>Sun, 18 Oct 2020 10:57:20 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/categories/stat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>R</title>
       <link>https://onoshima.github.io/categories/r/</link>
-      <pubDate>Sun, 18 Oct 2020 10:57:20 +0900</pubDate>
+      <pubDate>Thu, 08 Oct 2020 18:31:14 +0900</pubDate>
       
       <guid>https://onoshima.github.io/categories/r/</guid>
       <description></description>
@@ -26,15 +35,6 @@
       <pubDate>Thu, 24 Sep 2020 09:30:10 +0900</pubDate>
       
       <guid>https://onoshima.github.io/categories/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>stat</title>
-      <link>https://onoshima.github.io/categories/stat/</link>
-      <pubDate>Wed, 23 Sep 2020 14:59:29 +0900</pubDate>
-      
-      <guid>https://onoshima.github.io/categories/stat/</guid>
       <description></description>
     </item>
     
