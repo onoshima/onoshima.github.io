@@ -85,7 +85,7 @@
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
 	<time class="meta__text" datetime="2020-10-08T18:31:14">October 08, 2020</time>
-	<time class="meta__text" datetime="2020-10-08T21:24:07"> (Last Modified: October 08, 2020)</time>
+	<time class="meta__text" datetime="2020-10-10T19:00:12"> (Last Modified: October 10, 2020)</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -127,7 +127,13 @@ dat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">tibble<
 <h2 id="gt関数">gt関数</h2>
 <p>とりあえずこのままで，gt関数に突っ込んでみるとそれらしい表を出力してみす。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">dat <span style="color:#f92672">%&gt;%</span> <span style="color:#a6e22e">gt</span>()</code></pre></div>
-<p><img src="/images/gt2.png" alt="そのままgt"></p>
+<p><img src="/images/gt0.png" alt="そのままgt"></p>
+<p>グループに分けて表示するには，<code>groupname_col</code>の引数にグループ分けしたい列名を入れます。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">ab1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">gt</span>(dat,
+           groupname_col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Species&#34;</span>,
+           rowname_col <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;S/P&#34;</span>) 
+tab1</code></pre></div>
+<p><img src="/images/gt2.png" alt="グループ分け"></p>
 <p>表示する桁数が多いので減らしてみましょう。先ほど作ったものに桁数の設定を行う関数をたします。ここら辺の感覚はggplot的です。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">tab2 <span style="color:#f92672">&lt;-</span> tab1 <span style="color:#f92672">%&gt;%</span>
   <span style="color:#a6e22e">fmt_number</span>(

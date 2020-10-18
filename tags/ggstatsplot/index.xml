@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ggstatsplot on Takahiro ONOSHIMA&#39;s website</title>
+    <link>https://onoshima.github.io/tags/ggstatsplot/</link>
+    <description>Recent content in ggstatsplot on Takahiro ONOSHIMA&#39;s website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <lastBuildDate>Sun, 18 Oct 2020 10:57:20 +0900</lastBuildDate>
+    
+	<atom:link href="https://onoshima.github.io/tags/ggstatsplot/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>ggstatsplotパッケージについて</title>
+      <link>https://onoshima.github.io/stat/ggstatplot/</link>
+      <pubDate>Sun, 18 Oct 2020 10:57:20 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/stat/ggstatplot/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
