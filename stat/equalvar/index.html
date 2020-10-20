@@ -85,7 +85,7 @@
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
 	<time class="meta__text" datetime="2020-10-20T11:22:38">October 20, 2020</time>
-	<time class="meta__text" datetime="2020-10-20T13:42:32"> (Last Modified: October 20, 2020)</time>
+	<time class="meta__text" datetime="2020-10-20T15:26:56"> (Last Modified: October 20, 2020)</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -106,6 +106,7 @@
     <li><a href="#吉田1998本当にわかりやすいすごく大切なことが書いてあるごく初歩の統計の本">吉田（1998）『本当にわかりやすいすごく大切なことが書いてあるごく初歩の統計の本』</a></li>
     <li><a href="#山田杉澤村井2008rによるやさしい統計学">山田・杉澤・村井（2008）『Rによるやさしい統計学』</a></li>
     <li><a href="#宮川2015基本統計学第4版">宮川（2015）『基本統計学（第4版）』</a></li>
+    <li><a href="#field-miles--field-2012-discovering-statistics-using-r">Field, Miles, &amp; Field (2012) <em>Discovering statistics using R</em></a></li>
     <li><a href="#herzog-francis--clarke-2019-understandig-statistics-and-experimental-design">Herzog, Francis, &amp; Clarke (2019) <em>Understandig Statistics and Experimental Design</em></a></li>
     <li><a href="#leppink-2019statistical-methods-for-experimental-research-in-education-and-psychology">Leppink (2019)<em>Statistical Methods for Experimental Research in Education and Psychology</em></a></li>
   </ul>
@@ -166,6 +167,16 @@
 </blockquote>
 <p>pp.275-277で紹介されるのはF検定なので，2段階推定を紹介しているようです。</p>
 <p>英語の統計のテキストというのはあまり持っていないのですが，電子ブックで何冊か持っていたので調べてみました。</p>
+<h2 id="field-miles--field-2012-discovering-statistics-using-r">Field, Miles, &amp; Field (2012) <em>Discovering statistics using R</em></h2>
+<p>p.373で分散の等分散性についてコラムがあります。そこでは，</p>
+<blockquote>
+<p>[S]tatisticians used to recommend testing for it[homogeneity of variance] (using Levene&rsquo;s test) and if the assumption was violated, use an adjustment to correct for it. However, more recently statisticians have stopped using this approach, for two reasons. First, violating this assumption only matters if you have unequal group sizes; if you don&rsquo;t have unequal group sizes, the assumption is pretty much irrelevant and can be ignored. Second, the tests of homogeneity of variance tend to work very well when you have equal group sizes and large samples (when it doesn&rsquo;t matter as much if you have violated the assumption) and don&rsquo;t work as well with unequal group sizes and smaller samples - which is exactly when it matters.</p>
+</blockquote>
+<p>のように書いてあり，2段階検定が使われなくなったことを指摘しています。その後，Welchの方法を使えば気にしないで済むと書いてあります。</p>
+<p>その後のソフトウェアの使い方の解説部分でも，関数の等分散のオプションについて以下のように言っています。</p>
+<blockquote>
+<p>If for some reason you want to assume equal variances (we can&rsquo;t think why you would), then include the option var.equal = TRUE.</p>
+</blockquote>
 <h2 id="herzog-francis--clarke-2019-understandig-statistics-and-experimental-design">Herzog, Francis, &amp; Clarke (2019) <em>Understandig Statistics and Experimental Design</em></h2>
 <p>4.4節で，t検定の各種の仮定の違反が紹介されて，その中で母集団分散が異なる場合について説明されています（p.57）。そこでは分散が異なる場合にタイプIエラーがどの程度増えるのかについての簡単なシミュレーションが紹介されています。分散が異なる場合の対処法については，以下のように書いてありますが，Welchの方法で検定力が下がる場合もあると書いています。等分散性の判断についての記述はありません。</p>
 <blockquote>
