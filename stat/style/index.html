@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>tidyverse style guideを読んでみた際のメモ - Takahiro ONOSHIMA&#39;s website</title>
+	<script>(function(d,e){d[e]=d[e].replace("no-js","js");})(document.documentElement,"className");</script>
+	<meta name="description" content="">
+	
+	
+	<link rel="dns-prefetch" href="//fonts.googleapis.com">
+	<link rel="dns-prefetch" href="//fonts.gstatic.com">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700">
+	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/custom.css">
+	<link rel="shortcut icon" href="/favicon.ico">
+		
+</head>
+<body class="body">
+	<div class="container container--outer">
+		<header class="header">
+	<div class="container">
+		<div class="logo">
+			<a class="logo__link" href="/" title="Takahiro ONOSHIMA&#39;s website" rel="home">
+				<div class="logo__title">Takahiro ONOSHIMA&#39;s website</div>
+				<div class="logo__tagline">小野島昂洋の個人サイト</div>
+			</a>
+		</div>
+		
+<nav class="menu">
+	<button class="menu__btn" aria-haspopup="true" aria-expanded="false" tabindex="0">
+		<span class="menu__btn-title" tabindex="-1">Menu</span>
+	</button>
+	<ul class="menu__list">
+		<li class="menu__item">
+			<a class="menu__link" href="/">
+				
+				<span class="menu__text">Home</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/profile/">
+				
+				<span class="menu__text">Profile</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/works/">
+				
+				<span class="menu__text">Works</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/stat/">
+				
+				<span class="menu__text">STAT/R</span>
+				
+			</a>
+		</li>
+		<li class="menu__item">
+			<a class="menu__link" href="/posts/">
+				
+				<span class="menu__text">Others</span>
+				
+			</a>
+		</li>
+	</ul>
+</nav>
+
+
+	</div>
+</header>
+		<div class="wrapper flex">
+			<div class="primary">
+			
+<main class="main" role="main">
+	<article class="post">
+		<header class="post__header">
+			<h1 class="post__title">tidyverse style guideを読んでみた際のメモ</h1>
+			<div class="post__meta meta">
+<div class="meta__item-datetime meta__item">
+	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
+	<time class="meta__text" datetime="2020-10-24T21:23:55">October 24, 2020</time>
+	<time class="meta__text" datetime="2020-10-24T22:07:16"> (Last Modified: October 24, 2020)</time>
+</div>
+
+<div class="meta__item-categories meta__item">
+	<svg class="meta__icon icon icon-category" width="16" height="16" viewBox="0 0 16 16"><path d="m7 2l1 2h8v11h-16v-13z"/></svg>
+	<span class="meta__text"><a class="meta__link" href="/categories/r/" rel="category">R</a>
+	</span>
+</div></div>
+		</header>
+<div class="post__toc toc">
+	<div class="toc__title">Page content</div>
+	<div class="toc__menu">
+		<nav id="TableOfContents"></nav>
+	</div>
+</div>
+<div class="content post__content clearfix">
+			<p>tidystyle guideというものがあるのを知ったのでざっと目を通した際の殴り書き。
+分析のところまで。</p>
+<p><a href="https://style.tidyverse.org/package-files.html#names-1">https://style.tidyverse.org/package-files.html#names-1</a></p>
+<ul>
+<li>ファイル名
+<ul>
+<li>空白いれない</li>
+<li>意味あるものにする</li>
+<li>番号順にしたいなら，1xxx,2xxxxでなくて01xxx,02xxxのように0つめる</li>
+</ul>
+</li>
+<li>内部の構造
+<ul>
+<li># plot data &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-みたいに区切る</li>
+<li>package読み込むときはファイルの最初でまとめて</li>
+</ul>
+</li>
+<li>変数名
+<ul>
+<li>変数名は小文字のみ，意味の区切りは_でつなげる</li>
+<li>変数名は名詞で関数名は動詞</li>
+<li>cとかTとか一般的な関数や変数に代入しない</li>
+</ul>
+</li>
+<li>空白
+<ul>
+<li>,のあとはスペース入れる</li>
+<li>()の前後にスペース入れない</li>
+<li>ifとかforとかん()の前後はスペース入れる</li>
+<li>funcutionの()の後にはスペース入れる</li>
+<li>{{}}の中にはスペース入れる</li>
+<li>=とか&lt;-とかの前後にはスペース入れる</li>
+<li>片側の~式はスペース入れない（複雑だとスペース入れる）</li>
+<li>=の位置を揃えるための追加のスペースはOK</li>
+</ul>
+</li>
+<li>関数
+<ul>
+<li>データの引数名は省略，他は書く</li>
+</ul>
+</li>
+<li>制御フロー
+<ul>
+<li>{は行の最後にあるべき</li>
+<li>中身は2文字のインデント</li>
+<li>}は行の最初にあるべき</li>
+<li>とってもシンプルだったら落として1行でも可</li>
+<li>switchでは，各要素1行，フォールスルーエラーを書く</li>
+</ul>
+</li>
+<li>長い行
+<ul>
+<li>80文字を超えない</li>
+<li>関数名が長いなら，改行して1行ずつ，引数の指定する。</li>
+<li>引数を意味の繋がりで行にまとめても良い</li>
+</ul>
+</li>
+<li>セミコロン
+<ul>
+<li>行の終わりで使わない。1行に2つのコマンドを詰め込まない</li>
+<li>変数の代入に=を使わない&lt;-を使う</li>
+</ul>
+</li>
+<li>データ
+<ul>
+<li>文字列ベクトルは&quot;&ldquo;にする。&lsquo;&lsquo;は事情がない限り使わない。</li>
+<li>論理値ベクトルはT，FよりもTRUE，FALSE推奨</li>
+</ul>
+</li>
+<li>コメント
+<ul>
+<li>#とスペースで始める</li>
+<li>コメントをつける必要がある場合にはまずコードが明確にならないかを検討する</li>
+<li>コメントの方が長いならRmarkdownを使う</li>
+</ul>
+</li>
+<li>関数
+<ul>
+<li>return()は関数内の早い段階の場合のみ使う。最後の式が評価されるのだから</li>
+<li>return使うときには独立した１つの行に</li>
+</ul>
+</li>
+<li>コメント（関数）
+　- 何をやっているかでなく，なぜやっているかを書く
+　- 文の形で書く。2文以上あるときだけピリオド</li>
+<li>パイプ
+<ul>
+<li>%&gt;%使うと流れがわかりやすい</li>
+<li>%&gt;%の前にはスペース，改行して使う。空白は2文字。</li>
+<li>magrittrは()を省略できるけどするな</li>
+</ul>
+</li>
+<li>ggplot
+<ul>
+<li>ggplotの+は基本%&gt;%と同じように使う</li>
+<li>dplyrの%&gt;%と合わせて使うなら，さらに深いインデントにしない（インデントのレベルは1まで）</li>
+<li>ggplot関数の内部でデータの操作もできるけどしない。ggplotに渡す前にデータの操作をしておく</li>
+</ul>
+</li>
+</ul>
+
+		</div>
+		<footer class="post__footer">
+			
+<div class="post__tags tags clearfix">
+	<svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5 0 11V3C0 1.5.8.8.8.8S1.5 0 3 0h8c1.5 0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/></svg>
+	<ul class="tags__list">
+		<li class="tags__item"><a class="tags__link btn" href="/tags/tidyverse-style-guide/" rel="tag">tidyverse style guide</a></li>
+	</ul>
+</div>
+		</footer>
+	</article>
+</main>
+
+
+
+
+			</div>
+			
+		</div>
+		<footer class="footer">
+	<div class="container footer__container flex">
+		
+		<div class="footer__copyright">
+			&copy; 2020 Takahiro ONOSHIMA.
+			<span class="footer__copyright-credits">Generated with <a href="https://gohugo.io/" rel="nofollow noopener" target="_blank">Hugo</a> and <a href="https://github.com/Vimux/Mainroad/" rel="nofollow noopener" target="_blank">Mainroad</a> theme.</span>
+		</div>
+	</div>
+</footer>
+	</div>
+<script async defer src="/js/menu.js"></script>
+<script src="/js/custom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-AMS-MML_HTMLorMML" async></script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$']]
+  }
+});
+</script>
+
+</body>
+</html>

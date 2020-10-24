@@ -3,12 +3,37 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://onoshima.github.io/stat/equalvar/</loc>
-    <lastmod>2020-10-20T16:28:06+09:00</lastmod>
+    <loc>https://onoshima.github.io/categories/</loc>
+    <lastmod>2020-10-24T22:07:16+09:00</lastmod>
   </url>
   
   <url>
-    <loc>https://onoshima.github.io/categories/</loc>
+    <loc>https://onoshima.github.io/categories/r/</loc>
+    <lastmod>2020-10-24T22:07:16+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/tags/</loc>
+    <lastmod>2020-10-24T22:07:16+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/tags/tidyverse/</loc>
+    <lastmod>2020-10-24T22:07:16+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/tags/tidyverse-style-guide/</loc>
+    <lastmod>2020-10-24T22:07:16+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/stat/style/</loc>
+    <lastmod>2020-10-24T22:07:16+09:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://onoshima.github.io/stat/equalvar/</loc>
     <lastmod>2020-10-20T16:28:06+09:00</lastmod>
   </url>
   
@@ -28,22 +53,12 @@
   </url>
   
   <url>
-    <loc>https://onoshima.github.io/tags/</loc>
-    <lastmod>2020-10-20T13:42:17+09:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://onoshima.github.io/tags/gt/</loc>
     <lastmod>2020-10-20T13:42:17+09:00</lastmod>
   </url>
   
   <url>
     <loc>https://onoshima.github.io/stat/gt/</loc>
-    <lastmod>2020-10-20T13:42:17+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://onoshima.github.io/categories/r/</loc>
     <lastmod>2020-10-20T13:42:17+09:00</lastmod>
   </url>
   
@@ -314,11 +329,6 @@
   
   <url>
     <loc>https://onoshima.github.io/stat/filter/</loc>
-    <lastmod>2020-01-19T09:16:49+09:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://onoshima.github.io/tags/tidyverse/</loc>
     <lastmod>2020-01-19T09:16:49+09:00</lastmod>
   </url>
   

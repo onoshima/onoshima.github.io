@@ -6,10 +6,28 @@
     <description>Recent content in Tags on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 18 Oct 2020 10:57:20 +0900</lastBuildDate>
+    <lastBuildDate>Sat, 24 Oct 2020 21:23:55 +0900</lastBuildDate>
     
 	<atom:link href="https://onoshima.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>tidyverse</title>
+      <link>https://onoshima.github.io/tags/tidyverse/</link>
+      <pubDate>Sat, 24 Oct 2020 21:23:55 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/tidyverse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tidyverse style guide</title>
+      <link>https://onoshima.github.io/tags/tidyverse-style-guide/</link>
+      <pubDate>Sat, 24 Oct 2020 21:23:55 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/tidyverse-style-guide/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>ggstatsplot</title>
@@ -242,15 +260,6 @@
       <pubDate>Wed, 03 Jul 2019 07:10:40 +0900</pubDate>
       
       <guid>https://onoshima.github.io/tags/bootstrap/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tidyverse</title>
-      <link>https://onoshima.github.io/tags/tidyverse/</link>
-      <pubDate>Tue, 25 Jun 2019 16:38:21 +0900</pubDate>
-      
-      <guid>https://onoshima.github.io/tags/tidyverse/</guid>
       <description></description>
     </item>
     
