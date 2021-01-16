@@ -85,7 +85,7 @@
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
 	<time class="meta__text" datetime="2019-06-19T21:59:21">June 19, 2019</time>
-	<time class="meta__text" datetime="2020-01-19T09:16:49"> (Last Modified: January 19, 2020)</time>
+	<time class="meta__text" datetime="2021-01-16T17:51:40"> (Last Modified: January 16, 2021)</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -152,19 +152,20 @@
   <span style="color:#a6e22e">return</span>(res)
 }</code></pre></div>
 <h2 id="性能評価の数値実験">性能評価の数値実験</h2>
-<p>この関数がどの程度正確に相関係数を推定できるか実験してみる。母相関を0.8とする2変量標準正規分布からN=1000の乱数を発生させて, それを $ h=0.3, k=-0.2 $ の閾値でそれぞれ2値化する。例えば, 身長と体重の2変量が, それぞれ【高い,低い】【重い,軽い】のように2値データとして手に入った状態を想定すると良い。</p>
+<p>この関数がどの程度正確に相関係数を推定できるか実験してみる。母相関を0.8とする2変量標準正規分布からN=1000の乱数を発生させて, それを $ h=0.3, k=-0.2 $ の閾値でそれぞれ2値化する。たとえば, 身長と体重の2変量が, それぞれ【高い,低い】【重い,軽い】のように2値データとして手に入った状態を想定すると良い。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(mvtnorm)
 dat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rmvnorm</span>(<span style="color:#ae81ff">1000</span>, mean<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>), sigma<span style="color:#f92672">=</span><span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0.8</span>,<span style="color:#ae81ff">0.8</span>,<span style="color:#ae81ff">1</span>),<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>))
 height <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cut</span>(dat[,<span style="color:#ae81ff">1</span>], breaks<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>,<span style="color:#ae81ff">0.3</span>,<span style="color:#66d9ef">Inf</span>),labels<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;低い&#34;</span>, <span style="color:#e6db74">&#34;高い&#34;</span>))
 weight <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cut</span>(dat[,<span style="color:#ae81ff">2</span>], breaks<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>,<span style="color:#ae81ff">-0.2</span>,<span style="color:#66d9ef">Inf</span>),labels<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;軽い&#34;</span>, <span style="color:#e6db74">&#34;重い&#34;</span>))
 
 <span style="color:#75715e"># こんな感じの相関表になる</span>
+
 <span style="color:#a6e22e">table</span>(height, weight)
       weight
 height 軽い 重い
   低い  <span style="color:#ae81ff">400</span>  <span style="color:#ae81ff">237</span>
   高い   <span style="color:#ae81ff">27</span>  <span style="color:#ae81ff">336</span></code></pre></div>
-<p>このような2値データのペアの相関係数を計算すると当然離散化前より絶対値が低下していることが分かるが, テトラコリック相関係数ではもとの値に近い値を推定できている。</p>
+<p>このような2値データのペアの相関係数を計算すると当然離散化前より絶対値が低下していることがわかるが, テトラコリック相関係数ではもとの値に近い値を推定できている。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">cor</span>(dat[,<span style="color:#ae81ff">1</span>], dat[,<span style="color:#ae81ff">2</span>]) <span style="color:#75715e"># 離散化前の相関</span>
 [1] <span style="color:#ae81ff">0.7930115</span>
 <span style="color:#a6e22e">cor</span>(<span style="color:#a6e22e">as.numeric</span>(height),<span style="color:#a6e22e">as.numeric</span>(weight)) <span style="color:#75715e"># 離散化後の相関</span>
@@ -192,7 +193,7 @@ pearson <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">num
 }</code></pre></div>
 <p>結果は次の画像の通りである。
 <img src="/images/tetra_res.png" alt="数値実験結果"></p>
-<p>図中のContというのが連続変量のまま相関係数を計算したもの, Pearsonが離散化した変数でそのままピアソンの積率相関を求めたもの, Tetraがテトラコリック相関係数を求めたものである。TetraとPearsonを比べると, Pearsonが0.5-06付近まで相関係数の絶対値が低下しているのに対して, Tetraは母相関である0.8のあたりを概ね正確に推定していることが分かる。</p>
+<p>図中のContというのが連続変量のまま相関係数を計算したもの, Pearsonが離散化した変数でそのままピアソンの積率相関を求めたもの, Tetraがテトラコリック相関係数を求めたものである。TetraとPearsonを比べると, Pearsonが0.5-06付近まで相関係数の絶対値が低下しているのに対して, Tetraは母相関である0.8のあたりを概ね正確に推定していることがわかる。</p>
 
 		</div>
 		<footer class="post__footer">

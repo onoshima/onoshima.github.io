@@ -85,7 +85,7 @@
 <div class="meta__item-datetime meta__item">
 	<svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg>
 	<time class="meta__text" datetime="2020-09-22T14:41:25">September 22, 2020</time>
-	<time class="meta__text" datetime="2020-09-23T09:52:00"> (Last Modified: September 23, 2020)</time>
+	<time class="meta__text" datetime="2021-01-16T18:08:42"> (Last Modified: January 16, 2021)</time>
 </div>
 
 <div class="meta__item-categories meta__item">
@@ -109,7 +109,7 @@
 </div>
 <div class="content post__content clearfix">
 			<h2 id="はじめに">はじめに</h2>
-<p>探索的因子分析において，因子数を決める際には様々な基準があるのですが，その中にMAP基準というものがあります。必要があって調べた際のメモを残しておきます。</p>
+<p>探索的因子分析において，因子数を決める際にはさまざまな基準があるのですが，その中にMAP基準というものがあります。必要があって調べた際のメモを残しておきます。</p>
 <h2 id="map基準とは">MAP基準とは</h2>
 <p>MAPはMinimum average partical correlationの略です。オリジナルはVelicer（1976）による次の論文です。<a href="https://doi-org/10.1007/BF02293557">https://doi-org/10.1007/BF02293557</a></p>
 <p>$p$個の観測変数の相関行列を$R$とします。サイズは$p \times p$です。主成分分析の結果である$p \times m$のパターン行列を$A$とします。そのとき，偏分散共分散行列$C^*$は</p>
@@ -126,8 +126,8 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(psych)
 
 <span style="color:#a6e22e">data</span>(<span style="color:#e6db74">&#34;Thurstone.9&#34;</span>)
-R <span style="color:#f92672">&lt;-</span> Thurstone.9</code></pre></div>
-<table>
+R <span style="color:#f92672">&lt;-</span> Thurstone.9
+</code></pre></div><table>
 <thead>
 <tr>
 <th align="left"></th>
@@ -268,10 +268,9 @@ comp <span style="color:#f92672">&lt;-</span> evect <span style="color:#f92672">
  [6,] <span style="color:#ae81ff">-0.646</span>  <span style="color:#ae81ff">0.463</span> <span style="color:#ae81ff">-0.022</span> <span style="color:#ae81ff">-0.461</span> <span style="color:#ae81ff">-0.358</span>  <span style="color:#ae81ff">0.132</span> <span style="color:#ae81ff">-0.039</span>  <span style="color:#ae81ff">0.083</span>  <span style="color:#ae81ff">0.037</span>
  [7,] <span style="color:#ae81ff">-0.645</span>  <span style="color:#ae81ff">0.326</span>  <span style="color:#ae81ff">0.522</span>  <span style="color:#ae81ff">0.362</span> <span style="color:#ae81ff">-0.258</span> <span style="color:#ae81ff">-0.077</span>  <span style="color:#ae81ff">0.025</span>  <span style="color:#ae81ff">0.021</span>  <span style="color:#ae81ff">0.008</span>
  [8,] <span style="color:#ae81ff">-0.787</span> <span style="color:#ae81ff">-0.369</span>  <span style="color:#ae81ff">0.041</span> <span style="color:#ae81ff">-0.063</span> <span style="color:#ae81ff">-0.027</span>  <span style="color:#ae81ff">0.094</span> <span style="color:#ae81ff">-0.035</span> <span style="color:#ae81ff">-0.475</span> <span style="color:#ae81ff">-0.054</span>
- [9,] <span style="color:#ae81ff">-0.748</span> <span style="color:#ae81ff">-0.433</span> <span style="color:#ae81ff">-0.086</span> <span style="color:#ae81ff">-0.043</span> <span style="color:#ae81ff">-0.020</span> <span style="color:#ae81ff">-0.081</span>  <span style="color:#ae81ff">0.458</span>  <span style="color:#ae81ff">0.123</span> <span style="color:#ae81ff">-0.108</span></code></pre></div>
-<p>続いて，（1）式から偏相関係数行列を求めます。$D$は対角行列ですので，$D^{-1/2}$は$D$の対角成分の平方根の逆数を対角成分に持つ対角行列です。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
-Cstar <span style="color:#f92672">&lt;-</span> R <span style="color:#f92672">-</span> comp[,<span style="color:#ae81ff">1</span>] <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(comp[,<span style="color:#ae81ff">1</span>])
+ [9,] <span style="color:#ae81ff">-0.748</span> <span style="color:#ae81ff">-0.433</span> <span style="color:#ae81ff">-0.086</span> <span style="color:#ae81ff">-0.043</span> <span style="color:#ae81ff">-0.020</span> <span style="color:#ae81ff">-0.081</span>  <span style="color:#ae81ff">0.458</span>  <span style="color:#ae81ff">0.123</span> <span style="color:#ae81ff">-0.108</span>
+</code></pre></div><p>続いて，（1）式から偏相関係数行列を求めます。$D$は対角行列ですので，$D^{-1/2}$は$D$の対角成分の平方根の逆数を対角成分に持つ対角行列です。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Cstar <span style="color:#f92672">&lt;-</span> R <span style="color:#f92672">-</span> comp[,<span style="color:#ae81ff">1</span>] <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(comp[,<span style="color:#ae81ff">1</span>])
 d <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">diag</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#a6e22e">sqrt</span>(<span style="color:#a6e22e">diag</span>(Cstar)))
 Rstar <span style="color:#f92672">&lt;-</span> d <span style="color:#f92672">%*%</span> Cstar <span style="color:#f92672">%*%</span> d
 <span style="color:#a6e22e">round</span>(Rstar,<span style="color:#ae81ff">3</span>)
@@ -285,29 +284,27 @@ Rstar <span style="color:#f92672">&lt;-</span> d <span style="color:#f92672">%*%
  [6,]  <span style="color:#ae81ff">0.198</span>  <span style="color:#ae81ff">0.194</span> <span style="color:#ae81ff">-0.507</span> <span style="color:#ae81ff">-0.445</span>  <span style="color:#ae81ff">0.201</span>  <span style="color:#ae81ff">1.000</span>  <span style="color:#ae81ff">0.096</span> <span style="color:#ae81ff">-0.341</span> <span style="color:#ae81ff">-0.383</span>
  [7,]  <span style="color:#ae81ff">0.039</span>  <span style="color:#ae81ff">0.015</span> <span style="color:#ae81ff">-0.381</span> <span style="color:#ae81ff">-0.321</span>  <span style="color:#ae81ff">0.192</span>  <span style="color:#ae81ff">0.096</span>  <span style="color:#ae81ff">1.000</span> <span style="color:#ae81ff">-0.284</span> <span style="color:#ae81ff">-0.349</span>
  [8,] <span style="color:#ae81ff">-0.380</span> <span style="color:#ae81ff">-0.416</span>  <span style="color:#ae81ff">0.295</span>  <span style="color:#ae81ff">0.272</span> <span style="color:#ae81ff">-0.356</span> <span style="color:#ae81ff">-0.341</span> <span style="color:#ae81ff">-0.284</span>  <span style="color:#ae81ff">1.000</span>  <span style="color:#ae81ff">0.203</span>
- [9,] <span style="color:#ae81ff">-0.384</span> <span style="color:#ae81ff">-0.338</span>  <span style="color:#ae81ff">0.371</span>  <span style="color:#ae81ff">0.270</span> <span style="color:#ae81ff">-0.416</span> <span style="color:#ae81ff">-0.383</span> <span style="color:#ae81ff">-0.349</span>  <span style="color:#ae81ff">0.203</span>  <span style="color:#ae81ff">1.000</span></code></pre></div>
-<p>（2）式に従って，この行列の非対角要素の2乗の平均をとります。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
-p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(R)
+ [9,] <span style="color:#ae81ff">-0.384</span> <span style="color:#ae81ff">-0.338</span>  <span style="color:#ae81ff">0.371</span>  <span style="color:#ae81ff">0.270</span> <span style="color:#ae81ff">-0.416</span> <span style="color:#ae81ff">-0.383</span> <span style="color:#ae81ff">-0.349</span>  <span style="color:#ae81ff">0.203</span>  <span style="color:#ae81ff">1.000</span>
+</code></pre></div><p>（2）式に従って，この行列の非対角要素の2乗の平均をとります。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(R)
 <span style="color:#a6e22e">diag</span>(Rstar) <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
 <span style="color:#a6e22e">sum</span>(Rstar^2)<span style="color:#f92672">/</span>(p<span style="color:#f92672">*</span>(p<span style="color:#ae81ff">-1</span>))
-[1] <span style="color:#ae81ff">0.1142189</span></code></pre></div>
-<p>ということで，因子数が1のときの$f_m$が求まりました。</p>
+[1] <span style="color:#ae81ff">0.1142189</span>
+</code></pre></div><p>ということで，因子数が1のときの$f_m$が求まりました。</p>
 <p>あとは，この手続きを因子数を増やしながら繰り返していくだけなのですが，一応因子数が2の場合もやってみましょう。といってもパターン行列は求まっているのでそこの部分を変えて計算するだけです。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
-Cstar2 <span style="color:#f92672">&lt;-</span> R <span style="color:#f92672">-</span> comp[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(comp[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Cstar2 <span style="color:#f92672">&lt;-</span> R <span style="color:#f92672">-</span> comp[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(comp[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>])
 d2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">diag</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#a6e22e">sqrt</span>(<span style="color:#a6e22e">diag</span>(Cstar2)))
 Rstar2 <span style="color:#f92672">&lt;-</span> d2 <span style="color:#f92672">%*%</span> Cstar2 <span style="color:#f92672">%*%</span> d2
 <span style="color:#a6e22e">diag</span>(Rstar2) <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
 <span style="color:#a6e22e">sum</span>(Rstar2^2)<span style="color:#f92672">/</span>(p<span style="color:#f92672">*</span>(p<span style="color:#ae81ff">-1</span>))
-[1] <span style="color:#ae81ff">0.03953237</span></code></pre></div>
-<p>さて，$f_1=0.114$で$f_2=0.040$ですので，比較すると$m=2$の方が小さい値です。これをさらに先まで繰り返して，一番小さい値を出す因子数を採択することになります。</p>
+[1] <span style="color:#ae81ff">0.03953237</span>
+</code></pre></div><p>さて，$f_1=0.114$で$f_2=0.040$ですので，比較すると$m=2$の方が小さい値です。これをさらに先まで繰り返して，一番小さい値を出す因子数を採択することになります。</p>
 <h2 id="psychの関数">psychの関数</h2>
 <p><code>psych</code>の<code>vss</code>関数は，この手続きを全て自動でやってくれます。デフォルトでは8因子までですが，引数に<code>n=10</code>などと指定すれば，もっと多い因子数までの値を計算してくれます（あまり必要になることはないでしょうが）。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res.vss <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">vss</span>(R)
 res.vss<span style="color:#f92672">$</span>map
-[1] <span style="color:#ae81ff">0.11421886</span> <span style="color:#ae81ff">0.03953237</span> <span style="color:#ae81ff">0.06829390</span> <span style="color:#ae81ff">0.12575972</span> <span style="color:#ae81ff">0.20558816</span> <span style="color:#ae81ff">0.35901589</span> <span style="color:#ae81ff">0.54588031</span> <span style="color:#ae81ff">1.00000000</span></code></pre></div>
-<p>この中だと3つめの値が一番小さいので，3因子を選択することとなります。</p>
+[1] <span style="color:#ae81ff">0.11421886</span> <span style="color:#ae81ff">0.03953237</span> <span style="color:#ae81ff">0.06829390</span> <span style="color:#ae81ff">0.12575972</span> <span style="color:#ae81ff">0.20558816</span> <span style="color:#ae81ff">0.35901589</span> <span style="color:#ae81ff">0.54588031</span> <span style="color:#ae81ff">1.00000000</span>
+</code></pre></div><p>この中だと3つめの値が一番小さいので，3因子を選択することとなります。</p>
 
 		</div>
 		<footer class="post__footer">
