@@ -6,18 +6,20 @@
     <description>Recent content in ggstatsplot on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 18 Oct 2020 10:57:20 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/ggstatsplot/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Sun, 18 Oct 2020 10:57:20 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/ggstatsplot/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ggstatsplotパッケージについて</title>
-      <link>https://onoshima.github.io/stat/ggstatplot/</link>
+      <link>https://onoshima.github.io/posts/ggstatplot/</link>
       <pubDate>Sun, 18 Oct 2020 10:57:20 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/ggstatplot/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/ggstatplot/</guid>
+      <description>ggstatsplotパッケージが出たとのことで少しだけ使ってみた記録です。使い方は以下のリンクより。
+https://github.com/IndrajeetPatil/ggstatsplot
+ggbetweenstats 群間差の比較のためのバイオリンプロットを出すときに使えます。
+library(ggplot2) library(ggstatsplot) p1 &amp;lt;- ggbetweenstats(data=iris, x=Species, y=Sepal.Length) k=3) p1 こんな感じで，検定結果とプロットを一括でやってくれます。便利。 いろいろと細かな設定もできるようです。 p2 &amp;lt;- ggbetweenstats(data=iris, x=Species, y=Sepal.Length, k=2 , #検定結果の小数をどこまで表示するか title=&amp;#34;Distribution of sepal length across Iris species&amp;#34;, plot.type=&amp;#34;box&amp;#34;, # デフォルトはboxviolin，片方だけにもできる pairwise.comparisons = F, #多重比較を表示しないこともできる effsize.type = &amp;#34;biased&amp;#34;, #効果量を偏イータにしたければbiase results.subtitle = F, # FALSEにすると検定結果をサブタイトルから消せる bf.message = F) # したの方にあるベイズファクターの表示の有無 p2 
+ggscatterstats 散布図＋ヒストグラムに無相関の検定を合わせて出力するようです。
+p3 &amp;lt;- ggscatterstats( data = msleep, x = sleep_rem, y = awake, xlab = &amp;#34;REM sleep (in hours)&amp;#34;, ylab = &amp;#34;Amount of time spent awake (in hours)&amp;#34;, title = &amp;#34;Understanding mammalian sleep&amp;#34;, messages = FALSE ) p3 平均（や中央値）の線を引いたり，特定の値を上回る場合にラベルをつけたりできるみたいです。</description>
     </item>
     
   </channel>

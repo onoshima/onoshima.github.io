@@ -6,18 +6,18 @@
     <description>Recent content in parallel analysis on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 23 Sep 2020 10:39:35 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/parallel-analysis/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Wed, 23 Sep 2020 10:39:35 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/parallel-analysis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>探索的因子分析の際の平行分析について</title>
-      <link>https://onoshima.github.io/stat/parallel/</link>
+      <link>https://onoshima.github.io/posts/parallel/</link>
       <pubDate>Wed, 23 Sep 2020 10:39:35 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/parallel/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/parallel/</guid>
+      <description>はじめに 因子分析に関連した調べ物の必要があって，その覚書。今回は平行分析について。
+探索的因子分析で因子数を決めるための複数の基準が提案されていますが，平行分析（parallel analysis）はその一つで，因子分析の教科書などでも勧められる方法です。アイデアとしては，分析しようとしているデータセットと同じサイズであるランダムなデータセットから計算された固有値と比べて，ランダムなデータセットよりも大きい固有値までを採用しようという考えのようです。こうすることでサンプリングの誤差に対応できるとのことです。初出はHorn (1965)です。
+Rでの実験 Rで平行分析を行うにはpsychパッケージのfa.parallelという関数を用いれば良いのですが，ここでは原理を理解するためにパッケージを使わずにやってみます。使うデータはpsych所収のbfiというデータセットです。ビッグファイブの性格特性の質問紙データで，各因子5項目ずつ計25項目の質問紙のデータです。26列目以降は回答者の属性に関するデータが入っています。サンプルサイズは2800です。
+library(psych) dat &amp;lt;- bfi[,1:25] head(dat) A1 A2 A3 A4 A5 C1 C2 C3 C4 C5 E1 E2 E3 E4 E5 N1 N2 N3 N4 N5 O1 O2 O3 O4 O5 61617 2 4 3 4 4 2 3 3 4 4 3 3 3 4 4 3 4 2 2 3 3 6 3 4 3 61618 2 4 5 2 5 5 4 4 3 4 1 1 6 4 3 3 3 3 5 5 4 2 4 3 3 61620 5 4 5 4 4 4 5 4 2 5 2 4 4 4 5 4 5 4 2 3 4 2 5 5 2 61621 4 4 6 5 5 4 4 3 5 5 5 3 4 4 4 2 5 2 4 1 3 3 4 3 5 61622 2 3 3 4 5 4 4 5 3 2 2 2 5 4 5 2 3 4 4 3 3 3 4 3 3 61623 6 6 5 6 5 6 6 6 1 3 2 1 6 5 6 3 5 2 2 3 4 3 5 6 1 まずは，元データからスクリープロットを描いてみます（15因子目まで）。</description>
     </item>
     
   </channel>

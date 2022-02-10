@@ -6,90 +6,141 @@
     <description>Recent content in R on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 13 Jan 2021 15:21:08 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/categories/r/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Wed, 13 Jan 2021 15:21:08 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RからMplusを使う</title>
-      <link>https://onoshima.github.io/stat/mplusautomation/</link>
+      <link>https://onoshima.github.io/posts/mplusautomation/</link>
       <pubDate>Wed, 13 Jan 2021 15:21:08 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/mplusautomation/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/mplusautomation/</guid>
+      <description>構造方程式モデリングのためのソフトウェアと言えばMplusです。Mplusはシンタックスも簡単で計算も早くてとても良いソフトウェアですがアウトプットが見辛い上に，モデルの数だけインプットとアウトプットのファイルが増えていくのでごちゃつきます。また，私だけかもしれませんが，あとで解析をやりなおそうと思った際に，どのファイルを使ったのか分からなくなりがちです。
+そこで，MplusをRから使えるパッケージとしてMplusAutomationというものがあります。日本語で解説している資料としては徳岡先生（高松大）によるものあり大変参考になります。
+https://www.slideshare.net/masarutokuoka/rmplusmplusautomation-hiroshimar05
+以下ではそのスライドを参考にしたり，パッケージのvignetteを見ながら試した記録を残します（主に将来の自分に向けて）。
+モデルをRで書く mplusObjectという関数を使うと，Mplusのinputファイルを用意できるようです。以下ではpsychパッケージ所収のbfiデータを使っていきます。とりあえず，5因子のCFAのモデルを書いてみます。
+library(psych) library(MplusAutomation) test1 &amp;lt;- mplusObject(MODEL =&amp;#34;F1 BY A1-A5; F2 BY C1-C5; F3 BY E1-E5; F4 BY N1-N5; F5 BY O1-O5&amp;#34;, rdata = bfi) res &amp;lt;- mplusModeler(test, dataout = &amp;#34;test1.tsv&amp;#34;, modelout = &amp;#34;test1.inp&amp;#34;, run = 1L) mplusObject関数の引数は，通常のMplusのsyntaxのセクションに書くような内容を書いていきます。上の例では，モデルの部分だけ書きましたが，書いていないVARIABLEのセクションなどは，MODELの部分から必要なものを選んで勝手に作ってくれているようです。
+こうしてできたR上のMplus Model Objectを実行するためのものがmplusModeler関数です。第１の引数には先ほどのMplus Model Objectを指定します。実行すると，Model Objectを元にして，同じディレクトリ内に，Mplusのinput，Mplusの実行用のデータファイル，Mplusのアウトプットが生成されます。dataoutという引数には，Mplus実行用に生成されたデータのファイル名を指定します。このファイルでは，例えば，列名のヘッダーが削除されていたり，欠損値が「.」に置き換えられていたりと，Mplusで処理できる形にデータが変換されています。またmodeloutという引数には，モデルを実行するのに使われたMplusのインプットファイルのファイル名を渡します。runという引数に0を渡すとモデルは実行されず，Mplus用のデータファイルとインプットファイルだけが生成されるようです。モデルが意図した通りに.inpファイルに反映されているかどうかを確認したい時に使うもののようです。1より大きい場合にはブートストラップで繰り返すとのことです。
+上の例では，とりあえず実行できれば良いということでモデルのみ書きましたが，もう少しいろいろと指定したものを作ってみます。
+test2 &amp;lt;- mplusObject( TITLE = &amp;#34;This is mplusautomation test 2;&amp;#34;, ANALYSIS = &amp;#34;ESTIMATOR = MLR;&amp;#34;, OUTPUT = &amp;#34;SAMPSTAT STDYX MODINDICES(ALL);&amp;#34;, VARIABLE = &amp;#34;USEVARIABLES = A1-A5 C1-C5 E1-E5 N1-N5 O1-O5;&amp;#34;, MODEL =&amp;#34;F1 BY A1-A5*; F2 BY C1-C5*; F3 BY E1-E5*; F4 BY N1-N5*; F5 BY O1-O5*; F1@1 F2@1 F3@1 F4@1 F5@1;&amp;#34;, rdata = bfi) res2 &amp;lt;- mplusModeler(test2, dataout = &amp;#34;test2.</description>
     </item>
     
     <item>
       <title>tidyverse style guideを読んでみた際のメモ</title>
-      <link>https://onoshima.github.io/stat/style/</link>
+      <link>https://onoshima.github.io/posts/style/</link>
       <pubDate>Sat, 24 Oct 2020 21:23:55 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/style/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/style/</guid>
+      <description>tidystyle guideというものがあるのを知ったのでざっと目を通した際の殴り書き。 分析のところまで。
+https://style.tidyverse.org/package-files.html#names-1
+ ファイル名  空白いれない 意味あるものにする 番号順にしたいなら，1xxx,2xxxxでなくて01xxx,02xxxのように0つめる   内部の構造  # plot data &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-みたいに区切る package読み込むときはファイルの最初でまとめて   変数名  変数名は小文字のみ，意味の区切りは_でつなげる 変数名は名詞で関数名は動詞 cとかTとか一般的な関数や変数に代入しない   空白  ,のあとはスペース入れる ()の前後にスペース入れない ifとかforとかん()の前後はスペース入れる funcutionの()の後にはスペース入れる {{}}の中にはスペース入れる =とか&amp;lt;-とかの前後にはスペース入れる 片側の~式はスペース入れない（複雑だとスペース入れる） =の位置を揃えるための追加のスペースはOK   関数  データの引数名は省略，他は書く   制御フロー  {は行の最後にあるべき 中身は2文字のインデント }は行の最初にあるべき とってもシンプルだったら落として1行でも可 switchでは，各要素1行，フォールスルーエラーを書く   長い行  80文字を超えない 関数名が長いなら，改行して1行ずつ，引数の指定する。 引数を意味の繋がりで行にまとめても良い   セミコロン  行の終わりで使わない。1行に2つのコマンドを詰め込まない 変数の代入に=を使わない&amp;lt;-を使う   データ  文字列ベクトルは&amp;quot;&amp;ldquo;にする。&amp;lsquo;&amp;lsquo;は事情がない限り使わない。 論理値ベクトルはT，FよりもTRUE，FALSE推奨   コメント  #とスペースで始める コメントをつける必要がある場合にはまずコードが明確にならないかを検討する コメントの方が長いならRmarkdownを使う   関数  return()は関数内の早い段階の場合のみ使う。最後の式が評価されるのだから return使うときには独立した１つの行に   コメント（関数） - 何をやっているかでなく，なぜやっているかを書く - 文の形で書く。2文以上あるときだけピリオド パイプ  %&amp;gt;%使うと流れがわかりやすい %&amp;gt;%の前にはスペース，改行して使う。空白は2文字。 magrittrは()を省略できるけどするな   ggplot  ggplotの+は基本%&amp;gt;%と同じように使う dplyrの%&amp;gt;%と合わせて使うなら，さらに深いインデントにしない（インデントのレベルは1まで） ggplot関数の内部でデータの操作もできるけどしない。ggplotに渡す前にデータの操作をしておく    </description>
     </item>
     
     <item>
       <title>gtパッケージについて</title>
-      <link>https://onoshima.github.io/stat/gt/</link>
+      <link>https://onoshima.github.io/posts/gt/</link>
       <pubDate>Thu, 08 Oct 2020 18:31:14 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/gt/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/gt/</guid>
+      <description>Rにgtというパッケージがあります。これは，お手軽に表を作るためのパッケージです。使い方については以下の記事を見ると良いです。
+ https://qiita.com/yanami/items/8684640b20c86594fbec https://qiita.com/yanami/items/117851de49024f5980d0  ここでは私の自分のための備忘録を残しています。
+データの整形 irisデータで実験してみる。表の表示に適するように前段階としてデータを整形する。
+library(gt) library(tidyverse) dat &amp;lt;- tibble(iris) %&amp;gt;% group_by(Species) %&amp;gt;% summarise(across(Sepal.Length:Petal.Width,mean)) %&amp;gt;% pivot_longer(col=-Species, names_to=c(&amp;#34;S/P&amp;#34;,&amp;#34;L/W&amp;#34;), names_sep=&amp;#34;\\.&amp;#34;) %&amp;gt;% pivot_wider(names_from = &amp;#34;L/W&amp;#34;) gt関数 とりあえずこのままで，gt関数に突っ込んでみるとそれらしい表を出力してみす。
+dat %&amp;gt;% gt() グループに分けて表示するには，groupname_colの引数にグループ分けしたい列名を入れます。
+ab1 &amp;lt;- gt(dat, groupname_col = &amp;#34;Species&amp;#34;, rowname_col = &amp;#34;S/P&amp;#34;) tab1 表示する桁数が多いので減らしてみましょう。先ほど作ったものに桁数の設定を行う関数をたします。ここら辺の感覚はggplot的です。
+tab2 &amp;lt;- tab1 %&amp;gt;% fmt_number( columns = vars(&amp;#34;Length&amp;#34;, &amp;#34;Width&amp;#34;), decimals = 2) tab2 今度はタイトルを足してみます。タイトルを設定する関数をパイプでつなぎます。ついでスタブ列の列名も足すことにします。
+tab3 &amp;lt;- tab2 %&amp;gt;% tab_header( title = &amp;#34;ここにタイトルが入るよ&amp;#34;, ) %&amp;gt;% tab_stubhead(&amp;#34;S/P&amp;#34;) %&amp;gt;% tab_style( style=cell_text(align=&amp;#34;left&amp;#34;), locations = cells_title(&amp;#34;title&amp;#34;)) tab3  ついでに注もつけてみます。</description>
     </item>
     
     <item>
       <title>探索的因子分析の際の平行分析について</title>
-      <link>https://onoshima.github.io/stat/parallel/</link>
+      <link>https://onoshima.github.io/posts/parallel/</link>
       <pubDate>Wed, 23 Sep 2020 10:39:35 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/parallel/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/parallel/</guid>
+      <description>はじめに 因子分析に関連した調べ物の必要があって，その覚書。今回は平行分析について。
+探索的因子分析で因子数を決めるための複数の基準が提案されていますが，平行分析（parallel analysis）はその一つで，因子分析の教科書などでも勧められる方法です。アイデアとしては，分析しようとしているデータセットと同じサイズであるランダムなデータセットから計算された固有値と比べて，ランダムなデータセットよりも大きい固有値までを採用しようという考えのようです。こうすることでサンプリングの誤差に対応できるとのことです。初出はHorn (1965)です。
+Rでの実験 Rで平行分析を行うにはpsychパッケージのfa.parallelという関数を用いれば良いのですが，ここでは原理を理解するためにパッケージを使わずにやってみます。使うデータはpsych所収のbfiというデータセットです。ビッグファイブの性格特性の質問紙データで，各因子5項目ずつ計25項目の質問紙のデータです。26列目以降は回答者の属性に関するデータが入っています。サンプルサイズは2800です。
+library(psych) dat &amp;lt;- bfi[,1:25] head(dat) A1 A2 A3 A4 A5 C1 C2 C3 C4 C5 E1 E2 E3 E4 E5 N1 N2 N3 N4 N5 O1 O2 O3 O4 O5 61617 2 4 3 4 4 2 3 3 4 4 3 3 3 4 4 3 4 2 2 3 3 6 3 4 3 61618 2 4 5 2 5 5 4 4 3 4 1 1 6 4 3 3 3 3 5 5 4 2 4 3 3 61620 5 4 5 4 4 4 5 4 2 5 2 4 4 4 5 4 5 4 2 3 4 2 5 5 2 61621 4 4 6 5 5 4 4 3 5 5 5 3 4 4 4 2 5 2 4 1 3 3 4 3 5 61622 2 3 3 4 5 4 4 5 3 2 2 2 5 4 5 2 3 4 4 3 3 3 4 3 3 61623 6 6 5 6 5 6 6 6 1 3 2 1 6 5 6 3 5 2 2 3 4 3 5 6 1 まずは，元データからスクリープロットを描いてみます（15因子目まで）。</description>
     </item>
     
     <item>
       <title>因子分析におけるMAP基準について</title>
-      <link>https://onoshima.github.io/stat/vss/</link>
+      <link>https://onoshima.github.io/posts/vss/</link>
       <pubDate>Tue, 22 Sep 2020 14:41:25 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/vss/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/vss/</guid>
+      <description>はじめに 探索的因子分析において，因子数を決める際にはさまざまな基準があるのですが，その中にMAP基準というものがあります。必要があって調べた際のメモを残しておきます。
+MAP基準とは MAPはMinimum average partical correlationの略です。オリジナルはVelicer（1976）による次の論文です。https://doi-org/10.1007/BF02293557
+$p$個の観測変数の相関行列を$R$とします。サイズは$p \times p$です。主成分分析の結果である$p \times m$のパターン行列を$A$とします。そのとき，偏分散共分散行列$C^*$は
+$$C^* = R- AA^\prime$$
+と書けます。ここからさらに偏相関係数の行列は
+$$ R^* = D^{-1/2}( R- AA^\prime)D^{-1/2}　\tag{1}　$$
+と書けます。ここで $D$は，
+$$D = Diag(C^*) = Diag(R- AA^\prime)$$
+です。ここで，$R^*$のi行目，j列目の要素を $r ^* _{ij}$としたときに，偏相関行列の2乗の値の平均が
+$$ f_m = \frac{\sum \sum_{i \neq j} (r ^* _{ij})^2 }{p(p-1)}　\tag{2}$$
+として表されます。MAP基準とは，パターン行列のmの値を変えていきながらこの値を計算して，最小になる$f_m$の$m$を因子数として採択しようという方法です。
+実際の数値例を確認 実際にデータを触ってみながら，手順を確認してみます。psychのvss関数の中身を覗きながら書きました。使うデータはpsychパッケージの中に入っているThurstone.9という9つのテストの相関行列です。
+library(psych) data(&amp;#34;Thurstone.9&amp;#34;) R &amp;lt;- Thurstone.9     Prefixes Suffixes Vocabulary Sentences First.Last FirstLetters FourLetters Completion SameorOpposite     Prefixes 1.</description>
     </item>
     
     <item>
       <title>EFAから計算したωとCFAから計算したω</title>
-      <link>https://onoshima.github.io/stat/omega_efacfa/</link>
+      <link>https://onoshima.github.io/posts/omega_efacfa/</link>
       <pubDate>Wed, 16 Sep 2020 15:13:32 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/omega_efacfa/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/omega_efacfa/</guid>
+      <description>2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
+$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}+{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
+として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
+Revelle &amp;amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
+使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。
+https://www.personality-project.org/r/html/bifactor.html
+探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
+library(lavaan) library(psych) library(knitr) data(&amp;#34;Thurstone&amp;#34;) res_efa &amp;lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3))     g F1* F2* F3* h2 u2 p2     Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615   Vocabulary 0.</description>
     </item>
     
     <item>
       <title>lavaanでMplusのカテゴリカル因子分析を再現する</title>
-      <link>https://onoshima.github.io/stat/mplus_lavaan/</link>
+      <link>https://onoshima.github.io/posts/mplus_lavaan/</link>
       <pubDate>Mon, 27 Apr 2020 13:13:05 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/mplus_lavaan/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/mplus_lavaan/</guid>
+      <description>Mplusで行われたシミュレーションをRで再現しようとした際に調べたことの記録．MplusにおけるESTIMATOR=WLSMVとlavaanでestimator=&amp;quot;WLSMV&amp;quot;にした際の挙動について．
+データ Rのpsychのパッケージに入っているbfiの質問紙データの一部（A1-A5の項目まで）を利用した．なぜ一部かというとMplusのデモ版だと使える変数の数に制限があるためである．とりあえずcsvにして書き出す．Mplusだとデータファイルは変数名を含めないようなのでcol_names=FALSEにする．欠損値処理についても考えないために今回はリストワイズ削除．N=2709の5項目（すべて6件法）のデータを使う．
+library(readr) library(lavaan) bfiA &amp;lt;- psych::bfi[1:5] bfiA &amp;lt;- na.omit(bfiA) write_csv(bfiA, &amp;#34;bfiA.csv&amp;#34;, col_names = FALSE) head(bfiA) # A1 A2 A3 A4 A5 #61617 2 4 3 4 4 #61618 2 4 5 2 5 #1620 5 4 5 4 4 #61621 4 4 6 5 5 #61622 2 3 3 4 5 #61623 6 6 5 6 5 MplusでCFA まずは，Mplusでやってみる．インプットファイルはこんな感じ．
+TITLE: test; DATA: FILE = &amp;quot;bfiA.csv&amp;quot;; VARIABLE: NAMES = A1-A5; USEVARIABLES = A1-A5; CATEGORICAL = A1-A5; ANALYSIS: TYPE = GENERAL; ESTIMATOR= WLSMV; MODEL: F1 BY A1-A5*; F1@1; OUTPUT: SAMPSTAT STDYX MODINDICES(ALL); 結果，モデルフィットの部分は次のような感じ．</description>
     </item>
     
     <item>
       <title>non-normalな乱数を発生するパッケージあれこれ</title>
-      <link>https://onoshima.github.io/stat/nonnormal/</link>
+      <link>https://onoshima.github.io/posts/nonnormal/</link>
       <pubDate>Fri, 24 Apr 2020 10:27:42 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/nonnormal/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/nonnormal/</guid>
+      <description>はじめに Rは基本のパッケージに様々な確率分布の乱数を発生させる関数が備わっているが，研究の都合で正規分布に従わない歪んだデータを発生させる必要がでてきたので，Rで歪んだデータの乱数を発生させる際に使えるパッケージをいくつか試してみた．
+fungible まずはfungibleというパッケージに入っているmonte1という関数．変数の数，サンプルサイズ，母相関行列，歪度のベクトル，尖度のベクトルなど必要な情報を入れると，指定した通りの標準化された多変量の歪んだ乱数を生成してくれる．
+library(pacman) p_load(fungible) Sigma &amp;lt;- matrix(0.3,nrow=4,ncol=4) diag(Sigma) &amp;lt;- 1 skew &amp;lt;- c(0, 0.25, -0.3, 1.25) kurt &amp;lt;- c(0, 0, 1.5, 2.5) samplesize &amp;lt;- 1000 nvar &amp;lt;- ncol(Sigma) dat &amp;lt;- monte1(seed=1234,nvar=nvar, nsub=samplesize, cormat=Sigma, skewvec=skew, kurtvec=kurt) psych::describe(dat$data) psych::pairs.panels(dat$dat, smooth = F, hist.col = &amp;#34;white&amp;#34;) サンプルサイズが1000程度だと歪度も尖度もそこそこずれているがサンプルサイズを5000程度まで増やすとそれなりに正確になるようだ．
+seedの指定が必ず必要なので，シミュレーションとかで使う時はseedをずらしていくようにプログラムを組む必要がある． 乱数発生の手法の元となっているのは，Fleishman(1978)とVale &amp;amp; Maurelli(1983)の論文．
+https://link.springer.com/article/10.1007/BF02293811
+https://link.springer.com/article/10.1007/BF02293687
+SimMultiCorrData 次はSimMultiCorrDataというパッケージに入っているnonnormvar1という関数では1変量の歪んだ乱数を生成することができる．引数には，FleishmanかPolynomialのどちらの方法か，平均，分散，歪度，尖度のほか，サンプルサイズや，seedを指定できる．デフォルトでは平均=0で分散=1である．
+p_load(SimMultiCorrData) samplesize &amp;lt;- 1000 dat1 &amp;lt;- nonnormvar1(method=&amp;#34;Fleishman&amp;#34;, skews=-0.6, skurts=0,n=samplesize) dat2 &amp;lt;- nonnormvar1(method=&amp;#34;Fleishman&amp;#34;, skews=0, skurts=1.25,n=samplesize) この関数で発生させた乱数のデータは$continuous_variableに入っており，要約統計量は$summary_continuousにまとまっており，狙い通りの変数ができたかどうかの確認ができて便利である．
+ちなみに引数でmethod=&amp;quot;Polynomial&amp;quot;を指定すると次の論文の手順で乱数を生成するようである．</description>
     </item>
     
     <item>
       <title>RからeStatのAPIを使ってみる（その2）</title>
-      <link>https://onoshima.github.io/stat/restat_packages/</link>
+      <link>https://onoshima.github.io/posts/restat_packages/</link>
       <pubDate>Sun, 08 Mar 2020 16:50:26 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/restat_packages/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/restat_packages/</guid>
+      <description>はじめに Rからe-Statを使うお勉強の記録．@yutannihilation さん作成のestatapiというパッケージがあり，それを使ったらとても楽だった．使い方は以下のページに書いてある．
+https://qiita.com/kazutan/items/9c0b2dd0f055fde45cda
+不登校の児童生徒の数 今回は，文部科学省の「児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査」という調査を使ってみて，都道府県別1000人あたりの不登校児童の数をグラフにしてみた．日本地図については谷村先生作成のNipponMapというパッケージを使った．使い方は以下のサイトを参考にした．
+https://oku.edu.mie-u.ac.jp/~okumura/stat/nippon.html
+使ったコード library(pacman) p_load(estatapi, keyring,dplyr, stringr,NipponMap,RColorBrewer) key_set(&amp;#34;e-stat&amp;#34;) #　統計表の検索 00400304は児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査 statsList &amp;lt;- estat_getStatsList( appId = key_get(&amp;#34;e-stat&amp;#34;), searchWord = &amp;#34;&amp;#34;, statsCode = &amp;#34;00400304&amp;#34; ) str(statsList) lists &amp;lt;- statsList %&amp;gt;% filter(str_detect(TITLE, &amp;#34;不登校児童生徒数&amp;#34;)) id_vector &amp;lt;- pull(lists, &amp;#34;@id&amp;#34;) # メタ情報 meta_info &amp;lt;- estat_getMetaInfo(appId = key_get(&amp;#34;e-stat&amp;#34;), statsDataId = id_vector[1]) names(meta_info) # 実際のデータを取得 df &amp;lt;- estat_getStatsData( appId = key_get(&amp;#34;e-stat&amp;#34;), statsDataId = id_vector[1], cdCat02 = c(&amp;#34;120&amp;#34;, &amp;#34;140&amp;#34;), #小学校と中学校 cdArea = meta_info$area$&amp;#34;@code&amp;#34;[2:48]　#1番目は全国なので除外 ) df2017 &amp;lt;- df %&amp;gt;% rename(&amp;#34;year&amp;#34; = &amp;#34;時間軸(年度次)&amp;#34;) %&amp;gt;% filter(year == &amp;#34;2017年度&amp;#34;, 学校種類 == &amp;#34;小学校&amp;#34;, cat01_code == &amp;#34;120&amp;#34;) df2017_jhs &amp;lt;- df %&amp;gt;% rename(&amp;#34;year&amp;#34; = &amp;#34;時間軸(年度次)&amp;#34;) %&amp;gt;% filter(year == &amp;#34;2017年度&amp;#34;, 学校種類 == &amp;#34;中学校&amp;#34;, cat01_code == &amp;#34;120&amp;#34;) # 小学生をplot kenmei &amp;lt;- df2017$地域 br &amp;lt;- seq(3, 9, 1) color &amp;lt;- brewer.</description>
     </item>
     
     <item>
@@ -98,88 +149,153 @@
       <pubDate>Sat, 07 Mar 2020 20:58:44 +0900</pubDate>
       
       <guid>https://onoshima.github.io/posts/rapi/</guid>
-      <description></description>
+      <description>Rからe-StatのAPIを使ったときのメモ．以下のサイトの言う通りにやってみただけ．
+https://qiita.com/nozma/items/f88f5cc60ab63461deae
+e-StatのアプリケーションIDの取得 使うためには，アプリケーションIDというものを取得しないとならない．
+https://www.e-stat.go.jp/api/api-info/api-guide
+上のサイトの指示通りに，ユーザー登録してマイページよりアプリケーションIDを発行する．
+認証情報の管理 keyringというパッケージを使うと，ソースコードの中にIDとか書かなくてすむらしい．便利．
+https://qiita.com/nozma/items/9f4a638906471d125e96
+特別支援学校高等部の進路 試しに，文科省の「学校基本調査」から特別支援学校高等部で知的障害の進路の情報をとって，グラフにしてみたのがこちら．統計表をダウンロードしてからdplyrを使って整形していく流れ．実際の数と割合をグラフにしてみた．
+使ったコードは以下のもの．なぜか平成23年度から25年度はひとまとまりで提供されていたり，平成22年度とそれ以降で列名が違ったりと下処理が面倒くさかったです．
+library(pacman) p_load(keyring, httr, listviewer, rlist, pipeR, dplyr, stringr, ggplot2, stringi, readr, ggthemes) keyring::key_set(&amp;#34;e-stat&amp;#34;) ## 統計表を検索してお目当ての表を特定 response &amp;lt;- GET( url = &amp;#34;https://api.e-stat.go.jp/rest/2.1/app/json/getStatsList&amp;#34;, query = list( appId = keyring::key_get(&amp;#34;e-stat&amp;#34;), searchWord = &amp;#34;障害種 AND 状況別 AND 高等部&amp;#34; ) ) res_content &amp;lt;- content(response) jsonedit(res_content) id_table &amp;lt;- res_content$GET_STATS_LIST$DATALIST_INF$TABLE_INF %&amp;gt;&amp;gt;% list.select( id = `@id`, year = STATISTICS_NAME_SPEC$TABULATION_SUB_CATEGORY1, table_name = TITLE_SPEC$TABLE_NAME) %&amp;gt;&amp;gt;% list.stack() id_list &amp;lt;- pull(id_table, id) res &amp;lt;- tibble() for (id in id_list){ dat_year &amp;lt;- GET( url = &amp;#34;https://api.</description>
     </item>
     
     <item>
       <title>lavaanのアウトプットをパス図にする</title>
-      <link>https://onoshima.github.io/stat/lav2tikz/</link>
+      <link>https://onoshima.github.io/posts/lav2tikz/</link>
       <pubDate>Sat, 08 Feb 2020 11:57:05 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/lav2tikz/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/lav2tikz/</guid>
+      <description>はじめに RでSEMをやるときはlavaanをよく使うのですがその結果を綺麗なパス図にしたいということで関数を作りました. lavaanのアウトプットを突っ込むとTikZで描画するためのTeXファイルを吐き出す関数です. 構造方程式を含むもの（フルSEMとか呼ばれるのかな？）には対応しておらず, CFAをそれっぽく出すだけの機能しかありませんが&amp;hellip;
+インターネットには有難い情報を提供している方がいるもので, 作る際にはbob3さんの以下のブログが参考になりました.
+lavaanで作ったモデルからパス図を描く関数
+使い方 みんな大好き Holzinger &amp;amp; Swinefordのデータで試してみます. lavaanのアウトプットを関数に突っ込みます. sizeの引数にはTeXの文字サイズの記号を入れると推定値の文字サイズが変えられます.
+library(lavaan) mo &amp;lt;- &amp;#39; visual =~ x1+x2+x3 textual =~ x4+x5+x6 speed =~ x7+x8+x9 &amp;#39; res1 &amp;lt;- cfa(mo, HolzingerSwineford1939) write(lav2tikz(res1, size=&amp;#34;scriptsize&amp;#34;), file=&amp;#34;res1.tex&amp;#34;) 作業ディレクトリにres1.texファイルが作られますので, ターミナルでそこまで移動してコンパイルします.
+$ latex res1.tex $ dvipdfmx res1.dvi 次のような結果が得られます（webにアップロード用にpngにしていますが）.
+高次因子分析のモデルも一応描画できるようにしています.
+mo1 &amp;lt;- &amp;#39; visual =~ x1+x2+x3 textual =~ x4+x5+x6 speed =~ x7+x8+x9 g =~ visual+textual+speed &amp;#39; res2 &amp;lt;- cfa(mo1, data=HolzingerSwineford1939) write(lav2tikz(res2, size=&amp;#34;scriptsize&amp;#34;), file=&amp;#34;res2.tex&amp;#34;) 結果は次の通り.</description>
     </item>
     
     <item>
       <title>RstudioでGithubの鍵認証設定</title>
-      <link>https://onoshima.github.io/stat/rstudiogithub/</link>
+      <link>https://onoshima.github.io/posts/rstudiogithub/</link>
       <pubDate>Sat, 25 Jan 2020 14:04:09 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/rstudiogithub/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/rstudiogithub/</guid>
+      <description>R studioの鍵認証についての備忘録．またやることになったらおそらく忘れるので．
+やったこと  RstudioのToos &amp;gt; Global Option &amp;gt; Git/SVNでView public keyをクリック 表示される公開鍵をコピー Githubの自分のページ &amp;gt; Settings &amp;gt; SSH and GPG keysから右上のNew SSH kayというボタンをクリック 適当な名前をつけて先ほどの公開鍵をペースト  参考にしたもの http://dragstar.hatenablog.com/entry/2016/04/26/185546</description>
     </item>
     
     <item>
       <title>ggplot2でpdfを出力する</title>
-      <link>https://onoshima.github.io/stat/ggplot2japanese/</link>
+      <link>https://onoshima.github.io/posts/ggplot2japanese/</link>
       <pubDate>Sun, 12 Jan 2020 23:12:22 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/ggplot2japanese/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/ggplot2japanese/</guid>
+      <description>ggplot2でpdf出力 # ggplot2 pdf出力 library(tidyverse) dat &amp;lt;- as_tibble(iris) dat_long &amp;lt;- dat %&amp;gt;% gather(key=&amp;#34;part&amp;#34;, value=&amp;#34;value&amp;#34;,-Species) %&amp;gt;% mutate(part = as.factor(part)) p &amp;lt;- ggplot(dat_long, aes(x=Species, y=value, fill=Species)) + geom_boxplot() + facet_wrap(~part) # pdfに出力 pdf(&amp;#34;figure/iris.pdf&amp;#34;, width=7, height=7) print(p) dev.off() ※ 画像web表示のためにpng形式.
+日本語ファイルを出力 pdfで使うフォントを指定してやるとよい. pdfで何のフォントが使えるかを知りたい時はnames(pdfFonts())とか打つと良い.
+# 日本語を使う p1 &amp;lt;- p + ggtitle(&amp;#34;日本語タイトル&amp;#34;) + theme(plot.title=element_text(family=&amp;#34;Japan1GothicBBB&amp;#34;)) pdf(&amp;#34;figure/iris_ja.pdf&amp;#34;, width=7, height=7) print(p1) dev.off() ※ 画像web表示のためにpng形式.
+フォントが入っていない環境でも同じように表示するために, 以下のようにしてフォントを埋め込んでおくと良いらしい. embedFonts(&amp;#34;figure/iris.pdf&amp;#34;)</description>
     </item>
     
     <item>
       <title>相関係数行列からクロンバックのαを求める</title>
-      <link>https://onoshima.github.io/stat/cronbach/</link>
+      <link>https://onoshima.github.io/posts/cronbach/</link>
       <pubDate>Fri, 27 Dec 2019 21:37:22 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/cronbach/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/cronbach/</guid>
+      <description>尺度の作成論文などでは信頼性係数が報告される。信頼性係数には様々な種類があるが, その中でもっともよく使われるのがクロンバックのαである。クロンバックのαは次の計算式で求められる。
+$$ a = \frac{n}{n-1} \left( 1- \frac{\Sigma^n _{i=1}Var(X_i)}{Var(X)}\right) \tag{1} $$
+ここで, $n$は項目数, $X_i$は$i$番目の項目の得点である。$X$はテストの合計得点である。
+Rでクロンバックのαの求めるには Rでクロンバックのαを求めるためには複数のやり方がある。
+http://www.okadajp.org/RWiki/?%CE%B1%E4%BF%82%E6%95%B0%EF%BC%8C%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%AE%97%E5%87%BA
+とりあえずここではpsychパッケージに含まれるalpha()関数を使ってみることにする。データは同じパッケージに含まれるbfiを用いる。このデータはビッグファイブ理論が想定する因子を測定する質問紙で1因子につき5項目合計25項目からなる。サンプルサイズは2800である。今回は最初の10項目だけ使う。
+データの中身はこんな感じ。6件法である。
+さて, このデータに対してクロンバックのαを求めるにはalpha()関数を用いるのだが, データが逆転項目を含んでいるのでそれを処理しなければいけない。6件法なので6から項目を引くと出てくる。ここではのちの話の都合で欠損を含むデータを除外している。
+# 逆転項目の処理して必要な項目だけ取り出す new &amp;lt;- dat %&amp;gt;% mutate(A1=6-A1, C4=6-C4, C5=6-C5) %&amp;gt;% select(1:10) %&amp;gt;% filter(!is.na(A1), !is.na(A2), !is.na(A3), !is.na(A4), !is.na(A5), !is.na(C1), !is.na(C2), !is.na(C3), !is.na(C4), !is.na(C5)) 逆転項目の処理が済んだところで, alpha()関数を使ってみる。
+# クロンバックαを計算 res &amp;lt;- psych::alpha(new) αの値が出てくるだけでなくて, 各項目をなくした際にαがどのように変化するかの値も出てくる。これらは尺度作成の際には役に立つだろう。
+相関係数からクロンバックのαを求める ところで岡田（2015）によれば, クロンバックのαは相関係数行列から求めることもできるようである。
+https://www.jstage.jst.go.jp/article/arepj/54/0/54_71/_article/-char/ja/
+相関係数行列からクロンバックのαは次の式で求められる。
+$$ a = \frac{n\bar{r}}{1+(n-1) \bar{r}} \tag{2} $$
+ここでnは項目数で, $\bar{r}$は項目間の相関係数の平均である。さきほどのデータを用いて, 同様の結果が得られるが試してみる。相関係数行列を求めて, 上記の式に当てはめてみる。</description>
     </item>
     
     <item>
       <title>2群のプリポストデータに関して</title>
-      <link>https://onoshima.github.io/stat/prepost/</link>
+      <link>https://onoshima.github.io/posts/prepost/</link>
       <pubDate>Sat, 21 Dec 2019 16:12:33 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/prepost/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/prepost/</guid>
+      <description>2群のプリポストデータ 理由はよくわからないのだけれど, 知り合いから2群のプリポストデータの分析について聞かれることが多い。何かしらの介入の効果を検討したいらしく、統制群と介入群の2つに分けて, それぞれの群で介入前と介入後のデータを取るみたいな状況を想定しているようだ。
+こうした場合に適切な分析手法については吉田（2006）が論じており, （1）ポスト-プリの差得点を取り, その差得点（変化量）を従属変数としてt検定を行う, （2）プリ得点を共変量とした共分散分析（ANCOVA）を行う, の2種類が推奨されている。
+2要因（群×時期）の分散分析を行う例が散見されるが, これはこの分析において見たいものが交互作用のみで主効果の分析が意味をなさないので冗長だとされている。なお, この2要因分散分析の結果得られた交互作用のF値は, (1)の手法で得られた検定統計量tの2乗に一致することが知られているそうである。
+実際のデータを使った例 実際のデータといっても『やさしく学べる統計学』にあるサンプルデータを使う。データはcsv形式で, 青山学院の寺尾先生のホームページのシラバスからダウンロードできる。
+http://www.cc.aoyama.ac.jp/~t41338/lecture/aoyama/stat2e/stat2e_top.html
+データの中身の一部を取りだすとこんな感じである。1列目に被験者番号, 2列目に群の情報, 3列目にプリ得点, 4列目にポスト得点。なんの介入なのかは知らないけれどこんな形でデータが得られたとする。統制群と介入群は8名ずつである。
+箱ひげ図で表してみると次の通り。
+# データセットをlong型にして必要な列をfactorに変換 dat.long&amp;lt;- dat %&amp;gt;% gather(key = time, value = value, -c(group,sub)) %&amp;gt;% mutate(sub = as.factor(sub),group = as.factor(group), time= factor(time, levels=c(&amp;#34;pre&amp;#34;,&amp;#34;post&amp;#34;))) ## データの可視化 ggplot(data=dat.long, aes(x=time,y=value)) + geom_boxplot() + facet_wrap(~group) 差の変数のt検定 まず, （1）の方法を試してみる。 「post-pre」の変数を作ってそれからt検定を行う。
+# 差の得点を作ってt検定 newdat &amp;lt;- dat %&amp;gt;% mutate(difference = post-pre) %&amp;gt;% mutate(group = as.factor(group)) res.t &amp;lt;- t.</description>
     </item>
     
     <item>
       <title>Rでベクタ画像を作る際のメモ</title>
-      <link>https://onoshima.github.io/stat/pdf/</link>
+      <link>https://onoshima.github.io/posts/pdf/</link>
       <pubDate>Tue, 30 Jul 2019 18:20:19 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/pdf/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/pdf/</guid>
+      <description>Rでベクタ画像を作成する際に色々調べたメモ。
+ベクタ画像の作り方 postscriptでデバイスを開いて次のようにすると良い。
+postscript(&amp;#34;eps_sample1.eps&amp;#34;, width=7, height=7, paper=&amp;#34;special&amp;#34;, onefile = F, horizontal = F) plot(1:10, main=&amp;#34;eps file&amp;#34;) dev.off() widthとheightはインチ指定で描画する領域。paperはその外側の領域で&amp;quot;a4&amp;quot;とかサイズを指定するそうだけれど純粋に描いた領域の画像が欲しい場合は&amp;quot;special&amp;quot;を指定しておくと良いらしい。
+onefileは1つのファイルに2つ以上の画像を埋め込むとかどうたらの設定らしいが, 指定しないで作ったら私の環境だとよく分からない余白が発生した。Rwikiによれば, horizontalを指定しておかないとLaTeXに取り込んだ際によくないことが起こるらしい。
+フォントについて フォントを変更したいときは,引数でfamily=&amp;quot;Times&amp;quot;のように指定してやると良い。
+postscriptでどんなフォントが使えるかが知りたければ, &amp;lsquo;postscriptFonts()&amp;lsquo;の引数で見ることができる。Japan1というのがあるのでそれを選べば日本語が出力できる。（私のUbuntuの環境だとできるがMacだとなぜかできない。）
+postscript(&amp;#34;eps_sample4.eps&amp;#34;, width=7, height=7, paper=&amp;#34;special&amp;#34;, onefile = F, horizontal = F, family=&amp;#34;Japan1&amp;#34;) plot(1:10, main=&amp;#34;日本語のフォント&amp;#34;) dev.off() フォントの埋め込み こうして作られたepsファイルはフォントが埋め込まれていないため, 当該のフォントが入っていない環境では表示されなくなってしまう。そこで出来上がった画像にフォントを埋め込む必要がある。といっても、関数一発でできるので難しいことはない。
+embedFonts(&amp;#34;eps_sample1.eps&amp;#34;, format = &amp;#34;eps2write&amp;#34;) 参考にしたサイト Rのポストスクリプト画像（eps・psファイル）出力
+R による EPS 画像の作成とその LATEX への取り込み</description>
     </item>
     
     <item>
       <title>Rのlapply関数に関するメモ</title>
-      <link>https://onoshima.github.io/stat/laaply/</link>
+      <link>https://onoshima.github.io/posts/laaply/</link>
       <pubDate>Fri, 26 Jul 2019 13:47:56 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/laaply/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/laaply/</guid>
+      <description>lapplyおよびparallelパッケージのmclapplyについて調べた際の記録。
+lapplyとは Rで同一の関数を複数のオブジェクトを対象に行うときには, forで繰り返しのループで書くよりも, apply()ファミリーを用いて並列的に処理したほうが早いと言われる。lapplyは, 与えられたリストに対して同一の関数を適用する。lapplyだと戻り値はリストで, sapplyだと戻り値はベクトルである。
+例：異なる長さのベクトルの平均 実際に例を見てみると理解が早いかもしれない。長さが10, 100, 1000のベクトルからなるリストそれぞれの平均を求めるには次のように入力する。
+x &amp;lt;- list(rnorm(10), rnorm(100), rnorm(1000)) lapply(x, mean) # 戻り値はリスト sapply(x, mean) # 戻り値はベクトル mclapplyとは lapplyではリストのそれぞれに並列の処理を行うことができることが分かったが, 複数のリストオブジェクトに対して並列的に処理を行いたいという場面もあるかもしれない。そうした際には&amp;rsquo;parallel&amp;rsquo;というパッケージの&amp;rsquo;mclapply&amp;rsquo;という関数が使えるらしい。
+使い方は次のとおり。で繰り返す回数と, 処理する関数を指定するとよいようだ。
+replist &amp;lt;- parallel::mclapply(1:1000, function(x){ replicates &amp;lt;- list(mean(rnorm(10)), mean(rnorm(100)),mean(rnorm(1000))) }) 戻り値はネストされたリストである。例えば, ネストされたリストを次のように行列の形に直せば, 異なるサンプルサイズにおける標本平均値のばらつきなども分かる。
+replicates &amp;lt;- matrix(unlist(replist), 1000, 3, byrow=T) boxplot(replicates, names=c(&amp;#34;size10&amp;#34;, &amp;#34;size100&amp;#34;, &amp;#34;size1000&amp;#34;)) 速度の比較 本当にforのループよりも早いか調べてみる。今の処理を100,000回繰り返してみて速度を測ることにする。
+t.loop &amp;lt;- proc.time() x &amp;lt;- list() for (i in 1:100000){ x[[i]] &amp;lt;- list(mean(rnorm(10)), mean(rnorm(100)), mean(rnorm(1000))) } t.loop &amp;lt;- proc.</description>
     </item>
     
     <item>
       <title>ブートストラップについての調べもの</title>
-      <link>https://onoshima.github.io/stat/boot/</link>
+      <link>https://onoshima.github.io/posts/boot/</link>
       <pubDate>Wed, 03 Jul 2019 07:10:40 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/boot/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/boot/</guid>
+      <description>Rでブートストラップについて調べたときの記録。
+ブートストラップとは 大雑把に言えば, 統計量とかの分布を調べたりするために1つの標本から新しい標本（ブートストラップ標本）を何個も作ることのようだ。パラメトリックとノンパラメトリックがある。
+今回扱うのはノンパラメトリックの方。
+自作関数によるブートストラップ ブートストラップ標本を作るときには, もとの標本から同じサイズで復元抽出を行う。復元抽出とは要するに, くじ引きでくじを引くたびにもとの箱にくじを戻すことである。たとえば, 【太郎さん、花子さん、和夫さん】の3人からなるもとの標本があった場合に, あるブートストラップ標本では【太郎さん, 太郎さん, 花子さん】になるかもしれないし, 別のブートストラップ標本では【和夫さん, 和夫さん, 和夫さん】となるかもしれない。Rで復元抽出を行う際にはsamaple()関数の引数でreplace=TRUEを指定すると良い。試しにやってみる。Rの組み込みのデータセットであるstateからアメリカ50州の収入のデータを使って, 平均値と中央値がどのように分布するかを見てみる。
+# もとの標本 original &amp;lt;- state.x77[,&amp;#34;Income&amp;#34;] # 元の標本から復元抽出する回数 num.bs.sample &amp;lt;- 1000 # 結果を保存するようベクトル median.vector &amp;lt;- numeric(num.bs.sample) mean.vector &amp;lt;- numeric(num.bs.sample) for (i in 1:num.bs.sample){ median.vector[i] &amp;lt;- median(sample(original, length(original), replace=TRUE)) mean.vector[i] &amp;lt;- mean(sample(original, length(original), replace=T)) } # 結果の図示 boxplot(median.vector, mean.vector, names=c(&amp;#34;Median&amp;#34;,&amp;#34;Mean&amp;#34;), horizontal = T, las=T, xlab=&amp;#34;Income&amp;#34;) 結果は次のとおりである。これを使うと中央値の経験的な分布なども求められる。
+bootパッケージによるブートストラップ 毎回, 自分で繰り返しのループを書くのも面倒であろうということでbootという便利なパッケージがある。boot(もとの標本, 統計量を求める関数, ブートストラップ標本数)のように使う使うらしい。同じデータでやってみよう。
+library(boot) foo &amp;lt;- function(d,k){ median.</description>
     </item>
     
     <item>
       <title>tidyrを使ったデータの整理</title>
-      <link>https://onoshima.github.io/stat/filter/</link>
+      <link>https://onoshima.github.io/posts/filter/</link>
       <pubDate>Tue, 25 Jun 2019 16:38:21 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/filter/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/filter/</guid>
+      <description>データ整理にtidyverseを使った際の覚書。まずデータフレームをas_tibble()でtidy用の形式にする。
+library(tidyverse) air &amp;lt;- airquality tidy.air &amp;lt;- as_tibble(air) 条件に合うケースの抽出 filter()関数を使うと良いらしい。
+## 条件に合う行を抽出 air.May &amp;lt;- tidy.air %&amp;gt;% filter(Month==5) #5月のデータのみ取り出す Ozone.mean &amp;lt;- mean(air$Ozone, na.rm=T) air.high.Ozone &amp;lt;- tidy.air %&amp;gt;% # オゾンが平均より高いケースを取り出す filter(Ozone &amp;gt; Ozone.mean) air.high.Ozone.May &amp;lt;- tidy.air %&amp;gt;% #複合条件もOK filter(Ozone &amp;gt; Ozone.mean, Month==5) 抽出されたケースを見ると, オゾンの値が平均（43くらい）よりも高いケースのみのデータセットが出来上がっている。</description>
     </item>
     
   </channel>

@@ -6,18 +6,18 @@
     <description>Recent content in ggplot2 on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 12 Jan 2020 23:12:22 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Sun, 12 Jan 2020 23:12:22 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>ggplot2でpdfを出力する</title>
-      <link>https://onoshima.github.io/stat/ggplot2japanese/</link>
+      <link>https://onoshima.github.io/posts/ggplot2japanese/</link>
       <pubDate>Sun, 12 Jan 2020 23:12:22 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/ggplot2japanese/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/ggplot2japanese/</guid>
+      <description>ggplot2でpdf出力 # ggplot2 pdf出力 library(tidyverse) dat &amp;lt;- as_tibble(iris) dat_long &amp;lt;- dat %&amp;gt;% gather(key=&amp;#34;part&amp;#34;, value=&amp;#34;value&amp;#34;,-Species) %&amp;gt;% mutate(part = as.factor(part)) p &amp;lt;- ggplot(dat_long, aes(x=Species, y=value, fill=Species)) + geom_boxplot() + facet_wrap(~part) # pdfに出力 pdf(&amp;#34;figure/iris.pdf&amp;#34;, width=7, height=7) print(p) dev.off() ※ 画像web表示のためにpng形式.
+日本語ファイルを出力 pdfで使うフォントを指定してやるとよい. pdfで何のフォントが使えるかを知りたい時はnames(pdfFonts())とか打つと良い.
+# 日本語を使う p1 &amp;lt;- p + ggtitle(&amp;#34;日本語タイトル&amp;#34;) + theme(plot.title=element_text(family=&amp;#34;Japan1GothicBBB&amp;#34;)) pdf(&amp;#34;figure/iris_ja.pdf&amp;#34;, width=7, height=7) print(p1) dev.off() ※ 画像web表示のためにpng形式.
+フォントが入っていない環境でも同じように表示するために, 以下のようにしてフォントを埋め込んでおくと良いらしい. embedFonts(&amp;#34;figure/iris.pdf&amp;#34;)</description>
     </item>
     
   </channel>

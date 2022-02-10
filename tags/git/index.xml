@@ -6,18 +6,17 @@
     <description>Recent content in git on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 11 Feb 2020 17:30:47 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Tue, 11 Feb 2020 17:30:47 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>gitで一部のファイルを特定のコミットに戻すとき</title>
       <link>https://onoshima.github.io/posts/git_use/</link>
       <pubDate>Tue, 11 Feb 2020 17:30:47 +0900</pubDate>
       
       <guid>https://onoshima.github.io/posts/git_use/</guid>
-      <description></description>
+      <description>備忘録．なぜか知らないけれど，全然違うファイルを別のファイルに上書き保存してしまったときに調べた．
+git log #戻したいコミット番号を得る git checkout [コミット番号] [ファイルパス] 参考
+https://qiita.com/ritukiii/items/5bc8f74dbf4dc5d1384c</description>
     </item>
     
   </channel>

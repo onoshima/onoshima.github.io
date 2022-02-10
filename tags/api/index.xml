@@ -6,18 +6,19 @@
     <description>Recent content in api on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sun, 08 Mar 2020 16:50:26 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/api/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Sun, 08 Mar 2020 16:50:26 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/api/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RからeStatのAPIを使ってみる（その2）</title>
-      <link>https://onoshima.github.io/stat/restat_packages/</link>
+      <link>https://onoshima.github.io/posts/restat_packages/</link>
       <pubDate>Sun, 08 Mar 2020 16:50:26 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/restat_packages/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/restat_packages/</guid>
+      <description>はじめに Rからe-Statを使うお勉強の記録．@yutannihilation さん作成のestatapiというパッケージがあり，それを使ったらとても楽だった．使い方は以下のページに書いてある．
+https://qiita.com/kazutan/items/9c0b2dd0f055fde45cda
+不登校の児童生徒の数 今回は，文部科学省の「児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査」という調査を使ってみて，都道府県別1000人あたりの不登校児童の数をグラフにしてみた．日本地図については谷村先生作成のNipponMapというパッケージを使った．使い方は以下のサイトを参考にした．
+https://oku.edu.mie-u.ac.jp/~okumura/stat/nippon.html
+使ったコード library(pacman) p_load(estatapi, keyring,dplyr, stringr,NipponMap,RColorBrewer) key_set(&amp;#34;e-stat&amp;#34;) #　統計表の検索 00400304は児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査 statsList &amp;lt;- estat_getStatsList( appId = key_get(&amp;#34;e-stat&amp;#34;), searchWord = &amp;#34;&amp;#34;, statsCode = &amp;#34;00400304&amp;#34; ) str(statsList) lists &amp;lt;- statsList %&amp;gt;% filter(str_detect(TITLE, &amp;#34;不登校児童生徒数&amp;#34;)) id_vector &amp;lt;- pull(lists, &amp;#34;@id&amp;#34;) # メタ情報 meta_info &amp;lt;- estat_getMetaInfo(appId = key_get(&amp;#34;e-stat&amp;#34;), statsDataId = id_vector[1]) names(meta_info) # 実際のデータを取得 df &amp;lt;- estat_getStatsData( appId = key_get(&amp;#34;e-stat&amp;#34;), statsDataId = id_vector[1], cdCat02 = c(&amp;#34;120&amp;#34;, &amp;#34;140&amp;#34;), #小学校と中学校 cdArea = meta_info$area$&amp;#34;@code&amp;#34;[2:48]　#1番目は全国なので除外 ) df2017 &amp;lt;- df %&amp;gt;% rename(&amp;#34;year&amp;#34; = &amp;#34;時間軸(年度次)&amp;#34;) %&amp;gt;% filter(year == &amp;#34;2017年度&amp;#34;, 学校種類 == &amp;#34;小学校&amp;#34;, cat01_code == &amp;#34;120&amp;#34;) df2017_jhs &amp;lt;- df %&amp;gt;% rename(&amp;#34;year&amp;#34; = &amp;#34;時間軸(年度次)&amp;#34;) %&amp;gt;% filter(year == &amp;#34;2017年度&amp;#34;, 学校種類 == &amp;#34;中学校&amp;#34;, cat01_code == &amp;#34;120&amp;#34;) # 小学生をplot kenmei &amp;lt;- df2017$地域 br &amp;lt;- seq(3, 9, 1) color &amp;lt;- brewer.</description>
     </item>
     
     <item>
@@ -26,7 +27,16 @@
       <pubDate>Sat, 07 Mar 2020 20:58:44 +0900</pubDate>
       
       <guid>https://onoshima.github.io/posts/rapi/</guid>
-      <description></description>
+      <description>Rからe-StatのAPIを使ったときのメモ．以下のサイトの言う通りにやってみただけ．
+https://qiita.com/nozma/items/f88f5cc60ab63461deae
+e-StatのアプリケーションIDの取得 使うためには，アプリケーションIDというものを取得しないとならない．
+https://www.e-stat.go.jp/api/api-info/api-guide
+上のサイトの指示通りに，ユーザー登録してマイページよりアプリケーションIDを発行する．
+認証情報の管理 keyringというパッケージを使うと，ソースコードの中にIDとか書かなくてすむらしい．便利．
+https://qiita.com/nozma/items/9f4a638906471d125e96
+特別支援学校高等部の進路 試しに，文科省の「学校基本調査」から特別支援学校高等部で知的障害の進路の情報をとって，グラフにしてみたのがこちら．統計表をダウンロードしてからdplyrを使って整形していく流れ．実際の数と割合をグラフにしてみた．
+使ったコードは以下のもの．なぜか平成23年度から25年度はひとまとまりで提供されていたり，平成22年度とそれ以降で列名が違ったりと下処理が面倒くさかったです．
+library(pacman) p_load(keyring, httr, listviewer, rlist, pipeR, dplyr, stringr, ggplot2, stringi, readr, ggthemes) keyring::key_set(&amp;#34;e-stat&amp;#34;) ## 統計表を検索してお目当ての表を特定 response &amp;lt;- GET( url = &amp;#34;https://api.e-stat.go.jp/rest/2.1/app/json/getStatsList&amp;#34;, query = list( appId = keyring::key_get(&amp;#34;e-stat&amp;#34;), searchWord = &amp;#34;障害種 AND 状況別 AND 高等部&amp;#34; ) ) res_content &amp;lt;- content(response) jsonedit(res_content) id_table &amp;lt;- res_content$GET_STATS_LIST$DATALIST_INF$TABLE_INF %&amp;gt;&amp;gt;% list.select( id = `@id`, year = STATISTICS_NAME_SPEC$TABULATION_SUB_CATEGORY1, table_name = TITLE_SPEC$TABLE_NAME) %&amp;gt;&amp;gt;% list.stack() id_list &amp;lt;- pull(id_table, id) res &amp;lt;- tibble() for (id in id_list){ dat_year &amp;lt;- GET( url = &amp;#34;https://api.</description>
     </item>
     
   </channel>

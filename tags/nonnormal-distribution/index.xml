@@ -6,18 +6,23 @@
     <description>Recent content in nonnormal distribution on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Fri, 24 Apr 2020 10:27:42 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/nonnormal-distribution/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Fri, 24 Apr 2020 10:27:42 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/nonnormal-distribution/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>non-normalな乱数を発生するパッケージあれこれ</title>
-      <link>https://onoshima.github.io/stat/nonnormal/</link>
+      <link>https://onoshima.github.io/posts/nonnormal/</link>
       <pubDate>Fri, 24 Apr 2020 10:27:42 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/nonnormal/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/nonnormal/</guid>
+      <description>はじめに Rは基本のパッケージに様々な確率分布の乱数を発生させる関数が備わっているが，研究の都合で正規分布に従わない歪んだデータを発生させる必要がでてきたので，Rで歪んだデータの乱数を発生させる際に使えるパッケージをいくつか試してみた．
+fungible まずはfungibleというパッケージに入っているmonte1という関数．変数の数，サンプルサイズ，母相関行列，歪度のベクトル，尖度のベクトルなど必要な情報を入れると，指定した通りの標準化された多変量の歪んだ乱数を生成してくれる．
+library(pacman) p_load(fungible) Sigma &amp;lt;- matrix(0.3,nrow=4,ncol=4) diag(Sigma) &amp;lt;- 1 skew &amp;lt;- c(0, 0.25, -0.3, 1.25) kurt &amp;lt;- c(0, 0, 1.5, 2.5) samplesize &amp;lt;- 1000 nvar &amp;lt;- ncol(Sigma) dat &amp;lt;- monte1(seed=1234,nvar=nvar, nsub=samplesize, cormat=Sigma, skewvec=skew, kurtvec=kurt) psych::describe(dat$data) psych::pairs.panels(dat$dat, smooth = F, hist.col = &amp;#34;white&amp;#34;) サンプルサイズが1000程度だと歪度も尖度もそこそこずれているがサンプルサイズを5000程度まで増やすとそれなりに正確になるようだ．
+seedの指定が必ず必要なので，シミュレーションとかで使う時はseedをずらしていくようにプログラムを組む必要がある． 乱数発生の手法の元となっているのは，Fleishman(1978)とVale &amp;amp; Maurelli(1983)の論文．
+https://link.springer.com/article/10.1007/BF02293811
+https://link.springer.com/article/10.1007/BF02293687
+SimMultiCorrData 次はSimMultiCorrDataというパッケージに入っているnonnormvar1という関数では1変量の歪んだ乱数を生成することができる．引数には，FleishmanかPolynomialのどちらの方法か，平均，分散，歪度，尖度のほか，サンプルサイズや，seedを指定できる．デフォルトでは平均=0で分散=1である．
+p_load(SimMultiCorrData) samplesize &amp;lt;- 1000 dat1 &amp;lt;- nonnormvar1(method=&amp;#34;Fleishman&amp;#34;, skews=-0.6, skurts=0,n=samplesize) dat2 &amp;lt;- nonnormvar1(method=&amp;#34;Fleishman&amp;#34;, skews=0, skurts=1.25,n=samplesize) この関数で発生させた乱数のデータは$continuous_variableに入っており，要約統計量は$summary_continuousにまとまっており，狙い通りの変数ができたかどうかの確認ができて便利である．
+ちなみに引数でmethod=&amp;quot;Polynomial&amp;quot;を指定すると次の論文の手順で乱数を生成するようである．</description>
     </item>
     
   </channel>

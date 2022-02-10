@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 因子分析の教科書における因子数の選択についての記述 | Takahiro ONOSHIMA&#39;s website</title>
+  <link rel = 'canonical' href = 'https://onoshima.github.io/posts/factornumber/'>
+  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="因子分析の教科書における因子数の選択についての記述" />
+<meta property="og:description" content="はじめに 必要があって因子分析や心理測定の教科書で探索的因子分析の際の因子数の推定法がどのように扱われているかを調べたものの記録。手元にあるものだけ。
+Brown (2006) Brown, T. A. (2006). Confirmatory factor analysis for applied research. The Guilford Press.
+因子分析の定評のある教科書（らしい）。大学院の授業で読んだ。基本は確認的因子分析の教科書なのだが，2章で探索的因子分析も扱っている。その中でFactor Selectionという節で（pp.23-30）因子数の推定について扱っている。
+よく使われている手法として，Kaiser-Guttmanルール，スクリーテスト，平行分析を紹介している。また，因子の推定法が最尤法のときには，適合度の情報も使えることを紹介している。
+Raykov &amp; Marcoulides (2010) Raykov, T., &amp; Marcoulides, G. A. (2010). Introduction to Psychometric Theory. Routledge.
+因子分析は第3章で扱われており，因子数の探索は独立した節として3.8節で扱われている。紹介しているのはKaiser基準とスクリープロットとamount of explained varianceを紹介している。文献等の引用はなし。
+Tabachnick &amp; Fidell (2012) Tabachnick, B. G., &amp; Fidell, L. S. (2012). Using Multivariate Statistics (6th Edition). Pearson.
+因子分析の教科書という訳でなく，多変量統計全般の教科書。13章で主成分分析と因子分析を扱っている。13.6.2のAdequay of Extraction and Number of Factorsという節で因子数についての取り扱いがある（pp648-）。
+手法についてのまとめは，Gorsuch (1983)（因子分析の教科書）かZwick and Velicer (1986)を見てねと言い，SPSSとSASで扱える手法に焦点を絞って紹介している。Kairser基準，スクリーテスト，平行分析，MAP基準を紹介している。さらに，Zwick &amp; Velicer (1986)のシミュレーションの結果も紹介して平行分析とMAPがうまくいくと紹介している。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://onoshima.github.io/posts/factornumber/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-09-23T14:59:29+09:00" />
+<meta property="article:modified_time" content="2020-09-23T14:59:29+09:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="因子分析の教科書における因子数の選択についての記述"/>
+<meta name="twitter:description" content="はじめに 必要があって因子分析や心理測定の教科書で探索的因子分析の際の因子数の推定法がどのように扱われているかを調べたものの記録。手元にあるものだけ。
+Brown (2006) Brown, T. A. (2006). Confirmatory factor analysis for applied research. The Guilford Press.
+因子分析の定評のある教科書（らしい）。大学院の授業で読んだ。基本は確認的因子分析の教科書なのだが，2章で探索的因子分析も扱っている。その中でFactor Selectionという節で（pp.23-30）因子数の推定について扱っている。
+よく使われている手法として，Kaiser-Guttmanルール，スクリーテスト，平行分析を紹介している。また，因子の推定法が最尤法のときには，適合度の情報も使えることを紹介している。
+Raykov &amp; Marcoulides (2010) Raykov, T., &amp; Marcoulides, G. A. (2010). Introduction to Psychometric Theory. Routledge.
+因子分析は第3章で扱われており，因子数の探索は独立した節として3.8節で扱われている。紹介しているのはKaiser基準とスクリープロットとamount of explained varianceを紹介している。文献等の引用はなし。
+Tabachnick &amp; Fidell (2012) Tabachnick, B. G., &amp; Fidell, L. S. (2012). Using Multivariate Statistics (6th Edition). Pearson.
+因子分析の教科書という訳でなく，多変量統計全般の教科書。13章で主成分分析と因子分析を扱っている。13.6.2のAdequay of Extraction and Number of Factorsという節で因子数についての取り扱いがある（pp648-）。
+手法についてのまとめは，Gorsuch (1983)（因子分析の教科書）かZwick and Velicer (1986)を見てねと言い，SPSSとSASで扱える手法に焦点を絞って紹介している。Kairser基準，スクリーテスト，平行分析，MAP基準を紹介している。さらに，Zwick &amp; Velicer (1986)のシミュレーションの結果も紹介して平行分析とMAPがうまくいくと紹介している。"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://onoshima.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://onoshima.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://onoshima.github.io/posts/parallel/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="https://onoshima.github.io/posts/anaconda/" aria-label="Next">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&text=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&title=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&is_video=false&description=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&title=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&title=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&name=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0&description=%e3%81%af%e3%81%98%e3%82%81%e3%81%ab%20%e5%bf%85%e8%a6%81%e3%81%8c%e3%81%82%e3%81%a3%e3%81%a6%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%82%84%e5%bf%83%e7%90%86%e6%b8%ac%e5%ae%9a%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%a7%e6%8e%a2%e7%b4%a2%e7%9a%84%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e9%9a%9b%e3%81%ae%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e6%8e%a8%e5%ae%9a%e6%b3%95%e3%81%8c%e3%81%a9%e3%81%ae%e3%82%88%e3%81%86%e3%81%ab%e6%89%b1%e3%82%8f%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%81%8b%e3%82%92%e8%aa%bf%e3%81%b9%e3%81%9f%e3%82%82%e3%81%ae%e3%81%ae%e8%a8%98%e9%8c%b2%e3%80%82%e6%89%8b%e5%85%83%e3%81%ab%e3%81%82%e3%82%8b%e3%82%82%e3%81%ae%e3%81%a0%e3%81%91%e3%80%82%0aBrown%20%282006%29%20Brown%2c%20T.%20A.%20%282006%29.%20Confirmatory%20factor%20analysis%20for%20applied%20research.%20The%20Guilford%20Press.%0a%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e5%ae%9a%e8%a9%95%e3%81%ae%e3%81%82%e3%82%8b%e6%95%99%e7%a7%91%e6%9b%b8%ef%bc%88%e3%82%89%e3%81%97%e3%81%84%ef%bc%89%e3%80%82%e5%a4%a7%e5%ad%a6%e9%99%a2%e3%81%ae%e6%8e%88%e6%a5%ad%e3%81%a7%e8%aa%ad%e3%82%93%e3%81%a0%e3%80%82%e5%9f%ba%e6%9c%ac%e3%81%af%e7%a2%ba%e8%aa%8d%e7%9a%84%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%aa%e3%81%ae%e3%81%a0%e3%81%8c%ef%bc%8c2%e7%ab%a0%e3%81%a7%e6%8e%a2%e7%b4%a2%e7%9a%84%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%82%82%e6%89%b1%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%e3%81%9d%e3%81%ae%e4%b8%ad%e3%81%a7Factor%20Selection%e3%81%a8%e3%81%84%e3%81%86%e7%af%80%e3%81%a7%ef%bc%88pp.23-30%ef%bc%89%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e6%8e%a8%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e6%89%b1%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%0a%e3%82%88%e3%81%8f%e4%bd%bf%e3%82%8f%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e6%89%8b%e6%b3%95%e3%81%a8%e3%81%97%e3%81%a6%ef%bc%8cKaiser-Guttman%e3%83%ab%e3%83%bc%e3%83%ab%ef%bc%8c%e3%82%b9%e3%82%af%e3%83%aa%e3%83%bc%e3%83%86%e3%82%b9%e3%83%88%ef%bc%8c%e5%b9%b3%e8%a1%8c%e5%88%86%e6%9e%90%e3%82%92%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%e3%81%be%e3%81%9f%ef%bc%8c%e5%9b%a0%e5%ad%90%e3%81%ae%e6%8e%a8%e5%ae%9a%e6%b3%95%e3%81%8c%e6%9c%80%e5%b0%a4%e6%b3%95%e3%81%ae%e3%81%a8%e3%81%8d%e3%81%ab%e3%81%af%ef%bc%8c%e9%81%a9%e5%90%88%e5%ba%a6%e3%81%ae%e6%83%85%e5%a0%b1%e3%82%82%e4%bd%bf%e3%81%88%e3%82%8b%e3%81%93%e3%81%a8%e3%82%92%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%0aRaykov%20%26amp%3b%20Marcoulides%20%282010%29%20Raykov%2c%20T.%2c%20%26amp%3b%20Marcoulides%2c%20G.%20A.%20%282010%29.%20Introduction%20to%20Psychometric%20Theory.%20Routledge.%0a%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%af%e7%ac%ac3%e7%ab%a0%e3%81%a7%e6%89%b1%e3%82%8f%e3%82%8c%e3%81%a6%e3%81%8a%e3%82%8a%ef%bc%8c%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e6%8e%a2%e7%b4%a2%e3%81%af%e7%8b%ac%e7%ab%8b%e3%81%97%e3%81%9f%e7%af%80%e3%81%a8%e3%81%97%e3%81%a63.8%e7%af%80%e3%81%a7%e6%89%b1%e3%82%8f%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%e3%81%afKaiser%e5%9f%ba%e6%ba%96%e3%81%a8%e3%82%b9%e3%82%af%e3%83%aa%e3%83%bc%e3%83%97%e3%83%ad%e3%83%83%e3%83%88%e3%81%a8amount%20of%20explained%20variance%e3%82%92%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%e6%96%87%e7%8c%ae%e7%ad%89%e3%81%ae%e5%bc%95%e7%94%a8%e3%81%af%e3%81%aa%e3%81%97%e3%80%82%0aTabachnick%20%26amp%3b%20Fidell%20%282012%29%20Tabachnick%2c%20B.%20G.%2c%20%26amp%3b%20Fidell%2c%20L.%20S.%20%282012%29.%20Using%20Multivariate%20Statistics%20%286th%20Edition%29.%20Pearson.%0a%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%a8%e3%81%84%e3%81%86%e8%a8%b3%e3%81%a7%e3%81%aa%e3%81%8f%ef%bc%8c%e5%a4%9a%e5%a4%89%e9%87%8f%e7%b5%b1%e8%a8%88%e5%85%a8%e8%88%ac%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%80%8213%e7%ab%a0%e3%81%a7%e4%b8%bb%e6%88%90%e5%88%86%e5%88%86%e6%9e%90%e3%81%a8%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%82%92%e6%89%b1%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e3%80%8213.6.2%e3%81%aeAdequay%20of%20Extraction%20and%20Number%20of%20Factors%e3%81%a8%e3%81%84%e3%81%86%e7%af%80%e3%81%a7%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e5%8f%96%e3%82%8a%e6%89%b1%e3%81%84%e3%81%8c%e3%81%82%e3%82%8b%ef%bc%88pp648-%ef%bc%89%e3%80%82%0a%e6%89%8b%e6%b3%95%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e3%81%be%e3%81%a8%e3%82%81%e3%81%af%ef%bc%8cGorsuch%20%281983%29%ef%bc%88%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%ef%bc%89%e3%81%8bZwick%20and%20Velicer%20%281986%29%e3%82%92%e8%a6%8b%e3%81%a6%e3%81%ad%e3%81%a8%e8%a8%80%e3%81%84%ef%bc%8cSPSS%e3%81%a8SAS%e3%81%a7%e6%89%b1%e3%81%88%e3%82%8b%e6%89%8b%e6%b3%95%e3%81%ab%e7%84%a6%e7%82%b9%e3%82%92%e7%b5%9e%e3%81%a3%e3%81%a6%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82Kairser%e5%9f%ba%e6%ba%96%ef%bc%8c%e3%82%b9%e3%82%af%e3%83%aa%e3%83%bc%e3%83%86%e3%82%b9%e3%83%88%ef%bc%8c%e5%b9%b3%e8%a1%8c%e5%88%86%e6%9e%90%ef%bc%8cMAP%e5%9f%ba%e6%ba%96%e3%82%92%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%e3%81%95%e3%82%89%e3%81%ab%ef%bc%8cZwick%20%26amp%3b%20Velicer%20%281986%29%e3%81%ae%e3%82%b7%e3%83%9f%e3%83%a5%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%81%ae%e7%b5%90%e6%9e%9c%e3%82%82%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e5%b9%b3%e8%a1%8c%e5%88%86%e6%9e%90%e3%81%a8MAP%e3%81%8c%e3%81%86%e3%81%be%e3%81%8f%e3%81%84%e3%81%8f%e3%81%a8%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82" aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&t=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#brown-2006">Brown (2006)</a></li>
+    <li><a href="#raykov--marcoulides-2010">Raykov &amp; Marcoulides (2010)</a></li>
+    <li><a href="#tabachnick--fidell-2012">Tabachnick &amp; Fidell (2012)</a></li>
+    <li><a href="#irwing-booth--hughes-2018">Irwing, Booth, &amp; Hughes (2018)</a></li>
+  </ul>
+</nav>
+    </div>
+    
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        因子分析の教科書における因子数の選択についての記述
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2020-09-23 14:59:29 &#43;0900 JST" itemprop="datePublished">2020-09-23</time>
+          
+        </div>
+        
+        
+        
+        <div class="article-category">
+            <i class="fas fa-archive"></i>
+            
+            
+            <a class="category-link" href="/categories/stat">stat</a>
+            
+        </div>
+        
+        
+        <div class="article-tag">
+            <i class="fas fa-tag"></i>
+            
+            
+            <a class="tag-link" href="/tags/factor-analysis" rel="tag">factor analysis</a>
+            
+        </div>
+        
+      </div>
+    </header>
+
+  
+    
+    <div class="content" itemprop="articleBody">
+      <h2 id="はじめに">はじめに</h2>
+<p>必要があって因子分析や心理測定の教科書で探索的因子分析の際の因子数の推定法がどのように扱われているかを調べたものの記録。手元にあるものだけ。</p>
+<h2 id="brown-2006">Brown (2006)</h2>
+<p>Brown, T. A. (2006). Confirmatory factor analysis for applied research. The Guilford Press.</p>
+<p>因子分析の定評のある教科書（らしい）。大学院の授業で読んだ。基本は確認的因子分析の教科書なのだが，2章で探索的因子分析も扱っている。その中でFactor Selectionという節で（pp.23-30）因子数の推定について扱っている。</p>
+<p>よく使われている手法として，Kaiser-Guttmanルール，スクリーテスト，平行分析を紹介している。また，因子の推定法が最尤法のときには，適合度の情報も使えることを紹介している。</p>
+<h2 id="raykov--marcoulides-2010">Raykov &amp; Marcoulides (2010)</h2>
+<p>Raykov, T., &amp; Marcoulides, G. A. (2010). Introduction to Psychometric Theory. Routledge.</p>
+<p>因子分析は第3章で扱われており，因子数の探索は独立した節として3.8節で扱われている。紹介しているのはKaiser基準とスクリープロットとamount of explained varianceを紹介している。文献等の引用はなし。</p>
+<h2 id="tabachnick--fidell-2012">Tabachnick &amp; Fidell (2012)</h2>
+<p>Tabachnick, B. G., &amp; Fidell, L. S. (2012). Using Multivariate Statistics (6th Edition). Pearson.</p>
+<p>因子分析の教科書という訳でなく，多変量統計全般の教科書。13章で主成分分析と因子分析を扱っている。13.6.2のAdequay of Extraction and Number of Factorsという節で因子数についての取り扱いがある（pp648-）。</p>
+<p>手法についてのまとめは，Gorsuch (1983)（因子分析の教科書）かZwick and Velicer (1986)を見てねと言い，SPSSとSASで扱える手法に焦点を絞って紹介している。Kairser基準，スクリーテスト，平行分析，MAP基準を紹介している。さらに，Zwick &amp; Velicer (1986)のシミュレーションの結果も紹介して平行分析とMAPがうまくいくと紹介している。</p>
+<h2 id="irwing-booth--hughes-2018">Irwing, Booth, &amp; Hughes (2018)</h2>
+<p>Irwing, P., Booth, T., &amp; Hughes, D. J. (Eds.). (2018). The Wiley Handbook of Psychometric Testing: A Multidisciplinary Reference on Survey, Scale and Test Development. (New York). John Wiley &amp; Sons, Incorporated. <a href="https://doi.org/10.1002/9781118489772">https://doi.org/10.1002/9781118489772</a></p>
+<p>比較的新しめのハンドブック。1000ページを超える大著。この中の11章がまるまる因子数の問題について割かれている。ハンドブックだけあってKaiser基準，スクリーテスト，MAP，平行分析，平行分析の派生について詳しく引用付きで紹介している。</p>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/profile">Profile</a></li>
+         
+          <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+          <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#brown-2006">Brown (2006)</a></li>
+    <li><a href="#raykov--marcoulides-2010">Raykov &amp; Marcoulides (2010)</a></li>
+    <li><a href="#tabachnick--fidell-2012">Tabachnick &amp; Fidell (2012)</a></li>
+    <li><a href="#irwing-booth--hughes-2018">Irwing, Booth, &amp; Hughes (2018)</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&text=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&title=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&is_video=false&description=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&title=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&title=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&name=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0&description=%e3%81%af%e3%81%98%e3%82%81%e3%81%ab%20%e5%bf%85%e8%a6%81%e3%81%8c%e3%81%82%e3%81%a3%e3%81%a6%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%82%84%e5%bf%83%e7%90%86%e6%b8%ac%e5%ae%9a%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%a7%e6%8e%a2%e7%b4%a2%e7%9a%84%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e9%9a%9b%e3%81%ae%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e6%8e%a8%e5%ae%9a%e6%b3%95%e3%81%8c%e3%81%a9%e3%81%ae%e3%82%88%e3%81%86%e3%81%ab%e6%89%b1%e3%82%8f%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%81%8b%e3%82%92%e8%aa%bf%e3%81%b9%e3%81%9f%e3%82%82%e3%81%ae%e3%81%ae%e8%a8%98%e9%8c%b2%e3%80%82%e6%89%8b%e5%85%83%e3%81%ab%e3%81%82%e3%82%8b%e3%82%82%e3%81%ae%e3%81%a0%e3%81%91%e3%80%82%0aBrown%20%282006%29%20Brown%2c%20T.%20A.%20%282006%29.%20Confirmatory%20factor%20analysis%20for%20applied%20research.%20The%20Guilford%20Press.%0a%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e5%ae%9a%e8%a9%95%e3%81%ae%e3%81%82%e3%82%8b%e6%95%99%e7%a7%91%e6%9b%b8%ef%bc%88%e3%82%89%e3%81%97%e3%81%84%ef%bc%89%e3%80%82%e5%a4%a7%e5%ad%a6%e9%99%a2%e3%81%ae%e6%8e%88%e6%a5%ad%e3%81%a7%e8%aa%ad%e3%82%93%e3%81%a0%e3%80%82%e5%9f%ba%e6%9c%ac%e3%81%af%e7%a2%ba%e8%aa%8d%e7%9a%84%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%aa%e3%81%ae%e3%81%a0%e3%81%8c%ef%bc%8c2%e7%ab%a0%e3%81%a7%e6%8e%a2%e7%b4%a2%e7%9a%84%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%82%82%e6%89%b1%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%e3%81%9d%e3%81%ae%e4%b8%ad%e3%81%a7Factor%20Selection%e3%81%a8%e3%81%84%e3%81%86%e7%af%80%e3%81%a7%ef%bc%88pp.23-30%ef%bc%89%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e6%8e%a8%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e6%89%b1%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%0a%e3%82%88%e3%81%8f%e4%bd%bf%e3%82%8f%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e6%89%8b%e6%b3%95%e3%81%a8%e3%81%97%e3%81%a6%ef%bc%8cKaiser-Guttman%e3%83%ab%e3%83%bc%e3%83%ab%ef%bc%8c%e3%82%b9%e3%82%af%e3%83%aa%e3%83%bc%e3%83%86%e3%82%b9%e3%83%88%ef%bc%8c%e5%b9%b3%e8%a1%8c%e5%88%86%e6%9e%90%e3%82%92%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%e3%81%be%e3%81%9f%ef%bc%8c%e5%9b%a0%e5%ad%90%e3%81%ae%e6%8e%a8%e5%ae%9a%e6%b3%95%e3%81%8c%e6%9c%80%e5%b0%a4%e6%b3%95%e3%81%ae%e3%81%a8%e3%81%8d%e3%81%ab%e3%81%af%ef%bc%8c%e9%81%a9%e5%90%88%e5%ba%a6%e3%81%ae%e6%83%85%e5%a0%b1%e3%82%82%e4%bd%bf%e3%81%88%e3%82%8b%e3%81%93%e3%81%a8%e3%82%92%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%0aRaykov%20%26amp%3b%20Marcoulides%20%282010%29%20Raykov%2c%20T.%2c%20%26amp%3b%20Marcoulides%2c%20G.%20A.%20%282010%29.%20Introduction%20to%20Psychometric%20Theory.%20Routledge.%0a%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%af%e7%ac%ac3%e7%ab%a0%e3%81%a7%e6%89%b1%e3%82%8f%e3%82%8c%e3%81%a6%e3%81%8a%e3%82%8a%ef%bc%8c%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e6%8e%a2%e7%b4%a2%e3%81%af%e7%8b%ac%e7%ab%8b%e3%81%97%e3%81%9f%e7%af%80%e3%81%a8%e3%81%97%e3%81%a63.8%e7%af%80%e3%81%a7%e6%89%b1%e3%82%8f%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%e3%81%afKaiser%e5%9f%ba%e6%ba%96%e3%81%a8%e3%82%b9%e3%82%af%e3%83%aa%e3%83%bc%e3%83%97%e3%83%ad%e3%83%83%e3%83%88%e3%81%a8amount%20of%20explained%20variance%e3%82%92%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%e6%96%87%e7%8c%ae%e7%ad%89%e3%81%ae%e5%bc%95%e7%94%a8%e3%81%af%e3%81%aa%e3%81%97%e3%80%82%0aTabachnick%20%26amp%3b%20Fidell%20%282012%29%20Tabachnick%2c%20B.%20G.%2c%20%26amp%3b%20Fidell%2c%20L.%20S.%20%282012%29.%20Using%20Multivariate%20Statistics%20%286th%20Edition%29.%20Pearson.%0a%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%a8%e3%81%84%e3%81%86%e8%a8%b3%e3%81%a7%e3%81%aa%e3%81%8f%ef%bc%8c%e5%a4%9a%e5%a4%89%e9%87%8f%e7%b5%b1%e8%a8%88%e5%85%a8%e8%88%ac%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%80%8213%e7%ab%a0%e3%81%a7%e4%b8%bb%e6%88%90%e5%88%86%e5%88%86%e6%9e%90%e3%81%a8%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%82%92%e6%89%b1%e3%81%a3%e3%81%a6%e3%81%84%e3%82%8b%e3%80%8213.6.2%e3%81%aeAdequay%20of%20Extraction%20and%20Number%20of%20Factors%e3%81%a8%e3%81%84%e3%81%86%e7%af%80%e3%81%a7%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e5%8f%96%e3%82%8a%e6%89%b1%e3%81%84%e3%81%8c%e3%81%82%e3%82%8b%ef%bc%88pp648-%ef%bc%89%e3%80%82%0a%e6%89%8b%e6%b3%95%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e3%81%be%e3%81%a8%e3%82%81%e3%81%af%ef%bc%8cGorsuch%20%281983%29%ef%bc%88%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%ef%bc%89%e3%81%8bZwick%20and%20Velicer%20%281986%29%e3%82%92%e8%a6%8b%e3%81%a6%e3%81%ad%e3%81%a8%e8%a8%80%e3%81%84%ef%bc%8cSPSS%e3%81%a8SAS%e3%81%a7%e6%89%b1%e3%81%88%e3%82%8b%e6%89%8b%e6%b3%95%e3%81%ab%e7%84%a6%e7%82%b9%e3%82%92%e7%b5%9e%e3%81%a3%e3%81%a6%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82Kairser%e5%9f%ba%e6%ba%96%ef%bc%8c%e3%82%b9%e3%82%af%e3%83%aa%e3%83%bc%e3%83%86%e3%82%b9%e3%83%88%ef%bc%8c%e5%b9%b3%e8%a1%8c%e5%88%86%e6%9e%90%ef%bc%8cMAP%e5%9f%ba%e6%ba%96%e3%82%92%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%e3%81%95%e3%82%89%e3%81%ab%ef%bc%8cZwick%20%26amp%3b%20Velicer%20%281986%29%e3%81%ae%e3%82%b7%e3%83%9f%e3%83%a5%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%81%ae%e7%b5%90%e6%9e%9c%e3%82%82%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e5%b9%b3%e8%a1%8c%e5%88%86%e6%9e%90%e3%81%a8MAP%e3%81%8c%e3%81%86%e3%81%be%e3%81%8f%e3%81%84%e3%81%8f%e3%81%a8%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82" aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2ffactornumber%2f&t=%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e5%9b%a0%e5%ad%90%e6%95%b0%e3%81%ae%e9%81%b8%e6%8a%9e%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  Takahiro ONOSHIMA 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+<script src=/js/code-copy.js></script>
+
+
+
+  
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</html>

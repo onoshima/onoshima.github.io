@@ -6,18 +6,22 @@
     <description>Recent content in coefficient omega on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 16 Sep 2020 15:13:32 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/coefficient-omega/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Wed, 16 Sep 2020 15:13:32 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/coefficient-omega/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>EFAから計算したωとCFAから計算したω</title>
-      <link>https://onoshima.github.io/stat/omega_efacfa/</link>
+      <link>https://onoshima.github.io/posts/omega_efacfa/</link>
       <pubDate>Wed, 16 Sep 2020 15:13:32 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/omega_efacfa/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/omega_efacfa/</guid>
+      <description>2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
+$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}+{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
+として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
+Revelle &amp;amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
+使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。
+https://www.personality-project.org/r/html/bifactor.html
+探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
+library(lavaan) library(psych) library(knitr) data(&amp;#34;Thurstone&amp;#34;) res_efa &amp;lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3))     g F1* F2* F3* h2 u2 p2     Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615   Vocabulary 0.</description>
     </item>
     
   </channel>

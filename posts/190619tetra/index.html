@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> テトラコリック相関係数を求める関数の自作 | Takahiro ONOSHIMA&#39;s website</title>
+  <link rel = 'canonical' href = 'https://onoshima.github.io/posts/190619tetra/'>
+  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="テトラコリック相関係数を求める関数の自作" />
+<meta property="og:description" content="先日テトラコリック相関係数を求める方法についての記事を書いた。
+テトラコリック相関の初期
+それに基づいてRでテトラコリック相関係数を求める関数を自作した。
+Rでの関数化 作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということをorder=という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。
+tetrachoric &lt;- function(cor.table, order=6){ #必要な数値を代入 N &lt;- sum(cor.table) prop.bd &lt;- colSums(prop.table(cor.table))[2] prop.cd &lt;- rowSums(prop.table(cor.table))[2] h &lt;- qnorm(prop.bd, lower.tail = F) H &lt;- dnorm(h) k &lt;- qnorm(prop.cd, lower.tail = F) K &lt;- dnorm(k) tau &lt;- numeric(order) theta &lt;- numeric(order) v_bar &lt;- numeric(order) w_bar &lt;- numeric(order) #テトラコリック関数 for(n in 1:order){ if(n==1){ v_bar[n] &lt;- h w_bar[n] &lt;- k tau[n] &lt;- H theta[n] &lt;- K } else if (n==2){ v_bar[n] &lt;- h^2-1 w_bar[n] &lt;- k^2-1 tau[n] &lt;- H*h/sqrt(2) theta[n] &lt;- K*k/sqrt(2) } else { v_bar[n] &lt;- h * v_bar[n-1] - (n-1) * v_bar[n-2] w_bar[n] &lt;- k * w_bar[n-1] - (n-1) * w_bar[n-2] tau[n] &lt;- H*v_bar[n-1]/sqrt(factorial(n)) theta[n] &lt;- K*w_bar[n-1]/sqrt(factorial(n)) } } # 相関を計算 coef_vec &lt;- c(prop." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://onoshima.github.io/posts/190619tetra/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-06-19T21:59:21+09:00" />
+<meta property="article:modified_time" content="2019-06-19T21:59:21+09:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="テトラコリック相関係数を求める関数の自作"/>
+<meta name="twitter:description" content="先日テトラコリック相関係数を求める方法についての記事を書いた。
+テトラコリック相関の初期
+それに基づいてRでテトラコリック相関係数を求める関数を自作した。
+Rでの関数化 作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということをorder=という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。
+tetrachoric &lt;- function(cor.table, order=6){ #必要な数値を代入 N &lt;- sum(cor.table) prop.bd &lt;- colSums(prop.table(cor.table))[2] prop.cd &lt;- rowSums(prop.table(cor.table))[2] h &lt;- qnorm(prop.bd, lower.tail = F) H &lt;- dnorm(h) k &lt;- qnorm(prop.cd, lower.tail = F) K &lt;- dnorm(k) tau &lt;- numeric(order) theta &lt;- numeric(order) v_bar &lt;- numeric(order) w_bar &lt;- numeric(order) #テトラコリック関数 for(n in 1:order){ if(n==1){ v_bar[n] &lt;- h w_bar[n] &lt;- k tau[n] &lt;- H theta[n] &lt;- K } else if (n==2){ v_bar[n] &lt;- h^2-1 w_bar[n] &lt;- k^2-1 tau[n] &lt;- H*h/sqrt(2) theta[n] &lt;- K*k/sqrt(2) } else { v_bar[n] &lt;- h * v_bar[n-1] - (n-1) * v_bar[n-2] w_bar[n] &lt;- k * w_bar[n-1] - (n-1) * w_bar[n-2] tau[n] &lt;- H*v_bar[n-1]/sqrt(factorial(n)) theta[n] &lt;- K*w_bar[n-1]/sqrt(factorial(n)) } } # 相関を計算 coef_vec &lt;- c(prop."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://onoshima.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://onoshima.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://onoshima.github.io/posts/190618everitt/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="https://onoshima.github.io/posts/filter/" aria-label="Next">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&text=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&title=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&is_video=false&description=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&title=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&title=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&name=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c&description=%e5%85%88%e6%97%a5%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e6%96%b9%e6%b3%95%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e4%ba%8b%e3%82%92%e6%9b%b8%e3%81%84%e3%81%9f%e3%80%82%0a%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e3%81%ae%e5%88%9d%e6%9c%9f%0a%e3%81%9d%e3%82%8c%e3%81%ab%e5%9f%ba%e3%81%a5%e3%81%84%e3%81%a6R%e3%81%a7%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%82%92%e8%87%aa%e4%bd%9c%e3%81%97%e3%81%9f%e3%80%82%0aR%e3%81%a7%e3%81%ae%e9%96%a2%e6%95%b0%e5%8c%96%20%e4%bd%9c%e3%81%a3%e3%81%9f%e9%96%a2%e6%95%b0%e3%81%af%e4%bb%a5%e4%b8%8b%e3%81%ae%e9%80%9a%e3%82%8a%e3%80%82%e5%bc%95%e6%95%b0%e3%81%ab%e3%81%af2%c3%972%e3%81%ae%e7%9b%b8%e9%96%a2%e8%a1%a8%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%99%e3%82%8b%e3%80%82%e9%80%94%e4%b8%ad%e3%81%ae%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e9%96%a2%e6%95%b0%ef%bc%88%ef%bc%9f%ef%bc%89%e3%81%a7%e4%bd%95%e6%ac%a1%e3%81%be%e3%81%a7%e8%a8%88%e7%ae%97%e3%81%99%e3%82%8b%e3%81%8b%e3%81%a8%e3%81%84%e3%81%86%e3%81%93%e3%81%a8%e3%82%92order%3d%e3%81%a8%e3%81%84%e3%81%86%e5%bc%95%e6%95%b0%e3%81%a7%e6%8c%87%e5%ae%9a%e3%81%99%e3%82%8b%e3%80%82%e3%83%87%e3%83%95%e3%82%a9%e3%83%ab%e3%83%88%e3%81%af%e8%ab%96%e6%96%87%e3%81%ab%e6%8e%b2%e8%bc%89%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%9f%e3%82%82%e3%81%ae%e3%81%a8%e5%90%8c%e3%81%986%e3%81%ab%e3%81%97%e3%81%a6%e3%81%82%e3%82%8b%e3%80%82%0atetrachoric%20%26lt%3b-%20function%28cor.table%2c%20order%3d6%29%7b%20%23%e5%bf%85%e8%a6%81%e3%81%aa%e6%95%b0%e5%80%a4%e3%82%92%e4%bb%a3%e5%85%a5%20N%20%26lt%3b-%20sum%28cor.table%29%20prop.bd%20%26lt%3b-%20colSums%28prop.table%28cor.table%29%29%5b2%5d%20prop.cd%20%26lt%3b-%20rowSums%28prop.table%28cor.table%29%29%5b2%5d%20h%20%26lt%3b-%20qnorm%28prop.bd%2c%20lower.tail%20%3d%20F%29%20H%20%26lt%3b-%20dnorm%28h%29%20k%20%26lt%3b-%20qnorm%28prop.cd%2c%20lower.tail%20%3d%20F%29%20K%20%26lt%3b-%20dnorm%28k%29%20tau%20%26lt%3b-%20numeric%28order%29%20theta%20%26lt%3b-%20numeric%28order%29%20v_bar%20%26lt%3b-%20numeric%28order%29%20w_bar%20%26lt%3b-%20numeric%28order%29%20%23%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e9%96%a2%e6%95%b0%20for%28n%20in%201%3aorder%29%7b%20if%28n%3d%3d1%29%7b%20v_bar%5bn%5d%20%26lt%3b-%20h%20w_bar%5bn%5d%20%26lt%3b-%20k%20tau%5bn%5d%20%26lt%3b-%20H%20theta%5bn%5d%20%26lt%3b-%20K%20%7d%20else%20if%20%28n%3d%3d2%29%7b%20v_bar%5bn%5d%20%26lt%3b-%20h%5e2-1%20w_bar%5bn%5d%20%26lt%3b-%20k%5e2-1%20tau%5bn%5d%20%26lt%3b-%20H%2ah%2fsqrt%282%29%20theta%5bn%5d%20%26lt%3b-%20K%2ak%2fsqrt%282%29%20%7d%20else%20%7b%20v_bar%5bn%5d%20%26lt%3b-%20h%20%2a%20v_bar%5bn-1%5d%20-%20%28n-1%29%20%2a%20v_bar%5bn-2%5d%20w_bar%5bn%5d%20%26lt%3b-%20k%20%2a%20w_bar%5bn-1%5d%20-%20%28n-1%29%20%2a%20w_bar%5bn-2%5d%20tau%5bn%5d%20%26lt%3b-%20H%2av_bar%5bn-1%5d%2fsqrt%28factorial%28n%29%29%20theta%5bn%5d%20%26lt%3b-%20K%2aw_bar%5bn-1%5d%2fsqrt%28factorial%28n%29%29%20%7d%20%7d%20%23%20%e7%9b%b8%e9%96%a2%e3%82%92%e8%a8%88%e7%ae%97%20coef_vec%20%26lt%3b-%20c%28prop." aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&t=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#rでの関数化">Rでの関数化</a></li>
+    <li><a href="#性能評価の数値実験">性能評価の数値実験</a></li>
+  </ul>
+</nav>
+    </div>
+    
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        テトラコリック相関係数を求める関数の自作
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2019-06-19 21:59:21 &#43;0900 JST" itemprop="datePublished">2019-06-19</time>
+          
+        </div>
+        
+        
+        
+        <div class="article-category">
+            <i class="fas fa-archive"></i>
+            
+            
+            <a class="category-link" href="/categories/stat">stat</a>
+            
+        </div>
+        
+        
+        <div class="article-tag">
+            <i class="fas fa-tag"></i>
+            
+            
+            <a class="tag-link" href="/tags/tetrachoric-correlation" rel="tag">tetrachoric correlation</a>
+            
+             ,  
+            <a class="tag-link" href="/tags/r" rel="tag">R</a>
+            
+        </div>
+        
+      </div>
+    </header>
+
+  
+    
+    <div class="content" itemprop="articleBody">
+      <p>先日テトラコリック相関係数を求める方法についての記事を書いた。</p>
+<p><a href="https://onoshima.github.io/stat/190618everitt/">テトラコリック相関の初期</a></p>
+<p>それに基づいてRでテトラコリック相関係数を求める関数を自作した。</p>
+<h2 id="rでの関数化">Rでの関数化</h2>
+<p>作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということを<code>order=</code>という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">tetrachoric <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(cor.table, order<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>){
+
+  <span style="color:#75715e">#必要な数値を代入</span>
+  N <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(cor.table)
+  prop.bd <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">colSums</span>(<span style="color:#a6e22e">prop.table</span>(cor.table))[2]
+  prop.cd <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rowSums</span>(<span style="color:#a6e22e">prop.table</span>(cor.table))[2]
+  h <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">qnorm</span>(prop.bd, lower.tail <span style="color:#f92672">=</span> F)
+  H <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dnorm</span>(h)
+  k <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">qnorm</span>(prop.cd, lower.tail <span style="color:#f92672">=</span> F)
+  K <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">dnorm</span>(k)
+  tau <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">numeric</span>(order)
+  theta <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">numeric</span>(order)
+  v_bar <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">numeric</span>(order)
+  w_bar <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">numeric</span>(order)
+
+  <span style="color:#75715e">#テトラコリック関数</span>
+  <span style="color:#a6e22e">for</span>(n in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>order){
+    <span style="color:#a6e22e">if</span>(n<span style="color:#f92672">==</span><span style="color:#ae81ff">1</span>){
+      v_bar[n] <span style="color:#f92672">&lt;-</span> h
+      w_bar[n] <span style="color:#f92672">&lt;-</span> k
+      tau[n] <span style="color:#f92672">&lt;-</span> H
+      theta[n] <span style="color:#f92672">&lt;-</span> K
+    } else <span style="color:#a6e22e">if </span>(n<span style="color:#f92672">==</span><span style="color:#ae81ff">2</span>){
+      v_bar[n] <span style="color:#f92672">&lt;-</span> h^2<span style="color:#ae81ff">-1</span>
+      w_bar[n] <span style="color:#f92672">&lt;-</span> k^2<span style="color:#ae81ff">-1</span>
+      tau[n] <span style="color:#f92672">&lt;-</span> H<span style="color:#f92672">*</span>h<span style="color:#f92672">/</span><span style="color:#a6e22e">sqrt</span>(<span style="color:#ae81ff">2</span>)
+      theta[n] <span style="color:#f92672">&lt;-</span> K<span style="color:#f92672">*</span>k<span style="color:#f92672">/</span><span style="color:#a6e22e">sqrt</span>(<span style="color:#ae81ff">2</span>)
+    } else {
+      v_bar[n] <span style="color:#f92672">&lt;-</span> h <span style="color:#f92672">*</span> v_bar[n<span style="color:#ae81ff">-1</span>] <span style="color:#f92672">-</span> (n<span style="color:#ae81ff">-1</span>) <span style="color:#f92672">*</span> v_bar[n<span style="color:#ae81ff">-2</span>]
+      w_bar[n] <span style="color:#f92672">&lt;-</span> k <span style="color:#f92672">*</span> w_bar[n<span style="color:#ae81ff">-1</span>] <span style="color:#f92672">-</span> (n<span style="color:#ae81ff">-1</span>) <span style="color:#f92672">*</span> w_bar[n<span style="color:#ae81ff">-2</span>]
+      tau[n] <span style="color:#f92672">&lt;-</span>  H<span style="color:#f92672">*</span>v_bar[n<span style="color:#ae81ff">-1</span>]<span style="color:#f92672">/</span><span style="color:#a6e22e">sqrt</span>(<span style="color:#a6e22e">factorial</span>(n))
+      theta[n] <span style="color:#f92672">&lt;-</span> K<span style="color:#f92672">*</span>w_bar[n<span style="color:#ae81ff">-1</span>]<span style="color:#f92672">/</span><span style="color:#a6e22e">sqrt</span>(<span style="color:#a6e22e">factorial</span>(n))
+    }
+  }
+
+  <span style="color:#75715e"># 相関を計算</span>
+  coef_vec <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(prop.bd <span style="color:#f92672">*</span> prop.cd <span style="color:#f92672">-</span> cor.table[2,<span style="color:#ae81ff">2</span>]<span style="color:#f92672">/</span>N, tau <span style="color:#f92672">*</span> theta)
+  res <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">Re</span>(<span style="color:#a6e22e">polyroot</span>(coef_vec)[1])
+  <span style="color:#a6e22e">return</span>(res)
+}</code></pre></div>
+<h2 id="性能評価の数値実験">性能評価の数値実験</h2>
+<p>この関数がどの程度正確に相関係数を推定できるか実験してみる。母相関を0.8とする2変量標準正規分布からN=1000の乱数を発生させて, それを $ h=0.3, k=-0.2 $ の閾値でそれぞれ2値化する。たとえば, 身長と体重の2変量が, それぞれ【高い,低い】【重い,軽い】のように2値データとして手に入った状態を想定すると良い。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(mvtnorm)
+dat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rmvnorm</span>(<span style="color:#ae81ff">1000</span>, mean<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>), sigma<span style="color:#f92672">=</span><span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0.8</span>,<span style="color:#ae81ff">0.8</span>,<span style="color:#ae81ff">1</span>),<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>))
+height <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cut</span>(dat[,<span style="color:#ae81ff">1</span>], breaks<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>,<span style="color:#ae81ff">0.3</span>,<span style="color:#66d9ef">Inf</span>),labels<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;低い&#34;</span>, <span style="color:#e6db74">&#34;高い&#34;</span>))
+weight <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cut</span>(dat[,<span style="color:#ae81ff">2</span>], breaks<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>,<span style="color:#ae81ff">-0.2</span>,<span style="color:#66d9ef">Inf</span>),labels<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;軽い&#34;</span>, <span style="color:#e6db74">&#34;重い&#34;</span>))
+
+<span style="color:#75715e"># こんな感じの相関表になる</span>
+
+<span style="color:#a6e22e">table</span>(height, weight)
+      weight
+height 軽い 重い
+  低い  <span style="color:#ae81ff">400</span>  <span style="color:#ae81ff">237</span>
+  高い   <span style="color:#ae81ff">27</span>  <span style="color:#ae81ff">336</span></code></pre></div>
+<p>このような2値データのペアの相関係数を計算すると当然離散化前より絶対値が低下していることがわかるが, テトラコリック相関係数ではもとの値に近い値を推定できている。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">cor</span>(dat[,<span style="color:#ae81ff">1</span>], dat[,<span style="color:#ae81ff">2</span>]) <span style="color:#75715e"># 離散化前の相関</span>
+[1] <span style="color:#ae81ff">0.7930115</span>
+<span style="color:#a6e22e">cor</span>(<span style="color:#a6e22e">as.numeric</span>(height),<span style="color:#a6e22e">as.numeric</span>(weight)) <span style="color:#75715e"># 離散化後の相関</span>
+[1] <span style="color:#ae81ff">0.4956164</span>
+<span style="color:#a6e22e">tetrachoric</span>(<span style="color:#a6e22e">table</span>(height, weight)) <span style="color:#75715e"># テトラコリック相関</span>
+[1] <span style="color:#ae81ff">0.7463495</span>
+ </code></pre></div>
+<p>さて, これと同様の手続きを10000回繰り返し, テトラコリック相関係数はどの程度もとの相関を再現できるかを以下のコードで確かめた。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">## 繰り返しの回数</span>
+n.iteration <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10000</span>
+
+<span style="color:#75715e">##保存用ベクトル</span>
+tetra <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">numeric</span>(n.iteration)
+cont <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">numeric</span>(n.iteration)
+pearson <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">numeric</span>(n.iteration)
+
+<span style="color:#a6e22e">for</span>(ite in <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span>n.iteration){
+  dat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">rmvnorm</span>(<span style="color:#ae81ff">1000</span>, mean<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">0</span>), sigma<span style="color:#f92672">=</span><span style="color:#a6e22e">matrix</span>(<span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0.8</span>,<span style="color:#ae81ff">0.8</span>,<span style="color:#ae81ff">1</span>),<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">2</span>))
+  height <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cut</span>(dat[,<span style="color:#ae81ff">1</span>], breaks<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>,<span style="color:#ae81ff">0.3</span>,<span style="color:#66d9ef">Inf</span>),labels<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;低い&#34;</span>, <span style="color:#e6db74">&#34;高い&#34;</span>))
+  weight <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cut</span>(dat[,<span style="color:#ae81ff">2</span>], breaks<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#f92672">-</span><span style="color:#66d9ef">Inf</span>,<span style="color:#ae81ff">-0.2</span>,<span style="color:#66d9ef">Inf</span>),labels<span style="color:#f92672">=</span><span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;軽い&#34;</span>, <span style="color:#e6db74">&#34;重い&#34;</span>))
+
+  cont[ite] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor</span>(dat)[2,<span style="color:#ae81ff">1</span>]
+  pearson[ite] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor</span>(<span style="color:#a6e22e">as.numeric</span>(height),<span style="color:#a6e22e">as.numeric</span>(weight))
+  tetra[ite] <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">tetrachoric</span>(<span style="color:#a6e22e">table</span>(height, weight))  
+}</code></pre></div>
+<p>結果は次の画像の通りである。
+<img src="/images/tetra_res.png" alt="数値実験結果"></p>
+<p>図中のContというのが連続変量のまま相関係数を計算したもの, Pearsonが離散化した変数でそのままピアソンの積率相関を求めたもの, Tetraがテトラコリック相関係数を求めたものである。TetraとPearsonを比べると, Pearsonが0.5-06付近まで相関係数の絶対値が低下しているのに対して, Tetraは母相関である0.8のあたりを概ね正確に推定していることがわかる。</p>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/profile">Profile</a></li>
+         
+          <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+          <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#rでの関数化">Rでの関数化</a></li>
+    <li><a href="#性能評価の数値実験">性能評価の数値実験</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&text=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&title=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&is_video=false&description=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&title=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&title=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&name=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c&description=%e5%85%88%e6%97%a5%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e6%96%b9%e6%b3%95%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e4%ba%8b%e3%82%92%e6%9b%b8%e3%81%84%e3%81%9f%e3%80%82%0a%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e3%81%ae%e5%88%9d%e6%9c%9f%0a%e3%81%9d%e3%82%8c%e3%81%ab%e5%9f%ba%e3%81%a5%e3%81%84%e3%81%a6R%e3%81%a7%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%82%92%e8%87%aa%e4%bd%9c%e3%81%97%e3%81%9f%e3%80%82%0aR%e3%81%a7%e3%81%ae%e9%96%a2%e6%95%b0%e5%8c%96%20%e4%bd%9c%e3%81%a3%e3%81%9f%e9%96%a2%e6%95%b0%e3%81%af%e4%bb%a5%e4%b8%8b%e3%81%ae%e9%80%9a%e3%82%8a%e3%80%82%e5%bc%95%e6%95%b0%e3%81%ab%e3%81%af2%c3%972%e3%81%ae%e7%9b%b8%e9%96%a2%e8%a1%a8%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%99%e3%82%8b%e3%80%82%e9%80%94%e4%b8%ad%e3%81%ae%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e9%96%a2%e6%95%b0%ef%bc%88%ef%bc%9f%ef%bc%89%e3%81%a7%e4%bd%95%e6%ac%a1%e3%81%be%e3%81%a7%e8%a8%88%e7%ae%97%e3%81%99%e3%82%8b%e3%81%8b%e3%81%a8%e3%81%84%e3%81%86%e3%81%93%e3%81%a8%e3%82%92order%3d%e3%81%a8%e3%81%84%e3%81%86%e5%bc%95%e6%95%b0%e3%81%a7%e6%8c%87%e5%ae%9a%e3%81%99%e3%82%8b%e3%80%82%e3%83%87%e3%83%95%e3%82%a9%e3%83%ab%e3%83%88%e3%81%af%e8%ab%96%e6%96%87%e3%81%ab%e6%8e%b2%e8%bc%89%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%9f%e3%82%82%e3%81%ae%e3%81%a8%e5%90%8c%e3%81%986%e3%81%ab%e3%81%97%e3%81%a6%e3%81%82%e3%82%8b%e3%80%82%0atetrachoric%20%26lt%3b-%20function%28cor.table%2c%20order%3d6%29%7b%20%23%e5%bf%85%e8%a6%81%e3%81%aa%e6%95%b0%e5%80%a4%e3%82%92%e4%bb%a3%e5%85%a5%20N%20%26lt%3b-%20sum%28cor.table%29%20prop.bd%20%26lt%3b-%20colSums%28prop.table%28cor.table%29%29%5b2%5d%20prop.cd%20%26lt%3b-%20rowSums%28prop.table%28cor.table%29%29%5b2%5d%20h%20%26lt%3b-%20qnorm%28prop.bd%2c%20lower.tail%20%3d%20F%29%20H%20%26lt%3b-%20dnorm%28h%29%20k%20%26lt%3b-%20qnorm%28prop.cd%2c%20lower.tail%20%3d%20F%29%20K%20%26lt%3b-%20dnorm%28k%29%20tau%20%26lt%3b-%20numeric%28order%29%20theta%20%26lt%3b-%20numeric%28order%29%20v_bar%20%26lt%3b-%20numeric%28order%29%20w_bar%20%26lt%3b-%20numeric%28order%29%20%23%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e9%96%a2%e6%95%b0%20for%28n%20in%201%3aorder%29%7b%20if%28n%3d%3d1%29%7b%20v_bar%5bn%5d%20%26lt%3b-%20h%20w_bar%5bn%5d%20%26lt%3b-%20k%20tau%5bn%5d%20%26lt%3b-%20H%20theta%5bn%5d%20%26lt%3b-%20K%20%7d%20else%20if%20%28n%3d%3d2%29%7b%20v_bar%5bn%5d%20%26lt%3b-%20h%5e2-1%20w_bar%5bn%5d%20%26lt%3b-%20k%5e2-1%20tau%5bn%5d%20%26lt%3b-%20H%2ah%2fsqrt%282%29%20theta%5bn%5d%20%26lt%3b-%20K%2ak%2fsqrt%282%29%20%7d%20else%20%7b%20v_bar%5bn%5d%20%26lt%3b-%20h%20%2a%20v_bar%5bn-1%5d%20-%20%28n-1%29%20%2a%20v_bar%5bn-2%5d%20w_bar%5bn%5d%20%26lt%3b-%20k%20%2a%20w_bar%5bn-1%5d%20-%20%28n-1%29%20%2a%20w_bar%5bn-2%5d%20tau%5bn%5d%20%26lt%3b-%20H%2av_bar%5bn-1%5d%2fsqrt%28factorial%28n%29%29%20theta%5bn%5d%20%26lt%3b-%20K%2aw_bar%5bn-1%5d%2fsqrt%28factorial%28n%29%29%20%7d%20%7d%20%23%20%e7%9b%b8%e9%96%a2%e3%82%92%e8%a8%88%e7%ae%97%20coef_vec%20%26lt%3b-%20c%28prop." aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2f190619tetra%2f&t=%e3%83%86%e3%83%88%e3%83%a9%e3%82%b3%e3%83%aa%e3%83%83%e3%82%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e9%96%a2%e6%95%b0%e3%81%ae%e8%87%aa%e4%bd%9c" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  Takahiro ONOSHIMA 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+<script src=/js/code-copy.js></script>
+
+
+
+  
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</html>

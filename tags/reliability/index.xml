@@ -6,36 +6,64 @@
     <description>Recent content in reliability on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 16 Sep 2020 15:13:32 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/reliability/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Wed, 16 Sep 2020 15:13:32 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/reliability/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>EFAから計算したωとCFAから計算したω</title>
-      <link>https://onoshima.github.io/stat/omega_efacfa/</link>
+      <link>https://onoshima.github.io/posts/omega_efacfa/</link>
       <pubDate>Wed, 16 Sep 2020 15:13:32 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/omega_efacfa/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/omega_efacfa/</guid>
+      <description>2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
+$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}+{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
+として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
+Revelle &amp;amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
+使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。
+https://www.personality-project.org/r/html/bifactor.html
+探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
+library(lavaan) library(psych) library(knitr) data(&amp;#34;Thurstone&amp;#34;) res_efa &amp;lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3))     g F1* F2* F3* h2 u2 p2     Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615   Vocabulary 0.</description>
     </item>
     
     <item>
       <title>信頼性係数の目安の出どころ</title>
-      <link>https://onoshima.github.io/stat/nunnally/</link>
+      <link>https://onoshima.github.io/posts/nunnally/</link>
       <pubDate>Mon, 17 Feb 2020 20:43:28 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/nunnally/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/nunnally/</guid>
+      <description>尺度が開発される際には信頼性と妥当性についての検討が必要とされます。信頼性の指標としてはクロンバックのαが報告されることが多いのですが，巷でαの値が0.8以上あると望ましいとかなんとか言われていたりします。
+例えば次のサイトではこんな風に書かれています。
+ α係数の目安は0.80以上です。0.90を超えれば、かなりの信頼性と言えます。
+ http://www.u-gakugei.ac.jp/~kishilab/validity-reliability.htm
+また別のサイトではこんな風に書かれています。
+ 通常、アルファ係数が0.8以上であれば一貫性があると見なされます。
+ https://bellcurve.jp/statistics/blog/12206.html
+ところで，この0.8だの0.9だのの出どころについて調べてみると，英語で書かれたもののいくつかはNunnally(1978)というものを引用しています。これは次の本みたいです。
+https://www.amazon.co.jp/Psychometric-Theory-McGraw-Hill-Psychology-Nunnally/dp/0070474656
+では，そこには何が書いてあるのかと図書館でみてみますと以下のような記述でした。長いけど引用しておきます。
+ What a satisfactory level of reliability is depends on how a measure is being used. In the early stages of research on predictor tests or hypotesized measures of a construct, one saves time and energy by working with instruments that have ony modest reliability, for which purpose reliabilities of .70 or higher will suffice. If significant correlations are found, corrections for attenuation will estimate how much the correlations will increase when reliabilities of measures are increased.</description>
     </item>
     
     <item>
       <title>相関係数行列からクロンバックのαを求める</title>
-      <link>https://onoshima.github.io/stat/cronbach/</link>
+      <link>https://onoshima.github.io/posts/cronbach/</link>
       <pubDate>Fri, 27 Dec 2019 21:37:22 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/cronbach/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/cronbach/</guid>
+      <description>尺度の作成論文などでは信頼性係数が報告される。信頼性係数には様々な種類があるが, その中でもっともよく使われるのがクロンバックのαである。クロンバックのαは次の計算式で求められる。
+$$ a = \frac{n}{n-1} \left( 1- \frac{\Sigma^n _{i=1}Var(X_i)}{Var(X)}\right) \tag{1} $$
+ここで, $n$は項目数, $X_i$は$i$番目の項目の得点である。$X$はテストの合計得点である。
+Rでクロンバックのαの求めるには Rでクロンバックのαを求めるためには複数のやり方がある。
+http://www.okadajp.org/RWiki/?%CE%B1%E4%BF%82%E6%95%B0%EF%BC%8C%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%AE%97%E5%87%BA
+とりあえずここではpsychパッケージに含まれるalpha()関数を使ってみることにする。データは同じパッケージに含まれるbfiを用いる。このデータはビッグファイブ理論が想定する因子を測定する質問紙で1因子につき5項目合計25項目からなる。サンプルサイズは2800である。今回は最初の10項目だけ使う。
+データの中身はこんな感じ。6件法である。
+さて, このデータに対してクロンバックのαを求めるにはalpha()関数を用いるのだが, データが逆転項目を含んでいるのでそれを処理しなければいけない。6件法なので6から項目を引くと出てくる。ここではのちの話の都合で欠損を含むデータを除外している。
+# 逆転項目の処理して必要な項目だけ取り出す new &amp;lt;- dat %&amp;gt;% mutate(A1=6-A1, C4=6-C4, C5=6-C5) %&amp;gt;% select(1:10) %&amp;gt;% filter(!is.na(A1), !is.na(A2), !is.na(A3), !is.na(A4), !is.na(A5), !is.na(C1), !is.na(C2), !is.na(C3), !is.na(C4), !is.na(C5)) 逆転項目の処理が済んだところで, alpha()関数を使ってみる。
+# クロンバックαを計算 res &amp;lt;- psych::alpha(new) αの値が出てくるだけでなくて, 各項目をなくした際にαがどのように変化するかの値も出てくる。これらは尺度作成の際には役に立つだろう。
+相関係数からクロンバックのαを求める ところで岡田（2015）によれば, クロンバックのαは相関係数行列から求めることもできるようである。
+https://www.jstage.jst.go.jp/article/arepj/54/0/54_71/_article/-char/ja/
+相関係数行列からクロンバックのαは次の式で求められる。
+$$ a = \frac{n\bar{r}}{1+(n-1) \bar{r}} \tag{2} $$
+ここでnは項目数で, $\bar{r}$は項目間の相関係数の平均である。さきほどのデータを用いて, 同様の結果が得られるが試してみる。相関係数行列を求めて, 上記の式に当てはめてみる。</description>
     </item>
     
   </channel>

@@ -6,18 +6,27 @@
     <description>Recent content in MAP on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Tue, 22 Sep 2020 14:41:25 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/map/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Tue, 22 Sep 2020 14:41:25 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/map/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>因子分析におけるMAP基準について</title>
-      <link>https://onoshima.github.io/stat/vss/</link>
+      <link>https://onoshima.github.io/posts/vss/</link>
       <pubDate>Tue, 22 Sep 2020 14:41:25 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/vss/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/vss/</guid>
+      <description>はじめに 探索的因子分析において，因子数を決める際にはさまざまな基準があるのですが，その中にMAP基準というものがあります。必要があって調べた際のメモを残しておきます。
+MAP基準とは MAPはMinimum average partical correlationの略です。オリジナルはVelicer（1976）による次の論文です。https://doi-org/10.1007/BF02293557
+$p$個の観測変数の相関行列を$R$とします。サイズは$p \times p$です。主成分分析の結果である$p \times m$のパターン行列を$A$とします。そのとき，偏分散共分散行列$C^*$は
+$$C^* = R- AA^\prime$$
+と書けます。ここからさらに偏相関係数の行列は
+$$ R^* = D^{-1/2}( R- AA^\prime)D^{-1/2}　\tag{1}　$$
+と書けます。ここで $D$は，
+$$D = Diag(C^*) = Diag(R- AA^\prime)$$
+です。ここで，$R^*$のi行目，j列目の要素を $r ^* _{ij}$としたときに，偏相関行列の2乗の値の平均が
+$$ f_m = \frac{\sum \sum_{i \neq j} (r ^* _{ij})^2 }{p(p-1)}　\tag{2}$$
+として表されます。MAP基準とは，パターン行列のmの値を変えていきながらこの値を計算して，最小になる$f_m$の$m$を因子数として採択しようという方法です。
+実際の数値例を確認 実際にデータを触ってみながら，手順を確認してみます。psychのvss関数の中身を覗きながら書きました。使うデータはpsychパッケージの中に入っているThurstone.9という9つのテストの相関行列です。
+library(psych) data(&amp;#34;Thurstone.9&amp;#34;) R &amp;lt;- Thurstone.9     Prefixes Suffixes Vocabulary Sentences First.Last FirstLetters FourLetters Completion SameorOpposite     Prefixes 1.</description>
     </item>
     
   </channel>

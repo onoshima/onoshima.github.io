@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> EFAから計算したωとCFAから計算したω | Takahiro ONOSHIMA&#39;s website</title>
+  <link rel = 'canonical' href = 'https://onoshima.github.io/posts/omega_efacfa/'>
+  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="EFAから計算したωとCFAから計算したω" />
+<meta property="og:description" content="2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
+$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}&#43;{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
+として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
+Revelle &amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
+使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。
+https://www.personality-project.org/r/html/bifactor.html
+探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
+library(lavaan) library(psych) library(knitr) data(&#34;Thurstone&#34;) res_efa &lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3))     g F1* F2* F3* h2 u2 p2     Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615   Vocabulary 0." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://onoshima.github.io/posts/omega_efacfa/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-09-16T15:13:32+09:00" />
+<meta property="article:modified_time" content="2020-09-16T15:13:32+09:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="EFAから計算したωとCFAから計算したω"/>
+<meta name="twitter:description" content="2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
+$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}&#43;{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
+として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
+Revelle &amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
+使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。
+https://www.personality-project.org/r/html/bifactor.html
+探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
+library(lavaan) library(psych) library(knitr) data(&#34;Thurstone&#34;) res_efa &lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3))     g F1* F2* F3* h2 u2 p2     Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615   Vocabulary 0."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://onoshima.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://onoshima.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://onoshima.github.io/posts/mplus_lavaan/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="https://onoshima.github.io/posts/vss/" aria-label="Next">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&text=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&title=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&is_video=false&description=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&title=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&title=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&name=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89&description=2%e3%81%a4%e3%81%ae%cf%89%e4%bf%82%e6%95%b0%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%20%e4%bf%a1%e9%a0%bc%e6%80%a7%e4%bf%82%e6%95%b0%e3%81%ae1%e3%81%a4%e3%81%a7%e3%81%82%e3%82%8b%cf%89%e4%bf%82%e6%95%b0%e3%81%af%24%5comega_h%24%e3%81%a8%24%5comega_t%24%e3%81%8c%e3%81%82%e3%81%a3%e3%81%a6%ef%bc%8c%e3%81%9d%e3%82%8c%e3%81%9e%e3%82%8c%0a%24%24%20%5comega_h%20%3d%20%5cfrac%7b%7b%5cbf%201%5e%7b%5cprime%7d%20c%20c%5e%7b%5cprime%7d%201%7d%7d%7b%7b%5crm%20Var%7d%28X%29%7d%20%5c%5c%20%5comega_t%20%3d%20%5cfrac%7b%7b%5cbf%201%5e%7b%5cprime%7d%20c%20c%5e%7b%5cprime%7d%201%7d%2b%7b%5cbf%201%5e%7b%5cprime%7d%20A%20A%5e%7b%5cprime%7d%201%7d%7d%7b%7b%5crm%20Var%7d%28X%29%7d%20%24%24%0a%e3%81%a8%e3%81%97%e3%81%a6%e8%a1%a8%e3%81%95%e3%82%8c%e3%82%8b%e3%80%82%24%7b%5cbf%20c%7d%24%e3%81%af%e4%b8%80%e8%88%ac%e5%9b%a0%e5%ad%90%e3%81%ae%e5%9b%a0%e5%ad%90%e8%b2%a0%e8%8d%b7%e9%87%8f%e3%83%99%e3%82%af%e3%83%88%e3%83%ab%e3%81%a7%ef%bc%8c%24%7b%5cbf%20A%7d%24%e3%81%af%e7%be%a4%e5%9b%a0%e5%ad%90%e3%81%ae%e5%9b%a0%e5%ad%90%e8%b2%a0%e8%8d%b7%e9%87%8f%e8%a1%8c%e5%88%97%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%0aRevelle%20%26amp%3b%20Condon%ef%bc%882019%ef%bc%89%e3%81%ab%e3%82%88%e3%82%8b%e3%81%a8%ef%bc%8c%e3%81%93%e3%82%8c%e3%82%89%e3%81%ae%e6%8e%a8%e5%ae%9a%e5%80%a4%e3%82%92%e5%be%97%e3%82%8b%e6%96%b9%e6%b3%95%e3%81%af%ef%bc%8c%ef%bc%881%ef%bc%89EFA%e3%81%a7%e9%ab%98%e6%ac%a1%e5%9b%a0%e5%ad%90%e3%83%a2%e3%83%87%e3%83%ab%e3%81%ae%e5%9b%a0%e5%ad%90%e8%b2%a0%e8%8d%b7%e9%87%8f%e3%82%92%e5%be%97%e3%81%a6%e3%81%9d%e3%81%ae%e7%b5%90%e6%9e%9c%e3%81%abScmidt-Leiman%e5%a4%89%e6%8f%9b%e3%82%92%e3%81%8b%e3%81%91%e3%82%8b%e6%96%b9%e6%b3%95%e3%81%a8%ef%bc%8c%ef%bc%882%ef%bc%89CFA%e3%81%a7%e7%9b%b4%e6%8e%a5%e7%9a%84%e3%81%ab%e5%8f%8c%e5%9b%a0%e5%ad%90%e3%83%a2%e3%83%87%e3%83%ab%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%97%e3%81%a6%e6%8e%a8%e5%ae%9a%e5%80%a4%e3%82%92%e5%be%97%e3%82%8b%e6%96%b9%e6%b3%95%e3%81%8c%e3%81%82%e3%82%8b%e3%80%82%e3%81%93%e3%81%93%e3%81%a7%e3%81%af%ef%bc%8cR%e3%81%a7%e5%ae%9f%e9%9a%9b%e3%81%ab%e3%81%9d%e3%81%ae2%e3%81%a4%e3%82%92%e3%82%84%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%a6%e3%81%a9%e3%81%ae%e3%82%88%e3%81%86%e3%81%aa%e9%81%95%e3%81%84%e3%81%8c%e3%81%82%e3%82%8b%e3%81%8b%e3%82%92%e6%a4%9c%e8%a8%8e%e3%81%99%e3%82%8b%e3%80%82%0a%e4%bd%bf%e3%81%86%e3%83%87%e3%83%bc%e3%82%bf%e3%81%afPsych%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e5%85%a5%e3%81%a3%e3%81%a6%e3%82%8bThurstone%e3%81%a8%e3%81%84%e3%81%86%e3%83%87%e3%83%bc%e3%82%bf%ef%bc%88%e7%9b%b8%e9%96%a2%e8%a1%8c%e5%88%97%ef%bc%89%e3%80%829%e3%81%a4%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%81%a7%ef%bc%8c3%e3%81%a4%e3%81%ae%e5%9b%a0%e5%ad%90%ef%bc%881%ef%bc%89Verbal%20Comprehension%2c%ef%bc%882%ef%bc%89Word%20Fluency%2c%20%ef%bc%883%ef%bc%89Reasoning%e3%81%ab%e3%81%be%e3%81%a8%e3%81%be%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%b5%e3%82%a4%e3%82%ba%e3%81%af213%e3%82%89%e3%81%97%e3%81%84%e3%80%82%0ahttps%3a%2f%2fwww.personality-project.org%2fr%2fhtml%2fbifactor.html%0a%e6%8e%a2%e7%b4%a2%e7%9a%84%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ab%e3%82%88%e3%82%8b%e6%96%b9%e6%b3%95%20%e3%81%be%e3%81%9a%e3%81%af%ef%bc%8c%e6%8e%a2%e7%b4%a2%e7%9a%84%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%a7%e3%82%84%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%e3%80%82psych%e6%89%80%e5%8f%8e%e3%81%aeomega%e9%96%a2%e6%95%b0%e3%82%92%e4%bd%bf%e3%81%86%e3%80%82%e3%81%a8%e3%81%a6%e3%82%82%e7%b0%a1%e5%8d%98%e3%80%82%0alibrary%28lavaan%29%20library%28psych%29%20library%28knitr%29%20data%28%26%2334%3bThurstone%26%2334%3b%29%20res_efa%20%26lt%3b-%20omega%28Thurstone%29%20kable%28round%28res_efa%24schmid%24sl%2c3%29%29%20%20%20%20%20g%20F1%2a%20F2%2a%20F3%2a%20h2%20u2%20p2%20%20%20%20%20Sentences%200.709%200.560%20-0.022%200.030%200.817%200.183%200.615%20%20%20Vocabulary%200." aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&t=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#2つのω係数について">2つのω係数について</a></li>
+    <li><a href="#探索的因子分析による方法">探索的因子分析による方法</a></li>
+    <li><a href="#確認的因子分析による方法">確認的因子分析による方法</a></li>
+    <li><a href="#omegasem関数について">omegaSem関数について</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+    
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        EFAから計算したωとCFAから計算したω
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2020-09-16 15:13:32 &#43;0900 JST" itemprop="datePublished">2020-09-16</time>
+          
+        </div>
+        
+        
+        
+        <div class="article-category">
+            <i class="fas fa-archive"></i>
+            
+            
+            <a class="category-link" href="/categories/r">R</a>
+            
+             ,  
+            <a class="category-link" href="/categories/stat">Stat</a>
+            
+        </div>
+        
+        
+        <div class="article-tag">
+            <i class="fas fa-tag"></i>
+            
+            
+            <a class="tag-link" href="/tags/coefficient-omega" rel="tag">coefficient omega</a>
+            
+             ,  
+            <a class="tag-link" href="/tags/reliability" rel="tag">reliability</a>
+            
+        </div>
+        
+      </div>
+    </header>
+
+  
+    
+    <div class="content" itemprop="articleBody">
+      <h2 id="2つのω係数について">2つのω係数について</h2>
+<p>信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ</p>
+<p>$$
+\omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\
+\omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}+{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)}
+$$</p>
+<p>として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。</p>
+<p>Revelle &amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。</p>
+<p>使うデータは<code>Psych</code>パッケージに入ってる<code>Thurstone</code>というデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。</p>
+<p><a href="https://www.personality-project.org/r/html/bifactor.html">https://www.personality-project.org/r/html/bifactor.html</a></p>
+<h2 id="探索的因子分析による方法">探索的因子分析による方法</h2>
+<p>まずは，探索的因子分析でやってみる。<code>psych</code>所収の<code>omega</code>関数を使う。とても簡単。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
+<span style="color:#a6e22e">library</span>(lavaan)
+<span style="color:#a6e22e">library</span>(psych)
+<span style="color:#a6e22e">library</span>(knitr)
+
+<span style="color:#a6e22e">data</span>(<span style="color:#e6db74">&#34;Thurstone&#34;</span>) 
+res_efa  <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">omega</span>(Thurstone)
+
+<span style="color:#a6e22e">kable</span>(<span style="color:#a6e22e">round</span>(res_efa<span style="color:#f92672">$</span>schmid<span style="color:#f92672">$</span>sl,<span style="color:#ae81ff">3</span>))</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:right">g</th>
+<th style="text-align:right">F1*</th>
+<th style="text-align:right">F2*</th>
+<th style="text-align:right">F3*</th>
+<th style="text-align:right">h2</th>
+<th style="text-align:right">u2</th>
+<th style="text-align:right">p2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Sentences</td>
+<td style="text-align:right">0.709</td>
+<td style="text-align:right">0.560</td>
+<td style="text-align:right">-0.022</td>
+<td style="text-align:right">0.030</td>
+<td style="text-align:right">0.817</td>
+<td style="text-align:right">0.183</td>
+<td style="text-align:right">0.615</td>
+</tr>
+<tr>
+<td style="text-align:left">Vocabulary</td>
+<td style="text-align:right">0.726</td>
+<td style="text-align:right">0.553</td>
+<td style="text-align:right">0.042</td>
+<td style="text-align:right">-0.022</td>
+<td style="text-align:right">0.835</td>
+<td style="text-align:right">0.165</td>
+<td style="text-align:right">0.631</td>
+</tr>
+<tr>
+<td style="text-align:left">Sent.Completion</td>
+<td style="text-align:right">0.683</td>
+<td style="text-align:right">0.521</td>
+<td style="text-align:right">0.020</td>
+<td style="text-align:right">0.004</td>
+<td style="text-align:right">0.738</td>
+<td style="text-align:right">0.262</td>
+<td style="text-align:right">0.632</td>
+</tr>
+<tr>
+<td style="text-align:left">First.Letters</td>
+<td style="text-align:right">0.646</td>
+<td style="text-align:right">-0.001</td>
+<td style="text-align:right">0.558</td>
+<td style="text-align:right">0.002</td>
+<td style="text-align:right">0.729</td>
+<td style="text-align:right">0.271</td>
+<td style="text-align:right">0.573</td>
+</tr>
+<tr>
+<td style="text-align:left">Four.Letter.Words</td>
+<td style="text-align:right">0.622</td>
+<td style="text-align:right">-0.011</td>
+<td style="text-align:right">0.489</td>
+<td style="text-align:right">0.076</td>
+<td style="text-align:right">0.632</td>
+<td style="text-align:right">0.368</td>
+<td style="text-align:right">0.613</td>
+</tr>
+<tr>
+<td style="text-align:left">Suffixes</td>
+<td style="text-align:right">0.558</td>
+<td style="text-align:right">0.112</td>
+<td style="text-align:right">0.409</td>
+<td style="text-align:right">-0.060</td>
+<td style="text-align:right">0.495</td>
+<td style="text-align:right">0.505</td>
+<td style="text-align:right">0.629</td>
+</tr>
+<tr>
+<td style="text-align:left">Letter.Series</td>
+<td style="text-align:right">0.587</td>
+<td style="text-align:right">0.019</td>
+<td style="text-align:right">-0.009</td>
+<td style="text-align:right">0.617</td>
+<td style="text-align:right">0.725</td>
+<td style="text-align:right">0.275</td>
+<td style="text-align:right">0.475</td>
+</tr>
+<tr>
+<td style="text-align:left">Pedigrees</td>
+<td style="text-align:right">0.577</td>
+<td style="text-align:right">0.238</td>
+<td style="text-align:right">-0.033</td>
+<td style="text-align:right">0.339</td>
+<td style="text-align:right">0.505</td>
+<td style="text-align:right">0.495</td>
+<td style="text-align:right">0.659</td>
+</tr>
+<tr>
+<td style="text-align:left">Letter.Group</td>
+<td style="text-align:right">0.541</td>
+<td style="text-align:right">-0.037</td>
+<td style="text-align:right">0.139</td>
+<td style="text-align:right">0.459</td>
+<td style="text-align:right">0.524</td>
+<td style="text-align:right">0.476</td>
+<td style="text-align:right">0.558</td>
+</tr>
+</tbody>
+</table>
+<p>次のようなパス図も一緒に吐き出す。</p>
+<p><img src="/images/omega_efacfa.png" alt="パス図"></p>
+<p>ω係数は，$\omega_h = 0.74$と$\omega_t = 0.93$とのことである。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
+ Total, General and Subset omega for each subset
+                                                 g  F1<span style="color:#f92672">*</span>  F2<span style="color:#f92672">*</span>  F3<span style="color:#f92672">*</span>
+Omega total for total scores and subscales    <span style="color:#ae81ff">0.93</span> <span style="color:#ae81ff">0.92</span> <span style="color:#ae81ff">0.83</span> <span style="color:#ae81ff">0.79</span>
+Omega general for total scores and subscales  <span style="color:#ae81ff">0.74</span> <span style="color:#ae81ff">0.58</span> <span style="color:#ae81ff">0.50</span> <span style="color:#ae81ff">0.47</span>
+Omega group for total scores and subscales    <span style="color:#ae81ff">0.16</span> <span style="color:#ae81ff">0.34</span> <span style="color:#ae81ff">0.32</span> <span style="color:#ae81ff">0.32</span></code></pre></div>
+<p>これは先ほどの，SL変換後の因子負荷量から式通りに計算すると出てくる値である。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
+VarX <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(Thurstone) 
+c <span style="color:#f92672">&lt;-</span> res_efa<span style="color:#f92672">$</span>schmid<span style="color:#f92672">$</span>sl[,<span style="color:#e6db74">&#34;g&#34;</span>]
+A <span style="color:#f92672">&lt;-</span> res_efa<span style="color:#f92672">$</span>schmid<span style="color:#f92672">$</span>sl[,<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;F1*&#34;</span>,<span style="color:#e6db74">&#34;F2*&#34;</span>,<span style="color:#e6db74">&#34;F3*&#34;</span>)]
+
+nume1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(c <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(c)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">sum</span>(A <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(A))
+nume2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(c <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(c))
+nume1<span style="color:#f92672">/</span>VarX
+<span style="color:#75715e">#[1] 0.9308199</span>
+nume2<span style="color:#f92672">/</span>VarX
+<span style="color:#75715e">#[1] 0.7360703</span></code></pre></div>
+<h2 id="確認的因子分析による方法">確認的因子分析による方法</h2>
+<p>続いて確認的因子分析による方法を試してみる。<code>lavaan</code>でCFAをして因子負荷量行列を取り出す。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
+mo <span style="color:#f92672">&lt;-</span><span style="color:#e6db74">&#34;
+</span><span style="color:#e6db74">g =~ Sentences+Vocabulary+Sent.Completion+First.Letters+Four.Letter.Words+Suffixes+Letter.Series+Pedigrees+Letter.Group
+</span><span style="color:#e6db74">F1 =~ Sentences+Vocabulary+Sent.Completion
+</span><span style="color:#e6db74">F2 =~ First.Letters+Four.Letter.Words+Suffixes
+</span><span style="color:#e6db74">F3 =~ Letter.Series+Pedigrees+Letter.Group
+</span><span style="color:#e6db74">&#34;</span>
+
+res_cfa <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cfa</span>(mo, sample.cov<span style="color:#f92672">=</span>Thurstone, orthogonal<span style="color:#f92672">=</span>T, sample.nobs <span style="color:#f92672">=</span> <span style="color:#ae81ff">213</span>)
+lambda <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">inspect</span>(res_cfa,what<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;std&#34;</span>)<span style="color:#f92672">$</span>lambda
+<span style="color:#a6e22e">kable</span>(<span style="color:#a6e22e">round</span>(lambda,<span style="color:#ae81ff">3</span>))</code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:right">g</th>
+<th style="text-align:right">F1</th>
+<th style="text-align:right">F2</th>
+<th style="text-align:right">F3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Sentences</td>
+<td style="text-align:right">0.768</td>
+<td style="text-align:right">0.488</td>
+<td style="text-align:right">0.000</td>
+<td style="text-align:right">0.000</td>
+</tr>
+<tr>
+<td style="text-align:left">Vocabulary</td>
+<td style="text-align:right">0.791</td>
+<td style="text-align:right">0.452</td>
+<td style="text-align:right">0.000</td>
+<td style="text-align:right">0.000</td>
+</tr>
+<tr>
+<td style="text-align:left">Sent.Completion</td>
+<td style="text-align:right">0.754</td>
+<td style="text-align:right">0.404</td>
+<td style="text-align:right">0.000</td>
+<td style="text-align:right">0.000</td>
+</tr>
+<tr>
+<td style="text-align:left">First.Letters</td>
+<td style="text-align:right">0.608</td>
+<td style="text-align:right">0.000</td>
+<td style="text-align:right">0.614</td>
+<td style="text-align:right">0.000</td>
+</tr>
+<tr>
+<td style="text-align:left">Four.Letter.Words</td>
+<td style="text-align:right">0.597</td>
+<td style="text-align:right">0.000</td>
+<td style="text-align:right">0.506</td>
+<td style="text-align:right">0.000</td>
+</tr>
+<tr>
+<td style="text-align:left">Suffixes</td>
+<td style="text-align:right">0.572</td>
+<td style="text-align:right">0.000</td>
+<td style="text-align:right">0.394</td>
+<td style="text-align:right">0.000</td>
+</tr>
+<tr>
+<td style="text-align:left">Letter.Series</td>
+<td style="text-align:right">0.567</td>
+<td style="text-align:right">0.000</td>
+<td style="text-align:right">0.000</td>
+<td style="text-align:right">0.727</td>
+</tr>
+<tr>
+<td style="text-align:left">Pedigrees</td>
+<td style="text-align:right">0.662</td>
+<td style="text-align:right">0.000</td>
+<td style="text-align:right">0.000</td>
+<td style="text-align:right">0.247</td>
+</tr>
+<tr>
+<td style="text-align:left">Letter.Group</td>
+<td style="text-align:right">0.530</td>
+<td style="text-align:right">0.000</td>
+<td style="text-align:right">0.000</td>
+<td style="text-align:right">0.409</td>
+</tr>
+</tbody>
+</table>
+<p>この推定値を使って，先ほどと同様にωを計算する。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">c <span style="color:#f92672">&lt;-</span> lambda[,<span style="color:#e6db74">&#34;g&#34;</span>]
+A <span style="color:#f92672">&lt;-</span> lambda[,<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;F1&#34;</span>,<span style="color:#e6db74">&#34;F2&#34;</span>,<span style="color:#e6db74">&#34;F3&#34;</span>)]
+
+nume1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(c <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(c)) <span style="color:#f92672">+</span> <span style="color:#a6e22e">sum</span>(A <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(A))
+nume2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">sum</span>(c <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(c))
+nume1<span style="color:#f92672">/</span>VarX
+<span style="color:#75715e">#[1] 0.9278556</span>
+nume2<span style="color:#f92672">/</span>VarX
+<span style="color:#75715e">#[1] 0.7891304</span></code></pre></div>
+<p>ω係数は，$\omega_h = 0.79$と$\omega_t = 0.93$とのことである。$\omega_h$については，EFAで計算した場合より若干高い値である。
+この結果は，Revelle &amp; Condon(2019)が次のように言っている通り。</p>
+<blockquote>
+<p>The bifactor solution (g) tends to produce slightly larger estimates than the Schmid-Leiman procedure(h) because it forces all the cross loadings of the lower level factors to be 0 (p.9).</p>
+</blockquote>
+<h2 id="omegasem関数について">omegaSem関数について</h2>
+<p>ところで<code>psych</code>には<code>omegaSem</code>という関数があり，直接的に確認的因子分析に基づくωを計算できるようである。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"> 
+<span style="color:#a6e22e">omegaSem</span>(Thurstone, n.obs<span style="color:#f92672">=</span><span style="color:#ae81ff">213</span>)
+
+Total, General and Subset omega for each subset
+                                                 g  F1<span style="color:#f92672">*</span>  F2<span style="color:#f92672">*</span>  F3<span style="color:#f92672">*</span>
+Omega total for total scores and subscales    <span style="color:#ae81ff">0.93</span> <span style="color:#ae81ff">0.92</span> <span style="color:#ae81ff">0.82</span> <span style="color:#ae81ff">0.80</span>
+Omega general for total scores and subscales  <span style="color:#ae81ff">0.79</span> <span style="color:#ae81ff">0.69</span> <span style="color:#ae81ff">0.48</span> <span style="color:#ae81ff">0.50</span>
+Omega group for total scores and subscales    <span style="color:#ae81ff">0.14</span> <span style="color:#ae81ff">0.23</span> <span style="color:#ae81ff">0.35</span> <span style="color:#ae81ff">0.31</span></code></pre></div></p>
+<p>関数の中身をしっかり覗いた訳ではないから詳しくは分からないが，どうやら<code>omega</code>関数でSL変換による因子負荷量を得たあとに，その因子負荷量をもとにlavaanのモデル式を自動で書き出して，lavaanに突っ込んでいるようである。お手軽だけれどもCFAのモデルが変なモデルになっていないか確認しないと痛い目をみそうである（もっとも<code>omegaSem</code>関数を使うとパス図が描かれるからそこでチェックすれば良いだけの話だけど）</p>
+<h2 id="参考">参考</h2>
+<p>Revelle, W., &amp; Condon, D. M. (2019, August 5). Reliability From α to ω: A Tutorial. Psychological
+Assessment. Advance online publication. <a href="http://dx.doi.org/10.1037/pas0000754">http://dx.doi.org/10.1037/pas0000754</a></p>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/profile">Profile</a></li>
+         
+          <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+          <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#2つのω係数について">2つのω係数について</a></li>
+    <li><a href="#探索的因子分析による方法">探索的因子分析による方法</a></li>
+    <li><a href="#確認的因子分析による方法">確認的因子分析による方法</a></li>
+    <li><a href="#omegasem関数について">omegaSem関数について</a></li>
+    <li><a href="#参考">参考</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&text=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&title=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&is_video=false&description=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&title=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&title=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&name=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89&description=2%e3%81%a4%e3%81%ae%cf%89%e4%bf%82%e6%95%b0%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%20%e4%bf%a1%e9%a0%bc%e6%80%a7%e4%bf%82%e6%95%b0%e3%81%ae1%e3%81%a4%e3%81%a7%e3%81%82%e3%82%8b%cf%89%e4%bf%82%e6%95%b0%e3%81%af%24%5comega_h%24%e3%81%a8%24%5comega_t%24%e3%81%8c%e3%81%82%e3%81%a3%e3%81%a6%ef%bc%8c%e3%81%9d%e3%82%8c%e3%81%9e%e3%82%8c%0a%24%24%20%5comega_h%20%3d%20%5cfrac%7b%7b%5cbf%201%5e%7b%5cprime%7d%20c%20c%5e%7b%5cprime%7d%201%7d%7d%7b%7b%5crm%20Var%7d%28X%29%7d%20%5c%5c%20%5comega_t%20%3d%20%5cfrac%7b%7b%5cbf%201%5e%7b%5cprime%7d%20c%20c%5e%7b%5cprime%7d%201%7d%2b%7b%5cbf%201%5e%7b%5cprime%7d%20A%20A%5e%7b%5cprime%7d%201%7d%7d%7b%7b%5crm%20Var%7d%28X%29%7d%20%24%24%0a%e3%81%a8%e3%81%97%e3%81%a6%e8%a1%a8%e3%81%95%e3%82%8c%e3%82%8b%e3%80%82%24%7b%5cbf%20c%7d%24%e3%81%af%e4%b8%80%e8%88%ac%e5%9b%a0%e5%ad%90%e3%81%ae%e5%9b%a0%e5%ad%90%e8%b2%a0%e8%8d%b7%e9%87%8f%e3%83%99%e3%82%af%e3%83%88%e3%83%ab%e3%81%a7%ef%bc%8c%24%7b%5cbf%20A%7d%24%e3%81%af%e7%be%a4%e5%9b%a0%e5%ad%90%e3%81%ae%e5%9b%a0%e5%ad%90%e8%b2%a0%e8%8d%b7%e9%87%8f%e8%a1%8c%e5%88%97%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%0aRevelle%20%26amp%3b%20Condon%ef%bc%882019%ef%bc%89%e3%81%ab%e3%82%88%e3%82%8b%e3%81%a8%ef%bc%8c%e3%81%93%e3%82%8c%e3%82%89%e3%81%ae%e6%8e%a8%e5%ae%9a%e5%80%a4%e3%82%92%e5%be%97%e3%82%8b%e6%96%b9%e6%b3%95%e3%81%af%ef%bc%8c%ef%bc%881%ef%bc%89EFA%e3%81%a7%e9%ab%98%e6%ac%a1%e5%9b%a0%e5%ad%90%e3%83%a2%e3%83%87%e3%83%ab%e3%81%ae%e5%9b%a0%e5%ad%90%e8%b2%a0%e8%8d%b7%e9%87%8f%e3%82%92%e5%be%97%e3%81%a6%e3%81%9d%e3%81%ae%e7%b5%90%e6%9e%9c%e3%81%abScmidt-Leiman%e5%a4%89%e6%8f%9b%e3%82%92%e3%81%8b%e3%81%91%e3%82%8b%e6%96%b9%e6%b3%95%e3%81%a8%ef%bc%8c%ef%bc%882%ef%bc%89CFA%e3%81%a7%e7%9b%b4%e6%8e%a5%e7%9a%84%e3%81%ab%e5%8f%8c%e5%9b%a0%e5%ad%90%e3%83%a2%e3%83%87%e3%83%ab%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%97%e3%81%a6%e6%8e%a8%e5%ae%9a%e5%80%a4%e3%82%92%e5%be%97%e3%82%8b%e6%96%b9%e6%b3%95%e3%81%8c%e3%81%82%e3%82%8b%e3%80%82%e3%81%93%e3%81%93%e3%81%a7%e3%81%af%ef%bc%8cR%e3%81%a7%e5%ae%9f%e9%9a%9b%e3%81%ab%e3%81%9d%e3%81%ae2%e3%81%a4%e3%82%92%e3%82%84%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%a6%e3%81%a9%e3%81%ae%e3%82%88%e3%81%86%e3%81%aa%e9%81%95%e3%81%84%e3%81%8c%e3%81%82%e3%82%8b%e3%81%8b%e3%82%92%e6%a4%9c%e8%a8%8e%e3%81%99%e3%82%8b%e3%80%82%0a%e4%bd%bf%e3%81%86%e3%83%87%e3%83%bc%e3%82%bf%e3%81%afPsych%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e5%85%a5%e3%81%a3%e3%81%a6%e3%82%8bThurstone%e3%81%a8%e3%81%84%e3%81%86%e3%83%87%e3%83%bc%e3%82%bf%ef%bc%88%e7%9b%b8%e9%96%a2%e8%a1%8c%e5%88%97%ef%bc%89%e3%80%829%e3%81%a4%e3%81%ae%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%81%a7%ef%bc%8c3%e3%81%a4%e3%81%ae%e5%9b%a0%e5%ad%90%ef%bc%881%ef%bc%89Verbal%20Comprehension%2c%ef%bc%882%ef%bc%89Word%20Fluency%2c%20%ef%bc%883%ef%bc%89Reasoning%e3%81%ab%e3%81%be%e3%81%a8%e3%81%be%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%b5%e3%82%a4%e3%82%ba%e3%81%af213%e3%82%89%e3%81%97%e3%81%84%e3%80%82%0ahttps%3a%2f%2fwww.personality-project.org%2fr%2fhtml%2fbifactor.html%0a%e6%8e%a2%e7%b4%a2%e7%9a%84%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%ab%e3%82%88%e3%82%8b%e6%96%b9%e6%b3%95%20%e3%81%be%e3%81%9a%e3%81%af%ef%bc%8c%e6%8e%a2%e7%b4%a2%e7%9a%84%e5%9b%a0%e5%ad%90%e5%88%86%e6%9e%90%e3%81%a7%e3%82%84%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%e3%80%82psych%e6%89%80%e5%8f%8e%e3%81%aeomega%e9%96%a2%e6%95%b0%e3%82%92%e4%bd%bf%e3%81%86%e3%80%82%e3%81%a8%e3%81%a6%e3%82%82%e7%b0%a1%e5%8d%98%e3%80%82%0alibrary%28lavaan%29%20library%28psych%29%20library%28knitr%29%20data%28%26%2334%3bThurstone%26%2334%3b%29%20res_efa%20%26lt%3b-%20omega%28Thurstone%29%20kable%28round%28res_efa%24schmid%24sl%2c3%29%29%20%20%20%20%20g%20F1%2a%20F2%2a%20F3%2a%20h2%20u2%20p2%20%20%20%20%20Sentences%200.709%200.560%20-0.022%200.030%200.817%200.183%200.615%20%20%20Vocabulary%200." aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2fomega_efacfa%2f&t=EFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89%e3%81%a8CFA%e3%81%8b%e3%82%89%e8%a8%88%e7%ae%97%e3%81%97%e3%81%9f%cf%89" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  Takahiro ONOSHIMA 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+<script src=/js/code-copy.js></script>
+
+
+
+  
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</html>

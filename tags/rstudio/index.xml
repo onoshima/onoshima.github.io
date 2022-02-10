@@ -6,18 +6,16 @@
     <description>Recent content in Rstudio on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 25 Jan 2020 14:04:09 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/rstudio/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Sat, 25 Jan 2020 14:04:09 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/rstudio/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>RstudioでGithubの鍵認証設定</title>
-      <link>https://onoshima.github.io/stat/rstudiogithub/</link>
+      <link>https://onoshima.github.io/posts/rstudiogithub/</link>
       <pubDate>Sat, 25 Jan 2020 14:04:09 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/rstudiogithub/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/rstudiogithub/</guid>
+      <description>R studioの鍵認証についての備忘録．またやることになったらおそらく忘れるので．
+やったこと  RstudioのToos &amp;gt; Global Option &amp;gt; Git/SVNでView public keyをクリック 表示される公開鍵をコピー Githubの自分のページ &amp;gt; Settings &amp;gt; SSH and GPG keysから右上のNew SSH kayというボタンをクリック 適当な名前をつけて先ほどの公開鍵をペースト  参考にしたもの http://dragstar.hatenablog.com/entry/2016/04/26/185546</description>
     </item>
     
   </channel>

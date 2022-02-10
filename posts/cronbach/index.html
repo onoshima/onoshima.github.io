@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 相関係数行列からクロンバックのαを求める | Takahiro ONOSHIMA&#39;s website</title>
+  <link rel = 'canonical' href = 'https://onoshima.github.io/posts/cronbach/'>
+  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="相関係数行列からクロンバックのαを求める" />
+<meta property="og:description" content="尺度の作成論文などでは信頼性係数が報告される。信頼性係数には様々な種類があるが, その中でもっともよく使われるのがクロンバックのαである。クロンバックのαは次の計算式で求められる。
+$$ a = \frac{n}{n-1} \left( 1- \frac{\Sigma^n _{i=1}Var(X_i)}{Var(X)}\right) \tag{1} $$
+ここで, $n$は項目数, $X_i$は$i$番目の項目の得点である。$X$はテストの合計得点である。
+Rでクロンバックのαの求めるには Rでクロンバックのαを求めるためには複数のやり方がある。
+http://www.okadajp.org/RWiki/?%CE%B1%E4%BF%82%E6%95%B0%EF%BC%8C%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%AE%97%E5%87%BA
+とりあえずここではpsychパッケージに含まれるalpha()関数を使ってみることにする。データは同じパッケージに含まれるbfiを用いる。このデータはビッグファイブ理論が想定する因子を測定する質問紙で1因子につき5項目合計25項目からなる。サンプルサイズは2800である。今回は最初の10項目だけ使う。
+データの中身はこんな感じ。6件法である。
+さて, このデータに対してクロンバックのαを求めるにはalpha()関数を用いるのだが, データが逆転項目を含んでいるのでそれを処理しなければいけない。6件法なので6から項目を引くと出てくる。ここではのちの話の都合で欠損を含むデータを除外している。
+# 逆転項目の処理して必要な項目だけ取り出す new &lt;- dat %&gt;% mutate(A1=6-A1, C4=6-C4, C5=6-C5) %&gt;% select(1:10) %&gt;% filter(!is.na(A1), !is.na(A2), !is.na(A3), !is.na(A4), !is.na(A5), !is.na(C1), !is.na(C2), !is.na(C3), !is.na(C4), !is.na(C5)) 逆転項目の処理が済んだところで, alpha()関数を使ってみる。
+# クロンバックαを計算 res &lt;- psych::alpha(new) αの値が出てくるだけでなくて, 各項目をなくした際にαがどのように変化するかの値も出てくる。これらは尺度作成の際には役に立つだろう。
+相関係数からクロンバックのαを求める ところで岡田（2015）によれば, クロンバックのαは相関係数行列から求めることもできるようである。
+https://www.jstage.jst.go.jp/article/arepj/54/0/54_71/_article/-char/ja/
+相関係数行列からクロンバックのαは次の式で求められる。
+$$ a = \frac{n\bar{r}}{1&#43;(n-1) \bar{r}} \tag{2} $$
+ここでnは項目数で, $\bar{r}$は項目間の相関係数の平均である。さきほどのデータを用いて, 同様の結果が得られるが試してみる。相関係数行列を求めて, 上記の式に当てはめてみる。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://onoshima.github.io/posts/cronbach/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-12-27T21:37:22+09:00" />
+<meta property="article:modified_time" content="2019-12-27T21:37:22+09:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="相関係数行列からクロンバックのαを求める"/>
+<meta name="twitter:description" content="尺度の作成論文などでは信頼性係数が報告される。信頼性係数には様々な種類があるが, その中でもっともよく使われるのがクロンバックのαである。クロンバックのαは次の計算式で求められる。
+$$ a = \frac{n}{n-1} \left( 1- \frac{\Sigma^n _{i=1}Var(X_i)}{Var(X)}\right) \tag{1} $$
+ここで, $n$は項目数, $X_i$は$i$番目の項目の得点である。$X$はテストの合計得点である。
+Rでクロンバックのαの求めるには Rでクロンバックのαを求めるためには複数のやり方がある。
+http://www.okadajp.org/RWiki/?%CE%B1%E4%BF%82%E6%95%B0%EF%BC%8C%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%AE%97%E5%87%BA
+とりあえずここではpsychパッケージに含まれるalpha()関数を使ってみることにする。データは同じパッケージに含まれるbfiを用いる。このデータはビッグファイブ理論が想定する因子を測定する質問紙で1因子につき5項目合計25項目からなる。サンプルサイズは2800である。今回は最初の10項目だけ使う。
+データの中身はこんな感じ。6件法である。
+さて, このデータに対してクロンバックのαを求めるにはalpha()関数を用いるのだが, データが逆転項目を含んでいるのでそれを処理しなければいけない。6件法なので6から項目を引くと出てくる。ここではのちの話の都合で欠損を含むデータを除外している。
+# 逆転項目の処理して必要な項目だけ取り出す new &lt;- dat %&gt;% mutate(A1=6-A1, C4=6-C4, C5=6-C5) %&gt;% select(1:10) %&gt;% filter(!is.na(A1), !is.na(A2), !is.na(A3), !is.na(A4), !is.na(A5), !is.na(C1), !is.na(C2), !is.na(C3), !is.na(C4), !is.na(C5)) 逆転項目の処理が済んだところで, alpha()関数を使ってみる。
+# クロンバックαを計算 res &lt;- psych::alpha(new) αの値が出てくるだけでなくて, 各項目をなくした際にαがどのように変化するかの値も出てくる。これらは尺度作成の際には役に立つだろう。
+相関係数からクロンバックのαを求める ところで岡田（2015）によれば, クロンバックのαは相関係数行列から求めることもできるようである。
+https://www.jstage.jst.go.jp/article/arepj/54/0/54_71/_article/-char/ja/
+相関係数行列からクロンバックのαは次の式で求められる。
+$$ a = \frac{n\bar{r}}{1&#43;(n-1) \bar{r}} \tag{2} $$
+ここでnは項目数で, $\bar{r}$は項目間の相関係数の平均である。さきほどのデータを用いて, 同様の結果が得られるが試してみる。相関係数行列を求めて, 上記の式に当てはめてみる。"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://onoshima.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://onoshima.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://onoshima.github.io/posts/prepost/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="https://onoshima.github.io/posts/ggplot2japanese/" aria-label="Next">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&text=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&title=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&is_video=false&description=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&title=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&title=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&name=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b&description=%e5%b0%ba%e5%ba%a6%e3%81%ae%e4%bd%9c%e6%88%90%e8%ab%96%e6%96%87%e3%81%aa%e3%81%a9%e3%81%a7%e3%81%af%e4%bf%a1%e9%a0%bc%e6%80%a7%e4%bf%82%e6%95%b0%e3%81%8c%e5%a0%b1%e5%91%8a%e3%81%95%e3%82%8c%e3%82%8b%e3%80%82%e4%bf%a1%e9%a0%bc%e6%80%a7%e4%bf%82%e6%95%b0%e3%81%ab%e3%81%af%e6%a7%98%e3%80%85%e3%81%aa%e7%a8%ae%e9%a1%9e%e3%81%8c%e3%81%82%e3%82%8b%e3%81%8c%2c%20%e3%81%9d%e3%81%ae%e4%b8%ad%e3%81%a7%e3%82%82%e3%81%a3%e3%81%a8%e3%82%82%e3%82%88%e3%81%8f%e4%bd%bf%e3%82%8f%e3%82%8c%e3%82%8b%e3%81%ae%e3%81%8c%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%81%af%e6%ac%a1%e3%81%ae%e8%a8%88%e7%ae%97%e5%bc%8f%e3%81%a7%e6%b1%82%e3%82%81%e3%82%89%e3%82%8c%e3%82%8b%e3%80%82%0a%24%24%20a%20%3d%20%5cfrac%7bn%7d%7bn-1%7d%20%5cleft%28%201-%20%5cfrac%7b%5cSigma%5en%20_%7bi%3d1%7dVar%28X_i%29%7d%7bVar%28X%29%7d%5cright%29%20%5ctag%7b1%7d%20%24%24%0a%e3%81%93%e3%81%93%e3%81%a7%2c%20%24n%24%e3%81%af%e9%a0%85%e7%9b%ae%e6%95%b0%2c%20%24X_i%24%e3%81%af%24i%24%e7%95%aa%e7%9b%ae%e3%81%ae%e9%a0%85%e7%9b%ae%e3%81%ae%e5%be%97%e7%82%b9%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%24X%24%e3%81%af%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e5%90%88%e8%a8%88%e5%be%97%e7%82%b9%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%0aR%e3%81%a7%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%81%ae%e6%b1%82%e3%82%81%e3%82%8b%e3%81%ab%e3%81%af%20R%e3%81%a7%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ab%e3%81%af%e8%a4%87%e6%95%b0%e3%81%ae%e3%82%84%e3%82%8a%e6%96%b9%e3%81%8c%e3%81%82%e3%82%8b%e3%80%82%0ahttp%3a%2f%2fwww.okadajp.org%2fRWiki%2f%3f%25CE%25B1%25E4%25BF%2582%25E6%2595%25B0%25EF%25BC%258C%25E4%25BF%25A1%25E9%25A0%25BC%25E6%2580%25A7%25E4%25BF%2582%25E6%2595%25B0%25E3%2581%25AE%25E7%25AE%2597%25E5%2587%25BA%0a%e3%81%a8%e3%82%8a%e3%81%82%e3%81%88%e3%81%9a%e3%81%93%e3%81%93%e3%81%a7%e3%81%afpsych%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e5%90%ab%e3%81%be%e3%82%8c%e3%82%8balpha%28%29%e9%96%a2%e6%95%b0%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%e3%81%93%e3%81%a8%e3%81%ab%e3%81%99%e3%82%8b%e3%80%82%e3%83%87%e3%83%bc%e3%82%bf%e3%81%af%e5%90%8c%e3%81%98%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e5%90%ab%e3%81%be%e3%82%8c%e3%82%8bbfi%e3%82%92%e7%94%a8%e3%81%84%e3%82%8b%e3%80%82%e3%81%93%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%81%af%e3%83%93%e3%83%83%e3%82%b0%e3%83%95%e3%82%a1%e3%82%a4%e3%83%96%e7%90%86%e8%ab%96%e3%81%8c%e6%83%b3%e5%ae%9a%e3%81%99%e3%82%8b%e5%9b%a0%e5%ad%90%e3%82%92%e6%b8%ac%e5%ae%9a%e3%81%99%e3%82%8b%e8%b3%aa%e5%95%8f%e7%b4%99%e3%81%a71%e5%9b%a0%e5%ad%90%e3%81%ab%e3%81%a4%e3%81%8d5%e9%a0%85%e7%9b%ae%e5%90%88%e8%a8%8825%e9%a0%85%e7%9b%ae%e3%81%8b%e3%82%89%e3%81%aa%e3%82%8b%e3%80%82%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%b5%e3%82%a4%e3%82%ba%e3%81%af2800%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%e4%bb%8a%e5%9b%9e%e3%81%af%e6%9c%80%e5%88%9d%e3%81%ae10%e9%a0%85%e7%9b%ae%e3%81%a0%e3%81%91%e4%bd%bf%e3%81%86%e3%80%82%0a%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e4%b8%ad%e8%ba%ab%e3%81%af%e3%81%93%e3%82%93%e3%81%aa%e6%84%9f%e3%81%98%e3%80%826%e4%bb%b6%e6%b3%95%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%0a%e3%81%95%e3%81%a6%2c%20%e3%81%93%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ab%e5%af%be%e3%81%97%e3%81%a6%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e3%81%ab%e3%81%afalpha%28%29%e9%96%a2%e6%95%b0%e3%82%92%e7%94%a8%e3%81%84%e3%82%8b%e3%81%ae%e3%81%a0%e3%81%8c%2c%20%e3%83%87%e3%83%bc%e3%82%bf%e3%81%8c%e9%80%86%e8%bb%a2%e9%a0%85%e7%9b%ae%e3%82%92%e5%90%ab%e3%82%93%e3%81%a7%e3%81%84%e3%82%8b%e3%81%ae%e3%81%a7%e3%81%9d%e3%82%8c%e3%82%92%e5%87%a6%e7%90%86%e3%81%97%e3%81%aa%e3%81%91%e3%82%8c%e3%81%b0%e3%81%84%e3%81%91%e3%81%aa%e3%81%84%e3%80%826%e4%bb%b6%e6%b3%95%e3%81%aa%e3%81%ae%e3%81%a76%e3%81%8b%e3%82%89%e9%a0%85%e7%9b%ae%e3%82%92%e5%bc%95%e3%81%8f%e3%81%a8%e5%87%ba%e3%81%a6%e3%81%8f%e3%82%8b%e3%80%82%e3%81%93%e3%81%93%e3%81%a7%e3%81%af%e3%81%ae%e3%81%a1%e3%81%ae%e8%a9%b1%e3%81%ae%e9%83%bd%e5%90%88%e3%81%a7%e6%ac%a0%e6%90%8d%e3%82%92%e5%90%ab%e3%82%80%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92%e9%99%a4%e5%a4%96%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%0a%23%20%e9%80%86%e8%bb%a2%e9%a0%85%e7%9b%ae%e3%81%ae%e5%87%a6%e7%90%86%e3%81%97%e3%81%a6%e5%bf%85%e8%a6%81%e3%81%aa%e9%a0%85%e7%9b%ae%e3%81%a0%e3%81%91%e5%8f%96%e3%82%8a%e5%87%ba%e3%81%99%20new%20%26lt%3b-%20dat%20%25%26gt%3b%25%20mutate%28A1%3d6-A1%2c%20C4%3d6-C4%2c%20C5%3d6-C5%29%20%25%26gt%3b%25%20select%281%3a10%29%20%25%26gt%3b%25%20filter%28%21is.na%28A1%29%2c%20%21is.na%28A2%29%2c%20%21is.na%28A3%29%2c%20%21is.na%28A4%29%2c%20%21is.na%28A5%29%2c%20%21is.na%28C1%29%2c%20%21is.na%28C2%29%2c%20%21is.na%28C3%29%2c%20%21is.na%28C4%29%2c%20%21is.na%28C5%29%29%20%e9%80%86%e8%bb%a2%e9%a0%85%e7%9b%ae%e3%81%ae%e5%87%a6%e7%90%86%e3%81%8c%e6%b8%88%e3%82%93%e3%81%a0%e3%81%a8%e3%81%93%e3%82%8d%e3%81%a7%2c%20alpha%28%29%e9%96%a2%e6%95%b0%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%e3%80%82%0a%23%20%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%ce%b1%e3%82%92%e8%a8%88%e7%ae%97%20res%20%26lt%3b-%20psych%3a%3aalpha%28new%29%20%ce%b1%e3%81%ae%e5%80%a4%e3%81%8c%e5%87%ba%e3%81%a6%e3%81%8f%e3%82%8b%e3%81%a0%e3%81%91%e3%81%a7%e3%81%aa%e3%81%8f%e3%81%a6%2c%20%e5%90%84%e9%a0%85%e7%9b%ae%e3%82%92%e3%81%aa%e3%81%8f%e3%81%97%e3%81%9f%e9%9a%9b%e3%81%ab%ce%b1%e3%81%8c%e3%81%a9%e3%81%ae%e3%82%88%e3%81%86%e3%81%ab%e5%a4%89%e5%8c%96%e3%81%99%e3%82%8b%e3%81%8b%e3%81%ae%e5%80%a4%e3%82%82%e5%87%ba%e3%81%a6%e3%81%8f%e3%82%8b%e3%80%82%e3%81%93%e3%82%8c%e3%82%89%e3%81%af%e5%b0%ba%e5%ba%a6%e4%bd%9c%e6%88%90%e3%81%ae%e9%9a%9b%e3%81%ab%e3%81%af%e5%bd%b9%e3%81%ab%e7%ab%8b%e3%81%a4%e3%81%a0%e3%82%8d%e3%81%86%e3%80%82%0a%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%20%e3%81%a8%e3%81%93%e3%82%8d%e3%81%a7%e5%b2%a1%e7%94%b0%ef%bc%882015%ef%bc%89%e3%81%ab%e3%82%88%e3%82%8c%e3%81%b0%2c%20%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%81%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e6%b1%82%e3%82%81%e3%82%8b%e3%81%93%e3%81%a8%e3%82%82%e3%81%a7%e3%81%8d%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%0ahttps%3a%2f%2fwww.jstage.jst.go.jp%2farticle%2farepj%2f54%2f0%2f54_71%2f_article%2f-char%2fja%2f%0a%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%81%af%e6%ac%a1%e3%81%ae%e5%bc%8f%e3%81%a7%e6%b1%82%e3%82%81%e3%82%89%e3%82%8c%e3%82%8b%e3%80%82%0a%24%24%20a%20%3d%20%5cfrac%7bn%5cbar%7br%7d%7d%7b1%2b%28n-1%29%20%5cbar%7br%7d%7d%20%5ctag%7b2%7d%20%24%24%0a%e3%81%93%e3%81%93%e3%81%a7n%e3%81%af%e9%a0%85%e7%9b%ae%e6%95%b0%e3%81%a7%2c%20%24%5cbar%7br%7d%24%e3%81%af%e9%a0%85%e7%9b%ae%e9%96%93%e3%81%ae%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%81%ae%e5%b9%b3%e5%9d%87%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%e3%81%95%e3%81%8d%e3%81%bb%e3%81%a9%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92%e7%94%a8%e3%81%84%e3%81%a6%2c%20%e5%90%8c%e6%a7%98%e3%81%ae%e7%b5%90%e6%9e%9c%e3%81%8c%e5%be%97%e3%82%89%e3%82%8c%e3%82%8b%e3%81%8c%e8%a9%a6%e3%81%97%e3%81%a6%e3%81%bf%e3%82%8b%e3%80%82%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%82%92%e6%b1%82%e3%82%81%e3%81%a6%2c%20%e4%b8%8a%e8%a8%98%e3%81%ae%e5%bc%8f%e3%81%ab%e5%bd%93%e3%81%a6%e3%81%af%e3%82%81%e3%81%a6%e3%81%bf%e3%82%8b%e3%80%82" aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&t=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#rでクロンバックのαの求めるには">Rでクロンバックのαの求めるには</a></li>
+    <li><a href="#相関係数からクロンバックのαを求める">相関係数からクロンバックのαを求める</a></li>
+  </ul>
+</nav>
+    </div>
+    
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        相関係数行列からクロンバックのαを求める
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2019-12-27 21:37:22 &#43;0900 JST" itemprop="datePublished">2019-12-27</time>
+          
+        </div>
+        
+        
+        
+        <div class="article-category">
+            <i class="fas fa-archive"></i>
+            
+            
+            <a class="category-link" href="/categories/r">R</a>
+            
+             ,  
+            <a class="category-link" href="/categories/stat">Stat</a>
+            
+        </div>
+        
+        
+        <div class="article-tag">
+            <i class="fas fa-tag"></i>
+            
+            
+            <a class="tag-link" href="/tags/reliability" rel="tag">reliability</a>
+            
+             ,  
+            <a class="tag-link" href="/tags/cronbachs-alpha" rel="tag">Cronbach&#39;s alpha</a>
+            
+        </div>
+        
+      </div>
+    </header>
+
+  
+    
+    <div class="content" itemprop="articleBody">
+      <p>尺度の作成論文などでは信頼性係数が報告される。信頼性係数には様々な種類があるが, その中でもっともよく使われるのがクロンバックのαである。クロンバックのαは次の計算式で求められる。</p>
+<p>$$ a = \frac{n}{n-1} \left( 1- \frac{\Sigma^n _{i=1}Var(X_i)}{Var(X)}\right) \tag{1} $$</p>
+<p>ここで, $n$は項目数, $X_i$は$i$番目の項目の得点である。$X$はテストの合計得点である。</p>
+<h2 id="rでクロンバックのαの求めるには">Rでクロンバックのαの求めるには</h2>
+<p>Rでクロンバックのαを求めるためには複数のやり方がある。</p>
+<p><a href="http://www.okadajp.org/RWiki/?%CE%B1%E4%BF%82%E6%95%B0%EF%BC%8C%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%AE%97%E5%87%BA">http://www.okadajp.org/RWiki/?%CE%B1%E4%BF%82%E6%95%B0%EF%BC%8C%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%AE%97%E5%87%BA</a></p>
+<p>とりあえずここではpsychパッケージに含まれるalpha()関数を使ってみることにする。データは同じパッケージに含まれるbfiを用いる。このデータはビッグファイブ理論が想定する因子を測定する質問紙で1因子につき5項目合計25項目からなる。サンプルサイズは2800である。今回は最初の10項目だけ使う。</p>
+<p>データの中身はこんな感じ。6件法である。</p>
+<!-- raw HTML omitted -->
+<p>さて, このデータに対してクロンバックのαを求めるにはalpha()関数を用いるのだが, データが逆転項目を含んでいるのでそれを処理しなければいけない。6件法なので6から項目を引くと出てくる。ここではのちの話の都合で欠損を含むデータを除外している。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 逆転項目の処理して必要な項目だけ取り出す</span>
+new <span style="color:#f92672">&lt;-</span> dat <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">mutate</span>(A1<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span><span style="color:#f92672">-</span>A1, C4<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span><span style="color:#f92672">-</span>C4, C5<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span><span style="color:#f92672">-</span>C5) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">select</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">filter</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A1), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A2), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A3), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A4), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A5),
+         <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C1), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C2), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C3), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C4), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C5))</code></pre></div>
+<p>逆転項目の処理が済んだところで, alpha()関数を使ってみる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># クロンバックαを計算</span>
+res <span style="color:#f92672">&lt;-</span> psych<span style="color:#f92672">::</span><span style="color:#a6e22e">alpha</span>(new)</code></pre></div>
+<p><img src="/images/cronbach1.png" alt="cronbach1"></p>
+<p>αの値が出てくるだけでなくて, 各項目をなくした際にαがどのように変化するかの値も出てくる。これらは尺度作成の際には役に立つだろう。</p>
+<h2 id="相関係数からクロンバックのαを求める">相関係数からクロンバックのαを求める</h2>
+<p>ところで岡田（2015）によれば, クロンバックのαは相関係数行列から求めることもできるようである。</p>
+<p><a href="https://www.jstage.jst.go.jp/article/arepj/54/0/54_71/_article/-char/ja/">https://www.jstage.jst.go.jp/article/arepj/54/0/54_71/_article/-char/ja/</a></p>
+<p>相関係数行列からクロンバックのαは次の式で求められる。</p>
+<p>$$ a = \frac{n\bar{r}}{1+(n-1) \bar{r}} \tag{2} $$</p>
+<p>ここでnは項目数で, $\bar{r}$は項目間の相関係数の平均である。さきほどのデータを用いて, 同様の結果が得られるが試してみる。相関係数行列を求めて, 上記の式に当てはめてみる。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 相関係数からα計算計算</span>
+cormtx <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor</span>(new[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>], use <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;complete.obs&#34;</span>)
+rbar <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(cormtx<span style="color:#a6e22e">[lower.tri</span>(cormtx)])
+n <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
+alpha_computed_cormtx<span style="color:#f92672">&lt;-</span> (n <span style="color:#f92672">*</span> rbar) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> (n<span style="color:#ae81ff">-1</span>)<span style="color:#f92672">*</span>rbar)
+
+<span style="color:#75715e"># &gt; alpha_computed_cormtx</span>
+<span style="color:#75715e"># [1] 0.7397363</span></code></pre></div>
+<p>ここで得られた値は先ほどのalpha()関数の出力のstd.alphaという値と一致している。いつか使うかもしれないからこれを関数化しておくことにする。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 相関係数行列からαを求める感数</span>
+alpha.cor <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(x){
+  n <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(x)
+  rbar <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(x<span style="color:#a6e22e">[lower.tri</span>(x)])
+  alpha <span style="color:#f92672">&lt;-</span> (n <span style="color:#f92672">*</span> rbar) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> (n<span style="color:#ae81ff">-1</span>)<span style="color:#f92672">*</span>rbar)
+  <span style="color:#a6e22e">return</span>(alpha)
+}
+
+<span style="color:#75715e">#&gt; alpha.cor(cormtx)</span>
+<span style="color:#75715e">#[1] 0.7397363</span></code></pre></div>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/profile">Profile</a></li>
+         
+          <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+          <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#rでクロンバックのαの求めるには">Rでクロンバックのαの求めるには</a></li>
+    <li><a href="#相関係数からクロンバックのαを求める">相関係数からクロンバックのαを求める</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&text=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&title=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&is_video=false&description=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&title=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&title=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&name=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b&description=%e5%b0%ba%e5%ba%a6%e3%81%ae%e4%bd%9c%e6%88%90%e8%ab%96%e6%96%87%e3%81%aa%e3%81%a9%e3%81%a7%e3%81%af%e4%bf%a1%e9%a0%bc%e6%80%a7%e4%bf%82%e6%95%b0%e3%81%8c%e5%a0%b1%e5%91%8a%e3%81%95%e3%82%8c%e3%82%8b%e3%80%82%e4%bf%a1%e9%a0%bc%e6%80%a7%e4%bf%82%e6%95%b0%e3%81%ab%e3%81%af%e6%a7%98%e3%80%85%e3%81%aa%e7%a8%ae%e9%a1%9e%e3%81%8c%e3%81%82%e3%82%8b%e3%81%8c%2c%20%e3%81%9d%e3%81%ae%e4%b8%ad%e3%81%a7%e3%82%82%e3%81%a3%e3%81%a8%e3%82%82%e3%82%88%e3%81%8f%e4%bd%bf%e3%82%8f%e3%82%8c%e3%82%8b%e3%81%ae%e3%81%8c%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%81%af%e6%ac%a1%e3%81%ae%e8%a8%88%e7%ae%97%e5%bc%8f%e3%81%a7%e6%b1%82%e3%82%81%e3%82%89%e3%82%8c%e3%82%8b%e3%80%82%0a%24%24%20a%20%3d%20%5cfrac%7bn%7d%7bn-1%7d%20%5cleft%28%201-%20%5cfrac%7b%5cSigma%5en%20_%7bi%3d1%7dVar%28X_i%29%7d%7bVar%28X%29%7d%5cright%29%20%5ctag%7b1%7d%20%24%24%0a%e3%81%93%e3%81%93%e3%81%a7%2c%20%24n%24%e3%81%af%e9%a0%85%e7%9b%ae%e6%95%b0%2c%20%24X_i%24%e3%81%af%24i%24%e7%95%aa%e7%9b%ae%e3%81%ae%e9%a0%85%e7%9b%ae%e3%81%ae%e5%be%97%e7%82%b9%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%24X%24%e3%81%af%e3%83%86%e3%82%b9%e3%83%88%e3%81%ae%e5%90%88%e8%a8%88%e5%be%97%e7%82%b9%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%0aR%e3%81%a7%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%81%ae%e6%b1%82%e3%82%81%e3%82%8b%e3%81%ab%e3%81%af%20R%e3%81%a7%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ab%e3%81%af%e8%a4%87%e6%95%b0%e3%81%ae%e3%82%84%e3%82%8a%e6%96%b9%e3%81%8c%e3%81%82%e3%82%8b%e3%80%82%0ahttp%3a%2f%2fwww.okadajp.org%2fRWiki%2f%3f%25CE%25B1%25E4%25BF%2582%25E6%2595%25B0%25EF%25BC%258C%25E4%25BF%25A1%25E9%25A0%25BC%25E6%2580%25A7%25E4%25BF%2582%25E6%2595%25B0%25E3%2581%25AE%25E7%25AE%2597%25E5%2587%25BA%0a%e3%81%a8%e3%82%8a%e3%81%82%e3%81%88%e3%81%9a%e3%81%93%e3%81%93%e3%81%a7%e3%81%afpsych%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e5%90%ab%e3%81%be%e3%82%8c%e3%82%8balpha%28%29%e9%96%a2%e6%95%b0%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%e3%81%93%e3%81%a8%e3%81%ab%e3%81%99%e3%82%8b%e3%80%82%e3%83%87%e3%83%bc%e3%82%bf%e3%81%af%e5%90%8c%e3%81%98%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e5%90%ab%e3%81%be%e3%82%8c%e3%82%8bbfi%e3%82%92%e7%94%a8%e3%81%84%e3%82%8b%e3%80%82%e3%81%93%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%81%af%e3%83%93%e3%83%83%e3%82%b0%e3%83%95%e3%82%a1%e3%82%a4%e3%83%96%e7%90%86%e8%ab%96%e3%81%8c%e6%83%b3%e5%ae%9a%e3%81%99%e3%82%8b%e5%9b%a0%e5%ad%90%e3%82%92%e6%b8%ac%e5%ae%9a%e3%81%99%e3%82%8b%e8%b3%aa%e5%95%8f%e7%b4%99%e3%81%a71%e5%9b%a0%e5%ad%90%e3%81%ab%e3%81%a4%e3%81%8d5%e9%a0%85%e7%9b%ae%e5%90%88%e8%a8%8825%e9%a0%85%e7%9b%ae%e3%81%8b%e3%82%89%e3%81%aa%e3%82%8b%e3%80%82%e3%82%b5%e3%83%b3%e3%83%97%e3%83%ab%e3%82%b5%e3%82%a4%e3%82%ba%e3%81%af2800%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%e4%bb%8a%e5%9b%9e%e3%81%af%e6%9c%80%e5%88%9d%e3%81%ae10%e9%a0%85%e7%9b%ae%e3%81%a0%e3%81%91%e4%bd%bf%e3%81%86%e3%80%82%0a%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e4%b8%ad%e8%ba%ab%e3%81%af%e3%81%93%e3%82%93%e3%81%aa%e6%84%9f%e3%81%98%e3%80%826%e4%bb%b6%e6%b3%95%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%0a%e3%81%95%e3%81%a6%2c%20%e3%81%93%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ab%e5%af%be%e3%81%97%e3%81%a6%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%e3%81%ab%e3%81%afalpha%28%29%e9%96%a2%e6%95%b0%e3%82%92%e7%94%a8%e3%81%84%e3%82%8b%e3%81%ae%e3%81%a0%e3%81%8c%2c%20%e3%83%87%e3%83%bc%e3%82%bf%e3%81%8c%e9%80%86%e8%bb%a2%e9%a0%85%e7%9b%ae%e3%82%92%e5%90%ab%e3%82%93%e3%81%a7%e3%81%84%e3%82%8b%e3%81%ae%e3%81%a7%e3%81%9d%e3%82%8c%e3%82%92%e5%87%a6%e7%90%86%e3%81%97%e3%81%aa%e3%81%91%e3%82%8c%e3%81%b0%e3%81%84%e3%81%91%e3%81%aa%e3%81%84%e3%80%826%e4%bb%b6%e6%b3%95%e3%81%aa%e3%81%ae%e3%81%a76%e3%81%8b%e3%82%89%e9%a0%85%e7%9b%ae%e3%82%92%e5%bc%95%e3%81%8f%e3%81%a8%e5%87%ba%e3%81%a6%e3%81%8f%e3%82%8b%e3%80%82%e3%81%93%e3%81%93%e3%81%a7%e3%81%af%e3%81%ae%e3%81%a1%e3%81%ae%e8%a9%b1%e3%81%ae%e9%83%bd%e5%90%88%e3%81%a7%e6%ac%a0%e6%90%8d%e3%82%92%e5%90%ab%e3%82%80%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92%e9%99%a4%e5%a4%96%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%0a%23%20%e9%80%86%e8%bb%a2%e9%a0%85%e7%9b%ae%e3%81%ae%e5%87%a6%e7%90%86%e3%81%97%e3%81%a6%e5%bf%85%e8%a6%81%e3%81%aa%e9%a0%85%e7%9b%ae%e3%81%a0%e3%81%91%e5%8f%96%e3%82%8a%e5%87%ba%e3%81%99%20new%20%26lt%3b-%20dat%20%25%26gt%3b%25%20mutate%28A1%3d6-A1%2c%20C4%3d6-C4%2c%20C5%3d6-C5%29%20%25%26gt%3b%25%20select%281%3a10%29%20%25%26gt%3b%25%20filter%28%21is.na%28A1%29%2c%20%21is.na%28A2%29%2c%20%21is.na%28A3%29%2c%20%21is.na%28A4%29%2c%20%21is.na%28A5%29%2c%20%21is.na%28C1%29%2c%20%21is.na%28C2%29%2c%20%21is.na%28C3%29%2c%20%21is.na%28C4%29%2c%20%21is.na%28C5%29%29%20%e9%80%86%e8%bb%a2%e9%a0%85%e7%9b%ae%e3%81%ae%e5%87%a6%e7%90%86%e3%81%8c%e6%b8%88%e3%82%93%e3%81%a0%e3%81%a8%e3%81%93%e3%82%8d%e3%81%a7%2c%20alpha%28%29%e9%96%a2%e6%95%b0%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%e3%80%82%0a%23%20%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%ce%b1%e3%82%92%e8%a8%88%e7%ae%97%20res%20%26lt%3b-%20psych%3a%3aalpha%28new%29%20%ce%b1%e3%81%ae%e5%80%a4%e3%81%8c%e5%87%ba%e3%81%a6%e3%81%8f%e3%82%8b%e3%81%a0%e3%81%91%e3%81%a7%e3%81%aa%e3%81%8f%e3%81%a6%2c%20%e5%90%84%e9%a0%85%e7%9b%ae%e3%82%92%e3%81%aa%e3%81%8f%e3%81%97%e3%81%9f%e9%9a%9b%e3%81%ab%ce%b1%e3%81%8c%e3%81%a9%e3%81%ae%e3%82%88%e3%81%86%e3%81%ab%e5%a4%89%e5%8c%96%e3%81%99%e3%82%8b%e3%81%8b%e3%81%ae%e5%80%a4%e3%82%82%e5%87%ba%e3%81%a6%e3%81%8f%e3%82%8b%e3%80%82%e3%81%93%e3%82%8c%e3%82%89%e3%81%af%e5%b0%ba%e5%ba%a6%e4%bd%9c%e6%88%90%e3%81%ae%e9%9a%9b%e3%81%ab%e3%81%af%e5%bd%b9%e3%81%ab%e7%ab%8b%e3%81%a4%e3%81%a0%e3%82%8d%e3%81%86%e3%80%82%0a%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b%20%e3%81%a8%e3%81%93%e3%82%8d%e3%81%a7%e5%b2%a1%e7%94%b0%ef%bc%882015%ef%bc%89%e3%81%ab%e3%82%88%e3%82%8c%e3%81%b0%2c%20%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%81%af%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e6%b1%82%e3%82%81%e3%82%8b%e3%81%93%e3%81%a8%e3%82%82%e3%81%a7%e3%81%8d%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%0ahttps%3a%2f%2fwww.jstage.jst.go.jp%2farticle%2farepj%2f54%2f0%2f54_71%2f_article%2f-char%2fja%2f%0a%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%81%af%e6%ac%a1%e3%81%ae%e5%bc%8f%e3%81%a7%e6%b1%82%e3%82%81%e3%82%89%e3%82%8c%e3%82%8b%e3%80%82%0a%24%24%20a%20%3d%20%5cfrac%7bn%5cbar%7br%7d%7d%7b1%2b%28n-1%29%20%5cbar%7br%7d%7d%20%5ctag%7b2%7d%20%24%24%0a%e3%81%93%e3%81%93%e3%81%a7n%e3%81%af%e9%a0%85%e7%9b%ae%e6%95%b0%e3%81%a7%2c%20%24%5cbar%7br%7d%24%e3%81%af%e9%a0%85%e7%9b%ae%e9%96%93%e3%81%ae%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e3%81%ae%e5%b9%b3%e5%9d%87%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%e3%81%95%e3%81%8d%e3%81%bb%e3%81%a9%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92%e7%94%a8%e3%81%84%e3%81%a6%2c%20%e5%90%8c%e6%a7%98%e3%81%ae%e7%b5%90%e6%9e%9c%e3%81%8c%e5%be%97%e3%82%89%e3%82%8c%e3%82%8b%e3%81%8c%e8%a9%a6%e3%81%97%e3%81%a6%e3%81%bf%e3%82%8b%e3%80%82%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%82%92%e6%b1%82%e3%82%81%e3%81%a6%2c%20%e4%b8%8a%e8%a8%98%e3%81%ae%e5%bc%8f%e3%81%ab%e5%bd%93%e3%81%a6%e3%81%af%e3%82%81%e3%81%a6%e3%81%bf%e3%82%8b%e3%80%82" aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2fcronbach%2f&t=%e7%9b%b8%e9%96%a2%e4%bf%82%e6%95%b0%e8%a1%8c%e5%88%97%e3%81%8b%e3%82%89%e3%82%af%e3%83%ad%e3%83%b3%e3%83%90%e3%83%83%e3%82%af%e3%81%ae%ce%b1%e3%82%92%e6%b1%82%e3%82%81%e3%82%8b" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  Takahiro ONOSHIMA 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+<script src=/js/code-copy.js></script>
+
+
+
+  
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</html>

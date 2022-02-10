@@ -6,36 +6,56 @@
     <description>Recent content in factor analysis on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Wed, 23 Sep 2020 14:59:29 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/factor-analysis/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Wed, 23 Sep 2020 14:59:29 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/factor-analysis/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>因子分析の教科書における因子数の選択についての記述</title>
-      <link>https://onoshima.github.io/stat/factornumber/</link>
+      <link>https://onoshima.github.io/posts/factornumber/</link>
       <pubDate>Wed, 23 Sep 2020 14:59:29 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/factornumber/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/factornumber/</guid>
+      <description>はじめに 必要があって因子分析や心理測定の教科書で探索的因子分析の際の因子数の推定法がどのように扱われているかを調べたものの記録。手元にあるものだけ。
+Brown (2006) Brown, T. A. (2006). Confirmatory factor analysis for applied research. The Guilford Press.
+因子分析の定評のある教科書（らしい）。大学院の授業で読んだ。基本は確認的因子分析の教科書なのだが，2章で探索的因子分析も扱っている。その中でFactor Selectionという節で（pp.23-30）因子数の推定について扱っている。
+よく使われている手法として，Kaiser-Guttmanルール，スクリーテスト，平行分析を紹介している。また，因子の推定法が最尤法のときには，適合度の情報も使えることを紹介している。
+Raykov &amp;amp; Marcoulides (2010) Raykov, T., &amp;amp; Marcoulides, G. A. (2010). Introduction to Psychometric Theory. Routledge.
+因子分析は第3章で扱われており，因子数の探索は独立した節として3.8節で扱われている。紹介しているのはKaiser基準とスクリープロットとamount of explained varianceを紹介している。文献等の引用はなし。
+Tabachnick &amp;amp; Fidell (2012) Tabachnick, B. G., &amp;amp; Fidell, L. S. (2012). Using Multivariate Statistics (6th Edition). Pearson.
+因子分析の教科書という訳でなく，多変量統計全般の教科書。13章で主成分分析と因子分析を扱っている。13.6.2のAdequay of Extraction and Number of Factorsという節で因子数についての取り扱いがある（pp648-）。
+手法についてのまとめは，Gorsuch (1983)（因子分析の教科書）かZwick and Velicer (1986)を見てねと言い，SPSSとSASで扱える手法に焦点を絞って紹介している。Kairser基準，スクリーテスト，平行分析，MAP基準を紹介している。さらに，Zwick &amp;amp; Velicer (1986)のシミュレーションの結果も紹介して平行分析とMAPがうまくいくと紹介している。</description>
     </item>
     
     <item>
       <title>探索的因子分析の際の平行分析について</title>
-      <link>https://onoshima.github.io/stat/parallel/</link>
+      <link>https://onoshima.github.io/posts/parallel/</link>
       <pubDate>Wed, 23 Sep 2020 10:39:35 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/parallel/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/parallel/</guid>
+      <description>はじめに 因子分析に関連した調べ物の必要があって，その覚書。今回は平行分析について。
+探索的因子分析で因子数を決めるための複数の基準が提案されていますが，平行分析（parallel analysis）はその一つで，因子分析の教科書などでも勧められる方法です。アイデアとしては，分析しようとしているデータセットと同じサイズであるランダムなデータセットから計算された固有値と比べて，ランダムなデータセットよりも大きい固有値までを採用しようという考えのようです。こうすることでサンプリングの誤差に対応できるとのことです。初出はHorn (1965)です。
+Rでの実験 Rで平行分析を行うにはpsychパッケージのfa.parallelという関数を用いれば良いのですが，ここでは原理を理解するためにパッケージを使わずにやってみます。使うデータはpsych所収のbfiというデータセットです。ビッグファイブの性格特性の質問紙データで，各因子5項目ずつ計25項目の質問紙のデータです。26列目以降は回答者の属性に関するデータが入っています。サンプルサイズは2800です。
+library(psych) dat &amp;lt;- bfi[,1:25] head(dat) A1 A2 A3 A4 A5 C1 C2 C3 C4 C5 E1 E2 E3 E4 E5 N1 N2 N3 N4 N5 O1 O2 O3 O4 O5 61617 2 4 3 4 4 2 3 3 4 4 3 3 3 4 4 3 4 2 2 3 3 6 3 4 3 61618 2 4 5 2 5 5 4 4 3 4 1 1 6 4 3 3 3 3 5 5 4 2 4 3 3 61620 5 4 5 4 4 4 5 4 2 5 2 4 4 4 5 4 5 4 2 3 4 2 5 5 2 61621 4 4 6 5 5 4 4 3 5 5 5 3 4 4 4 2 5 2 4 1 3 3 4 3 5 61622 2 3 3 4 5 4 4 5 3 2 2 2 5 4 5 2 3 4 4 3 3 3 4 3 3 61623 6 6 5 6 5 6 6 6 1 3 2 1 6 5 6 3 5 2 2 3 4 3 5 6 1 まずは，元データからスクリープロットを描いてみます（15因子目まで）。</description>
     </item>
     
     <item>
       <title>因子分析におけるMAP基準について</title>
-      <link>https://onoshima.github.io/stat/vss/</link>
+      <link>https://onoshima.github.io/posts/vss/</link>
       <pubDate>Tue, 22 Sep 2020 14:41:25 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/vss/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/vss/</guid>
+      <description>はじめに 探索的因子分析において，因子数を決める際にはさまざまな基準があるのですが，その中にMAP基準というものがあります。必要があって調べた際のメモを残しておきます。
+MAP基準とは MAPはMinimum average partical correlationの略です。オリジナルはVelicer（1976）による次の論文です。https://doi-org/10.1007/BF02293557
+$p$個の観測変数の相関行列を$R$とします。サイズは$p \times p$です。主成分分析の結果である$p \times m$のパターン行列を$A$とします。そのとき，偏分散共分散行列$C^*$は
+$$C^* = R- AA^\prime$$
+と書けます。ここからさらに偏相関係数の行列は
+$$ R^* = D^{-1/2}( R- AA^\prime)D^{-1/2}　\tag{1}　$$
+と書けます。ここで $D$は，
+$$D = Diag(C^*) = Diag(R- AA^\prime)$$
+です。ここで，$R^*$のi行目，j列目の要素を $r ^* _{ij}$としたときに，偏相関行列の2乗の値の平均が
+$$ f_m = \frac{\sum \sum_{i \neq j} (r ^* _{ij})^2 }{p(p-1)}　\tag{2}$$
+として表されます。MAP基準とは，パターン行列のmの値を変えていきながらこの値を計算して，最小になる$f_m$の$m$を因子数として採択しようという方法です。
+実際の数値例を確認 実際にデータを触ってみながら，手順を確認してみます。psychのvss関数の中身を覗きながら書きました。使うデータはpsychパッケージの中に入っているThurstone.9という9つのテストの相関行列です。
+library(psych) data(&amp;#34;Thurstone.9&amp;#34;) R &amp;lt;- Thurstone.9     Prefixes Suffixes Vocabulary Sentences First.Last FirstLetters FourLetters Completion SameorOpposite     Prefixes 1.</description>
     </item>
     
   </channel>

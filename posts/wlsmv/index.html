@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> カテゴリカルデータをlavaanでSEMする際の細かい話 | Takahiro ONOSHIMA&#39;s website</title>
+  <link rel = 'canonical' href = 'https://onoshima.github.io/posts/wlsmv/'>
+  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="カテゴリカルデータをlavaanでSEMする際の細かい話" />
+<meta property="og:description" content="lavaanでカテゴリカルデータのSEMをする際には，orederedの引数にカテゴリカルなデータの変数名を指定する．推定はデフォルトではWLSMVらしい．
+WLSMVというのはそもそも，estimatorのみを指している訳でなく，estimatorがDWLSで，robust標準誤差を用いて，平均と分散を調整したテスト統計量を使う3点セットのことらしいのだが，Mplusでデフォルトの推定WLSMVなため業界ではこの呼び名で定着したそうだ．
+Mplusはversionが1から5までとversion6以降ではWLSMVの指す意味が違うそうである．lavaanを使ってversion5までのWLSMVを再現するには，estimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;Sattertwaite&quot;の3点セットなのだが，ver6以降のWLSMVはestimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;scaled.shifted&quot;だそうだ．個別に指定してもよいし，estimator=&quot;WLSMV&quot;とすればver6以降に，estimator=&quot;WLSMVS&quot;とすればver5までのと同じ方法になるようだ．とある推定の結果を一致させたかったときにつまづいたので記録を残しておく．
+【参考】
+https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://onoshima.github.io/posts/wlsmv/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-04-16T20:04:15+09:00" />
+<meta property="article:modified_time" content="2020-04-16T20:04:15+09:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="カテゴリカルデータをlavaanでSEMする際の細かい話"/>
+<meta name="twitter:description" content="lavaanでカテゴリカルデータのSEMをする際には，orederedの引数にカテゴリカルなデータの変数名を指定する．推定はデフォルトではWLSMVらしい．
+WLSMVというのはそもそも，estimatorのみを指している訳でなく，estimatorがDWLSで，robust標準誤差を用いて，平均と分散を調整したテスト統計量を使う3点セットのことらしいのだが，Mplusでデフォルトの推定WLSMVなため業界ではこの呼び名で定着したそうだ．
+Mplusはversionが1から5までとversion6以降ではWLSMVの指す意味が違うそうである．lavaanを使ってversion5までのWLSMVを再現するには，estimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;Sattertwaite&quot;の3点セットなのだが，ver6以降のWLSMVはestimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;scaled.shifted&quot;だそうだ．個別に指定してもよいし，estimator=&quot;WLSMV&quot;とすればver6以降に，estimator=&quot;WLSMVS&quot;とすればver5までのと同じ方法になるようだ．とある推定の結果を一致させたかったときにつまづいたので記録を残しておく．
+【参考】
+https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://onoshima.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://onoshima.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://onoshima.github.io/stat/wlsmv/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="https://onoshima.github.io/posts/nonnormal/" aria-label="Next">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&text=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&title=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&is_video=false&description=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&title=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&title=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&name=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1&description=lavaan%e3%81%a7%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%81%aeSEM%e3%82%92%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ab%e3%81%af%ef%bc%8coredered%e3%81%ae%e5%bc%95%e6%95%b0%e3%81%ab%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%81%aa%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e5%a4%89%e6%95%b0%e5%90%8d%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%99%e3%82%8b%ef%bc%8e%e6%8e%a8%e5%ae%9a%e3%81%af%e3%83%87%e3%83%95%e3%82%a9%e3%83%ab%e3%83%88%e3%81%a7%e3%81%afWLSMV%e3%82%89%e3%81%97%e3%81%84%ef%bc%8e%0aWLSMV%e3%81%a8%e3%81%84%e3%81%86%e3%81%ae%e3%81%af%e3%81%9d%e3%82%82%e3%81%9d%e3%82%82%ef%bc%8cestimator%e3%81%ae%e3%81%bf%e3%82%92%e6%8c%87%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e8%a8%b3%e3%81%a7%e3%81%aa%e3%81%8f%ef%bc%8cestimator%e3%81%8cDWLS%e3%81%a7%ef%bc%8crobust%e6%a8%99%e6%ba%96%e8%aa%a4%e5%b7%ae%e3%82%92%e7%94%a8%e3%81%84%e3%81%a6%ef%bc%8c%e5%b9%b3%e5%9d%87%e3%81%a8%e5%88%86%e6%95%a3%e3%82%92%e8%aa%bf%e6%95%b4%e3%81%97%e3%81%9f%e3%83%86%e3%82%b9%e3%83%88%e7%b5%b1%e8%a8%88%e9%87%8f%e3%82%92%e4%bd%bf%e3%81%863%e7%82%b9%e3%82%bb%e3%83%83%e3%83%88%e3%81%ae%e3%81%93%e3%81%a8%e3%82%89%e3%81%97%e3%81%84%e3%81%ae%e3%81%a0%e3%81%8c%ef%bc%8cMplus%e3%81%a7%e3%83%87%e3%83%95%e3%82%a9%e3%83%ab%e3%83%88%e3%81%ae%e6%8e%a8%e5%ae%9aWLSMV%e3%81%aa%e3%81%9f%e3%82%81%e6%a5%ad%e7%95%8c%e3%81%a7%e3%81%af%e3%81%93%e3%81%ae%e5%91%bc%e3%81%b3%e5%90%8d%e3%81%a7%e5%ae%9a%e7%9d%80%e3%81%97%e3%81%9f%e3%81%9d%e3%81%86%e3%81%a0%ef%bc%8e%0aMplus%e3%81%afversion%e3%81%8c1%e3%81%8b%e3%82%895%e3%81%be%e3%81%a7%e3%81%a8version6%e4%bb%a5%e9%99%8d%e3%81%a7%e3%81%afWLSMV%e3%81%ae%e6%8c%87%e3%81%99%e6%84%8f%e5%91%b3%e3%81%8c%e9%81%95%e3%81%86%e3%81%9d%e3%81%86%e3%81%a7%e3%81%82%e3%82%8b%ef%bc%8elavaan%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6version5%e3%81%be%e3%81%a7%e3%81%aeWLSMV%e3%82%92%e5%86%8d%e7%8f%be%e3%81%99%e3%82%8b%e3%81%ab%e3%81%af%ef%bc%8cestimator%3d%26quot%3bDWSL%26quot%3b%2c%20se%3d%26quot%3bstandard%26quot%3b%2c%20test%3d%26quot%3bSattertwaite%26quot%3b%e3%81%ae3%e7%82%b9%e3%82%bb%e3%83%83%e3%83%88%e3%81%aa%e3%81%ae%e3%81%a0%e3%81%8c%ef%bc%8cver6%e4%bb%a5%e9%99%8d%e3%81%aeWLSMV%e3%81%afestimator%3d%26quot%3bDWSL%26quot%3b%2c%20se%3d%26quot%3bstandard%26quot%3b%2c%20test%3d%26quot%3bscaled.shifted%26quot%3b%e3%81%a0%e3%81%9d%e3%81%86%e3%81%a0%ef%bc%8e%e5%80%8b%e5%88%a5%e3%81%ab%e6%8c%87%e5%ae%9a%e3%81%97%e3%81%a6%e3%82%82%e3%82%88%e3%81%84%e3%81%97%ef%bc%8cestimator%3d%26quot%3bWLSMV%26quot%3b%e3%81%a8%e3%81%99%e3%82%8c%e3%81%b0ver6%e4%bb%a5%e9%99%8d%e3%81%ab%ef%bc%8cestimator%3d%26quot%3bWLSMVS%26quot%3b%e3%81%a8%e3%81%99%e3%82%8c%e3%81%b0ver5%e3%81%be%e3%81%a7%e3%81%ae%e3%81%a8%e5%90%8c%e3%81%98%e6%96%b9%e6%b3%95%e3%81%ab%e3%81%aa%e3%82%8b%e3%82%88%e3%81%86%e3%81%a0%ef%bc%8e%e3%81%a8%e3%81%82%e3%82%8b%e6%8e%a8%e5%ae%9a%e3%81%ae%e7%b5%90%e6%9e%9c%e3%82%92%e4%b8%80%e8%87%b4%e3%81%95%e3%81%9b%e3%81%9f%e3%81%8b%e3%81%a3%e3%81%9f%e3%81%a8%e3%81%8d%e3%81%ab%e3%81%a4%e3%81%be%e3%81%a5%e3%81%84%e3%81%9f%e3%81%ae%e3%81%a7%e8%a8%98%e9%8c%b2%e3%82%92%e6%ae%8b%e3%81%97%e3%81%a6%e3%81%8a%e3%81%8f%ef%bc%8e%0a%e3%80%90%e5%8f%82%e8%80%83%e3%80%91%0ahttps%3a%2f%2fpersonality-project.org%2fr%2ftutorials%2fsummerschool.14%2frosseel_sem_cat.pdf" aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&t=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    
+    <div id="toc">
+      <nav id="TableOfContents"></nav>
+    </div>
+    
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        カテゴリカルデータをlavaanでSEMする際の細かい話
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2020-04-16 20:04:15 &#43;0900 JST" itemprop="datePublished">2020-04-16</time>
+          
+        </div>
+        
+        
+        
+        <div class="article-category">
+            <i class="fas fa-archive"></i>
+            
+            
+            <a class="category-link" href="/categories/stat">stat</a>
+            
+        </div>
+        
+        
+        <div class="article-tag">
+            <i class="fas fa-tag"></i>
+            
+            
+            <a class="tag-link" href="/tags/lavaan" rel="tag">lavaan</a>
+            
+             ,  
+            <a class="tag-link" href="/tags/wlsmv" rel="tag">WLSMV</a>
+            
+             ,  
+            <a class="tag-link" href="/tags/sem" rel="tag">SEM</a>
+            
+        </div>
+        
+      </div>
+    </header>
+
+  
+    
+    <div class="content" itemprop="articleBody">
+      <p>lavaanでカテゴリカルデータのSEMをする際には，<code>oredered</code>の引数にカテゴリカルなデータの変数名を指定する．推定はデフォルトでは<code>WLSMV</code>らしい．</p>
+<p><code>WLSMV</code>というのはそもそも，estimatorのみを指している訳でなく，estimatorがDWLSで，robust標準誤差を用いて，平均と分散を調整したテスト統計量を使う3点セットのことらしいのだが，Mplusでデフォルトの推定<code>WLSMV</code>なため業界ではこの呼び名で定着したそうだ．</p>
+<p>Mplusはversionが1から5までとversion6以降ではWLSMVの指す意味が違うそうである．lavaanを使ってversion5までのWLSMVを再現するには，<code>estimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;Sattertwaite&quot;</code>の3点セットなのだが，ver6以降のWLSMVは<code>estimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;scaled.shifted&quot;</code>だそうだ．個別に指定してもよいし，<code>estimator=&quot;WLSMV&quot;</code>とすればver6以降に，<code>estimator=&quot;WLSMVS&quot;</code>とすればver5までのと同じ方法になるようだ．とある推定の結果を一致させたかったときにつまづいたので記録を残しておく．</p>
+<p>【参考】</p>
+<p><a href="https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf">https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf</a></p>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/profile">Profile</a></li>
+         
+          <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+          <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents"></nav>
+    </div>
+    
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&text=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&title=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&is_video=false&description=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&title=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&title=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&name=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1&description=lavaan%e3%81%a7%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%81%aeSEM%e3%82%92%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ab%e3%81%af%ef%bc%8coredered%e3%81%ae%e5%bc%95%e6%95%b0%e3%81%ab%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%81%aa%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e5%a4%89%e6%95%b0%e5%90%8d%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%99%e3%82%8b%ef%bc%8e%e6%8e%a8%e5%ae%9a%e3%81%af%e3%83%87%e3%83%95%e3%82%a9%e3%83%ab%e3%83%88%e3%81%a7%e3%81%afWLSMV%e3%82%89%e3%81%97%e3%81%84%ef%bc%8e%0aWLSMV%e3%81%a8%e3%81%84%e3%81%86%e3%81%ae%e3%81%af%e3%81%9d%e3%82%82%e3%81%9d%e3%82%82%ef%bc%8cestimator%e3%81%ae%e3%81%bf%e3%82%92%e6%8c%87%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e8%a8%b3%e3%81%a7%e3%81%aa%e3%81%8f%ef%bc%8cestimator%e3%81%8cDWLS%e3%81%a7%ef%bc%8crobust%e6%a8%99%e6%ba%96%e8%aa%a4%e5%b7%ae%e3%82%92%e7%94%a8%e3%81%84%e3%81%a6%ef%bc%8c%e5%b9%b3%e5%9d%87%e3%81%a8%e5%88%86%e6%95%a3%e3%82%92%e8%aa%bf%e6%95%b4%e3%81%97%e3%81%9f%e3%83%86%e3%82%b9%e3%83%88%e7%b5%b1%e8%a8%88%e9%87%8f%e3%82%92%e4%bd%bf%e3%81%863%e7%82%b9%e3%82%bb%e3%83%83%e3%83%88%e3%81%ae%e3%81%93%e3%81%a8%e3%82%89%e3%81%97%e3%81%84%e3%81%ae%e3%81%a0%e3%81%8c%ef%bc%8cMplus%e3%81%a7%e3%83%87%e3%83%95%e3%82%a9%e3%83%ab%e3%83%88%e3%81%ae%e6%8e%a8%e5%ae%9aWLSMV%e3%81%aa%e3%81%9f%e3%82%81%e6%a5%ad%e7%95%8c%e3%81%a7%e3%81%af%e3%81%93%e3%81%ae%e5%91%bc%e3%81%b3%e5%90%8d%e3%81%a7%e5%ae%9a%e7%9d%80%e3%81%97%e3%81%9f%e3%81%9d%e3%81%86%e3%81%a0%ef%bc%8e%0aMplus%e3%81%afversion%e3%81%8c1%e3%81%8b%e3%82%895%e3%81%be%e3%81%a7%e3%81%a8version6%e4%bb%a5%e9%99%8d%e3%81%a7%e3%81%afWLSMV%e3%81%ae%e6%8c%87%e3%81%99%e6%84%8f%e5%91%b3%e3%81%8c%e9%81%95%e3%81%86%e3%81%9d%e3%81%86%e3%81%a7%e3%81%82%e3%82%8b%ef%bc%8elavaan%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6version5%e3%81%be%e3%81%a7%e3%81%aeWLSMV%e3%82%92%e5%86%8d%e7%8f%be%e3%81%99%e3%82%8b%e3%81%ab%e3%81%af%ef%bc%8cestimator%3d%26quot%3bDWSL%26quot%3b%2c%20se%3d%26quot%3bstandard%26quot%3b%2c%20test%3d%26quot%3bSattertwaite%26quot%3b%e3%81%ae3%e7%82%b9%e3%82%bb%e3%83%83%e3%83%88%e3%81%aa%e3%81%ae%e3%81%a0%e3%81%8c%ef%bc%8cver6%e4%bb%a5%e9%99%8d%e3%81%aeWLSMV%e3%81%afestimator%3d%26quot%3bDWSL%26quot%3b%2c%20se%3d%26quot%3bstandard%26quot%3b%2c%20test%3d%26quot%3bscaled.shifted%26quot%3b%e3%81%a0%e3%81%9d%e3%81%86%e3%81%a0%ef%bc%8e%e5%80%8b%e5%88%a5%e3%81%ab%e6%8c%87%e5%ae%9a%e3%81%97%e3%81%a6%e3%82%82%e3%82%88%e3%81%84%e3%81%97%ef%bc%8cestimator%3d%26quot%3bWLSMV%26quot%3b%e3%81%a8%e3%81%99%e3%82%8c%e3%81%b0ver6%e4%bb%a5%e9%99%8d%e3%81%ab%ef%bc%8cestimator%3d%26quot%3bWLSMVS%26quot%3b%e3%81%a8%e3%81%99%e3%82%8c%e3%81%b0ver5%e3%81%be%e3%81%a7%e3%81%ae%e3%81%a8%e5%90%8c%e3%81%98%e6%96%b9%e6%b3%95%e3%81%ab%e3%81%aa%e3%82%8b%e3%82%88%e3%81%86%e3%81%a0%ef%bc%8e%e3%81%a8%e3%81%82%e3%82%8b%e6%8e%a8%e5%ae%9a%e3%81%ae%e7%b5%90%e6%9e%9c%e3%82%92%e4%b8%80%e8%87%b4%e3%81%95%e3%81%9b%e3%81%9f%e3%81%8b%e3%81%a3%e3%81%9f%e3%81%a8%e3%81%8d%e3%81%ab%e3%81%a4%e3%81%be%e3%81%a5%e3%81%84%e3%81%9f%e3%81%ae%e3%81%a7%e8%a8%98%e9%8c%b2%e3%82%92%e6%ae%8b%e3%81%97%e3%81%a6%e3%81%8a%e3%81%8f%ef%bc%8e%0a%e3%80%90%e5%8f%82%e8%80%83%e3%80%91%0ahttps%3a%2f%2fpersonality-project.org%2fr%2ftutorials%2fsummerschool.14%2frosseel_sem_cat.pdf" aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2fwlsmv%2f&t=%e3%82%ab%e3%83%86%e3%82%b4%e3%83%aa%e3%82%ab%e3%83%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92lavaan%e3%81%a7SEM%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e7%b4%b0%e3%81%8b%e3%81%84%e8%a9%b1" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  Takahiro ONOSHIMA 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+<script src=/js/code-copy.js></script>
+
+
+
+  
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</html>

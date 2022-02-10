@@ -6,18 +6,17 @@
     <description>Recent content in tidyverse style guide on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 24 Oct 2020 21:23:55 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/tidyverse-style-guide/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Sat, 24 Oct 2020 21:23:55 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/tidyverse-style-guide/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>tidyverse style guideを読んでみた際のメモ</title>
-      <link>https://onoshima.github.io/stat/style/</link>
+      <link>https://onoshima.github.io/posts/style/</link>
       <pubDate>Sat, 24 Oct 2020 21:23:55 +0900</pubDate>
       
-      <guid>https://onoshima.github.io/stat/style/</guid>
-      <description></description>
+      <guid>https://onoshima.github.io/posts/style/</guid>
+      <description>tidystyle guideというものがあるのを知ったのでざっと目を通した際の殴り書き。 分析のところまで。
+https://style.tidyverse.org/package-files.html#names-1
+ ファイル名  空白いれない 意味あるものにする 番号順にしたいなら，1xxx,2xxxxでなくて01xxx,02xxxのように0つめる   内部の構造  # plot data &amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;&amp;mdash;-みたいに区切る package読み込むときはファイルの最初でまとめて   変数名  変数名は小文字のみ，意味の区切りは_でつなげる 変数名は名詞で関数名は動詞 cとかTとか一般的な関数や変数に代入しない   空白  ,のあとはスペース入れる ()の前後にスペース入れない ifとかforとかん()の前後はスペース入れる funcutionの()の後にはスペース入れる {{}}の中にはスペース入れる =とか&amp;lt;-とかの前後にはスペース入れる 片側の~式はスペース入れない（複雑だとスペース入れる） =の位置を揃えるための追加のスペースはOK   関数  データの引数名は省略，他は書く   制御フロー  {は行の最後にあるべき 中身は2文字のインデント }は行の最初にあるべき とってもシンプルだったら落として1行でも可 switchでは，各要素1行，フォールスルーエラーを書く   長い行  80文字を超えない 関数名が長いなら，改行して1行ずつ，引数の指定する。 引数を意味の繋がりで行にまとめても良い   セミコロン  行の終わりで使わない。1行に2つのコマンドを詰め込まない 変数の代入に=を使わない&amp;lt;-を使う   データ  文字列ベクトルは&amp;quot;&amp;ldquo;にする。&amp;lsquo;&amp;lsquo;は事情がない限り使わない。 論理値ベクトルはT，FよりもTRUE，FALSE推奨   コメント  #とスペースで始める コメントをつける必要がある場合にはまずコードが明確にならないかを検討する コメントの方が長いならRmarkdownを使う   関数  return()は関数内の早い段階の場合のみ使う。最後の式が評価されるのだから return使うときには独立した１つの行に   コメント（関数） - 何をやっているかでなく，なぜやっているかを書く - 文の形で書く。2文以上あるときだけピリオド パイプ  %&amp;gt;%使うと流れがわかりやすい %&amp;gt;%の前にはスペース，改行して使う。空白は2文字。 magrittrは()を省略できるけどするな   ggplot  ggplotの+は基本%&amp;gt;%と同じように使う dplyrの%&amp;gt;%と合わせて使うなら，さらに深いインデントにしない（インデントのレベルは1まで） ggplot関数の内部でデータの操作もできるけどしない。ggplotに渡す前にデータの操作をしておく    </description>
     </item>
     
   </channel>

@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> 2段階検定についての統計の教科書の記述 | Takahiro ONOSHIMA&#39;s website</title>
+  <link rel = 'canonical' href = 'https://onoshima.github.io/posts/equalvar/'>
+  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="2段階検定についての統計の教科書の記述" />
+<meta property="og:description" content="はじめに 2つの群の平均値の差を検定するときにはt検定がよく使われます。このとき2つの群の分散が異なるときに普通のt検定を行うとタイプIエラーを犯す可能性が大きくなりますが，Welchのt検定を使うとそれをコントロールすることができます。
+ https://academic-oup-com.ez.wul.waseda.ac.jp/biomet/article/29/3-4/350/256577  等分散の仮定を違反したときに，どの程度悪いことが起きるのか，そしてWelchの方法を使うとどの程度それがコントロールできるかについては青木先生の次のシミュレーションが大変参考になります。
+ http://aoki2.si.gunma-u.ac.jp/lecture/BF/index.html  統計学のテキストの中には，2つの群の等分散の判断にF検定など分散に関する検定を用いて，その結果をもとに普通のt検定を行うかWelchのt検定を用いるかを判断するべし，という記述があったりします。ここではこれを便宜的に2段階検定法と呼びますが，この2段階検定法の問題点は様々なところで指摘されています。井口先生の次のサイトがかなり詳しく書いています。
+ https://biolab.sakura.ne.jp/welch-test.html  また，奥村先生の次の簡易的なシミュレーションも参考になります。
+ https://oku.edu.mie-u.ac.jp/~okumura/blog/node/2262  ところで，統計解析のテキストはこの問題についてどう書いているのかふと気になりましたので，以下調べてみた記録を以下に残しておきます（手元にあったもののみですが）。
+芝・南風原（1990）『行動科学における統計解析法』 2段階検定を推奨している訳ではないですが，そういう手法をとることがあると紹介しています（pp.108-9）。
+ ところで，ここで述べた検定法を適用するときは，2群の母集団分散が等しいという仮定が妥当であるかどうかを，実際に得られた標本分散を用いて確認する必要がある。その際，2群の母集団分散に関する仮説$H_0：\sigma_1 ^2 =\sigma_2 ^2$の検定を利用することがある。この仮説が棄却されない場合でも，それが等分散を証明することにはならないが，その仮定が消極的ながら指示されたとみなすのである。
+ 母分散が等しいという帰無仮説を棄却できなかったからといって，それをもって等分散の証明にならないと明示しているのは親切ですね。
+森・吉田（1990）『心理学のためのデータ解析テクニカルブック』 以下の記述（p.62）のように2段階検定を推奨しています。
+ 2つの条件の平均値の差について検定を行うためには，2条件の分散が等質であるという前提条件が満たされていなければならない。そこで，まず，この条件が満たされているかどうか調べておこう。これにはF検定を行えばよい。
+ 宮埜（1993）『心理学のためのデータ解析法』 Welchの方法についての紹介はなく普通のt検定のみの解説ですが，等分散性の仮定についての以下のような補足があります。
+ 実データでは正規性および等分散性の家庭は必ずしも満足されない。しかし，正規性については標本の大きさが15以上ならば満足されなくても検定結果はあまり変わらない。また，等分散性についても分散比が0.4から2.5の範囲にある場合や$n_1 = n_2$である場合にはあまり結果に影響しないことが知られている。
+ 等分散性についてのこの性質が誰の何の研究に基づいているのかは分からないのですが，巻末にいくつか参考にした文献が挙げられており，そのいずれかにこの記述があるのだと思われます。手元にその文献はないため確認できていませんが。
+吉田（1998）『本当にわかりやすいすごく大切なことが書いてあるごく初歩の統計の本』 「対応のない場合のt検定を適用する際の前提条件」というコラム（？）のようなものがあり（p.191）そこには以下のように書いてあります。
+ ②両条件の母集団の分散（ないし，標準偏差）が等しいこと。ただし，これも実際には得られたデータの分散が条件間で大きく異らなければよしとします。そして，両条件の分散に顕著な差が認められた場合には，この章の3節で解説するU検定や，ウェルチ（Welch）の検定，コクラン・コックス（Cochran-Cox）の検定などの他の検定を用います。
+ コラムの中では分散の異なりの判定については述べていませんが，注には，「2つの条件の分散の差の検定については森・吉田（1990）のF検定の部分を見るように書いているので2段階検定を推奨しているようです。
+山田・杉澤・村井（2008）『Rによるやさしい統計学』 t検定に関する章の中で，等分散性の検定を行うように書いています。まとめの段落では以下のように書かれているので，2段階検定が推奨されています（p.150）。
+ ここまでの内容を整理しておきましょう。まず，var.test関数を実行して分散の等質性をチェックします。その結果，等分散の仮定が満たされていたら独立な2群のt検定（t.test(クラスA，クラスB，var.equal=TRUE)）を，そうでなかったらWelchの検定（t.test(クラスA, クラスB，var.equal=FALSE)）を行うということです。
+ 宮川（2015）『基本統計学（第4版）』 Welchの方法についての記載はなく，p.267の注で以下のように書いています。
+ $\sigma_1 ^2 \neq \sigma_2 ^2 $ のときの検定方法もあるが，それは本書では扱わない。なお， $\sigma_1 ^2 = \sigma_2 ^2 $としてよいかどうかは，後述（9.7節，275-277ページ）の検定方により調べることができる。
+ pp.275-277で紹介されるのはF検定なので，2段階推定を紹介しているようです。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://onoshima.github.io/posts/equalvar/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-10-20T11:22:38+09:00" />
+<meta property="article:modified_time" content="2020-10-20T11:22:38+09:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="2段階検定についての統計の教科書の記述"/>
+<meta name="twitter:description" content="はじめに 2つの群の平均値の差を検定するときにはt検定がよく使われます。このとき2つの群の分散が異なるときに普通のt検定を行うとタイプIエラーを犯す可能性が大きくなりますが，Welchのt検定を使うとそれをコントロールすることができます。
+ https://academic-oup-com.ez.wul.waseda.ac.jp/biomet/article/29/3-4/350/256577  等分散の仮定を違反したときに，どの程度悪いことが起きるのか，そしてWelchの方法を使うとどの程度それがコントロールできるかについては青木先生の次のシミュレーションが大変参考になります。
+ http://aoki2.si.gunma-u.ac.jp/lecture/BF/index.html  統計学のテキストの中には，2つの群の等分散の判断にF検定など分散に関する検定を用いて，その結果をもとに普通のt検定を行うかWelchのt検定を用いるかを判断するべし，という記述があったりします。ここではこれを便宜的に2段階検定法と呼びますが，この2段階検定法の問題点は様々なところで指摘されています。井口先生の次のサイトがかなり詳しく書いています。
+ https://biolab.sakura.ne.jp/welch-test.html  また，奥村先生の次の簡易的なシミュレーションも参考になります。
+ https://oku.edu.mie-u.ac.jp/~okumura/blog/node/2262  ところで，統計解析のテキストはこの問題についてどう書いているのかふと気になりましたので，以下調べてみた記録を以下に残しておきます（手元にあったもののみですが）。
+芝・南風原（1990）『行動科学における統計解析法』 2段階検定を推奨している訳ではないですが，そういう手法をとることがあると紹介しています（pp.108-9）。
+ ところで，ここで述べた検定法を適用するときは，2群の母集団分散が等しいという仮定が妥当であるかどうかを，実際に得られた標本分散を用いて確認する必要がある。その際，2群の母集団分散に関する仮説$H_0：\sigma_1 ^2 =\sigma_2 ^2$の検定を利用することがある。この仮説が棄却されない場合でも，それが等分散を証明することにはならないが，その仮定が消極的ながら指示されたとみなすのである。
+ 母分散が等しいという帰無仮説を棄却できなかったからといって，それをもって等分散の証明にならないと明示しているのは親切ですね。
+森・吉田（1990）『心理学のためのデータ解析テクニカルブック』 以下の記述（p.62）のように2段階検定を推奨しています。
+ 2つの条件の平均値の差について検定を行うためには，2条件の分散が等質であるという前提条件が満たされていなければならない。そこで，まず，この条件が満たされているかどうか調べておこう。これにはF検定を行えばよい。
+ 宮埜（1993）『心理学のためのデータ解析法』 Welchの方法についての紹介はなく普通のt検定のみの解説ですが，等分散性の仮定についての以下のような補足があります。
+ 実データでは正規性および等分散性の家庭は必ずしも満足されない。しかし，正規性については標本の大きさが15以上ならば満足されなくても検定結果はあまり変わらない。また，等分散性についても分散比が0.4から2.5の範囲にある場合や$n_1 = n_2$である場合にはあまり結果に影響しないことが知られている。
+ 等分散性についてのこの性質が誰の何の研究に基づいているのかは分からないのですが，巻末にいくつか参考にした文献が挙げられており，そのいずれかにこの記述があるのだと思われます。手元にその文献はないため確認できていませんが。
+吉田（1998）『本当にわかりやすいすごく大切なことが書いてあるごく初歩の統計の本』 「対応のない場合のt検定を適用する際の前提条件」というコラム（？）のようなものがあり（p.191）そこには以下のように書いてあります。
+ ②両条件の母集団の分散（ないし，標準偏差）が等しいこと。ただし，これも実際には得られたデータの分散が条件間で大きく異らなければよしとします。そして，両条件の分散に顕著な差が認められた場合には，この章の3節で解説するU検定や，ウェルチ（Welch）の検定，コクラン・コックス（Cochran-Cox）の検定などの他の検定を用います。
+ コラムの中では分散の異なりの判定については述べていませんが，注には，「2つの条件の分散の差の検定については森・吉田（1990）のF検定の部分を見るように書いているので2段階検定を推奨しているようです。
+山田・杉澤・村井（2008）『Rによるやさしい統計学』 t検定に関する章の中で，等分散性の検定を行うように書いています。まとめの段落では以下のように書かれているので，2段階検定が推奨されています（p.150）。
+ ここまでの内容を整理しておきましょう。まず，var.test関数を実行して分散の等質性をチェックします。その結果，等分散の仮定が満たされていたら独立な2群のt検定（t.test(クラスA，クラスB，var.equal=TRUE)）を，そうでなかったらWelchの検定（t.test(クラスA, クラスB，var.equal=FALSE)）を行うということです。
+ 宮川（2015）『基本統計学（第4版）』 Welchの方法についての記載はなく，p.267の注で以下のように書いています。
+ $\sigma_1 ^2 \neq \sigma_2 ^2 $ のときの検定方法もあるが，それは本書では扱わない。なお， $\sigma_1 ^2 = \sigma_2 ^2 $としてよいかどうかは，後述（9.7節，275-277ページ）の検定方により調べることができる。
+ pp.275-277で紹介されるのはF検定なので，2段階推定を紹介しているようです。"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://onoshima.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://onoshima.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://onoshima.github.io/posts/ggstatplot/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="https://onoshima.github.io/posts/style/" aria-label="Next">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&text=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&title=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&is_video=false&description=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&title=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&title=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&name=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0&description=%e3%81%af%e3%81%98%e3%82%81%e3%81%ab%202%e3%81%a4%e3%81%ae%e7%be%a4%e3%81%ae%e5%b9%b3%e5%9d%87%e5%80%a4%e3%81%ae%e5%b7%ae%e3%82%92%e6%a4%9c%e5%ae%9a%e3%81%99%e3%82%8b%e3%81%a8%e3%81%8d%e3%81%ab%e3%81%aft%e6%a4%9c%e5%ae%9a%e3%81%8c%e3%82%88%e3%81%8f%e4%bd%bf%e3%82%8f%e3%82%8c%e3%81%be%e3%81%99%e3%80%82%e3%81%93%e3%81%ae%e3%81%a8%e3%81%8d2%e3%81%a4%e3%81%ae%e7%be%a4%e3%81%ae%e5%88%86%e6%95%a3%e3%81%8c%e7%95%b0%e3%81%aa%e3%82%8b%e3%81%a8%e3%81%8d%e3%81%ab%e6%99%ae%e9%80%9a%e3%81%aet%e6%a4%9c%e5%ae%9a%e3%82%92%e8%a1%8c%e3%81%86%e3%81%a8%e3%82%bf%e3%82%a4%e3%83%97I%e3%82%a8%e3%83%a9%e3%83%bc%e3%82%92%e7%8a%af%e3%81%99%e5%8f%af%e8%83%bd%e6%80%a7%e3%81%8c%e5%a4%a7%e3%81%8d%e3%81%8f%e3%81%aa%e3%82%8a%e3%81%be%e3%81%99%e3%81%8c%ef%bc%8cWelch%e3%81%aet%e6%a4%9c%e5%ae%9a%e3%82%92%e4%bd%bf%e3%81%86%e3%81%a8%e3%81%9d%e3%82%8c%e3%82%92%e3%82%b3%e3%83%b3%e3%83%88%e3%83%ad%e3%83%bc%e3%83%ab%e3%81%99%e3%82%8b%e3%81%93%e3%81%a8%e3%81%8c%e3%81%a7%e3%81%8d%e3%81%be%e3%81%99%e3%80%82%0a%20https%3a%2f%2facademic-oup-com.ez.wul.waseda.ac.jp%2fbiomet%2farticle%2f29%2f3-4%2f350%2f256577%20%20%e7%ad%89%e5%88%86%e6%95%a3%e3%81%ae%e4%bb%ae%e5%ae%9a%e3%82%92%e9%81%95%e5%8f%8d%e3%81%97%e3%81%9f%e3%81%a8%e3%81%8d%e3%81%ab%ef%bc%8c%e3%81%a9%e3%81%ae%e7%a8%8b%e5%ba%a6%e6%82%aa%e3%81%84%e3%81%93%e3%81%a8%e3%81%8c%e8%b5%b7%e3%81%8d%e3%82%8b%e3%81%ae%e3%81%8b%ef%bc%8c%e3%81%9d%e3%81%97%e3%81%a6Welch%e3%81%ae%e6%96%b9%e6%b3%95%e3%82%92%e4%bd%bf%e3%81%86%e3%81%a8%e3%81%a9%e3%81%ae%e7%a8%8b%e5%ba%a6%e3%81%9d%e3%82%8c%e3%81%8c%e3%82%b3%e3%83%b3%e3%83%88%e3%83%ad%e3%83%bc%e3%83%ab%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%8b%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%af%e9%9d%92%e6%9c%a8%e5%85%88%e7%94%9f%e3%81%ae%e6%ac%a1%e3%81%ae%e3%82%b7%e3%83%9f%e3%83%a5%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%81%8c%e5%a4%a7%e5%a4%89%e5%8f%82%e8%80%83%e3%81%ab%e3%81%aa%e3%82%8a%e3%81%be%e3%81%99%e3%80%82%0a%20http%3a%2f%2faoki2.si.gunma-u.ac.jp%2flecture%2fBF%2findex.html%20%20%e7%b5%b1%e8%a8%88%e5%ad%a6%e3%81%ae%e3%83%86%e3%82%ad%e3%82%b9%e3%83%88%e3%81%ae%e4%b8%ad%e3%81%ab%e3%81%af%ef%bc%8c2%e3%81%a4%e3%81%ae%e7%be%a4%e3%81%ae%e7%ad%89%e5%88%86%e6%95%a3%e3%81%ae%e5%88%a4%e6%96%ad%e3%81%abF%e6%a4%9c%e5%ae%9a%e3%81%aa%e3%81%a9%e5%88%86%e6%95%a3%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e6%a4%9c%e5%ae%9a%e3%82%92%e7%94%a8%e3%81%84%e3%81%a6%ef%bc%8c%e3%81%9d%e3%81%ae%e7%b5%90%e6%9e%9c%e3%82%92%e3%82%82%e3%81%a8%e3%81%ab%e6%99%ae%e9%80%9a%e3%81%aet%e6%a4%9c%e5%ae%9a%e3%82%92%e8%a1%8c%e3%81%86%e3%81%8bWelch%e3%81%aet%e6%a4%9c%e5%ae%9a%e3%82%92%e7%94%a8%e3%81%84%e3%82%8b%e3%81%8b%e3%82%92%e5%88%a4%e6%96%ad%e3%81%99%e3%82%8b%e3%81%b9%e3%81%97%ef%bc%8c%e3%81%a8%e3%81%84%e3%81%86%e8%a8%98%e8%bf%b0%e3%81%8c%e3%81%82%e3%81%a3%e3%81%9f%e3%82%8a%e3%81%97%e3%81%be%e3%81%99%e3%80%82%e3%81%93%e3%81%93%e3%81%a7%e3%81%af%e3%81%93%e3%82%8c%e3%82%92%e4%be%bf%e5%ae%9c%e7%9a%84%e3%81%ab2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e6%b3%95%e3%81%a8%e5%91%bc%e3%81%b3%e3%81%be%e3%81%99%e3%81%8c%ef%bc%8c%e3%81%93%e3%81%ae2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e6%b3%95%e3%81%ae%e5%95%8f%e9%a1%8c%e7%82%b9%e3%81%af%e6%a7%98%e3%80%85%e3%81%aa%e3%81%a8%e3%81%93%e3%82%8d%e3%81%a7%e6%8c%87%e6%91%98%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%e3%80%82%e4%ba%95%e5%8f%a3%e5%85%88%e7%94%9f%e3%81%ae%e6%ac%a1%e3%81%ae%e3%82%b5%e3%82%a4%e3%83%88%e3%81%8c%e3%81%8b%e3%81%aa%e3%82%8a%e8%a9%b3%e3%81%97%e3%81%8f%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%e3%80%82%0a%20https%3a%2f%2fbiolab.sakura.ne.jp%2fwelch-test.html%20%20%e3%81%be%e3%81%9f%ef%bc%8c%e5%a5%a5%e6%9d%91%e5%85%88%e7%94%9f%e3%81%ae%e6%ac%a1%e3%81%ae%e7%b0%a1%e6%98%93%e7%9a%84%e3%81%aa%e3%82%b7%e3%83%9f%e3%83%a5%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%82%82%e5%8f%82%e8%80%83%e3%81%ab%e3%81%aa%e3%82%8a%e3%81%be%e3%81%99%e3%80%82%0a%20https%3a%2f%2foku.edu.mie-u.ac.jp%2f~okumura%2fblog%2fnode%2f2262%20%20%e3%81%a8%e3%81%93%e3%82%8d%e3%81%a7%ef%bc%8c%e7%b5%b1%e8%a8%88%e8%a7%a3%e6%9e%90%e3%81%ae%e3%83%86%e3%82%ad%e3%82%b9%e3%83%88%e3%81%af%e3%81%93%e3%81%ae%e5%95%8f%e9%a1%8c%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%a9%e3%81%86%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%e3%81%8b%e3%81%b5%e3%81%a8%e6%b0%97%e3%81%ab%e3%81%aa%e3%82%8a%e3%81%be%e3%81%97%e3%81%9f%e3%81%ae%e3%81%a7%ef%bc%8c%e4%bb%a5%e4%b8%8b%e8%aa%bf%e3%81%b9%e3%81%a6%e3%81%bf%e3%81%9f%e8%a8%98%e9%8c%b2%e3%82%92%e4%bb%a5%e4%b8%8b%e3%81%ab%e6%ae%8b%e3%81%97%e3%81%a6%e3%81%8a%e3%81%8d%e3%81%be%e3%81%99%ef%bc%88%e6%89%8b%e5%85%83%e3%81%ab%e3%81%82%e3%81%a3%e3%81%9f%e3%82%82%e3%81%ae%e3%81%ae%e3%81%bf%e3%81%a7%e3%81%99%e3%81%8c%ef%bc%89%e3%80%82%0a%e8%8a%9d%e3%83%bb%e5%8d%97%e9%a2%a8%e5%8e%9f%ef%bc%881990%ef%bc%89%e3%80%8e%e8%a1%8c%e5%8b%95%e7%a7%91%e5%ad%a6%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e7%b5%b1%e8%a8%88%e8%a7%a3%e6%9e%90%e6%b3%95%e3%80%8f%202%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%82%92%e6%8e%a8%e5%a5%a8%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e8%a8%b3%e3%81%a7%e3%81%af%e3%81%aa%e3%81%84%e3%81%a7%e3%81%99%e3%81%8c%ef%bc%8c%e3%81%9d%e3%81%86%e3%81%84%e3%81%86%e6%89%8b%e6%b3%95%e3%82%92%e3%81%a8%e3%82%8b%e3%81%93%e3%81%a8%e3%81%8c%e3%81%82%e3%82%8b%e3%81%a8%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%ef%bc%88pp.108-9%ef%bc%89%e3%80%82%0a%20%e3%81%a8%e3%81%93%e3%82%8d%e3%81%a7%ef%bc%8c%e3%81%93%e3%81%93%e3%81%a7%e8%bf%b0%e3%81%b9%e3%81%9f%e6%a4%9c%e5%ae%9a%e6%b3%95%e3%82%92%e9%81%a9%e7%94%a8%e3%81%99%e3%82%8b%e3%81%a8%e3%81%8d%e3%81%af%ef%bc%8c2%e7%be%a4%e3%81%ae%e6%af%8d%e9%9b%86%e5%9b%a3%e5%88%86%e6%95%a3%e3%81%8c%e7%ad%89%e3%81%97%e3%81%84%e3%81%a8%e3%81%84%e3%81%86%e4%bb%ae%e5%ae%9a%e3%81%8c%e5%a6%a5%e5%bd%93%e3%81%a7%e3%81%82%e3%82%8b%e3%81%8b%e3%81%a9%e3%81%86%e3%81%8b%e3%82%92%ef%bc%8c%e5%ae%9f%e9%9a%9b%e3%81%ab%e5%be%97%e3%82%89%e3%82%8c%e3%81%9f%e6%a8%99%e6%9c%ac%e5%88%86%e6%95%a3%e3%82%92%e7%94%a8%e3%81%84%e3%81%a6%e7%a2%ba%e8%aa%8d%e3%81%99%e3%82%8b%e5%bf%85%e8%a6%81%e3%81%8c%e3%81%82%e3%82%8b%e3%80%82%e3%81%9d%e3%81%ae%e9%9a%9b%ef%bc%8c2%e7%be%a4%e3%81%ae%e6%af%8d%e9%9b%86%e5%9b%a3%e5%88%86%e6%95%a3%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e4%bb%ae%e8%aa%ac%24H_0%ef%bc%9a%5csigma_1%20%5e2%20%3d%5csigma_2%20%5e2%24%e3%81%ae%e6%a4%9c%e5%ae%9a%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b%e3%81%93%e3%81%a8%e3%81%8c%e3%81%82%e3%82%8b%e3%80%82%e3%81%93%e3%81%ae%e4%bb%ae%e8%aa%ac%e3%81%8c%e6%a3%84%e5%8d%b4%e3%81%95%e3%82%8c%e3%81%aa%e3%81%84%e5%a0%b4%e5%90%88%e3%81%a7%e3%82%82%ef%bc%8c%e3%81%9d%e3%82%8c%e3%81%8c%e7%ad%89%e5%88%86%e6%95%a3%e3%82%92%e8%a8%bc%e6%98%8e%e3%81%99%e3%82%8b%e3%81%93%e3%81%a8%e3%81%ab%e3%81%af%e3%81%aa%e3%82%89%e3%81%aa%e3%81%84%e3%81%8c%ef%bc%8c%e3%81%9d%e3%81%ae%e4%bb%ae%e5%ae%9a%e3%81%8c%e6%b6%88%e6%a5%b5%e7%9a%84%e3%81%aa%e3%81%8c%e3%82%89%e6%8c%87%e7%a4%ba%e3%81%95%e3%82%8c%e3%81%9f%e3%81%a8%e3%81%bf%e3%81%aa%e3%81%99%e3%81%ae%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%0a%20%e6%af%8d%e5%88%86%e6%95%a3%e3%81%8c%e7%ad%89%e3%81%97%e3%81%84%e3%81%a8%e3%81%84%e3%81%86%e5%b8%b0%e7%84%a1%e4%bb%ae%e8%aa%ac%e3%82%92%e6%a3%84%e5%8d%b4%e3%81%a7%e3%81%8d%e3%81%aa%e3%81%8b%e3%81%a3%e3%81%9f%e3%81%8b%e3%82%89%e3%81%a8%e3%81%84%e3%81%a3%e3%81%a6%ef%bc%8c%e3%81%9d%e3%82%8c%e3%82%92%e3%82%82%e3%81%a3%e3%81%a6%e7%ad%89%e5%88%86%e6%95%a3%e3%81%ae%e8%a8%bc%e6%98%8e%e3%81%ab%e3%81%aa%e3%82%89%e3%81%aa%e3%81%84%e3%81%a8%e6%98%8e%e7%a4%ba%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%e3%81%af%e8%a6%aa%e5%88%87%e3%81%a7%e3%81%99%e3%81%ad%e3%80%82%0a%e6%a3%ae%e3%83%bb%e5%90%89%e7%94%b0%ef%bc%881990%ef%bc%89%e3%80%8e%e5%bf%83%e7%90%86%e5%ad%a6%e3%81%ae%e3%81%9f%e3%82%81%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e8%a7%a3%e6%9e%90%e3%83%86%e3%82%af%e3%83%8b%e3%82%ab%e3%83%ab%e3%83%96%e3%83%83%e3%82%af%e3%80%8f%20%e4%bb%a5%e4%b8%8b%e3%81%ae%e8%a8%98%e8%bf%b0%ef%bc%88p.62%ef%bc%89%e3%81%ae%e3%82%88%e3%81%86%e3%81%ab2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%82%92%e6%8e%a8%e5%a5%a8%e3%81%97%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%e3%80%82%0a%202%e3%81%a4%e3%81%ae%e6%9d%a1%e4%bb%b6%e3%81%ae%e5%b9%b3%e5%9d%87%e5%80%a4%e3%81%ae%e5%b7%ae%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e6%a4%9c%e5%ae%9a%e3%82%92%e8%a1%8c%e3%81%86%e3%81%9f%e3%82%81%e3%81%ab%e3%81%af%ef%bc%8c2%e6%9d%a1%e4%bb%b6%e3%81%ae%e5%88%86%e6%95%a3%e3%81%8c%e7%ad%89%e8%b3%aa%e3%81%a7%e3%81%82%e3%82%8b%e3%81%a8%e3%81%84%e3%81%86%e5%89%8d%e6%8f%90%e6%9d%a1%e4%bb%b6%e3%81%8c%e6%ba%80%e3%81%9f%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%aa%e3%81%91%e3%82%8c%e3%81%b0%e3%81%aa%e3%82%89%e3%81%aa%e3%81%84%e3%80%82%e3%81%9d%e3%81%93%e3%81%a7%ef%bc%8c%e3%81%be%e3%81%9a%ef%bc%8c%e3%81%93%e3%81%ae%e6%9d%a1%e4%bb%b6%e3%81%8c%e6%ba%80%e3%81%9f%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%81%8b%e3%81%a9%e3%81%86%e3%81%8b%e8%aa%bf%e3%81%b9%e3%81%a6%e3%81%8a%e3%81%93%e3%81%86%e3%80%82%e3%81%93%e3%82%8c%e3%81%ab%e3%81%afF%e6%a4%9c%e5%ae%9a%e3%82%92%e8%a1%8c%e3%81%88%e3%81%b0%e3%82%88%e3%81%84%e3%80%82%0a%20%e5%ae%ae%e5%9f%9c%ef%bc%881993%ef%bc%89%e3%80%8e%e5%bf%83%e7%90%86%e5%ad%a6%e3%81%ae%e3%81%9f%e3%82%81%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e8%a7%a3%e6%9e%90%e6%b3%95%e3%80%8f%20Welch%e3%81%ae%e6%96%b9%e6%b3%95%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b4%b9%e4%bb%8b%e3%81%af%e3%81%aa%e3%81%8f%e6%99%ae%e9%80%9a%e3%81%aet%e6%a4%9c%e5%ae%9a%e3%81%ae%e3%81%bf%e3%81%ae%e8%a7%a3%e8%aa%ac%e3%81%a7%e3%81%99%e3%81%8c%ef%bc%8c%e7%ad%89%e5%88%86%e6%95%a3%e6%80%a7%e3%81%ae%e4%bb%ae%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%82%88%e3%81%86%e3%81%aa%e8%a3%9c%e8%b6%b3%e3%81%8c%e3%81%82%e3%82%8a%e3%81%be%e3%81%99%e3%80%82%0a%20%e5%ae%9f%e3%83%87%e3%83%bc%e3%82%bf%e3%81%a7%e3%81%af%e6%ad%a3%e8%a6%8f%e6%80%a7%e3%81%8a%e3%82%88%e3%81%b3%e7%ad%89%e5%88%86%e6%95%a3%e6%80%a7%e3%81%ae%e5%ae%b6%e5%ba%ad%e3%81%af%e5%bf%85%e3%81%9a%e3%81%97%e3%82%82%e6%ba%80%e8%b6%b3%e3%81%95%e3%82%8c%e3%81%aa%e3%81%84%e3%80%82%e3%81%97%e3%81%8b%e3%81%97%ef%bc%8c%e6%ad%a3%e8%a6%8f%e6%80%a7%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%af%e6%a8%99%e6%9c%ac%e3%81%ae%e5%a4%a7%e3%81%8d%e3%81%95%e3%81%8c15%e4%bb%a5%e4%b8%8a%e3%81%aa%e3%82%89%e3%81%b0%e6%ba%80%e8%b6%b3%e3%81%95%e3%82%8c%e3%81%aa%e3%81%8f%e3%81%a6%e3%82%82%e6%a4%9c%e5%ae%9a%e7%b5%90%e6%9e%9c%e3%81%af%e3%81%82%e3%81%be%e3%82%8a%e5%a4%89%e3%82%8f%e3%82%89%e3%81%aa%e3%81%84%e3%80%82%e3%81%be%e3%81%9f%ef%bc%8c%e7%ad%89%e5%88%86%e6%95%a3%e6%80%a7%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%82%82%e5%88%86%e6%95%a3%e6%af%94%e3%81%8c0.4%e3%81%8b%e3%82%892.5%e3%81%ae%e7%af%84%e5%9b%b2%e3%81%ab%e3%81%82%e3%82%8b%e5%a0%b4%e5%90%88%e3%82%84%24n_1%20%3d%20n_2%24%e3%81%a7%e3%81%82%e3%82%8b%e5%a0%b4%e5%90%88%e3%81%ab%e3%81%af%e3%81%82%e3%81%be%e3%82%8a%e7%b5%90%e6%9e%9c%e3%81%ab%e5%bd%b1%e9%9f%bf%e3%81%97%e3%81%aa%e3%81%84%e3%81%93%e3%81%a8%e3%81%8c%e7%9f%a5%e3%82%89%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%0a%20%e7%ad%89%e5%88%86%e6%95%a3%e6%80%a7%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e3%81%93%e3%81%ae%e6%80%a7%e8%b3%aa%e3%81%8c%e8%aa%b0%e3%81%ae%e4%bd%95%e3%81%ae%e7%a0%94%e7%a9%b6%e3%81%ab%e5%9f%ba%e3%81%a5%e3%81%84%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%e3%81%8b%e3%81%af%e5%88%86%e3%81%8b%e3%82%89%e3%81%aa%e3%81%84%e3%81%ae%e3%81%a7%e3%81%99%e3%81%8c%ef%bc%8c%e5%b7%bb%e6%9c%ab%e3%81%ab%e3%81%84%e3%81%8f%e3%81%a4%e3%81%8b%e5%8f%82%e8%80%83%e3%81%ab%e3%81%97%e3%81%9f%e6%96%87%e7%8c%ae%e3%81%8c%e6%8c%99%e3%81%92%e3%82%89%e3%82%8c%e3%81%a6%e3%81%8a%e3%82%8a%ef%bc%8c%e3%81%9d%e3%81%ae%e3%81%84%e3%81%9a%e3%82%8c%e3%81%8b%e3%81%ab%e3%81%93%e3%81%ae%e8%a8%98%e8%bf%b0%e3%81%8c%e3%81%82%e3%82%8b%e3%81%ae%e3%81%a0%e3%81%a8%e6%80%9d%e3%82%8f%e3%82%8c%e3%81%be%e3%81%99%e3%80%82%e6%89%8b%e5%85%83%e3%81%ab%e3%81%9d%e3%81%ae%e6%96%87%e7%8c%ae%e3%81%af%e3%81%aa%e3%81%84%e3%81%9f%e3%82%81%e7%a2%ba%e8%aa%8d%e3%81%a7%e3%81%8d%e3%81%a6%e3%81%84%e3%81%be%e3%81%9b%e3%82%93%e3%81%8c%e3%80%82%0a%e5%90%89%e7%94%b0%ef%bc%881998%ef%bc%89%e3%80%8e%e6%9c%ac%e5%bd%93%e3%81%ab%e3%82%8f%e3%81%8b%e3%82%8a%e3%82%84%e3%81%99%e3%81%84%e3%81%99%e3%81%94%e3%81%8f%e5%a4%a7%e5%88%87%e3%81%aa%e3%81%93%e3%81%a8%e3%81%8c%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%82%e3%82%8b%e3%81%94%e3%81%8f%e5%88%9d%e6%ad%a9%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%9c%ac%e3%80%8f%20%e3%80%8c%e5%af%be%e5%bf%9c%e3%81%ae%e3%81%aa%e3%81%84%e5%a0%b4%e5%90%88%e3%81%aet%e6%a4%9c%e5%ae%9a%e3%82%92%e9%81%a9%e7%94%a8%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e5%89%8d%e6%8f%90%e6%9d%a1%e4%bb%b6%e3%80%8d%e3%81%a8%e3%81%84%e3%81%86%e3%82%b3%e3%83%a9%e3%83%a0%ef%bc%88%ef%bc%9f%ef%bc%89%e3%81%ae%e3%82%88%e3%81%86%e3%81%aa%e3%82%82%e3%81%ae%e3%81%8c%e3%81%82%e3%82%8a%ef%bc%88p.191%ef%bc%89%e3%81%9d%e3%81%93%e3%81%ab%e3%81%af%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%82%88%e3%81%86%e3%81%ab%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%82%e3%82%8a%e3%81%be%e3%81%99%e3%80%82%0a%20%e2%91%a1%e4%b8%a1%e6%9d%a1%e4%bb%b6%e3%81%ae%e6%af%8d%e9%9b%86%e5%9b%a3%e3%81%ae%e5%88%86%e6%95%a3%ef%bc%88%e3%81%aa%e3%81%84%e3%81%97%ef%bc%8c%e6%a8%99%e6%ba%96%e5%81%8f%e5%b7%ae%ef%bc%89%e3%81%8c%e7%ad%89%e3%81%97%e3%81%84%e3%81%93%e3%81%a8%e3%80%82%e3%81%9f%e3%81%a0%e3%81%97%ef%bc%8c%e3%81%93%e3%82%8c%e3%82%82%e5%ae%9f%e9%9a%9b%e3%81%ab%e3%81%af%e5%be%97%e3%82%89%e3%82%8c%e3%81%9f%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e5%88%86%e6%95%a3%e3%81%8c%e6%9d%a1%e4%bb%b6%e9%96%93%e3%81%a7%e5%a4%a7%e3%81%8d%e3%81%8f%e7%95%b0%e3%82%89%e3%81%aa%e3%81%91%e3%82%8c%e3%81%b0%e3%82%88%e3%81%97%e3%81%a8%e3%81%97%e3%81%be%e3%81%99%e3%80%82%e3%81%9d%e3%81%97%e3%81%a6%ef%bc%8c%e4%b8%a1%e6%9d%a1%e4%bb%b6%e3%81%ae%e5%88%86%e6%95%a3%e3%81%ab%e9%a1%95%e8%91%97%e3%81%aa%e5%b7%ae%e3%81%8c%e8%aa%8d%e3%82%81%e3%82%89%e3%82%8c%e3%81%9f%e5%a0%b4%e5%90%88%e3%81%ab%e3%81%af%ef%bc%8c%e3%81%93%e3%81%ae%e7%ab%a0%e3%81%ae3%e7%af%80%e3%81%a7%e8%a7%a3%e8%aa%ac%e3%81%99%e3%82%8bU%e6%a4%9c%e5%ae%9a%e3%82%84%ef%bc%8c%e3%82%a6%e3%82%a7%e3%83%ab%e3%83%81%ef%bc%88Welch%ef%bc%89%e3%81%ae%e6%a4%9c%e5%ae%9a%ef%bc%8c%e3%82%b3%e3%82%af%e3%83%a9%e3%83%b3%e3%83%bb%e3%82%b3%e3%83%83%e3%82%af%e3%82%b9%ef%bc%88Cochran-Cox%ef%bc%89%e3%81%ae%e6%a4%9c%e5%ae%9a%e3%81%aa%e3%81%a9%e3%81%ae%e4%bb%96%e3%81%ae%e6%a4%9c%e5%ae%9a%e3%82%92%e7%94%a8%e3%81%84%e3%81%be%e3%81%99%e3%80%82%0a%20%e3%82%b3%e3%83%a9%e3%83%a0%e3%81%ae%e4%b8%ad%e3%81%a7%e3%81%af%e5%88%86%e6%95%a3%e3%81%ae%e7%95%b0%e3%81%aa%e3%82%8a%e3%81%ae%e5%88%a4%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%af%e8%bf%b0%e3%81%b9%e3%81%a6%e3%81%84%e3%81%be%e3%81%9b%e3%82%93%e3%81%8c%ef%bc%8c%e6%b3%a8%e3%81%ab%e3%81%af%ef%bc%8c%e3%80%8c2%e3%81%a4%e3%81%ae%e6%9d%a1%e4%bb%b6%e3%81%ae%e5%88%86%e6%95%a3%e3%81%ae%e5%b7%ae%e3%81%ae%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%af%e6%a3%ae%e3%83%bb%e5%90%89%e7%94%b0%ef%bc%881990%ef%bc%89%e3%81%aeF%e6%a4%9c%e5%ae%9a%e3%81%ae%e9%83%a8%e5%88%86%e3%82%92%e8%a6%8b%e3%82%8b%e3%82%88%e3%81%86%e3%81%ab%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%e3%81%a72%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%82%92%e6%8e%a8%e5%a5%a8%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82%0a%e5%b1%b1%e7%94%b0%e3%83%bb%e6%9d%89%e6%be%a4%e3%83%bb%e6%9d%91%e4%ba%95%ef%bc%882008%ef%bc%89%e3%80%8eR%e3%81%ab%e3%82%88%e3%82%8b%e3%82%84%e3%81%95%e3%81%97%e3%81%84%e7%b5%b1%e8%a8%88%e5%ad%a6%e3%80%8f%20t%e6%a4%9c%e5%ae%9a%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e7%ab%a0%e3%81%ae%e4%b8%ad%e3%81%a7%ef%bc%8c%e7%ad%89%e5%88%86%e6%95%a3%e6%80%a7%e3%81%ae%e6%a4%9c%e5%ae%9a%e3%82%92%e8%a1%8c%e3%81%86%e3%82%88%e3%81%86%e3%81%ab%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%e3%80%82%e3%81%be%e3%81%a8%e3%82%81%e3%81%ae%e6%ae%b5%e8%90%bd%e3%81%a7%e3%81%af%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%82%88%e3%81%86%e3%81%ab%e6%9b%b8%e3%81%8b%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%e3%81%a7%ef%bc%8c2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%8c%e6%8e%a8%e5%a5%a8%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%ef%bc%88p.150%ef%bc%89%e3%80%82%0a%20%e3%81%93%e3%81%93%e3%81%be%e3%81%a7%e3%81%ae%e5%86%85%e5%ae%b9%e3%82%92%e6%95%b4%e7%90%86%e3%81%97%e3%81%a6%e3%81%8a%e3%81%8d%e3%81%be%e3%81%97%e3%82%87%e3%81%86%e3%80%82%e3%81%be%e3%81%9a%ef%bc%8cvar.test%e9%96%a2%e6%95%b0%e3%82%92%e5%ae%9f%e8%a1%8c%e3%81%97%e3%81%a6%e5%88%86%e6%95%a3%e3%81%ae%e7%ad%89%e8%b3%aa%e6%80%a7%e3%82%92%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e3%81%97%e3%81%be%e3%81%99%e3%80%82%e3%81%9d%e3%81%ae%e7%b5%90%e6%9e%9c%ef%bc%8c%e7%ad%89%e5%88%86%e6%95%a3%e3%81%ae%e4%bb%ae%e5%ae%9a%e3%81%8c%e6%ba%80%e3%81%9f%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%9f%e3%82%89%e7%8b%ac%e7%ab%8b%e3%81%aa2%e7%be%a4%e3%81%aet%e6%a4%9c%e5%ae%9a%ef%bc%88t.test%28%e3%82%af%e3%83%a9%e3%82%b9A%ef%bc%8c%e3%82%af%e3%83%a9%e3%82%b9B%ef%bc%8cvar.equal%3dTRUE%29%ef%bc%89%e3%82%92%ef%bc%8c%e3%81%9d%e3%81%86%e3%81%a7%e3%81%aa%e3%81%8b%e3%81%a3%e3%81%9f%e3%82%89Welch%e3%81%ae%e6%a4%9c%e5%ae%9a%ef%bc%88t.test%28%e3%82%af%e3%83%a9%e3%82%b9A%2c%20%e3%82%af%e3%83%a9%e3%82%b9B%ef%bc%8cvar.equal%3dFALSE%29%ef%bc%89%e3%82%92%e8%a1%8c%e3%81%86%e3%81%a8%e3%81%84%e3%81%86%e3%81%93%e3%81%a8%e3%81%a7%e3%81%99%e3%80%82%0a%20%e5%ae%ae%e5%b7%9d%ef%bc%882015%ef%bc%89%e3%80%8e%e5%9f%ba%e6%9c%ac%e7%b5%b1%e8%a8%88%e5%ad%a6%ef%bc%88%e7%ac%ac4%e7%89%88%ef%bc%89%e3%80%8f%20Welch%e3%81%ae%e6%96%b9%e6%b3%95%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bc%89%e3%81%af%e3%81%aa%e3%81%8f%ef%bc%8cp.267%e3%81%ae%e6%b3%a8%e3%81%a7%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%82%88%e3%81%86%e3%81%ab%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%e3%80%82%0a%20%24%5csigma_1%20%5e2%20%5cneq%20%5csigma_2%20%5e2%20%24%20%e3%81%ae%e3%81%a8%e3%81%8d%e3%81%ae%e6%a4%9c%e5%ae%9a%e6%96%b9%e6%b3%95%e3%82%82%e3%81%82%e3%82%8b%e3%81%8c%ef%bc%8c%e3%81%9d%e3%82%8c%e3%81%af%e6%9c%ac%e6%9b%b8%e3%81%a7%e3%81%af%e6%89%b1%e3%82%8f%e3%81%aa%e3%81%84%e3%80%82%e3%81%aa%e3%81%8a%ef%bc%8c%20%24%5csigma_1%20%5e2%20%3d%20%5csigma_2%20%5e2%20%24%e3%81%a8%e3%81%97%e3%81%a6%e3%82%88%e3%81%84%e3%81%8b%e3%81%a9%e3%81%86%e3%81%8b%e3%81%af%ef%bc%8c%e5%be%8c%e8%bf%b0%ef%bc%889.7%e7%af%80%ef%bc%8c275-277%e3%83%9a%e3%83%bc%e3%82%b8%ef%bc%89%e3%81%ae%e6%a4%9c%e5%ae%9a%e6%96%b9%e3%81%ab%e3%82%88%e3%82%8a%e8%aa%bf%e3%81%b9%e3%82%8b%e3%81%93%e3%81%a8%e3%81%8c%e3%81%a7%e3%81%8d%e3%82%8b%e3%80%82%0a%20pp.275-277%e3%81%a7%e7%b4%b9%e4%bb%8b%e3%81%95%e3%82%8c%e3%82%8b%e3%81%ae%e3%81%afF%e6%a4%9c%e5%ae%9a%e3%81%aa%e3%81%ae%e3%81%a7%ef%bc%8c2%e6%ae%b5%e9%9a%8e%e6%8e%a8%e5%ae%9a%e3%82%92%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82" aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&t=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#芝南風原1990行動科学における統計解析法">芝・南風原（1990）『行動科学における統計解析法』</a></li>
+    <li><a href="#森吉田1990心理学のためのデータ解析テクニカルブック">森・吉田（1990）『心理学のためのデータ解析テクニカルブック』</a></li>
+    <li><a href="#宮埜1993心理学のためのデータ解析法">宮埜（1993）『心理学のためのデータ解析法』</a></li>
+    <li><a href="#吉田1998本当にわかりやすいすごく大切なことが書いてあるごく初歩の統計の本">吉田（1998）『本当にわかりやすいすごく大切なことが書いてあるごく初歩の統計の本』</a></li>
+    <li><a href="#山田杉澤村井2008rによるやさしい統計学">山田・杉澤・村井（2008）『Rによるやさしい統計学』</a></li>
+    <li><a href="#宮川2015基本統計学第4版">宮川（2015）『基本統計学（第4版）』</a></li>
+    <li><a href="#howell-2010-statistical-methods-for-psychology7th-ed">Howell (2010) <em>Statistical Methods for Psychology(7th ed.)</em></a></li>
+    <li><a href="#field-miles--field-2012-discovering-statistics-using-r">Field, Miles, &amp; Field (2012) <em>Discovering statistics using R</em></a></li>
+    <li><a href="#herzog-francis--clarke-2019-understandig-statistics-and-experimental-design">Herzog, Francis, &amp; Clarke (2019) <em>Understandig Statistics and Experimental Design</em></a></li>
+    <li><a href="#leppink-2019statistical-methods-for-experimental-research-in-education-and-psychology">Leppink (2019)<em>Statistical Methods for Experimental Research in Education and Psychology</em></a></li>
+  </ul>
+</nav>
+    </div>
+    
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        2段階検定についての統計の教科書の記述
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2020-10-20 11:22:38 &#43;0900 JST" itemprop="datePublished">2020-10-20</time>
+          
+        </div>
+        
+        
+        
+        <div class="article-category">
+            <i class="fas fa-archive"></i>
+            
+            
+            <a class="category-link" href="/categories/stat">stat</a>
+            
+        </div>
+        
+        
+      </div>
+    </header>
+
+  
+    
+    <div class="content" itemprop="articleBody">
+      <h2 id="はじめに">はじめに</h2>
+<p>2つの群の平均値の差を検定するときにはt検定がよく使われます。このとき2つの群の分散が異なるときに普通のt検定を行うとタイプIエラーを犯す可能性が大きくなりますが，Welchのt検定を使うとそれをコントロールすることができます。</p>
+<ul>
+<li><a href="https://academic-oup-com.ez.wul.waseda.ac.jp/biomet/article/29/3-4/350/256577">https://academic-oup-com.ez.wul.waseda.ac.jp/biomet/article/29/3-4/350/256577</a></li>
+</ul>
+<p>等分散の仮定を違反したときに，どの程度悪いことが起きるのか，そしてWelchの方法を使うとどの程度それがコントロールできるかについては青木先生の次のシミュレーションが大変参考になります。</p>
+<ul>
+<li><a href="http://aoki2.si.gunma-u.ac.jp/lecture/BF/index.html">http://aoki2.si.gunma-u.ac.jp/lecture/BF/index.html</a></li>
+</ul>
+<p>統計学のテキストの中には，2つの群の等分散の判断にF検定など分散に関する検定を用いて，その結果をもとに普通のt検定を行うかWelchのt検定を用いるかを判断するべし，という記述があったりします。ここではこれを便宜的に2段階検定法と呼びますが，この2段階検定法の問題点は様々なところで指摘されています。井口先生の次のサイトがかなり詳しく書いています。</p>
+<ul>
+<li><a href="https://biolab.sakura.ne.jp/welch-test.html">https://biolab.sakura.ne.jp/welch-test.html</a></li>
+</ul>
+<p>また，奥村先生の次の簡易的なシミュレーションも参考になります。</p>
+<ul>
+<li><a href="https://oku.edu.mie-u.ac.jp/~okumura/blog/node/2262">https://oku.edu.mie-u.ac.jp/~okumura/blog/node/2262</a></li>
+</ul>
+<p>ところで，統計解析のテキストはこの問題についてどう書いているのかふと気になりましたので，以下調べてみた記録を以下に残しておきます（手元にあったもののみですが）。</p>
+<h2 id="芝南風原1990行動科学における統計解析法">芝・南風原（1990）『行動科学における統計解析法』</h2>
+<p>2段階検定を推奨している訳ではないですが，そういう手法をとることがあると紹介しています（pp.108-9）。</p>
+<blockquote>
+<p>ところで，ここで述べた検定法を適用するときは，2群の母集団分散が等しいという仮定が妥当であるかどうかを，実際に得られた標本分散を用いて確認する必要がある。その際，2群の母集団分散に関する仮説$H_0：\sigma_1 ^2 =\sigma_2 ^2$の検定を利用することがある。この仮説が棄却されない場合でも，それが等分散を証明することにはならないが，その仮定が消極的ながら指示されたとみなすのである。</p>
+</blockquote>
+<p>母分散が等しいという帰無仮説を棄却できなかったからといって，それをもって等分散の証明にならないと明示しているのは親切ですね。</p>
+<h2 id="森吉田1990心理学のためのデータ解析テクニカルブック">森・吉田（1990）『心理学のためのデータ解析テクニカルブック』</h2>
+<p>以下の記述（p.62）のように2段階検定を推奨しています。</p>
+<blockquote>
+<p>2つの条件の平均値の差について検定を行うためには，2条件の分散が等質であるという前提条件が満たされていなければならない。そこで，まず，この条件が満たされているかどうか調べておこう。これにはF検定を行えばよい。</p>
+</blockquote>
+<h2 id="宮埜1993心理学のためのデータ解析法">宮埜（1993）『心理学のためのデータ解析法』</h2>
+<p>Welchの方法についての紹介はなく普通のt検定のみの解説ですが，等分散性の仮定についての以下のような補足があります。</p>
+<blockquote>
+<p>実データでは正規性および等分散性の家庭は必ずしも満足されない。しかし，正規性については標本の大きさが15以上ならば満足されなくても検定結果はあまり変わらない。また，等分散性についても分散比が0.4から2.5の範囲にある場合や$n_1 = n_2$である場合にはあまり結果に影響しないことが知られている。</p>
+</blockquote>
+<p>等分散性についてのこの性質が誰の何の研究に基づいているのかは分からないのですが，巻末にいくつか参考にした文献が挙げられており，そのいずれかにこの記述があるのだと思われます。手元にその文献はないため確認できていませんが。</p>
+<h2 id="吉田1998本当にわかりやすいすごく大切なことが書いてあるごく初歩の統計の本">吉田（1998）『本当にわかりやすいすごく大切なことが書いてあるごく初歩の統計の本』</h2>
+<p>「対応のない場合のt検定を適用する際の前提条件」というコラム（？）のようなものがあり（p.191）そこには以下のように書いてあります。</p>
+<blockquote>
+<p>②両条件の母集団の分散（ないし，標準偏差）が等しいこと。ただし，これも実際には得られたデータの分散が条件間で大きく異らなければよしとします。そして，両条件の分散に顕著な差が認められた場合には，この章の3節で解説するU検定や，ウェルチ（Welch）の検定，コクラン・コックス（Cochran-Cox）の検定などの他の検定を用います。</p>
+</blockquote>
+<p>コラムの中では分散の異なりの判定については述べていませんが，注には，「2つの条件の分散の差の検定については森・吉田（1990）のF検定の部分を見るように書いているので2段階検定を推奨しているようです。</p>
+<h2 id="山田杉澤村井2008rによるやさしい統計学">山田・杉澤・村井（2008）『Rによるやさしい統計学』</h2>
+<p>t検定に関する章の中で，等分散性の検定を行うように書いています。まとめの段落では以下のように書かれているので，2段階検定が推奨されています（p.150）。</p>
+<blockquote>
+<p>ここまでの内容を整理しておきましょう。まず，var.test関数を実行して分散の等質性をチェックします。その結果，等分散の仮定が満たされていたら独立な2群のt検定（<code>t.test(クラスA，クラスB，var.equal=TRUE)</code>）を，そうでなかったらWelchの検定（<code>t.test(クラスA, クラスB，var.equal=FALSE)</code>）を行うということです。</p>
+</blockquote>
+<h2 id="宮川2015基本統計学第4版">宮川（2015）『基本統計学（第4版）』</h2>
+<p>Welchの方法についての記載はなく，p.267の注で以下のように書いています。</p>
+<blockquote>
+<p>$\sigma_1 ^2 \neq \sigma_2 ^2 $ のときの検定方法もあるが，それは本書では扱わない。なお， $\sigma_1 ^2 = \sigma_2 ^2 $としてよいかどうかは，後述（9.7節，275-277ページ）の検定方により調べることができる。</p>
+</blockquote>
+<p>pp.275-277で紹介されるのはF検定なので，2段階推定を紹介しているようです。</p>
+<p>英語の統計のテキストというのはあまり持っていないのですが，いくつか手元にあったもので調べてみました。</p>
+<h2 id="howell-2010-statistical-methods-for-psychology7th-ed">Howell (2010) <em>Statistical Methods for Psychology(7th ed.)</em></h2>
+<p>等分散の仮定が違反された場合には，Welch-を使えと書いており，等分散のチェックにはLeveneの方法を使えと書いてあり，2段階検定を推奨しています（pp.214-215）。なお等分散の検定にF検定を使うのは，データの非正規性の影響を強く受けるので採用しないとのことです。</p>
+<h2 id="field-miles--field-2012-discovering-statistics-using-r">Field, Miles, &amp; Field (2012) <em>Discovering statistics using R</em></h2>
+<p>p.373で分散の等分散性についてコラムがあります。そこでは，</p>
+<blockquote>
+<p>[S]tatisticians used to recommend testing for it[homogeneity of variance] (using Levene&rsquo;s test) and if the assumption was violated, use an adjustment to correct for it. However, more recently statisticians have stopped using this approach, for two reasons. First, violating this assumption only matters if you have unequal group sizes; if you don&rsquo;t have unequal group sizes, the assumption is pretty much irrelevant and can be ignored. Second, the tests of homogeneity of variance tend to work very well when you have equal group sizes and large samples (when it doesn&rsquo;t matter as much if you have violated the assumption) and don&rsquo;t work as well with unequal group sizes and smaller samples - which is exactly when it matters.</p>
+</blockquote>
+<p>のように書いてあり，2段階検定が使われなくなったことを指摘しています。その後，Welchの方法を使えば気にしないで済むと書いてあります。</p>
+<p>その後のソフトウェアの使い方の解説部分でも，関数の等分散のオプションについて以下のように言っています。</p>
+<blockquote>
+<p>If for some reason you want to assume equal variances (we can&rsquo;t think why you would), then include the option var.equal = TRUE.</p>
+</blockquote>
+<h2 id="herzog-francis--clarke-2019-understandig-statistics-and-experimental-design">Herzog, Francis, &amp; Clarke (2019) <em>Understandig Statistics and Experimental Design</em></h2>
+<p>4.4節で，t検定の各種の仮定の違反が紹介されて，その中で母集団分散が異なる場合について説明されています（p.57）。そこでは分散が異なる場合にタイプIエラーがどの程度増えるのかについての簡単なシミュレーションが紹介されています。分散が異なる場合の対処法については，以下のように書いてありますが，Welchの方法で検定力が下がる場合もあると書いています。等分散性の判断についての記述はありません。</p>
+<blockquote>
+<p>These problems can be addressed by using a variation of the t -test called the Welch test. However, there is a cost; if the population standard deviations are actually equal, then the Welch test has smaller power than the standard t -test (it is less likely to reject the null hypothesis when there really is a difference).</p>
+</blockquote>
+<h2 id="leppink-2019statistical-methods-for-experimental-research-in-education-and-psychology">Leppink (2019)<em>Statistical Methods for Experimental Research in Education and Psychology</em></h2>
+<p>p.28で等分散性の問題を扱っています。多くの研究者が（正規性）と等分散性の検定をしてからt検定を行うとしつつもその問題点を指摘しています。</p>
+<blockquote>
+<p>Many researchers test both the normally distributed population and equal SDs assumptions through statistical significance tests (e.g., Fasano &amp; Francheschini, 1987; Justel, Peña, &amp; Zamar, 1997; Levene, 1960; Shapiro &amp; Wilk, 1965; Smirnov, 1948; Stephens, 1974). However, this approach is not without problems.</p>
+</blockquote>
+<p>問題点は3つあるとしていて，1つ目が，等分散の検定が非有意だからといってそれが等分散の証拠にはならないこと，２つ目は検定結果はサンプルサイズに依存すること，３点目は問題点という訳ではないようですが，研究者はいつでも普通のt検定とWelchの検定の結果を両方報告できる（のだから両方報告すれば良い，と解釈すればよいのかな？）としています。</p>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/profile">Profile</a></li>
+         
+          <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+          <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#芝南風原1990行動科学における統計解析法">芝・南風原（1990）『行動科学における統計解析法』</a></li>
+    <li><a href="#森吉田1990心理学のためのデータ解析テクニカルブック">森・吉田（1990）『心理学のためのデータ解析テクニカルブック』</a></li>
+    <li><a href="#宮埜1993心理学のためのデータ解析法">宮埜（1993）『心理学のためのデータ解析法』</a></li>
+    <li><a href="#吉田1998本当にわかりやすいすごく大切なことが書いてあるごく初歩の統計の本">吉田（1998）『本当にわかりやすいすごく大切なことが書いてあるごく初歩の統計の本』</a></li>
+    <li><a href="#山田杉澤村井2008rによるやさしい統計学">山田・杉澤・村井（2008）『Rによるやさしい統計学』</a></li>
+    <li><a href="#宮川2015基本統計学第4版">宮川（2015）『基本統計学（第4版）』</a></li>
+    <li><a href="#howell-2010-statistical-methods-for-psychology7th-ed">Howell (2010) <em>Statistical Methods for Psychology(7th ed.)</em></a></li>
+    <li><a href="#field-miles--field-2012-discovering-statistics-using-r">Field, Miles, &amp; Field (2012) <em>Discovering statistics using R</em></a></li>
+    <li><a href="#herzog-francis--clarke-2019-understandig-statistics-and-experimental-design">Herzog, Francis, &amp; Clarke (2019) <em>Understandig Statistics and Experimental Design</em></a></li>
+    <li><a href="#leppink-2019statistical-methods-for-experimental-research-in-education-and-psychology">Leppink (2019)<em>Statistical Methods for Experimental Research in Education and Psychology</em></a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&text=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&title=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&is_video=false&description=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&title=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&title=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&name=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0&description=%e3%81%af%e3%81%98%e3%82%81%e3%81%ab%202%e3%81%a4%e3%81%ae%e7%be%a4%e3%81%ae%e5%b9%b3%e5%9d%87%e5%80%a4%e3%81%ae%e5%b7%ae%e3%82%92%e6%a4%9c%e5%ae%9a%e3%81%99%e3%82%8b%e3%81%a8%e3%81%8d%e3%81%ab%e3%81%aft%e6%a4%9c%e5%ae%9a%e3%81%8c%e3%82%88%e3%81%8f%e4%bd%bf%e3%82%8f%e3%82%8c%e3%81%be%e3%81%99%e3%80%82%e3%81%93%e3%81%ae%e3%81%a8%e3%81%8d2%e3%81%a4%e3%81%ae%e7%be%a4%e3%81%ae%e5%88%86%e6%95%a3%e3%81%8c%e7%95%b0%e3%81%aa%e3%82%8b%e3%81%a8%e3%81%8d%e3%81%ab%e6%99%ae%e9%80%9a%e3%81%aet%e6%a4%9c%e5%ae%9a%e3%82%92%e8%a1%8c%e3%81%86%e3%81%a8%e3%82%bf%e3%82%a4%e3%83%97I%e3%82%a8%e3%83%a9%e3%83%bc%e3%82%92%e7%8a%af%e3%81%99%e5%8f%af%e8%83%bd%e6%80%a7%e3%81%8c%e5%a4%a7%e3%81%8d%e3%81%8f%e3%81%aa%e3%82%8a%e3%81%be%e3%81%99%e3%81%8c%ef%bc%8cWelch%e3%81%aet%e6%a4%9c%e5%ae%9a%e3%82%92%e4%bd%bf%e3%81%86%e3%81%a8%e3%81%9d%e3%82%8c%e3%82%92%e3%82%b3%e3%83%b3%e3%83%88%e3%83%ad%e3%83%bc%e3%83%ab%e3%81%99%e3%82%8b%e3%81%93%e3%81%a8%e3%81%8c%e3%81%a7%e3%81%8d%e3%81%be%e3%81%99%e3%80%82%0a%20https%3a%2f%2facademic-oup-com.ez.wul.waseda.ac.jp%2fbiomet%2farticle%2f29%2f3-4%2f350%2f256577%20%20%e7%ad%89%e5%88%86%e6%95%a3%e3%81%ae%e4%bb%ae%e5%ae%9a%e3%82%92%e9%81%95%e5%8f%8d%e3%81%97%e3%81%9f%e3%81%a8%e3%81%8d%e3%81%ab%ef%bc%8c%e3%81%a9%e3%81%ae%e7%a8%8b%e5%ba%a6%e6%82%aa%e3%81%84%e3%81%93%e3%81%a8%e3%81%8c%e8%b5%b7%e3%81%8d%e3%82%8b%e3%81%ae%e3%81%8b%ef%bc%8c%e3%81%9d%e3%81%97%e3%81%a6Welch%e3%81%ae%e6%96%b9%e6%b3%95%e3%82%92%e4%bd%bf%e3%81%86%e3%81%a8%e3%81%a9%e3%81%ae%e7%a8%8b%e5%ba%a6%e3%81%9d%e3%82%8c%e3%81%8c%e3%82%b3%e3%83%b3%e3%83%88%e3%83%ad%e3%83%bc%e3%83%ab%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%8b%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%af%e9%9d%92%e6%9c%a8%e5%85%88%e7%94%9f%e3%81%ae%e6%ac%a1%e3%81%ae%e3%82%b7%e3%83%9f%e3%83%a5%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%81%8c%e5%a4%a7%e5%a4%89%e5%8f%82%e8%80%83%e3%81%ab%e3%81%aa%e3%82%8a%e3%81%be%e3%81%99%e3%80%82%0a%20http%3a%2f%2faoki2.si.gunma-u.ac.jp%2flecture%2fBF%2findex.html%20%20%e7%b5%b1%e8%a8%88%e5%ad%a6%e3%81%ae%e3%83%86%e3%82%ad%e3%82%b9%e3%83%88%e3%81%ae%e4%b8%ad%e3%81%ab%e3%81%af%ef%bc%8c2%e3%81%a4%e3%81%ae%e7%be%a4%e3%81%ae%e7%ad%89%e5%88%86%e6%95%a3%e3%81%ae%e5%88%a4%e6%96%ad%e3%81%abF%e6%a4%9c%e5%ae%9a%e3%81%aa%e3%81%a9%e5%88%86%e6%95%a3%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e6%a4%9c%e5%ae%9a%e3%82%92%e7%94%a8%e3%81%84%e3%81%a6%ef%bc%8c%e3%81%9d%e3%81%ae%e7%b5%90%e6%9e%9c%e3%82%92%e3%82%82%e3%81%a8%e3%81%ab%e6%99%ae%e9%80%9a%e3%81%aet%e6%a4%9c%e5%ae%9a%e3%82%92%e8%a1%8c%e3%81%86%e3%81%8bWelch%e3%81%aet%e6%a4%9c%e5%ae%9a%e3%82%92%e7%94%a8%e3%81%84%e3%82%8b%e3%81%8b%e3%82%92%e5%88%a4%e6%96%ad%e3%81%99%e3%82%8b%e3%81%b9%e3%81%97%ef%bc%8c%e3%81%a8%e3%81%84%e3%81%86%e8%a8%98%e8%bf%b0%e3%81%8c%e3%81%82%e3%81%a3%e3%81%9f%e3%82%8a%e3%81%97%e3%81%be%e3%81%99%e3%80%82%e3%81%93%e3%81%93%e3%81%a7%e3%81%af%e3%81%93%e3%82%8c%e3%82%92%e4%be%bf%e5%ae%9c%e7%9a%84%e3%81%ab2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e6%b3%95%e3%81%a8%e5%91%bc%e3%81%b3%e3%81%be%e3%81%99%e3%81%8c%ef%bc%8c%e3%81%93%e3%81%ae2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e6%b3%95%e3%81%ae%e5%95%8f%e9%a1%8c%e7%82%b9%e3%81%af%e6%a7%98%e3%80%85%e3%81%aa%e3%81%a8%e3%81%93%e3%82%8d%e3%81%a7%e6%8c%87%e6%91%98%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%e3%80%82%e4%ba%95%e5%8f%a3%e5%85%88%e7%94%9f%e3%81%ae%e6%ac%a1%e3%81%ae%e3%82%b5%e3%82%a4%e3%83%88%e3%81%8c%e3%81%8b%e3%81%aa%e3%82%8a%e8%a9%b3%e3%81%97%e3%81%8f%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%e3%80%82%0a%20https%3a%2f%2fbiolab.sakura.ne.jp%2fwelch-test.html%20%20%e3%81%be%e3%81%9f%ef%bc%8c%e5%a5%a5%e6%9d%91%e5%85%88%e7%94%9f%e3%81%ae%e6%ac%a1%e3%81%ae%e7%b0%a1%e6%98%93%e7%9a%84%e3%81%aa%e3%82%b7%e3%83%9f%e3%83%a5%e3%83%ac%e3%83%bc%e3%82%b7%e3%83%a7%e3%83%b3%e3%82%82%e5%8f%82%e8%80%83%e3%81%ab%e3%81%aa%e3%82%8a%e3%81%be%e3%81%99%e3%80%82%0a%20https%3a%2f%2foku.edu.mie-u.ac.jp%2f~okumura%2fblog%2fnode%2f2262%20%20%e3%81%a8%e3%81%93%e3%82%8d%e3%81%a7%ef%bc%8c%e7%b5%b1%e8%a8%88%e8%a7%a3%e6%9e%90%e3%81%ae%e3%83%86%e3%82%ad%e3%82%b9%e3%83%88%e3%81%af%e3%81%93%e3%81%ae%e5%95%8f%e9%a1%8c%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%a9%e3%81%86%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%e3%81%8b%e3%81%b5%e3%81%a8%e6%b0%97%e3%81%ab%e3%81%aa%e3%82%8a%e3%81%be%e3%81%97%e3%81%9f%e3%81%ae%e3%81%a7%ef%bc%8c%e4%bb%a5%e4%b8%8b%e8%aa%bf%e3%81%b9%e3%81%a6%e3%81%bf%e3%81%9f%e8%a8%98%e9%8c%b2%e3%82%92%e4%bb%a5%e4%b8%8b%e3%81%ab%e6%ae%8b%e3%81%97%e3%81%a6%e3%81%8a%e3%81%8d%e3%81%be%e3%81%99%ef%bc%88%e6%89%8b%e5%85%83%e3%81%ab%e3%81%82%e3%81%a3%e3%81%9f%e3%82%82%e3%81%ae%e3%81%ae%e3%81%bf%e3%81%a7%e3%81%99%e3%81%8c%ef%bc%89%e3%80%82%0a%e8%8a%9d%e3%83%bb%e5%8d%97%e9%a2%a8%e5%8e%9f%ef%bc%881990%ef%bc%89%e3%80%8e%e8%a1%8c%e5%8b%95%e7%a7%91%e5%ad%a6%e3%81%ab%e3%81%8a%e3%81%91%e3%82%8b%e7%b5%b1%e8%a8%88%e8%a7%a3%e6%9e%90%e6%b3%95%e3%80%8f%202%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%82%92%e6%8e%a8%e5%a5%a8%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e8%a8%b3%e3%81%a7%e3%81%af%e3%81%aa%e3%81%84%e3%81%a7%e3%81%99%e3%81%8c%ef%bc%8c%e3%81%9d%e3%81%86%e3%81%84%e3%81%86%e6%89%8b%e6%b3%95%e3%82%92%e3%81%a8%e3%82%8b%e3%81%93%e3%81%a8%e3%81%8c%e3%81%82%e3%82%8b%e3%81%a8%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%ef%bc%88pp.108-9%ef%bc%89%e3%80%82%0a%20%e3%81%a8%e3%81%93%e3%82%8d%e3%81%a7%ef%bc%8c%e3%81%93%e3%81%93%e3%81%a7%e8%bf%b0%e3%81%b9%e3%81%9f%e6%a4%9c%e5%ae%9a%e6%b3%95%e3%82%92%e9%81%a9%e7%94%a8%e3%81%99%e3%82%8b%e3%81%a8%e3%81%8d%e3%81%af%ef%bc%8c2%e7%be%a4%e3%81%ae%e6%af%8d%e9%9b%86%e5%9b%a3%e5%88%86%e6%95%a3%e3%81%8c%e7%ad%89%e3%81%97%e3%81%84%e3%81%a8%e3%81%84%e3%81%86%e4%bb%ae%e5%ae%9a%e3%81%8c%e5%a6%a5%e5%bd%93%e3%81%a7%e3%81%82%e3%82%8b%e3%81%8b%e3%81%a9%e3%81%86%e3%81%8b%e3%82%92%ef%bc%8c%e5%ae%9f%e9%9a%9b%e3%81%ab%e5%be%97%e3%82%89%e3%82%8c%e3%81%9f%e6%a8%99%e6%9c%ac%e5%88%86%e6%95%a3%e3%82%92%e7%94%a8%e3%81%84%e3%81%a6%e7%a2%ba%e8%aa%8d%e3%81%99%e3%82%8b%e5%bf%85%e8%a6%81%e3%81%8c%e3%81%82%e3%82%8b%e3%80%82%e3%81%9d%e3%81%ae%e9%9a%9b%ef%bc%8c2%e7%be%a4%e3%81%ae%e6%af%8d%e9%9b%86%e5%9b%a3%e5%88%86%e6%95%a3%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e4%bb%ae%e8%aa%ac%24H_0%ef%bc%9a%5csigma_1%20%5e2%20%3d%5csigma_2%20%5e2%24%e3%81%ae%e6%a4%9c%e5%ae%9a%e3%82%92%e5%88%a9%e7%94%a8%e3%81%99%e3%82%8b%e3%81%93%e3%81%a8%e3%81%8c%e3%81%82%e3%82%8b%e3%80%82%e3%81%93%e3%81%ae%e4%bb%ae%e8%aa%ac%e3%81%8c%e6%a3%84%e5%8d%b4%e3%81%95%e3%82%8c%e3%81%aa%e3%81%84%e5%a0%b4%e5%90%88%e3%81%a7%e3%82%82%ef%bc%8c%e3%81%9d%e3%82%8c%e3%81%8c%e7%ad%89%e5%88%86%e6%95%a3%e3%82%92%e8%a8%bc%e6%98%8e%e3%81%99%e3%82%8b%e3%81%93%e3%81%a8%e3%81%ab%e3%81%af%e3%81%aa%e3%82%89%e3%81%aa%e3%81%84%e3%81%8c%ef%bc%8c%e3%81%9d%e3%81%ae%e4%bb%ae%e5%ae%9a%e3%81%8c%e6%b6%88%e6%a5%b5%e7%9a%84%e3%81%aa%e3%81%8c%e3%82%89%e6%8c%87%e7%a4%ba%e3%81%95%e3%82%8c%e3%81%9f%e3%81%a8%e3%81%bf%e3%81%aa%e3%81%99%e3%81%ae%e3%81%a7%e3%81%82%e3%82%8b%e3%80%82%0a%20%e6%af%8d%e5%88%86%e6%95%a3%e3%81%8c%e7%ad%89%e3%81%97%e3%81%84%e3%81%a8%e3%81%84%e3%81%86%e5%b8%b0%e7%84%a1%e4%bb%ae%e8%aa%ac%e3%82%92%e6%a3%84%e5%8d%b4%e3%81%a7%e3%81%8d%e3%81%aa%e3%81%8b%e3%81%a3%e3%81%9f%e3%81%8b%e3%82%89%e3%81%a8%e3%81%84%e3%81%a3%e3%81%a6%ef%bc%8c%e3%81%9d%e3%82%8c%e3%82%92%e3%82%82%e3%81%a3%e3%81%a6%e7%ad%89%e5%88%86%e6%95%a3%e3%81%ae%e8%a8%bc%e6%98%8e%e3%81%ab%e3%81%aa%e3%82%89%e3%81%aa%e3%81%84%e3%81%a8%e6%98%8e%e7%a4%ba%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%e3%81%af%e8%a6%aa%e5%88%87%e3%81%a7%e3%81%99%e3%81%ad%e3%80%82%0a%e6%a3%ae%e3%83%bb%e5%90%89%e7%94%b0%ef%bc%881990%ef%bc%89%e3%80%8e%e5%bf%83%e7%90%86%e5%ad%a6%e3%81%ae%e3%81%9f%e3%82%81%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e8%a7%a3%e6%9e%90%e3%83%86%e3%82%af%e3%83%8b%e3%82%ab%e3%83%ab%e3%83%96%e3%83%83%e3%82%af%e3%80%8f%20%e4%bb%a5%e4%b8%8b%e3%81%ae%e8%a8%98%e8%bf%b0%ef%bc%88p.62%ef%bc%89%e3%81%ae%e3%82%88%e3%81%86%e3%81%ab2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%82%92%e6%8e%a8%e5%a5%a8%e3%81%97%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%e3%80%82%0a%202%e3%81%a4%e3%81%ae%e6%9d%a1%e4%bb%b6%e3%81%ae%e5%b9%b3%e5%9d%87%e5%80%a4%e3%81%ae%e5%b7%ae%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e6%a4%9c%e5%ae%9a%e3%82%92%e8%a1%8c%e3%81%86%e3%81%9f%e3%82%81%e3%81%ab%e3%81%af%ef%bc%8c2%e6%9d%a1%e4%bb%b6%e3%81%ae%e5%88%86%e6%95%a3%e3%81%8c%e7%ad%89%e8%b3%aa%e3%81%a7%e3%81%82%e3%82%8b%e3%81%a8%e3%81%84%e3%81%86%e5%89%8d%e6%8f%90%e6%9d%a1%e4%bb%b6%e3%81%8c%e6%ba%80%e3%81%9f%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%aa%e3%81%91%e3%82%8c%e3%81%b0%e3%81%aa%e3%82%89%e3%81%aa%e3%81%84%e3%80%82%e3%81%9d%e3%81%93%e3%81%a7%ef%bc%8c%e3%81%be%e3%81%9a%ef%bc%8c%e3%81%93%e3%81%ae%e6%9d%a1%e4%bb%b6%e3%81%8c%e6%ba%80%e3%81%9f%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%81%8b%e3%81%a9%e3%81%86%e3%81%8b%e8%aa%bf%e3%81%b9%e3%81%a6%e3%81%8a%e3%81%93%e3%81%86%e3%80%82%e3%81%93%e3%82%8c%e3%81%ab%e3%81%afF%e6%a4%9c%e5%ae%9a%e3%82%92%e8%a1%8c%e3%81%88%e3%81%b0%e3%82%88%e3%81%84%e3%80%82%0a%20%e5%ae%ae%e5%9f%9c%ef%bc%881993%ef%bc%89%e3%80%8e%e5%bf%83%e7%90%86%e5%ad%a6%e3%81%ae%e3%81%9f%e3%82%81%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e8%a7%a3%e6%9e%90%e6%b3%95%e3%80%8f%20Welch%e3%81%ae%e6%96%b9%e6%b3%95%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b4%b9%e4%bb%8b%e3%81%af%e3%81%aa%e3%81%8f%e6%99%ae%e9%80%9a%e3%81%aet%e6%a4%9c%e5%ae%9a%e3%81%ae%e3%81%bf%e3%81%ae%e8%a7%a3%e8%aa%ac%e3%81%a7%e3%81%99%e3%81%8c%ef%bc%8c%e7%ad%89%e5%88%86%e6%95%a3%e6%80%a7%e3%81%ae%e4%bb%ae%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%82%88%e3%81%86%e3%81%aa%e8%a3%9c%e8%b6%b3%e3%81%8c%e3%81%82%e3%82%8a%e3%81%be%e3%81%99%e3%80%82%0a%20%e5%ae%9f%e3%83%87%e3%83%bc%e3%82%bf%e3%81%a7%e3%81%af%e6%ad%a3%e8%a6%8f%e6%80%a7%e3%81%8a%e3%82%88%e3%81%b3%e7%ad%89%e5%88%86%e6%95%a3%e6%80%a7%e3%81%ae%e5%ae%b6%e5%ba%ad%e3%81%af%e5%bf%85%e3%81%9a%e3%81%97%e3%82%82%e6%ba%80%e8%b6%b3%e3%81%95%e3%82%8c%e3%81%aa%e3%81%84%e3%80%82%e3%81%97%e3%81%8b%e3%81%97%ef%bc%8c%e6%ad%a3%e8%a6%8f%e6%80%a7%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%af%e6%a8%99%e6%9c%ac%e3%81%ae%e5%a4%a7%e3%81%8d%e3%81%95%e3%81%8c15%e4%bb%a5%e4%b8%8a%e3%81%aa%e3%82%89%e3%81%b0%e6%ba%80%e8%b6%b3%e3%81%95%e3%82%8c%e3%81%aa%e3%81%8f%e3%81%a6%e3%82%82%e6%a4%9c%e5%ae%9a%e7%b5%90%e6%9e%9c%e3%81%af%e3%81%82%e3%81%be%e3%82%8a%e5%a4%89%e3%82%8f%e3%82%89%e3%81%aa%e3%81%84%e3%80%82%e3%81%be%e3%81%9f%ef%bc%8c%e7%ad%89%e5%88%86%e6%95%a3%e6%80%a7%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%82%82%e5%88%86%e6%95%a3%e6%af%94%e3%81%8c0.4%e3%81%8b%e3%82%892.5%e3%81%ae%e7%af%84%e5%9b%b2%e3%81%ab%e3%81%82%e3%82%8b%e5%a0%b4%e5%90%88%e3%82%84%24n_1%20%3d%20n_2%24%e3%81%a7%e3%81%82%e3%82%8b%e5%a0%b4%e5%90%88%e3%81%ab%e3%81%af%e3%81%82%e3%81%be%e3%82%8a%e7%b5%90%e6%9e%9c%e3%81%ab%e5%bd%b1%e9%9f%bf%e3%81%97%e3%81%aa%e3%81%84%e3%81%93%e3%81%a8%e3%81%8c%e7%9f%a5%e3%82%89%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%80%82%0a%20%e7%ad%89%e5%88%86%e6%95%a3%e6%80%a7%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e3%81%93%e3%81%ae%e6%80%a7%e8%b3%aa%e3%81%8c%e8%aa%b0%e3%81%ae%e4%bd%95%e3%81%ae%e7%a0%94%e7%a9%b6%e3%81%ab%e5%9f%ba%e3%81%a5%e3%81%84%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%e3%81%8b%e3%81%af%e5%88%86%e3%81%8b%e3%82%89%e3%81%aa%e3%81%84%e3%81%ae%e3%81%a7%e3%81%99%e3%81%8c%ef%bc%8c%e5%b7%bb%e6%9c%ab%e3%81%ab%e3%81%84%e3%81%8f%e3%81%a4%e3%81%8b%e5%8f%82%e8%80%83%e3%81%ab%e3%81%97%e3%81%9f%e6%96%87%e7%8c%ae%e3%81%8c%e6%8c%99%e3%81%92%e3%82%89%e3%82%8c%e3%81%a6%e3%81%8a%e3%82%8a%ef%bc%8c%e3%81%9d%e3%81%ae%e3%81%84%e3%81%9a%e3%82%8c%e3%81%8b%e3%81%ab%e3%81%93%e3%81%ae%e8%a8%98%e8%bf%b0%e3%81%8c%e3%81%82%e3%82%8b%e3%81%ae%e3%81%a0%e3%81%a8%e6%80%9d%e3%82%8f%e3%82%8c%e3%81%be%e3%81%99%e3%80%82%e6%89%8b%e5%85%83%e3%81%ab%e3%81%9d%e3%81%ae%e6%96%87%e7%8c%ae%e3%81%af%e3%81%aa%e3%81%84%e3%81%9f%e3%82%81%e7%a2%ba%e8%aa%8d%e3%81%a7%e3%81%8d%e3%81%a6%e3%81%84%e3%81%be%e3%81%9b%e3%82%93%e3%81%8c%e3%80%82%0a%e5%90%89%e7%94%b0%ef%bc%881998%ef%bc%89%e3%80%8e%e6%9c%ac%e5%bd%93%e3%81%ab%e3%82%8f%e3%81%8b%e3%82%8a%e3%82%84%e3%81%99%e3%81%84%e3%81%99%e3%81%94%e3%81%8f%e5%a4%a7%e5%88%87%e3%81%aa%e3%81%93%e3%81%a8%e3%81%8c%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%82%e3%82%8b%e3%81%94%e3%81%8f%e5%88%9d%e6%ad%a9%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%9c%ac%e3%80%8f%20%e3%80%8c%e5%af%be%e5%bf%9c%e3%81%ae%e3%81%aa%e3%81%84%e5%a0%b4%e5%90%88%e3%81%aet%e6%a4%9c%e5%ae%9a%e3%82%92%e9%81%a9%e7%94%a8%e3%81%99%e3%82%8b%e9%9a%9b%e3%81%ae%e5%89%8d%e6%8f%90%e6%9d%a1%e4%bb%b6%e3%80%8d%e3%81%a8%e3%81%84%e3%81%86%e3%82%b3%e3%83%a9%e3%83%a0%ef%bc%88%ef%bc%9f%ef%bc%89%e3%81%ae%e3%82%88%e3%81%86%e3%81%aa%e3%82%82%e3%81%ae%e3%81%8c%e3%81%82%e3%82%8a%ef%bc%88p.191%ef%bc%89%e3%81%9d%e3%81%93%e3%81%ab%e3%81%af%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%82%88%e3%81%86%e3%81%ab%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%82%e3%82%8a%e3%81%be%e3%81%99%e3%80%82%0a%20%e2%91%a1%e4%b8%a1%e6%9d%a1%e4%bb%b6%e3%81%ae%e6%af%8d%e9%9b%86%e5%9b%a3%e3%81%ae%e5%88%86%e6%95%a3%ef%bc%88%e3%81%aa%e3%81%84%e3%81%97%ef%bc%8c%e6%a8%99%e6%ba%96%e5%81%8f%e5%b7%ae%ef%bc%89%e3%81%8c%e7%ad%89%e3%81%97%e3%81%84%e3%81%93%e3%81%a8%e3%80%82%e3%81%9f%e3%81%a0%e3%81%97%ef%bc%8c%e3%81%93%e3%82%8c%e3%82%82%e5%ae%9f%e9%9a%9b%e3%81%ab%e3%81%af%e5%be%97%e3%82%89%e3%82%8c%e3%81%9f%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e5%88%86%e6%95%a3%e3%81%8c%e6%9d%a1%e4%bb%b6%e9%96%93%e3%81%a7%e5%a4%a7%e3%81%8d%e3%81%8f%e7%95%b0%e3%82%89%e3%81%aa%e3%81%91%e3%82%8c%e3%81%b0%e3%82%88%e3%81%97%e3%81%a8%e3%81%97%e3%81%be%e3%81%99%e3%80%82%e3%81%9d%e3%81%97%e3%81%a6%ef%bc%8c%e4%b8%a1%e6%9d%a1%e4%bb%b6%e3%81%ae%e5%88%86%e6%95%a3%e3%81%ab%e9%a1%95%e8%91%97%e3%81%aa%e5%b7%ae%e3%81%8c%e8%aa%8d%e3%82%81%e3%82%89%e3%82%8c%e3%81%9f%e5%a0%b4%e5%90%88%e3%81%ab%e3%81%af%ef%bc%8c%e3%81%93%e3%81%ae%e7%ab%a0%e3%81%ae3%e7%af%80%e3%81%a7%e8%a7%a3%e8%aa%ac%e3%81%99%e3%82%8bU%e6%a4%9c%e5%ae%9a%e3%82%84%ef%bc%8c%e3%82%a6%e3%82%a7%e3%83%ab%e3%83%81%ef%bc%88Welch%ef%bc%89%e3%81%ae%e6%a4%9c%e5%ae%9a%ef%bc%8c%e3%82%b3%e3%82%af%e3%83%a9%e3%83%b3%e3%83%bb%e3%82%b3%e3%83%83%e3%82%af%e3%82%b9%ef%bc%88Cochran-Cox%ef%bc%89%e3%81%ae%e6%a4%9c%e5%ae%9a%e3%81%aa%e3%81%a9%e3%81%ae%e4%bb%96%e3%81%ae%e6%a4%9c%e5%ae%9a%e3%82%92%e7%94%a8%e3%81%84%e3%81%be%e3%81%99%e3%80%82%0a%20%e3%82%b3%e3%83%a9%e3%83%a0%e3%81%ae%e4%b8%ad%e3%81%a7%e3%81%af%e5%88%86%e6%95%a3%e3%81%ae%e7%95%b0%e3%81%aa%e3%82%8a%e3%81%ae%e5%88%a4%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%af%e8%bf%b0%e3%81%b9%e3%81%a6%e3%81%84%e3%81%be%e3%81%9b%e3%82%93%e3%81%8c%ef%bc%8c%e6%b3%a8%e3%81%ab%e3%81%af%ef%bc%8c%e3%80%8c2%e3%81%a4%e3%81%ae%e6%9d%a1%e4%bb%b6%e3%81%ae%e5%88%86%e6%95%a3%e3%81%ae%e5%b7%ae%e3%81%ae%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%af%e6%a3%ae%e3%83%bb%e5%90%89%e7%94%b0%ef%bc%881990%ef%bc%89%e3%81%aeF%e6%a4%9c%e5%ae%9a%e3%81%ae%e9%83%a8%e5%88%86%e3%82%92%e8%a6%8b%e3%82%8b%e3%82%88%e3%81%86%e3%81%ab%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%e3%81%a72%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%82%92%e6%8e%a8%e5%a5%a8%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82%0a%e5%b1%b1%e7%94%b0%e3%83%bb%e6%9d%89%e6%be%a4%e3%83%bb%e6%9d%91%e4%ba%95%ef%bc%882008%ef%bc%89%e3%80%8eR%e3%81%ab%e3%82%88%e3%82%8b%e3%82%84%e3%81%95%e3%81%97%e3%81%84%e7%b5%b1%e8%a8%88%e5%ad%a6%e3%80%8f%20t%e6%a4%9c%e5%ae%9a%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e7%ab%a0%e3%81%ae%e4%b8%ad%e3%81%a7%ef%bc%8c%e7%ad%89%e5%88%86%e6%95%a3%e6%80%a7%e3%81%ae%e6%a4%9c%e5%ae%9a%e3%82%92%e8%a1%8c%e3%81%86%e3%82%88%e3%81%86%e3%81%ab%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%e3%80%82%e3%81%be%e3%81%a8%e3%82%81%e3%81%ae%e6%ae%b5%e8%90%bd%e3%81%a7%e3%81%af%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%82%88%e3%81%86%e3%81%ab%e6%9b%b8%e3%81%8b%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%81%ae%e3%81%a7%ef%bc%8c2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%8c%e6%8e%a8%e5%a5%a8%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%ef%bc%88p.150%ef%bc%89%e3%80%82%0a%20%e3%81%93%e3%81%93%e3%81%be%e3%81%a7%e3%81%ae%e5%86%85%e5%ae%b9%e3%82%92%e6%95%b4%e7%90%86%e3%81%97%e3%81%a6%e3%81%8a%e3%81%8d%e3%81%be%e3%81%97%e3%82%87%e3%81%86%e3%80%82%e3%81%be%e3%81%9a%ef%bc%8cvar.test%e9%96%a2%e6%95%b0%e3%82%92%e5%ae%9f%e8%a1%8c%e3%81%97%e3%81%a6%e5%88%86%e6%95%a3%e3%81%ae%e7%ad%89%e8%b3%aa%e6%80%a7%e3%82%92%e3%83%81%e3%82%a7%e3%83%83%e3%82%af%e3%81%97%e3%81%be%e3%81%99%e3%80%82%e3%81%9d%e3%81%ae%e7%b5%90%e6%9e%9c%ef%bc%8c%e7%ad%89%e5%88%86%e6%95%a3%e3%81%ae%e4%bb%ae%e5%ae%9a%e3%81%8c%e6%ba%80%e3%81%9f%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%9f%e3%82%89%e7%8b%ac%e7%ab%8b%e3%81%aa2%e7%be%a4%e3%81%aet%e6%a4%9c%e5%ae%9a%ef%bc%88t.test%28%e3%82%af%e3%83%a9%e3%82%b9A%ef%bc%8c%e3%82%af%e3%83%a9%e3%82%b9B%ef%bc%8cvar.equal%3dTRUE%29%ef%bc%89%e3%82%92%ef%bc%8c%e3%81%9d%e3%81%86%e3%81%a7%e3%81%aa%e3%81%8b%e3%81%a3%e3%81%9f%e3%82%89Welch%e3%81%ae%e6%a4%9c%e5%ae%9a%ef%bc%88t.test%28%e3%82%af%e3%83%a9%e3%82%b9A%2c%20%e3%82%af%e3%83%a9%e3%82%b9B%ef%bc%8cvar.equal%3dFALSE%29%ef%bc%89%e3%82%92%e8%a1%8c%e3%81%86%e3%81%a8%e3%81%84%e3%81%86%e3%81%93%e3%81%a8%e3%81%a7%e3%81%99%e3%80%82%0a%20%e5%ae%ae%e5%b7%9d%ef%bc%882015%ef%bc%89%e3%80%8e%e5%9f%ba%e6%9c%ac%e7%b5%b1%e8%a8%88%e5%ad%a6%ef%bc%88%e7%ac%ac4%e7%89%88%ef%bc%89%e3%80%8f%20Welch%e3%81%ae%e6%96%b9%e6%b3%95%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e8%a8%98%e8%bc%89%e3%81%af%e3%81%aa%e3%81%8f%ef%bc%8cp.267%e3%81%ae%e6%b3%a8%e3%81%a7%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%82%88%e3%81%86%e3%81%ab%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%e3%80%82%0a%20%24%5csigma_1%20%5e2%20%5cneq%20%5csigma_2%20%5e2%20%24%20%e3%81%ae%e3%81%a8%e3%81%8d%e3%81%ae%e6%a4%9c%e5%ae%9a%e6%96%b9%e6%b3%95%e3%82%82%e3%81%82%e3%82%8b%e3%81%8c%ef%bc%8c%e3%81%9d%e3%82%8c%e3%81%af%e6%9c%ac%e6%9b%b8%e3%81%a7%e3%81%af%e6%89%b1%e3%82%8f%e3%81%aa%e3%81%84%e3%80%82%e3%81%aa%e3%81%8a%ef%bc%8c%20%24%5csigma_1%20%5e2%20%3d%20%5csigma_2%20%5e2%20%24%e3%81%a8%e3%81%97%e3%81%a6%e3%82%88%e3%81%84%e3%81%8b%e3%81%a9%e3%81%86%e3%81%8b%e3%81%af%ef%bc%8c%e5%be%8c%e8%bf%b0%ef%bc%889.7%e7%af%80%ef%bc%8c275-277%e3%83%9a%e3%83%bc%e3%82%b8%ef%bc%89%e3%81%ae%e6%a4%9c%e5%ae%9a%e6%96%b9%e3%81%ab%e3%82%88%e3%82%8a%e8%aa%bf%e3%81%b9%e3%82%8b%e3%81%93%e3%81%a8%e3%81%8c%e3%81%a7%e3%81%8d%e3%82%8b%e3%80%82%0a%20pp.275-277%e3%81%a7%e7%b4%b9%e4%bb%8b%e3%81%95%e3%82%8c%e3%82%8b%e3%81%ae%e3%81%afF%e6%a4%9c%e5%ae%9a%e3%81%aa%e3%81%ae%e3%81%a7%ef%bc%8c2%e6%ae%b5%e9%9a%8e%e6%8e%a8%e5%ae%9a%e3%82%92%e7%b4%b9%e4%bb%8b%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82" aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2fequalvar%2f&t=2%e6%ae%b5%e9%9a%8e%e6%a4%9c%e5%ae%9a%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%ae%e7%b5%b1%e8%a8%88%e3%81%ae%e6%95%99%e7%a7%91%e6%9b%b8%e3%81%ae%e8%a8%98%e8%bf%b0" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  Takahiro ONOSHIMA 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+<script src=/js/code-copy.js></script>
+
+
+
+  
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</html>

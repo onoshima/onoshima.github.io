@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> RからeStatのAPIを使ってみる（その2） | Takahiro ONOSHIMA&#39;s website</title>
+  <link rel = 'canonical' href = 'https://onoshima.github.io/posts/restat_packages/'>
+  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="RからeStatのAPIを使ってみる（その2）" />
+<meta property="og:description" content="はじめに Rからe-Statを使うお勉強の記録．@yutannihilation さん作成のestatapiというパッケージがあり，それを使ったらとても楽だった．使い方は以下のページに書いてある．
+https://qiita.com/kazutan/items/9c0b2dd0f055fde45cda
+不登校の児童生徒の数 今回は，文部科学省の「児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査」という調査を使ってみて，都道府県別1000人あたりの不登校児童の数をグラフにしてみた．日本地図については谷村先生作成のNipponMapというパッケージを使った．使い方は以下のサイトを参考にした．
+https://oku.edu.mie-u.ac.jp/~okumura/stat/nippon.html
+使ったコード library(pacman) p_load(estatapi, keyring,dplyr, stringr,NipponMap,RColorBrewer) key_set(&#34;e-stat&#34;) #　統計表の検索 00400304は児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査 statsList &lt;- estat_getStatsList( appId = key_get(&#34;e-stat&#34;), searchWord = &#34;&#34;, statsCode = &#34;00400304&#34; ) str(statsList) lists &lt;- statsList %&gt;% filter(str_detect(TITLE, &#34;不登校児童生徒数&#34;)) id_vector &lt;- pull(lists, &#34;@id&#34;) # メタ情報 meta_info &lt;- estat_getMetaInfo(appId = key_get(&#34;e-stat&#34;), statsDataId = id_vector[1]) names(meta_info) # 実際のデータを取得 df &lt;- estat_getStatsData( appId = key_get(&#34;e-stat&#34;), statsDataId = id_vector[1], cdCat02 = c(&#34;120&#34;, &#34;140&#34;), #小学校と中学校 cdArea = meta_info$area$&#34;@code&#34;[2:48]　#1番目は全国なので除外 ) df2017 &lt;- df %&gt;% rename(&#34;year&#34; = &#34;時間軸(年度次)&#34;) %&gt;% filter(year == &#34;2017年度&#34;, 学校種類 == &#34;小学校&#34;, cat01_code == &#34;120&#34;) df2017_jhs &lt;- df %&gt;% rename(&#34;year&#34; = &#34;時間軸(年度次)&#34;) %&gt;% filter(year == &#34;2017年度&#34;, 学校種類 == &#34;中学校&#34;, cat01_code == &#34;120&#34;) # 小学生をplot kenmei &lt;- df2017$地域 br &lt;- seq(3, 9, 1) color &lt;- brewer." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://onoshima.github.io/posts/restat_packages/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-03-08T16:50:26+09:00" />
+<meta property="article:modified_time" content="2020-03-08T16:50:26+09:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="RからeStatのAPIを使ってみる（その2）"/>
+<meta name="twitter:description" content="はじめに Rからe-Statを使うお勉強の記録．@yutannihilation さん作成のestatapiというパッケージがあり，それを使ったらとても楽だった．使い方は以下のページに書いてある．
+https://qiita.com/kazutan/items/9c0b2dd0f055fde45cda
+不登校の児童生徒の数 今回は，文部科学省の「児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査」という調査を使ってみて，都道府県別1000人あたりの不登校児童の数をグラフにしてみた．日本地図については谷村先生作成のNipponMapというパッケージを使った．使い方は以下のサイトを参考にした．
+https://oku.edu.mie-u.ac.jp/~okumura/stat/nippon.html
+使ったコード library(pacman) p_load(estatapi, keyring,dplyr, stringr,NipponMap,RColorBrewer) key_set(&#34;e-stat&#34;) #　統計表の検索 00400304は児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査 statsList &lt;- estat_getStatsList( appId = key_get(&#34;e-stat&#34;), searchWord = &#34;&#34;, statsCode = &#34;00400304&#34; ) str(statsList) lists &lt;- statsList %&gt;% filter(str_detect(TITLE, &#34;不登校児童生徒数&#34;)) id_vector &lt;- pull(lists, &#34;@id&#34;) # メタ情報 meta_info &lt;- estat_getMetaInfo(appId = key_get(&#34;e-stat&#34;), statsDataId = id_vector[1]) names(meta_info) # 実際のデータを取得 df &lt;- estat_getStatsData( appId = key_get(&#34;e-stat&#34;), statsDataId = id_vector[1], cdCat02 = c(&#34;120&#34;, &#34;140&#34;), #小学校と中学校 cdArea = meta_info$area$&#34;@code&#34;[2:48]　#1番目は全国なので除外 ) df2017 &lt;- df %&gt;% rename(&#34;year&#34; = &#34;時間軸(年度次)&#34;) %&gt;% filter(year == &#34;2017年度&#34;, 学校種類 == &#34;小学校&#34;, cat01_code == &#34;120&#34;) df2017_jhs &lt;- df %&gt;% rename(&#34;year&#34; = &#34;時間軸(年度次)&#34;) %&gt;% filter(year == &#34;2017年度&#34;, 学校種類 == &#34;中学校&#34;, cat01_code == &#34;120&#34;) # 小学生をplot kenmei &lt;- df2017$地域 br &lt;- seq(3, 9, 1) color &lt;- brewer."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://onoshima.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://onoshima.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://onoshima.github.io/posts/rapi/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="https://onoshima.github.io/posts/zotero/" aria-label="Next">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&text=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&title=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&is_video=false&description=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&title=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&title=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&name=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89&description=%e3%81%af%e3%81%98%e3%82%81%e3%81%ab%20R%e3%81%8b%e3%82%89e-Stat%e3%82%92%e4%bd%bf%e3%81%86%e3%81%8a%e5%8b%89%e5%bc%b7%e3%81%ae%e8%a8%98%e9%8c%b2%ef%bc%8e%40yutannihilation%20%e3%81%95%e3%82%93%e4%bd%9c%e6%88%90%e3%81%aeestatapi%e3%81%a8%e3%81%84%e3%81%86%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%8c%e3%81%82%e3%82%8a%ef%bc%8c%e3%81%9d%e3%82%8c%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9f%e3%82%89%e3%81%a8%e3%81%a6%e3%82%82%e6%a5%bd%e3%81%a0%e3%81%a3%e3%81%9f%ef%bc%8e%e4%bd%bf%e3%81%84%e6%96%b9%e3%81%af%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%83%9a%e3%83%bc%e3%82%b8%e3%81%ab%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%82%e3%82%8b%ef%bc%8e%0ahttps%3a%2f%2fqiita.com%2fkazutan%2fitems%2f9c0b2dd0f055fde45cda%0a%e4%b8%8d%e7%99%bb%e6%a0%a1%e3%81%ae%e5%85%90%e7%ab%a5%e7%94%9f%e5%be%92%e3%81%ae%e6%95%b0%20%e4%bb%8a%e5%9b%9e%e3%81%af%ef%bc%8c%e6%96%87%e9%83%a8%e7%a7%91%e5%ad%a6%e7%9c%81%e3%81%ae%e3%80%8c%e5%85%90%e7%ab%a5%e7%94%9f%e5%be%92%e3%81%ae%e5%95%8f%e9%a1%8c%e8%a1%8c%e5%8b%95%e3%83%bb%e4%b8%8d%e7%99%bb%e6%a0%a1%e7%ad%89%e7%94%9f%e5%be%92%e6%8c%87%e5%b0%8e%e4%b8%8a%e3%81%ae%e8%ab%b8%e8%aa%b2%e9%a1%8c%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e8%aa%bf%e6%9f%bb%e3%80%8d%e3%81%a8%e3%81%84%e3%81%86%e8%aa%bf%e6%9f%bb%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%a6%ef%bc%8c%e9%83%bd%e9%81%93%e5%ba%9c%e7%9c%8c%e5%88%a51000%e4%ba%ba%e3%81%82%e3%81%9f%e3%82%8a%e3%81%ae%e4%b8%8d%e7%99%bb%e6%a0%a1%e5%85%90%e7%ab%a5%e3%81%ae%e6%95%b0%e3%82%92%e3%82%b0%e3%83%a9%e3%83%95%e3%81%ab%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f%ef%bc%8e%e6%97%a5%e6%9c%ac%e5%9c%b0%e5%9b%b3%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%af%e8%b0%b7%e6%9d%91%e5%85%88%e7%94%9f%e4%bd%9c%e6%88%90%e3%81%aeNipponMap%e3%81%a8%e3%81%84%e3%81%86%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9f%ef%bc%8e%e4%bd%bf%e3%81%84%e6%96%b9%e3%81%af%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%82%b5%e3%82%a4%e3%83%88%e3%82%92%e5%8f%82%e8%80%83%e3%81%ab%e3%81%97%e3%81%9f%ef%bc%8e%0ahttps%3a%2f%2foku.edu.mie-u.ac.jp%2f~okumura%2fstat%2fnippon.html%0a%e4%bd%bf%e3%81%a3%e3%81%9f%e3%82%b3%e3%83%bc%e3%83%89%20library%28pacman%29%20p_load%28estatapi%2c%20keyring%2cdplyr%2c%20stringr%2cNipponMap%2cRColorBrewer%29%20key_set%28%26%2334%3be-stat%26%2334%3b%29%20%23%e3%80%80%e7%b5%b1%e8%a8%88%e8%a1%a8%e3%81%ae%e6%a4%9c%e7%b4%a2%2000400304%e3%81%af%e5%85%90%e7%ab%a5%e7%94%9f%e5%be%92%e3%81%ae%e5%95%8f%e9%a1%8c%e8%a1%8c%e5%8b%95%e3%83%bb%e4%b8%8d%e7%99%bb%e6%a0%a1%e7%ad%89%e7%94%9f%e5%be%92%e6%8c%87%e5%b0%8e%e4%b8%8a%e3%81%ae%e8%ab%b8%e8%aa%b2%e9%a1%8c%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e8%aa%bf%e6%9f%bb%20statsList%20%26lt%3b-%20estat_getStatsList%28%20appId%20%3d%20key_get%28%26%2334%3be-stat%26%2334%3b%29%2c%20searchWord%20%3d%20%26%2334%3b%26%2334%3b%2c%20statsCode%20%3d%20%26%2334%3b00400304%26%2334%3b%20%29%20str%28statsList%29%20lists%20%26lt%3b-%20statsList%20%25%26gt%3b%25%20filter%28str_detect%28TITLE%2c%20%26%2334%3b%e4%b8%8d%e7%99%bb%e6%a0%a1%e5%85%90%e7%ab%a5%e7%94%9f%e5%be%92%e6%95%b0%26%2334%3b%29%29%20id_vector%20%26lt%3b-%20pull%28lists%2c%20%26%2334%3b%40id%26%2334%3b%29%20%23%20%e3%83%a1%e3%82%bf%e6%83%85%e5%a0%b1%20meta_info%20%26lt%3b-%20estat_getMetaInfo%28appId%20%3d%20key_get%28%26%2334%3be-stat%26%2334%3b%29%2c%20statsDataId%20%3d%20id_vector%5b1%5d%29%20names%28meta_info%29%20%23%20%e5%ae%9f%e9%9a%9b%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92%e5%8f%96%e5%be%97%20df%20%26lt%3b-%20estat_getStatsData%28%20appId%20%3d%20key_get%28%26%2334%3be-stat%26%2334%3b%29%2c%20statsDataId%20%3d%20id_vector%5b1%5d%2c%20cdCat02%20%3d%20c%28%26%2334%3b120%26%2334%3b%2c%20%26%2334%3b140%26%2334%3b%29%2c%20%23%e5%b0%8f%e5%ad%a6%e6%a0%a1%e3%81%a8%e4%b8%ad%e5%ad%a6%e6%a0%a1%20cdArea%20%3d%20meta_info%24area%24%26%2334%3b%40code%26%2334%3b%5b2%3a48%5d%e3%80%80%231%e7%95%aa%e7%9b%ae%e3%81%af%e5%85%a8%e5%9b%bd%e3%81%aa%e3%81%ae%e3%81%a7%e9%99%a4%e5%a4%96%20%29%20df2017%20%26lt%3b-%20df%20%25%26gt%3b%25%20rename%28%26%2334%3byear%26%2334%3b%20%3d%20%26%2334%3b%e6%99%82%e9%96%93%e8%bb%b8%28%e5%b9%b4%e5%ba%a6%e6%ac%a1%29%26%2334%3b%29%20%25%26gt%3b%25%20filter%28year%20%3d%3d%20%26%2334%3b2017%e5%b9%b4%e5%ba%a6%26%2334%3b%2c%20%e5%ad%a6%e6%a0%a1%e7%a8%ae%e9%a1%9e%20%3d%3d%20%26%2334%3b%e5%b0%8f%e5%ad%a6%e6%a0%a1%26%2334%3b%2c%20cat01_code%20%3d%3d%20%26%2334%3b120%26%2334%3b%29%20df2017_jhs%20%26lt%3b-%20df%20%25%26gt%3b%25%20rename%28%26%2334%3byear%26%2334%3b%20%3d%20%26%2334%3b%e6%99%82%e9%96%93%e8%bb%b8%28%e5%b9%b4%e5%ba%a6%e6%ac%a1%29%26%2334%3b%29%20%25%26gt%3b%25%20filter%28year%20%3d%3d%20%26%2334%3b2017%e5%b9%b4%e5%ba%a6%26%2334%3b%2c%20%e5%ad%a6%e6%a0%a1%e7%a8%ae%e9%a1%9e%20%3d%3d%20%26%2334%3b%e4%b8%ad%e5%ad%a6%e6%a0%a1%26%2334%3b%2c%20cat01_code%20%3d%3d%20%26%2334%3b120%26%2334%3b%29%20%23%20%e5%b0%8f%e5%ad%a6%e7%94%9f%e3%82%92plot%20kenmei%20%26lt%3b-%20df2017%24%e5%9c%b0%e5%9f%9f%20br%20%26lt%3b-%20seq%283%2c%209%2c%201%29%20color%20%26lt%3b-%20brewer." aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&t=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#不登校の児童生徒の数">不登校の児童生徒の数</a></li>
+    <li><a href="#使ったコード">使ったコード</a></li>
+  </ul>
+</nav>
+    </div>
+    
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        RからeStatのAPIを使ってみる（その2）
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2020-03-08 16:50:26 &#43;0900 JST" itemprop="datePublished">2020-03-08</time>
+          
+        </div>
+        
+        
+        
+        <div class="article-category">
+            <i class="fas fa-archive"></i>
+            
+            
+            <a class="category-link" href="/categories/stat">Stat</a>
+            
+             ,  
+            <a class="category-link" href="/categories/r">R</a>
+            
+        </div>
+        
+        
+        <div class="article-tag">
+            <i class="fas fa-tag"></i>
+            
+            
+            <a class="tag-link" href="/tags/e-stat" rel="tag">e-Stat</a>
+            
+             ,  
+            <a class="tag-link" href="/tags/api" rel="tag">API</a>
+            
+        </div>
+        
+      </div>
+    </header>
+
+  
+    
+    <div class="content" itemprop="articleBody">
+      <h2 id="はじめに">はじめに</h2>
+<p>Rからe-Statを使うお勉強の記録．<a href="https://qiita.com/yutannihilation">@yutannihilation</a> さん作成の<code>estatapi</code>というパッケージがあり，それを使ったらとても楽だった．使い方は以下のページに書いてある．</p>
+<p><a href="https://qiita.com/kazutan/items/9c0b2dd0f055fde45cda">https://qiita.com/kazutan/items/9c0b2dd0f055fde45cda</a></p>
+<h2 id="不登校の児童生徒の数">不登校の児童生徒の数</h2>
+<p>今回は，文部科学省の「児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査」という調査を使ってみて，都道府県別1000人あたりの不登校児童の数をグラフにしてみた．日本地図については谷村先生作成の<code>NipponMap</code>というパッケージを使った．使い方は以下のサイトを参考にした．</p>
+<p><a href="https://oku.edu.mie-u.ac.jp/~okumura/stat/nippon.html">https://oku.edu.mie-u.ac.jp/~okumura/stat/nippon.html</a></p>
+<p><img src="/images/scref_es2017.png" alt="小学生の不登校児童">
+<img src="/images/scref_jhs2017.png" alt="中学生の不登校生徒"></p>
+<h2 id="使ったコード">使ったコード</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(pacman)
+<span style="color:#a6e22e">p_load</span>(estatapi, keyring,dplyr, stringr,NipponMap,RColorBrewer)
+<span style="color:#a6e22e">key_set</span>(<span style="color:#e6db74">&#34;e-stat&#34;</span>)
+
+<span style="color:#75715e">#　統計表の検索 00400304は児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査</span>
+statsList <span style="color:#f92672">&lt;-</span>
+  <span style="color:#a6e22e">estat_getStatsList</span>(
+    appId <span style="color:#f92672">=</span> <span style="color:#a6e22e">key_get</span>(<span style="color:#e6db74">&#34;e-stat&#34;</span>),
+    searchWord <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>,
+    statsCode <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;00400304&#34;</span>
+  )
+<span style="color:#a6e22e">str</span>(statsList)
+
+lists <span style="color:#f92672">&lt;-</span> statsList <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">filter</span>(<span style="color:#a6e22e">str_detect</span>(TITLE, <span style="color:#e6db74">&#34;不登校児童生徒数&#34;</span>))
+id_vector <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">pull</span>(lists, <span style="color:#e6db74">&#34;@id&#34;</span>)
+
+<span style="color:#75715e"># メタ情報</span>
+meta_info <span style="color:#f92672">&lt;-</span>
+  <span style="color:#a6e22e">estat_getMetaInfo</span>(appId <span style="color:#f92672">=</span> <span style="color:#a6e22e">key_get</span>(<span style="color:#e6db74">&#34;e-stat&#34;</span>), statsDataId <span style="color:#f92672">=</span> id_vector[1])
+<span style="color:#a6e22e">names</span>(meta_info)
+
+<span style="color:#75715e"># 実際のデータを取得</span>
+df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">estat_getStatsData</span>(
+  appId <span style="color:#f92672">=</span> <span style="color:#a6e22e">key_get</span>(<span style="color:#e6db74">&#34;e-stat&#34;</span>),
+  statsDataId <span style="color:#f92672">=</span> id_vector[1],
+  cdCat02 <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;120&#34;</span>, <span style="color:#e6db74">&#34;140&#34;</span>), <span style="color:#75715e">#小学校と中学校</span>
+  cdArea <span style="color:#f92672">=</span> meta_info<span style="color:#f92672">$</span>area<span style="color:#f92672">$</span><span style="color:#e6db74">&#34;@code&#34;</span>[2<span style="color:#f92672">:</span><span style="color:#ae81ff">48</span>]　<span style="color:#75715e">#1番目は全国なので除外</span>
+)
+
+df2017 <span style="color:#f92672">&lt;-</span> df <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">rename</span>(<span style="color:#e6db74">&#34;year&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;時間軸(年度次)&#34;</span>) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">filter</span>(year <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;2017年度&#34;</span>,  学校種類 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;小学校&#34;</span>, cat01_code <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;120&#34;</span>)
+df2017_jhs <span style="color:#f92672">&lt;-</span> df <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">rename</span>(<span style="color:#e6db74">&#34;year&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;時間軸(年度次)&#34;</span>) <span style="color:#f92672">%&gt;%</span>
+  <span style="color:#a6e22e">filter</span>(year <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;2017年度&#34;</span>,  学校種類 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;中学校&#34;</span>, cat01_code <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;120&#34;</span>)
+
+<span style="color:#75715e"># 小学生をplot</span>
+kenmei <span style="color:#f92672">&lt;-</span> df2017<span style="color:#f92672">$</span>地域
+
+br <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">9</span>, <span style="color:#ae81ff">1</span>)
+color <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">brewer.pal</span>(<span style="color:#ae81ff">6</span>, <span style="color:#e6db74">&#34;Reds&#34;</span>)
+cols <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">cut</span>(df2017<span style="color:#f92672">$</span>value, breaks <span style="color:#f92672">=</span> br, labels <span style="color:#f92672">=</span> color))
+<span style="color:#a6e22e">names</span>(cols) <span style="color:#f92672">=</span> kenmei
+leg <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;3-4人&#34;</span>,<span style="color:#e6db74">&#34;4-5人&#34;</span>, <span style="color:#e6db74">&#34;5-6人&#34;</span>,<span style="color:#e6db74">&#34;6-7人&#34;</span>, <span style="color:#e6db74">&#34;7-8人&#34;</span>, <span style="color:#e6db74">&#34;8-9人&#34;</span>)
+
+<span style="color:#a6e22e">png</span>(<span style="color:#e6db74">&#34;images/scref_es2017.png&#34;</span>, width<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, res<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>,units<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;in&#34;</span>)
+<span style="color:#a6e22e">par</span>(family <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HiraKakuProN-W3&#34;</span>)
+<span style="color:#a6e22e">JapanPrefMap</span>(col <span style="color:#f92672">=</span> cols)
+<span style="color:#a6e22e">title</span>(<span style="color:#e6db74">&#34;小学生1000人あたりの不登校児童数（2017年度）&#34;</span>, sub<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;出典「児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査」&#34;</span>)
+<span style="color:#a6e22e">legend</span>(<span style="color:#e6db74">&#34;right&#34;</span>,legend<span style="color:#f92672">=</span>leg , fill <span style="color:#f92672">=</span> color)
+<span style="color:#a6e22e">dev.off</span>()
+
+<span style="color:#75715e"># 中学生をplot</span>
+<span style="color:#a6e22e">max</span>(df2017_jhs<span style="color:#f92672">$</span>value)
+br <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">seq</span>(<span style="color:#ae81ff">20</span>,<span style="color:#ae81ff">50</span>, <span style="color:#ae81ff">5</span>)
+color <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">brewer.pal</span>(<span style="color:#ae81ff">6</span>, <span style="color:#e6db74">&#34;Greens&#34;</span>)
+cols <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as.character</span>(<span style="color:#a6e22e">cut</span>(df2017_jhs<span style="color:#f92672">$</span>value, breaks <span style="color:#f92672">=</span> br, labels <span style="color:#f92672">=</span> color))
+<span style="color:#a6e22e">names</span>(cols) <span style="color:#f92672">=</span> kenmei
+leg <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;20-25人&#34;</span>,<span style="color:#e6db74">&#34;25-30人&#34;</span>, <span style="color:#e6db74">&#34;30-35人&#34;</span>,<span style="color:#e6db74">&#34;35-40人&#34;</span>, <span style="color:#e6db74">&#34;40-45人&#34;</span>)
+
+<span style="color:#a6e22e">png</span>(<span style="color:#e6db74">&#34;images/scref_jhs2017.png&#34;</span>, width<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span>, height<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>, res<span style="color:#f92672">=</span><span style="color:#ae81ff">300</span>,units<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;in&#34;</span>)
+<span style="color:#a6e22e">par</span>(family <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;HiraKakuProN-W3&#34;</span>)
+<span style="color:#a6e22e">JapanPrefMap</span>(col <span style="color:#f92672">=</span> cols)
+<span style="color:#a6e22e">title</span>(<span style="color:#e6db74">&#34;中学生1000人あたりの不登校生徒数（2017年度）&#34;</span>, sub<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;出典「児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査」&#34;</span>)
+<span style="color:#a6e22e">legend</span>(<span style="color:#e6db74">&#34;right&#34;</span>,legend<span style="color:#f92672">=</span>leg , fill <span style="color:#f92672">=</span> color[1<span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>])
+<span style="color:#a6e22e">dev.off</span>()</code></pre></div>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/profile">Profile</a></li>
+         
+          <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+          <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#はじめに">はじめに</a></li>
+    <li><a href="#不登校の児童生徒の数">不登校の児童生徒の数</a></li>
+    <li><a href="#使ったコード">使ったコード</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&text=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&title=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&is_video=false&description=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&title=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&title=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&name=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89&description=%e3%81%af%e3%81%98%e3%82%81%e3%81%ab%20R%e3%81%8b%e3%82%89e-Stat%e3%82%92%e4%bd%bf%e3%81%86%e3%81%8a%e5%8b%89%e5%bc%b7%e3%81%ae%e8%a8%98%e9%8c%b2%ef%bc%8e%40yutannihilation%20%e3%81%95%e3%82%93%e4%bd%9c%e6%88%90%e3%81%aeestatapi%e3%81%a8%e3%81%84%e3%81%86%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%8c%e3%81%82%e3%82%8a%ef%bc%8c%e3%81%9d%e3%82%8c%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9f%e3%82%89%e3%81%a8%e3%81%a6%e3%82%82%e6%a5%bd%e3%81%a0%e3%81%a3%e3%81%9f%ef%bc%8e%e4%bd%bf%e3%81%84%e6%96%b9%e3%81%af%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%83%9a%e3%83%bc%e3%82%b8%e3%81%ab%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%82%e3%82%8b%ef%bc%8e%0ahttps%3a%2f%2fqiita.com%2fkazutan%2fitems%2f9c0b2dd0f055fde45cda%0a%e4%b8%8d%e7%99%bb%e6%a0%a1%e3%81%ae%e5%85%90%e7%ab%a5%e7%94%9f%e5%be%92%e3%81%ae%e6%95%b0%20%e4%bb%8a%e5%9b%9e%e3%81%af%ef%bc%8c%e6%96%87%e9%83%a8%e7%a7%91%e5%ad%a6%e7%9c%81%e3%81%ae%e3%80%8c%e5%85%90%e7%ab%a5%e7%94%9f%e5%be%92%e3%81%ae%e5%95%8f%e9%a1%8c%e8%a1%8c%e5%8b%95%e3%83%bb%e4%b8%8d%e7%99%bb%e6%a0%a1%e7%ad%89%e7%94%9f%e5%be%92%e6%8c%87%e5%b0%8e%e4%b8%8a%e3%81%ae%e8%ab%b8%e8%aa%b2%e9%a1%8c%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e8%aa%bf%e6%9f%bb%e3%80%8d%e3%81%a8%e3%81%84%e3%81%86%e8%aa%bf%e6%9f%bb%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%a6%ef%bc%8c%e9%83%bd%e9%81%93%e5%ba%9c%e7%9c%8c%e5%88%a51000%e4%ba%ba%e3%81%82%e3%81%9f%e3%82%8a%e3%81%ae%e4%b8%8d%e7%99%bb%e6%a0%a1%e5%85%90%e7%ab%a5%e3%81%ae%e6%95%b0%e3%82%92%e3%82%b0%e3%83%a9%e3%83%95%e3%81%ab%e3%81%97%e3%81%a6%e3%81%bf%e3%81%9f%ef%bc%8e%e6%97%a5%e6%9c%ac%e5%9c%b0%e5%9b%b3%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6%e3%81%af%e8%b0%b7%e6%9d%91%e5%85%88%e7%94%9f%e4%bd%9c%e6%88%90%e3%81%aeNipponMap%e3%81%a8%e3%81%84%e3%81%86%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9f%ef%bc%8e%e4%bd%bf%e3%81%84%e6%96%b9%e3%81%af%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%82%b5%e3%82%a4%e3%83%88%e3%82%92%e5%8f%82%e8%80%83%e3%81%ab%e3%81%97%e3%81%9f%ef%bc%8e%0ahttps%3a%2f%2foku.edu.mie-u.ac.jp%2f~okumura%2fstat%2fnippon.html%0a%e4%bd%bf%e3%81%a3%e3%81%9f%e3%82%b3%e3%83%bc%e3%83%89%20library%28pacman%29%20p_load%28estatapi%2c%20keyring%2cdplyr%2c%20stringr%2cNipponMap%2cRColorBrewer%29%20key_set%28%26%2334%3be-stat%26%2334%3b%29%20%23%e3%80%80%e7%b5%b1%e8%a8%88%e8%a1%a8%e3%81%ae%e6%a4%9c%e7%b4%a2%2000400304%e3%81%af%e5%85%90%e7%ab%a5%e7%94%9f%e5%be%92%e3%81%ae%e5%95%8f%e9%a1%8c%e8%a1%8c%e5%8b%95%e3%83%bb%e4%b8%8d%e7%99%bb%e6%a0%a1%e7%ad%89%e7%94%9f%e5%be%92%e6%8c%87%e5%b0%8e%e4%b8%8a%e3%81%ae%e8%ab%b8%e8%aa%b2%e9%a1%8c%e3%81%ab%e9%96%a2%e3%81%99%e3%82%8b%e8%aa%bf%e6%9f%bb%20statsList%20%26lt%3b-%20estat_getStatsList%28%20appId%20%3d%20key_get%28%26%2334%3be-stat%26%2334%3b%29%2c%20searchWord%20%3d%20%26%2334%3b%26%2334%3b%2c%20statsCode%20%3d%20%26%2334%3b00400304%26%2334%3b%20%29%20str%28statsList%29%20lists%20%26lt%3b-%20statsList%20%25%26gt%3b%25%20filter%28str_detect%28TITLE%2c%20%26%2334%3b%e4%b8%8d%e7%99%bb%e6%a0%a1%e5%85%90%e7%ab%a5%e7%94%9f%e5%be%92%e6%95%b0%26%2334%3b%29%29%20id_vector%20%26lt%3b-%20pull%28lists%2c%20%26%2334%3b%40id%26%2334%3b%29%20%23%20%e3%83%a1%e3%82%bf%e6%83%85%e5%a0%b1%20meta_info%20%26lt%3b-%20estat_getMetaInfo%28appId%20%3d%20key_get%28%26%2334%3be-stat%26%2334%3b%29%2c%20statsDataId%20%3d%20id_vector%5b1%5d%29%20names%28meta_info%29%20%23%20%e5%ae%9f%e9%9a%9b%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92%e5%8f%96%e5%be%97%20df%20%26lt%3b-%20estat_getStatsData%28%20appId%20%3d%20key_get%28%26%2334%3be-stat%26%2334%3b%29%2c%20statsDataId%20%3d%20id_vector%5b1%5d%2c%20cdCat02%20%3d%20c%28%26%2334%3b120%26%2334%3b%2c%20%26%2334%3b140%26%2334%3b%29%2c%20%23%e5%b0%8f%e5%ad%a6%e6%a0%a1%e3%81%a8%e4%b8%ad%e5%ad%a6%e6%a0%a1%20cdArea%20%3d%20meta_info%24area%24%26%2334%3b%40code%26%2334%3b%5b2%3a48%5d%e3%80%80%231%e7%95%aa%e7%9b%ae%e3%81%af%e5%85%a8%e5%9b%bd%e3%81%aa%e3%81%ae%e3%81%a7%e9%99%a4%e5%a4%96%20%29%20df2017%20%26lt%3b-%20df%20%25%26gt%3b%25%20rename%28%26%2334%3byear%26%2334%3b%20%3d%20%26%2334%3b%e6%99%82%e9%96%93%e8%bb%b8%28%e5%b9%b4%e5%ba%a6%e6%ac%a1%29%26%2334%3b%29%20%25%26gt%3b%25%20filter%28year%20%3d%3d%20%26%2334%3b2017%e5%b9%b4%e5%ba%a6%26%2334%3b%2c%20%e5%ad%a6%e6%a0%a1%e7%a8%ae%e9%a1%9e%20%3d%3d%20%26%2334%3b%e5%b0%8f%e5%ad%a6%e6%a0%a1%26%2334%3b%2c%20cat01_code%20%3d%3d%20%26%2334%3b120%26%2334%3b%29%20df2017_jhs%20%26lt%3b-%20df%20%25%26gt%3b%25%20rename%28%26%2334%3byear%26%2334%3b%20%3d%20%26%2334%3b%e6%99%82%e9%96%93%e8%bb%b8%28%e5%b9%b4%e5%ba%a6%e6%ac%a1%29%26%2334%3b%29%20%25%26gt%3b%25%20filter%28year%20%3d%3d%20%26%2334%3b2017%e5%b9%b4%e5%ba%a6%26%2334%3b%2c%20%e5%ad%a6%e6%a0%a1%e7%a8%ae%e9%a1%9e%20%3d%3d%20%26%2334%3b%e4%b8%ad%e5%ad%a6%e6%a0%a1%26%2334%3b%2c%20cat01_code%20%3d%3d%20%26%2334%3b120%26%2334%3b%29%20%23%20%e5%b0%8f%e5%ad%a6%e7%94%9f%e3%82%92plot%20kenmei%20%26lt%3b-%20df2017%24%e5%9c%b0%e5%9f%9f%20br%20%26lt%3b-%20seq%283%2c%209%2c%201%29%20color%20%26lt%3b-%20brewer." aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2frestat_packages%2f&t=R%e3%81%8b%e3%82%89eStat%e3%81%aeAPI%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%82%8b%ef%bc%88%e3%81%9d%e3%81%ae2%ef%bc%89" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  Takahiro ONOSHIMA 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+<script src=/js/code-copy.js></script>
+
+
+
+  
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</html>

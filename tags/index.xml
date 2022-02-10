@@ -6,10 +6,16 @@
     <description>Recent content in Tags on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Sat, 16 Jan 2021 18:38:48 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Wed, 09 Feb 2022 10:42:17 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hugo</title>
+      <link>https://onoshima.github.io/tags/hugo/</link>
+      <pubDate>Wed, 09 Feb 2022 10:42:17 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/hugo/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Monte Carlo Simulation</title>
@@ -26,15 +32,6 @@
       <pubDate>Sat, 16 Jan 2021 18:38:48 +0900</pubDate>
       
       <guid>https://onoshima.github.io/tags/mplus/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tidyverse</title>
-      <link>https://onoshima.github.io/tags/tidyverse/</link>
-      <pubDate>Sat, 24 Oct 2020 21:23:55 +0900</pubDate>
-      
-      <guid>https://onoshima.github.io/tags/tidyverse/</guid>
       <description></description>
     </item>
     
@@ -111,15 +108,6 @@
     </item>
     
     <item>
-      <title>R</title>
-      <link>https://onoshima.github.io/tags/r/</link>
-      <pubDate>Wed, 16 Sep 2020 15:13:32 +0900</pubDate>
-      
-      <guid>https://onoshima.github.io/tags/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>reliability</title>
       <link>https://onoshima.github.io/tags/reliability/</link>
       <pubDate>Wed, 16 Sep 2020 15:13:32 +0900</pubDate>
@@ -192,15 +180,6 @@
     </item>
     
     <item>
-      <title>hugo</title>
-      <link>https://onoshima.github.io/tags/hugo/</link>
-      <pubDate>Sat, 15 Feb 2020 16:32:13 +0900</pubDate>
-      
-      <guid>https://onoshima.github.io/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>git</title>
       <link>https://onoshima.github.io/tags/git/</link>
       <pubDate>Tue, 11 Feb 2020 17:30:47 +0900</pubDate>
@@ -264,11 +243,29 @@
     </item>
     
     <item>
+      <title>R</title>
+      <link>https://onoshima.github.io/tags/r/</link>
+      <pubDate>Fri, 26 Jul 2019 13:47:56 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>bootstrap</title>
       <link>https://onoshima.github.io/tags/bootstrap/</link>
       <pubDate>Wed, 03 Jul 2019 07:10:40 +0900</pubDate>
       
       <guid>https://onoshima.github.io/tags/bootstrap/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tidyverse</title>
+      <link>https://onoshima.github.io/tags/tidyverse/</link>
+      <pubDate>Tue, 25 Jun 2019 16:38:21 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/tags/tidyverse/</guid>
       <description></description>
     </item>
     

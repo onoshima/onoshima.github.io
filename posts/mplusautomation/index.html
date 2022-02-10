@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> RからMplusを使う | Takahiro ONOSHIMA&#39;s website</title>
+  <link rel = 'canonical' href = 'https://onoshima.github.io/posts/mplusautomation/'>
+  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="RからMplusを使う" />
+<meta property="og:description" content="構造方程式モデリングのためのソフトウェアと言えばMplusです。Mplusはシンタックスも簡単で計算も早くてとても良いソフトウェアですがアウトプットが見辛い上に，モデルの数だけインプットとアウトプットのファイルが増えていくのでごちゃつきます。また，私だけかもしれませんが，あとで解析をやりなおそうと思った際に，どのファイルを使ったのか分からなくなりがちです。
+そこで，MplusをRから使えるパッケージとしてMplusAutomationというものがあります。日本語で解説している資料としては徳岡先生（高松大）によるものあり大変参考になります。
+https://www.slideshare.net/masarutokuoka/rmplusmplusautomation-hiroshimar05
+以下ではそのスライドを参考にしたり，パッケージのvignetteを見ながら試した記録を残します（主に将来の自分に向けて）。
+モデルをRで書く mplusObjectという関数を使うと，Mplusのinputファイルを用意できるようです。以下ではpsychパッケージ所収のbfiデータを使っていきます。とりあえず，5因子のCFAのモデルを書いてみます。
+library(psych) library(MplusAutomation) test1 &lt;- mplusObject(MODEL =&#34;F1 BY A1-A5; F2 BY C1-C5; F3 BY E1-E5; F4 BY N1-N5; F5 BY O1-O5&#34;, rdata = bfi) res &lt;- mplusModeler(test, dataout = &#34;test1.tsv&#34;, modelout = &#34;test1.inp&#34;, run = 1L) mplusObject関数の引数は，通常のMplusのsyntaxのセクションに書くような内容を書いていきます。上の例では，モデルの部分だけ書きましたが，書いていないVARIABLEのセクションなどは，MODELの部分から必要なものを選んで勝手に作ってくれているようです。
+こうしてできたR上のMplus Model Objectを実行するためのものがmplusModeler関数です。第１の引数には先ほどのMplus Model Objectを指定します。実行すると，Model Objectを元にして，同じディレクトリ内に，Mplusのinput，Mplusの実行用のデータファイル，Mplusのアウトプットが生成されます。dataoutという引数には，Mplus実行用に生成されたデータのファイル名を指定します。このファイルでは，例えば，列名のヘッダーが削除されていたり，欠損値が「.」に置き換えられていたりと，Mplusで処理できる形にデータが変換されています。またmodeloutという引数には，モデルを実行するのに使われたMplusのインプットファイルのファイル名を渡します。runという引数に0を渡すとモデルは実行されず，Mplus用のデータファイルとインプットファイルだけが生成されるようです。モデルが意図した通りに.inpファイルに反映されているかどうかを確認したい時に使うもののようです。1より大きい場合にはブートストラップで繰り返すとのことです。
+上の例では，とりあえず実行できれば良いということでモデルのみ書きましたが，もう少しいろいろと指定したものを作ってみます。
+test2 &lt;- mplusObject( TITLE = &#34;This is mplusautomation test 2;&#34;, ANALYSIS = &#34;ESTIMATOR = MLR;&#34;, OUTPUT = &#34;SAMPSTAT STDYX MODINDICES(ALL);&#34;, VARIABLE = &#34;USEVARIABLES = A1-A5 C1-C5 E1-E5 N1-N5 O1-O5;&#34;, MODEL =&#34;F1 BY A1-A5*; F2 BY C1-C5*; F3 BY E1-E5*; F4 BY N1-N5*; F5 BY O1-O5*; F1@1 F2@1 F3@1 F4@1 F5@1;&#34;, rdata = bfi) res2 &lt;- mplusModeler(test2, dataout = &#34;test2." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://onoshima.github.io/posts/mplusautomation/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-01-13T15:21:08+09:00" />
+<meta property="article:modified_time" content="2021-01-13T15:21:08+09:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="RからMplusを使う"/>
+<meta name="twitter:description" content="構造方程式モデリングのためのソフトウェアと言えばMplusです。Mplusはシンタックスも簡単で計算も早くてとても良いソフトウェアですがアウトプットが見辛い上に，モデルの数だけインプットとアウトプットのファイルが増えていくのでごちゃつきます。また，私だけかもしれませんが，あとで解析をやりなおそうと思った際に，どのファイルを使ったのか分からなくなりがちです。
+そこで，MplusをRから使えるパッケージとしてMplusAutomationというものがあります。日本語で解説している資料としては徳岡先生（高松大）によるものあり大変参考になります。
+https://www.slideshare.net/masarutokuoka/rmplusmplusautomation-hiroshimar05
+以下ではそのスライドを参考にしたり，パッケージのvignetteを見ながら試した記録を残します（主に将来の自分に向けて）。
+モデルをRで書く mplusObjectという関数を使うと，Mplusのinputファイルを用意できるようです。以下ではpsychパッケージ所収のbfiデータを使っていきます。とりあえず，5因子のCFAのモデルを書いてみます。
+library(psych) library(MplusAutomation) test1 &lt;- mplusObject(MODEL =&#34;F1 BY A1-A5; F2 BY C1-C5; F3 BY E1-E5; F4 BY N1-N5; F5 BY O1-O5&#34;, rdata = bfi) res &lt;- mplusModeler(test, dataout = &#34;test1.tsv&#34;, modelout = &#34;test1.inp&#34;, run = 1L) mplusObject関数の引数は，通常のMplusのsyntaxのセクションに書くような内容を書いていきます。上の例では，モデルの部分だけ書きましたが，書いていないVARIABLEのセクションなどは，MODELの部分から必要なものを選んで勝手に作ってくれているようです。
+こうしてできたR上のMplus Model Objectを実行するためのものがmplusModeler関数です。第１の引数には先ほどのMplus Model Objectを指定します。実行すると，Model Objectを元にして，同じディレクトリ内に，Mplusのinput，Mplusの実行用のデータファイル，Mplusのアウトプットが生成されます。dataoutという引数には，Mplus実行用に生成されたデータのファイル名を指定します。このファイルでは，例えば，列名のヘッダーが削除されていたり，欠損値が「.」に置き換えられていたりと，Mplusで処理できる形にデータが変換されています。またmodeloutという引数には，モデルを実行するのに使われたMplusのインプットファイルのファイル名を渡します。runという引数に0を渡すとモデルは実行されず，Mplus用のデータファイルとインプットファイルだけが生成されるようです。モデルが意図した通りに.inpファイルに反映されているかどうかを確認したい時に使うもののようです。1より大きい場合にはブートストラップで繰り返すとのことです。
+上の例では，とりあえず実行できれば良いということでモデルのみ書きましたが，もう少しいろいろと指定したものを作ってみます。
+test2 &lt;- mplusObject( TITLE = &#34;This is mplusautomation test 2;&#34;, ANALYSIS = &#34;ESTIMATOR = MLR;&#34;, OUTPUT = &#34;SAMPSTAT STDYX MODINDICES(ALL);&#34;, VARIABLE = &#34;USEVARIABLES = A1-A5 C1-C5 E1-E5 N1-N5 O1-O5;&#34;, MODEL =&#34;F1 BY A1-A5*; F2 BY C1-C5*; F3 BY E1-E5*; F4 BY N1-N5*; F5 BY O1-O5*; F1@1 F2@1 F3@1 F4@1 F5@1;&#34;, rdata = bfi) res2 &lt;- mplusModeler(test2, dataout = &#34;test2."/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://onoshima.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://onoshima.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://onoshima.github.io/posts/style/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="https://onoshima.github.io/posts/extract_montecarlo/" aria-label="Next">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&text=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&title=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&is_video=false&description=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&title=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&title=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&name=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86&description=%e6%a7%8b%e9%80%a0%e6%96%b9%e7%a8%8b%e5%bc%8f%e3%83%a2%e3%83%87%e3%83%aa%e3%83%b3%e3%82%b0%e3%81%ae%e3%81%9f%e3%82%81%e3%81%ae%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e3%81%a8%e8%a8%80%e3%81%88%e3%81%b0Mplus%e3%81%a7%e3%81%99%e3%80%82Mplus%e3%81%af%e3%82%b7%e3%83%b3%e3%82%bf%e3%83%83%e3%82%af%e3%82%b9%e3%82%82%e7%b0%a1%e5%8d%98%e3%81%a7%e8%a8%88%e7%ae%97%e3%82%82%e6%97%a9%e3%81%8f%e3%81%a6%e3%81%a8%e3%81%a6%e3%82%82%e8%89%af%e3%81%84%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e3%81%a7%e3%81%99%e3%81%8c%e3%82%a2%e3%82%a6%e3%83%88%e3%83%97%e3%83%83%e3%83%88%e3%81%8c%e8%a6%8b%e8%be%9b%e3%81%84%e4%b8%8a%e3%81%ab%ef%bc%8c%e3%83%a2%e3%83%87%e3%83%ab%e3%81%ae%e6%95%b0%e3%81%a0%e3%81%91%e3%82%a4%e3%83%b3%e3%83%97%e3%83%83%e3%83%88%e3%81%a8%e3%82%a2%e3%82%a6%e3%83%88%e3%83%97%e3%83%83%e3%83%88%e3%81%ae%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%8c%e5%a2%97%e3%81%88%e3%81%a6%e3%81%84%e3%81%8f%e3%81%ae%e3%81%a7%e3%81%94%e3%81%a1%e3%82%83%e3%81%a4%e3%81%8d%e3%81%be%e3%81%99%e3%80%82%e3%81%be%e3%81%9f%ef%bc%8c%e7%a7%81%e3%81%a0%e3%81%91%e3%81%8b%e3%82%82%e3%81%97%e3%82%8c%e3%81%be%e3%81%9b%e3%82%93%e3%81%8c%ef%bc%8c%e3%81%82%e3%81%a8%e3%81%a7%e8%a7%a3%e6%9e%90%e3%82%92%e3%82%84%e3%82%8a%e3%81%aa%e3%81%8a%e3%81%9d%e3%81%86%e3%81%a8%e6%80%9d%e3%81%a3%e3%81%9f%e9%9a%9b%e3%81%ab%ef%bc%8c%e3%81%a9%e3%81%ae%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9f%e3%81%ae%e3%81%8b%e5%88%86%e3%81%8b%e3%82%89%e3%81%aa%e3%81%8f%e3%81%aa%e3%82%8a%e3%81%8c%e3%81%a1%e3%81%a7%e3%81%99%e3%80%82%0a%e3%81%9d%e3%81%93%e3%81%a7%ef%bc%8cMplus%e3%82%92R%e3%81%8b%e3%82%89%e4%bd%bf%e3%81%88%e3%82%8b%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%a8%e3%81%97%e3%81%a6MplusAutomation%e3%81%a8%e3%81%84%e3%81%86%e3%82%82%e3%81%ae%e3%81%8c%e3%81%82%e3%82%8a%e3%81%be%e3%81%99%e3%80%82%e6%97%a5%e6%9c%ac%e8%aa%9e%e3%81%a7%e8%a7%a3%e8%aa%ac%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e8%b3%87%e6%96%99%e3%81%a8%e3%81%97%e3%81%a6%e3%81%af%e5%be%b3%e5%b2%a1%e5%85%88%e7%94%9f%ef%bc%88%e9%ab%98%e6%9d%be%e5%a4%a7%ef%bc%89%e3%81%ab%e3%82%88%e3%82%8b%e3%82%82%e3%81%ae%e3%81%82%e3%82%8a%e5%a4%a7%e5%a4%89%e5%8f%82%e8%80%83%e3%81%ab%e3%81%aa%e3%82%8a%e3%81%be%e3%81%99%e3%80%82%0ahttps%3a%2f%2fwww.slideshare.net%2fmasarutokuoka%2frmplusmplusautomation-hiroshimar05%0a%e4%bb%a5%e4%b8%8b%e3%81%a7%e3%81%af%e3%81%9d%e3%81%ae%e3%82%b9%e3%83%a9%e3%82%a4%e3%83%89%e3%82%92%e5%8f%82%e8%80%83%e3%81%ab%e3%81%97%e3%81%9f%e3%82%8a%ef%bc%8c%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%aevignette%e3%82%92%e8%a6%8b%e3%81%aa%e3%81%8c%e3%82%89%e8%a9%a6%e3%81%97%e3%81%9f%e8%a8%98%e9%8c%b2%e3%82%92%e6%ae%8b%e3%81%97%e3%81%be%e3%81%99%ef%bc%88%e4%b8%bb%e3%81%ab%e5%b0%86%e6%9d%a5%e3%81%ae%e8%87%aa%e5%88%86%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%ef%bc%89%e3%80%82%0a%e3%83%a2%e3%83%87%e3%83%ab%e3%82%92R%e3%81%a7%e6%9b%b8%e3%81%8f%20mplusObject%e3%81%a8%e3%81%84%e3%81%86%e9%96%a2%e6%95%b0%e3%82%92%e4%bd%bf%e3%81%86%e3%81%a8%ef%bc%8cMplus%e3%81%aeinput%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%82%92%e7%94%a8%e6%84%8f%e3%81%a7%e3%81%8d%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82%e4%bb%a5%e4%b8%8b%e3%81%a7%e3%81%afpsych%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e6%89%80%e5%8f%8e%e3%81%aebfi%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%84%e3%81%8d%e3%81%be%e3%81%99%e3%80%82%e3%81%a8%e3%82%8a%e3%81%82%e3%81%88%e3%81%9a%ef%bc%8c5%e5%9b%a0%e5%ad%90%e3%81%aeCFA%e3%81%ae%e3%83%a2%e3%83%87%e3%83%ab%e3%82%92%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%bf%e3%81%be%e3%81%99%e3%80%82%0alibrary%28psych%29%20library%28MplusAutomation%29%20test1%20%26lt%3b-%20mplusObject%28MODEL%20%3d%26%2334%3bF1%20BY%20A1-A5%3b%20F2%20BY%20C1-C5%3b%20F3%20BY%20E1-E5%3b%20F4%20BY%20N1-N5%3b%20F5%20BY%20O1-O5%26%2334%3b%2c%20rdata%20%3d%20bfi%29%20res%20%26lt%3b-%20mplusModeler%28test%2c%20dataout%20%3d%20%26%2334%3btest1.tsv%26%2334%3b%2c%20modelout%20%3d%20%26%2334%3btest1.inp%26%2334%3b%2c%20run%20%3d%201L%29%20mplusObject%e9%96%a2%e6%95%b0%e3%81%ae%e5%bc%95%e6%95%b0%e3%81%af%ef%bc%8c%e9%80%9a%e5%b8%b8%e3%81%aeMplus%e3%81%aesyntax%e3%81%ae%e3%82%bb%e3%82%af%e3%82%b7%e3%83%a7%e3%83%b3%e3%81%ab%e6%9b%b8%e3%81%8f%e3%82%88%e3%81%86%e3%81%aa%e5%86%85%e5%ae%b9%e3%82%92%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%81%8d%e3%81%be%e3%81%99%e3%80%82%e4%b8%8a%e3%81%ae%e4%be%8b%e3%81%a7%e3%81%af%ef%bc%8c%e3%83%a2%e3%83%87%e3%83%ab%e3%81%ae%e9%83%a8%e5%88%86%e3%81%a0%e3%81%91%e6%9b%b8%e3%81%8d%e3%81%be%e3%81%97%e3%81%9f%e3%81%8c%ef%bc%8c%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%81%aa%e3%81%84VARIABLE%e3%81%ae%e3%82%bb%e3%82%af%e3%82%b7%e3%83%a7%e3%83%b3%e3%81%aa%e3%81%a9%e3%81%af%ef%bc%8cMODEL%e3%81%ae%e9%83%a8%e5%88%86%e3%81%8b%e3%82%89%e5%bf%85%e8%a6%81%e3%81%aa%e3%82%82%e3%81%ae%e3%82%92%e9%81%b8%e3%82%93%e3%81%a7%e5%8b%9d%e6%89%8b%e3%81%ab%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%8f%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82%0a%e3%81%93%e3%81%86%e3%81%97%e3%81%a6%e3%81%a7%e3%81%8d%e3%81%9fR%e4%b8%8a%e3%81%aeMplus%20Model%20Object%e3%82%92%e5%ae%9f%e8%a1%8c%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e3%82%82%e3%81%ae%e3%81%8cmplusModeler%e9%96%a2%e6%95%b0%e3%81%a7%e3%81%99%e3%80%82%e7%ac%ac%ef%bc%91%e3%81%ae%e5%bc%95%e6%95%b0%e3%81%ab%e3%81%af%e5%85%88%e3%81%bb%e3%81%a9%e3%81%aeMplus%20Model%20Object%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%97%e3%81%be%e3%81%99%e3%80%82%e5%ae%9f%e8%a1%8c%e3%81%99%e3%82%8b%e3%81%a8%ef%bc%8cModel%20Object%e3%82%92%e5%85%83%e3%81%ab%e3%81%97%e3%81%a6%ef%bc%8c%e5%90%8c%e3%81%98%e3%83%87%e3%82%a3%e3%83%ac%e3%82%af%e3%83%88%e3%83%aa%e5%86%85%e3%81%ab%ef%bc%8cMplus%e3%81%aeinput%ef%bc%8cMplus%e3%81%ae%e5%ae%9f%e8%a1%8c%e7%94%a8%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%ef%bc%8cMplus%e3%81%ae%e3%82%a2%e3%82%a6%e3%83%88%e3%83%97%e3%83%83%e3%83%88%e3%81%8c%e7%94%9f%e6%88%90%e3%81%95%e3%82%8c%e3%81%be%e3%81%99%e3%80%82dataout%e3%81%a8%e3%81%84%e3%81%86%e5%bc%95%e6%95%b0%e3%81%ab%e3%81%af%ef%bc%8cMplus%e5%ae%9f%e8%a1%8c%e7%94%a8%e3%81%ab%e7%94%9f%e6%88%90%e3%81%95%e3%82%8c%e3%81%9f%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e5%90%8d%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%97%e3%81%be%e3%81%99%e3%80%82%e3%81%93%e3%81%ae%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%a7%e3%81%af%ef%bc%8c%e4%be%8b%e3%81%88%e3%81%b0%ef%bc%8c%e5%88%97%e5%90%8d%e3%81%ae%e3%83%98%e3%83%83%e3%83%80%e3%83%bc%e3%81%8c%e5%89%8a%e9%99%a4%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%9f%e3%82%8a%ef%bc%8c%e6%ac%a0%e6%90%8d%e5%80%a4%e3%81%8c%e3%80%8c.%e3%80%8d%e3%81%ab%e7%bd%ae%e3%81%8d%e6%8f%9b%e3%81%88%e3%82%89%e3%82%8c%e3%81%a6%e3%81%84%e3%81%9f%e3%82%8a%e3%81%a8%ef%bc%8cMplus%e3%81%a7%e5%87%a6%e7%90%86%e3%81%a7%e3%81%8d%e3%82%8b%e5%bd%a2%e3%81%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%81%8c%e5%a4%89%e6%8f%9b%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%e3%80%82%e3%81%be%e3%81%9fmodelout%e3%81%a8%e3%81%84%e3%81%86%e5%bc%95%e6%95%b0%e3%81%ab%e3%81%af%ef%bc%8c%e3%83%a2%e3%83%87%e3%83%ab%e3%82%92%e5%ae%9f%e8%a1%8c%e3%81%99%e3%82%8b%e3%81%ae%e3%81%ab%e4%bd%bf%e3%82%8f%e3%82%8c%e3%81%9fMplus%e3%81%ae%e3%82%a4%e3%83%b3%e3%83%97%e3%83%83%e3%83%88%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%ae%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e5%90%8d%e3%82%92%e6%b8%a1%e3%81%97%e3%81%be%e3%81%99%e3%80%82run%e3%81%a8%e3%81%84%e3%81%86%e5%bc%95%e6%95%b0%e3%81%ab0%e3%82%92%e6%b8%a1%e3%81%99%e3%81%a8%e3%83%a2%e3%83%87%e3%83%ab%e3%81%af%e5%ae%9f%e8%a1%8c%e3%81%95%e3%82%8c%e3%81%9a%ef%bc%8cMplus%e7%94%a8%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%a8%e3%82%a4%e3%83%b3%e3%83%97%e3%83%83%e3%83%88%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%a0%e3%81%91%e3%81%8c%e7%94%9f%e6%88%90%e3%81%95%e3%82%8c%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82%e3%83%a2%e3%83%87%e3%83%ab%e3%81%8c%e6%84%8f%e5%9b%b3%e3%81%97%e3%81%9f%e9%80%9a%e3%82%8a%e3%81%ab.inp%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%ab%e5%8f%8d%e6%98%a0%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%81%8b%e3%81%a9%e3%81%86%e3%81%8b%e3%82%92%e7%a2%ba%e8%aa%8d%e3%81%97%e3%81%9f%e3%81%84%e6%99%82%e3%81%ab%e4%bd%bf%e3%81%86%e3%82%82%e3%81%ae%e3%81%ae%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%821%e3%82%88%e3%82%8a%e5%a4%a7%e3%81%8d%e3%81%84%e5%a0%b4%e5%90%88%e3%81%ab%e3%81%af%e3%83%96%e3%83%bc%e3%83%88%e3%82%b9%e3%83%88%e3%83%a9%e3%83%83%e3%83%97%e3%81%a7%e7%b9%b0%e3%82%8a%e8%bf%94%e3%81%99%e3%81%a8%e3%81%ae%e3%81%93%e3%81%a8%e3%81%a7%e3%81%99%e3%80%82%0a%e4%b8%8a%e3%81%ae%e4%be%8b%e3%81%a7%e3%81%af%ef%bc%8c%e3%81%a8%e3%82%8a%e3%81%82%e3%81%88%e3%81%9a%e5%ae%9f%e8%a1%8c%e3%81%a7%e3%81%8d%e3%82%8c%e3%81%b0%e8%89%af%e3%81%84%e3%81%a8%e3%81%84%e3%81%86%e3%81%93%e3%81%a8%e3%81%a7%e3%83%a2%e3%83%87%e3%83%ab%e3%81%ae%e3%81%bf%e6%9b%b8%e3%81%8d%e3%81%be%e3%81%97%e3%81%9f%e3%81%8c%ef%bc%8c%e3%82%82%e3%81%86%e5%b0%91%e3%81%97%e3%81%84%e3%82%8d%e3%81%84%e3%82%8d%e3%81%a8%e6%8c%87%e5%ae%9a%e3%81%97%e3%81%9f%e3%82%82%e3%81%ae%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%be%e3%81%99%e3%80%82%0atest2%20%26lt%3b-%20mplusObject%28%20TITLE%20%3d%20%26%2334%3bThis%20is%20mplusautomation%20test%202%3b%26%2334%3b%2c%20ANALYSIS%20%3d%20%26%2334%3bESTIMATOR%20%3d%20MLR%3b%26%2334%3b%2c%20OUTPUT%20%3d%20%26%2334%3bSAMPSTAT%20STDYX%20MODINDICES%28ALL%29%3b%26%2334%3b%2c%20VARIABLE%20%3d%20%26%2334%3bUSEVARIABLES%20%3d%20A1-A5%20C1-C5%20E1-E5%20N1-N5%20O1-O5%3b%26%2334%3b%2c%20MODEL%20%3d%26%2334%3bF1%20BY%20A1-A5%2a%3b%20F2%20BY%20C1-C5%2a%3b%20F3%20BY%20E1-E5%2a%3b%20F4%20BY%20N1-N5%2a%3b%20F5%20BY%20O1-O5%2a%3b%20F1%401%20F2%401%20F3%401%20F4%401%20F5%401%3b%26%2334%3b%2c%20rdata%20%3d%20bfi%29%20res2%20%26lt%3b-%20mplusModeler%28test2%2c%20dataout%20%3d%20%26%2334%3btest2." aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&t=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#モデルをrで書く">モデルをRで書く</a></li>
+    <li><a href="#結果をr上で見る">結果をR上で見る</a></li>
+    <li><a href="#探索的因子分析の場合">探索的因子分析の場合</a></li>
+    <li><a href="#多母集団同時解析の場合">多母集団同時解析の場合</a></li>
+    <li><a href="#mplus用のデータだけ作りたい">Mplus用のデータだけ作りたい</a></li>
+  </ul>
+</nav>
+    </div>
+    
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        RからMplusを使う
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2021-01-13 15:21:08 &#43;0900 JST" itemprop="datePublished">2021-01-13</time>
+          
+        </div>
+        
+        
+        
+        <div class="article-category">
+            <i class="fas fa-archive"></i>
+            
+            
+            <a class="category-link" href="/categories/stat">stat</a>
+            
+             ,  
+            <a class="category-link" href="/categories/r">R</a>
+            
+        </div>
+        
+        
+      </div>
+    </header>
+
+  
+    
+    <div class="content" itemprop="articleBody">
+      <p>構造方程式モデリングのためのソフトウェアと言えばMplusです。Mplusはシンタックスも簡単で計算も早くてとても良いソフトウェアですがアウトプットが見辛い上に，モデルの数だけインプットとアウトプットのファイルが増えていくのでごちゃつきます。また，私だけかもしれませんが，あとで解析をやりなおそうと思った際に，どのファイルを使ったのか分からなくなりがちです。</p>
+<p>そこで，MplusをRから使えるパッケージとして<code>MplusAutomation</code>というものがあります。日本語で解説している資料としては徳岡先生（高松大）によるものあり大変参考になります。</p>
+<p><a href="https://www.slideshare.net/masarutokuoka/rmplusmplusautomation-hiroshimar05">https://www.slideshare.net/masarutokuoka/rmplusmplusautomation-hiroshimar05</a></p>
+<p>以下ではそのスライドを参考にしたり，パッケージのvignetteを見ながら試した記録を残します（主に将来の自分に向けて）。</p>
+<h2 id="モデルをrで書く">モデルをRで書く</h2>
+<p><code>mplusObject</code>という関数を使うと，Mplusのinputファイルを用意できるようです。以下では<code>psych</code>パッケージ所収の<code>bfi</code>データを使っていきます。とりあえず，5因子のCFAのモデルを書いてみます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(psych)
+<span style="color:#a6e22e">library</span>(MplusAutomation)
+test1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusObject</span>(MODEL <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;F1 BY A1-A5;
+</span><span style="color:#e6db74">                    F2 BY C1-C5;
+</span><span style="color:#e6db74">                    F3 BY E1-E5;
+</span><span style="color:#e6db74">                    F4 BY N1-N5;
+</span><span style="color:#e6db74">                    F5 BY O1-O5&#34;</span>,
+                    rdata <span style="color:#f92672">=</span> bfi)
+res <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusModeler</span>(test,
+                    dataout <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test1.tsv&#34;</span>,
+                    modelout <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test1.inp&#34;</span>, run <span style="color:#f92672">=</span> <span style="color:#ae81ff">1L</span>)</code></pre></div>
+<p><code>mplusObject</code>関数の引数は，通常のMplusのsyntaxのセクションに書くような内容を書いていきます。上の例では，モデルの部分だけ書きましたが，書いていないVARIABLEのセクションなどは，MODELの部分から必要なものを選んで勝手に作ってくれているようです。</p>
+<p>こうしてできたR上のMplus Model Objectを実行するためのものが<code>mplusModeler</code>関数です。第１の引数には先ほどのMplus Model Objectを指定します。実行すると，Model Objectを元にして，同じディレクトリ内に，Mplusのinput，Mplusの実行用のデータファイル，Mplusのアウトプットが生成されます。<code>dataout</code>という引数には，Mplus実行用に生成されたデータのファイル名を指定します。このファイルでは，例えば，列名のヘッダーが削除されていたり，欠損値が「.」に置き換えられていたりと，Mplusで処理できる形にデータが変換されています。また<code>modelout</code>という引数には，モデルを実行するのに使われたMplusのインプットファイルのファイル名を渡します。<code>run</code>という引数に0を渡すとモデルは実行されず，Mplus用のデータファイルとインプットファイルだけが生成されるようです。モデルが意図した通りに.inpファイルに反映されているかどうかを確認したい時に使うもののようです。1より大きい場合にはブートストラップで繰り返すとのことです。</p>
+<p>上の例では，とりあえず実行できれば良いということでモデルのみ書きましたが，もう少しいろいろと指定したものを作ってみます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">test2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusObject</span>(
+  TITLE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;This is mplusautomation test 2;&#34;</span>,
+  ANALYSIS <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ESTIMATOR = MLR;&#34;</span>,
+  OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;SAMPSTAT STDYX MODINDICES(ALL);&#34;</span>,
+  VARIABLE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;USEVARIABLES = A1-A5 C1-C5 E1-E5 N1-N5 O1-O5;&#34;</span>,
+  MODEL <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;F1 BY A1-A5*;
+</span><span style="color:#e6db74">          F2 BY C1-C5*;
+</span><span style="color:#e6db74">          F3 BY E1-E5*;
+</span><span style="color:#e6db74">          F4 BY N1-N5*;
+</span><span style="color:#e6db74">          F5 BY O1-O5*;
+</span><span style="color:#e6db74">          F1@1 F2@1 F3@1 F4@1 F5@1;&#34;</span>,
+          rdata <span style="color:#f92672">=</span> bfi)
+res2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusModeler</span>(test2,
+                    dataout <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test2.tsv&#34;</span>,
+                    modelout <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test2.inp&#34;</span>, run <span style="color:#f92672">=</span> <span style="color:#ae81ff">1L</span>)</code></pre></div>
+<p>以下の画像は，上の関数で作った.inpファイルです。<code>mplusObject</code>で指定した情報が，.inpの各セクションに反映されていることがわかります。</p>
+<p><img src="/images/mplusauto_inp.png" alt=".inpファイル"></p>
+<h2 id="結果をr上で見る">結果をR上で見る</h2>
+<p>分析したファイルの結果をみたい場合には，結果のオブジェクトを<code>summary</code>関数に渡せば良いようです。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">summary</span>(res2)
+<span style="color:#75715e"># readModels(&#34;test2.out&#34;, what = &#34;summaries&#34;) アウトプットファイルを読み込ませても同じ出力が得られる</span>
+<span style="color:#75715e"># res2$results$summariesでも</span></code></pre></div>
+<p><img src="/images/mplusauto_res.png" alt="結果"></p>
+<p>推定したパラメータをみたい場合には以下のように，Rのリストオペレータを使うか，<code>readModels</code>関数にアウトプットファイルを渡すと良いようです。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res2<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>parameters
+<span style="color:#75715e"># readModels(&#34;test2.out&#34;, what = &#34;parameters&#34;)$parameters</span></code></pre></div>
+<h2 id="探索的因子分析の場合">探索的因子分析の場合</h2>
+<p>同じデータセットで探索的因子分析を実行してみます。1因子から10因子までを指定してやってみましょう。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">test3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusObject</span>(
+  TITLE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;This is mplusautomation test 3;&#34;</span>,
+  ANALYSIS <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;TYPE = EFA 1 10;
+</span><span style="color:#e6db74">              ESTIMATOR = MLR;
+</span><span style="color:#e6db74">              ROTATION = GEOMIN;
+</span><span style="color:#e6db74">              PARALLEL = 50;&#34;</span>,
+  MODEL <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>,
+  VARIABLE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;USEVARIABLES = A1-A5 C1-C5 E1-E5 N1-N5 O1-O5;&#34;</span>,
+  PLOT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;TYPE = PLOT3;&#34;</span>,
+  rdata <span style="color:#f92672">=</span> bfi)
+res3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusModeler</span>(test3,
+                     dataout <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test3.tsv&#34;</span>,
+                     modelout <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test3.inp&#34;</span>, run <span style="color:#f92672">=</span> <span style="color:#ae81ff">1L</span>)</code></pre></div>
+<p>結果を見る際には上と同様にsummary関数でも見れますし，以下のように必要な情報だけ引っ張って表にするとみやすくなります。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res3<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>summaries[,<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;NumFactors&#34;</span>, <span style="color:#e6db74">&#34;ChiSqM_DF&#34;</span>, <span style="color:#e6db74">&#34;ChiSqM_Value&#34;</span>,<span style="color:#e6db74">&#34;ChiSqM_PValue&#34;</span>, 
+                          <span style="color:#e6db74">&#34;CFI&#34;</span>, <span style="color:#e6db74">&#34;TLI&#34;</span>, <span style="color:#e6db74">&#34;SRMR&#34;</span>, <span style="color:#e6db74">&#34;RMSEA_Estimate&#34;</span>, <span style="color:#e6db74">&#34;AIC&#34;</span>, <span style="color:#e6db74">&#34;BIC&#34;</span>, <span style="color:#e6db74">&#34;aBIC&#34;</span>)]</code></pre></div></p>
+<p><img src="/images/mplusauto_efa.png" alt="EFAの結果"></p>
+<p>平行分析の結果は<code>gh5</code>というところに入っています。これを取り出せば以下のように平行分析のプロットもできます。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">25</span>, res3<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>gh5<span style="color:#f92672">$</span>efa<span style="color:#f92672">$</span>eigenvalues, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;b&#34;</span>)
+<span style="color:#a6e22e">points</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">25</span>, res3<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>gh5<span style="color:#f92672">$</span>efa<span style="color:#f92672">$</span>parallel_average, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;b&#34;</span>, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span>)
+<span style="color:#a6e22e">points</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">25</span>, res3<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>gh5<span style="color:#f92672">$</span>efa<span style="color:#f92672">$</span>parallel_ci, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;b&#34;</span>, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
+<span style="color:#a6e22e">legend</span>(<span style="color:#e6db74">&#34;topright&#34;</span>, legend <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;sample&#34;</span>, <span style="color:#e6db74">&#34;parallel_average&#34;</span>, <span style="color:#e6db74">&#34;parallel_95&#34;</span>), pch <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">3</span>))</code></pre></div></p>
+<p><img src="/images/mplusauto_parallel.png" alt="平行分析の結果"></p>
+<h2 id="多母集団同時解析の場合">多母集団同時解析の場合</h2>
+<p>Mplusだと多母集団の同時解析も複雑な制約の掛け方でない限りコマンド1発なので簡単です（もっともRのlavaanでも簡単ですが）。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">test4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusObject</span>(
+  TITLE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;This is mplusautomation test 4;&#34;</span>,
+  ANALYSIS <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ESTIMATOR = MLR;
+</span><span style="color:#e6db74">              MODEL = CONFIGURAL METRIC SCALAR;&#34;</span>,
+  VARIABLE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;USEVARIABLES = A1-A5 C1-C5 E1-E5 N1-N5 O1-O5 GENDER;
+</span><span style="color:#e6db74">              GROUPING = gender(1 = MALES, 2 = FEMALES);&#34;</span>,
+  MODEL <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;F1 BY A1-A5;
+</span><span style="color:#e6db74">          F2 BY C1-C5;
+</span><span style="color:#e6db74">          F3 BY E1-E5;
+</span><span style="color:#e6db74">          F4 BY N1-N5;
+</span><span style="color:#e6db74">          F5 BY O1-O5;&#34;</span>,
+  rdata <span style="color:#f92672">=</span> bfi)
+res4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusModeler</span>(test4,
+                     dataout <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test4.tsv&#34;</span>,
+                     modelout <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test4.inp&#34;</span>, run <span style="color:#f92672">=</span> <span style="color:#ae81ff">1L</span>)
+ </code></pre></div>
+<p>先ほどのように，結果から必要な情報のみ取り出して表にすると便利です。</p>
+<p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res4<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>summaries[,<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Model&#34;</span>, <span style="color:#e6db74">&#34;ChiSqM_Value&#34;</span>, <span style="color:#e6db74">&#34;ChiSqM_DF&#34;</span>,<span style="color:#e6db74">&#34;ChiSqM_PValue&#34;</span>,
+                          <span style="color:#e6db74">&#34;CFI&#34;</span>, <span style="color:#e6db74">&#34;SRMR&#34;</span>, <span style="color:#e6db74">&#34;RMSEA_Estimate&#34;</span>, <span style="color:#e6db74">&#34;AIC&#34;</span>, <span style="color:#e6db74">&#34;BIC&#34;</span>)]</code></pre></div>
+<img src="/images/mplusauto_multigroup.png" alt="多母集団の結果"></p>
+<p>また，結果のオブジェクトの<code>results$invariance_testing</code>には，カイ二乗値の差の検定の結果が収められています。</p>
+<p><img src="/images/mplusauto_multigroup2.png" alt="多母集団の結果2"></p>
+<h2 id="mplus用のデータだけ作りたい">Mplus用のデータだけ作りたい</h2>
+<p>Mplus用のデータだけを作りたい場合には<code>prepareMplusData</code>という関数が用意されているようです。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">prepareMplusData</span>(bfi, <span style="color:#e6db74">&#34;bfi.tsv&#34;</span>)</code></pre></div>
+<p>こうするとタブ区切りのファイルが生成されます。欠損地は「.」に置き換えられるようです。なお，<code>inpfile = TRUE</code>と指定すると，元のデータにあったファイル名が入力されたinpファイルも生成してくれますので，それをもとにMplusのsyntaxを書いていくと元のデータと同じ変数名を間違いなく使うことができるようです。<code>keepCols = c(&quot;A1&quot;, &quot;gender&quot;)</code>のようにすると必要な列のみ指定してデータファイルを生成できるみたいです。</p>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/profile">Profile</a></li>
+         
+          <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+          <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#モデルをrで書く">モデルをRで書く</a></li>
+    <li><a href="#結果をr上で見る">結果をR上で見る</a></li>
+    <li><a href="#探索的因子分析の場合">探索的因子分析の場合</a></li>
+    <li><a href="#多母集団同時解析の場合">多母集団同時解析の場合</a></li>
+    <li><a href="#mplus用のデータだけ作りたい">Mplus用のデータだけ作りたい</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&text=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&title=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&is_video=false&description=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&title=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&title=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&name=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86&description=%e6%a7%8b%e9%80%a0%e6%96%b9%e7%a8%8b%e5%bc%8f%e3%83%a2%e3%83%87%e3%83%aa%e3%83%b3%e3%82%b0%e3%81%ae%e3%81%9f%e3%82%81%e3%81%ae%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e3%81%a8%e8%a8%80%e3%81%88%e3%81%b0Mplus%e3%81%a7%e3%81%99%e3%80%82Mplus%e3%81%af%e3%82%b7%e3%83%b3%e3%82%bf%e3%83%83%e3%82%af%e3%82%b9%e3%82%82%e7%b0%a1%e5%8d%98%e3%81%a7%e8%a8%88%e7%ae%97%e3%82%82%e6%97%a9%e3%81%8f%e3%81%a6%e3%81%a8%e3%81%a6%e3%82%82%e8%89%af%e3%81%84%e3%82%bd%e3%83%95%e3%83%88%e3%82%a6%e3%82%a7%e3%82%a2%e3%81%a7%e3%81%99%e3%81%8c%e3%82%a2%e3%82%a6%e3%83%88%e3%83%97%e3%83%83%e3%83%88%e3%81%8c%e8%a6%8b%e8%be%9b%e3%81%84%e4%b8%8a%e3%81%ab%ef%bc%8c%e3%83%a2%e3%83%87%e3%83%ab%e3%81%ae%e6%95%b0%e3%81%a0%e3%81%91%e3%82%a4%e3%83%b3%e3%83%97%e3%83%83%e3%83%88%e3%81%a8%e3%82%a2%e3%82%a6%e3%83%88%e3%83%97%e3%83%83%e3%83%88%e3%81%ae%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%8c%e5%a2%97%e3%81%88%e3%81%a6%e3%81%84%e3%81%8f%e3%81%ae%e3%81%a7%e3%81%94%e3%81%a1%e3%82%83%e3%81%a4%e3%81%8d%e3%81%be%e3%81%99%e3%80%82%e3%81%be%e3%81%9f%ef%bc%8c%e7%a7%81%e3%81%a0%e3%81%91%e3%81%8b%e3%82%82%e3%81%97%e3%82%8c%e3%81%be%e3%81%9b%e3%82%93%e3%81%8c%ef%bc%8c%e3%81%82%e3%81%a8%e3%81%a7%e8%a7%a3%e6%9e%90%e3%82%92%e3%82%84%e3%82%8a%e3%81%aa%e3%81%8a%e3%81%9d%e3%81%86%e3%81%a8%e6%80%9d%e3%81%a3%e3%81%9f%e9%9a%9b%e3%81%ab%ef%bc%8c%e3%81%a9%e3%81%ae%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%9f%e3%81%ae%e3%81%8b%e5%88%86%e3%81%8b%e3%82%89%e3%81%aa%e3%81%8f%e3%81%aa%e3%82%8a%e3%81%8c%e3%81%a1%e3%81%a7%e3%81%99%e3%80%82%0a%e3%81%9d%e3%81%93%e3%81%a7%ef%bc%8cMplus%e3%82%92R%e3%81%8b%e3%82%89%e4%bd%bf%e3%81%88%e3%82%8b%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%a8%e3%81%97%e3%81%a6MplusAutomation%e3%81%a8%e3%81%84%e3%81%86%e3%82%82%e3%81%ae%e3%81%8c%e3%81%82%e3%82%8a%e3%81%be%e3%81%99%e3%80%82%e6%97%a5%e6%9c%ac%e8%aa%9e%e3%81%a7%e8%a7%a3%e8%aa%ac%e3%81%97%e3%81%a6%e3%81%84%e3%82%8b%e8%b3%87%e6%96%99%e3%81%a8%e3%81%97%e3%81%a6%e3%81%af%e5%be%b3%e5%b2%a1%e5%85%88%e7%94%9f%ef%bc%88%e9%ab%98%e6%9d%be%e5%a4%a7%ef%bc%89%e3%81%ab%e3%82%88%e3%82%8b%e3%82%82%e3%81%ae%e3%81%82%e3%82%8a%e5%a4%a7%e5%a4%89%e5%8f%82%e8%80%83%e3%81%ab%e3%81%aa%e3%82%8a%e3%81%be%e3%81%99%e3%80%82%0ahttps%3a%2f%2fwww.slideshare.net%2fmasarutokuoka%2frmplusmplusautomation-hiroshimar05%0a%e4%bb%a5%e4%b8%8b%e3%81%a7%e3%81%af%e3%81%9d%e3%81%ae%e3%82%b9%e3%83%a9%e3%82%a4%e3%83%89%e3%82%92%e5%8f%82%e8%80%83%e3%81%ab%e3%81%97%e3%81%9f%e3%82%8a%ef%bc%8c%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%aevignette%e3%82%92%e8%a6%8b%e3%81%aa%e3%81%8c%e3%82%89%e8%a9%a6%e3%81%97%e3%81%9f%e8%a8%98%e9%8c%b2%e3%82%92%e6%ae%8b%e3%81%97%e3%81%be%e3%81%99%ef%bc%88%e4%b8%bb%e3%81%ab%e5%b0%86%e6%9d%a5%e3%81%ae%e8%87%aa%e5%88%86%e3%81%ab%e5%90%91%e3%81%91%e3%81%a6%ef%bc%89%e3%80%82%0a%e3%83%a2%e3%83%87%e3%83%ab%e3%82%92R%e3%81%a7%e6%9b%b8%e3%81%8f%20mplusObject%e3%81%a8%e3%81%84%e3%81%86%e9%96%a2%e6%95%b0%e3%82%92%e4%bd%bf%e3%81%86%e3%81%a8%ef%bc%8cMplus%e3%81%aeinput%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%82%92%e7%94%a8%e6%84%8f%e3%81%a7%e3%81%8d%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82%e4%bb%a5%e4%b8%8b%e3%81%a7%e3%81%afpsych%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e6%89%80%e5%8f%8e%e3%81%aebfi%e3%83%87%e3%83%bc%e3%82%bf%e3%82%92%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%84%e3%81%8d%e3%81%be%e3%81%99%e3%80%82%e3%81%a8%e3%82%8a%e3%81%82%e3%81%88%e3%81%9a%ef%bc%8c5%e5%9b%a0%e5%ad%90%e3%81%aeCFA%e3%81%ae%e3%83%a2%e3%83%87%e3%83%ab%e3%82%92%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%bf%e3%81%be%e3%81%99%e3%80%82%0alibrary%28psych%29%20library%28MplusAutomation%29%20test1%20%26lt%3b-%20mplusObject%28MODEL%20%3d%26%2334%3bF1%20BY%20A1-A5%3b%20F2%20BY%20C1-C5%3b%20F3%20BY%20E1-E5%3b%20F4%20BY%20N1-N5%3b%20F5%20BY%20O1-O5%26%2334%3b%2c%20rdata%20%3d%20bfi%29%20res%20%26lt%3b-%20mplusModeler%28test%2c%20dataout%20%3d%20%26%2334%3btest1.tsv%26%2334%3b%2c%20modelout%20%3d%20%26%2334%3btest1.inp%26%2334%3b%2c%20run%20%3d%201L%29%20mplusObject%e9%96%a2%e6%95%b0%e3%81%ae%e5%bc%95%e6%95%b0%e3%81%af%ef%bc%8c%e9%80%9a%e5%b8%b8%e3%81%aeMplus%e3%81%aesyntax%e3%81%ae%e3%82%bb%e3%82%af%e3%82%b7%e3%83%a7%e3%83%b3%e3%81%ab%e6%9b%b8%e3%81%8f%e3%82%88%e3%81%86%e3%81%aa%e5%86%85%e5%ae%b9%e3%82%92%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%81%8d%e3%81%be%e3%81%99%e3%80%82%e4%b8%8a%e3%81%ae%e4%be%8b%e3%81%a7%e3%81%af%ef%bc%8c%e3%83%a2%e3%83%87%e3%83%ab%e3%81%ae%e9%83%a8%e5%88%86%e3%81%a0%e3%81%91%e6%9b%b8%e3%81%8d%e3%81%be%e3%81%97%e3%81%9f%e3%81%8c%ef%bc%8c%e6%9b%b8%e3%81%84%e3%81%a6%e3%81%84%e3%81%aa%e3%81%84VARIABLE%e3%81%ae%e3%82%bb%e3%82%af%e3%82%b7%e3%83%a7%e3%83%b3%e3%81%aa%e3%81%a9%e3%81%af%ef%bc%8cMODEL%e3%81%ae%e9%83%a8%e5%88%86%e3%81%8b%e3%82%89%e5%bf%85%e8%a6%81%e3%81%aa%e3%82%82%e3%81%ae%e3%82%92%e9%81%b8%e3%82%93%e3%81%a7%e5%8b%9d%e6%89%8b%e3%81%ab%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%8f%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82%0a%e3%81%93%e3%81%86%e3%81%97%e3%81%a6%e3%81%a7%e3%81%8d%e3%81%9fR%e4%b8%8a%e3%81%aeMplus%20Model%20Object%e3%82%92%e5%ae%9f%e8%a1%8c%e3%81%99%e3%82%8b%e3%81%9f%e3%82%81%e3%81%ae%e3%82%82%e3%81%ae%e3%81%8cmplusModeler%e9%96%a2%e6%95%b0%e3%81%a7%e3%81%99%e3%80%82%e7%ac%ac%ef%bc%91%e3%81%ae%e5%bc%95%e6%95%b0%e3%81%ab%e3%81%af%e5%85%88%e3%81%bb%e3%81%a9%e3%81%aeMplus%20Model%20Object%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%97%e3%81%be%e3%81%99%e3%80%82%e5%ae%9f%e8%a1%8c%e3%81%99%e3%82%8b%e3%81%a8%ef%bc%8cModel%20Object%e3%82%92%e5%85%83%e3%81%ab%e3%81%97%e3%81%a6%ef%bc%8c%e5%90%8c%e3%81%98%e3%83%87%e3%82%a3%e3%83%ac%e3%82%af%e3%83%88%e3%83%aa%e5%86%85%e3%81%ab%ef%bc%8cMplus%e3%81%aeinput%ef%bc%8cMplus%e3%81%ae%e5%ae%9f%e8%a1%8c%e7%94%a8%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%ef%bc%8cMplus%e3%81%ae%e3%82%a2%e3%82%a6%e3%83%88%e3%83%97%e3%83%83%e3%83%88%e3%81%8c%e7%94%9f%e6%88%90%e3%81%95%e3%82%8c%e3%81%be%e3%81%99%e3%80%82dataout%e3%81%a8%e3%81%84%e3%81%86%e5%bc%95%e6%95%b0%e3%81%ab%e3%81%af%ef%bc%8cMplus%e5%ae%9f%e8%a1%8c%e7%94%a8%e3%81%ab%e7%94%9f%e6%88%90%e3%81%95%e3%82%8c%e3%81%9f%e3%83%87%e3%83%bc%e3%82%bf%e3%81%ae%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e5%90%8d%e3%82%92%e6%8c%87%e5%ae%9a%e3%81%97%e3%81%be%e3%81%99%e3%80%82%e3%81%93%e3%81%ae%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%a7%e3%81%af%ef%bc%8c%e4%be%8b%e3%81%88%e3%81%b0%ef%bc%8c%e5%88%97%e5%90%8d%e3%81%ae%e3%83%98%e3%83%83%e3%83%80%e3%83%bc%e3%81%8c%e5%89%8a%e9%99%a4%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%9f%e3%82%8a%ef%bc%8c%e6%ac%a0%e6%90%8d%e5%80%a4%e3%81%8c%e3%80%8c.%e3%80%8d%e3%81%ab%e7%bd%ae%e3%81%8d%e6%8f%9b%e3%81%88%e3%82%89%e3%82%8c%e3%81%a6%e3%81%84%e3%81%9f%e3%82%8a%e3%81%a8%ef%bc%8cMplus%e3%81%a7%e5%87%a6%e7%90%86%e3%81%a7%e3%81%8d%e3%82%8b%e5%bd%a2%e3%81%ab%e3%83%87%e3%83%bc%e3%82%bf%e3%81%8c%e5%a4%89%e6%8f%9b%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%81%be%e3%81%99%e3%80%82%e3%81%be%e3%81%9fmodelout%e3%81%a8%e3%81%84%e3%81%86%e5%bc%95%e6%95%b0%e3%81%ab%e3%81%af%ef%bc%8c%e3%83%a2%e3%83%87%e3%83%ab%e3%82%92%e5%ae%9f%e8%a1%8c%e3%81%99%e3%82%8b%e3%81%ae%e3%81%ab%e4%bd%bf%e3%82%8f%e3%82%8c%e3%81%9fMplus%e3%81%ae%e3%82%a4%e3%83%b3%e3%83%97%e3%83%83%e3%83%88%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%ae%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e5%90%8d%e3%82%92%e6%b8%a1%e3%81%97%e3%81%be%e3%81%99%e3%80%82run%e3%81%a8%e3%81%84%e3%81%86%e5%bc%95%e6%95%b0%e3%81%ab0%e3%82%92%e6%b8%a1%e3%81%99%e3%81%a8%e3%83%a2%e3%83%87%e3%83%ab%e3%81%af%e5%ae%9f%e8%a1%8c%e3%81%95%e3%82%8c%e3%81%9a%ef%bc%8cMplus%e7%94%a8%e3%81%ae%e3%83%87%e3%83%bc%e3%82%bf%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%a8%e3%82%a4%e3%83%b3%e3%83%97%e3%83%83%e3%83%88%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%a0%e3%81%91%e3%81%8c%e7%94%9f%e6%88%90%e3%81%95%e3%82%8c%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82%e3%83%a2%e3%83%87%e3%83%ab%e3%81%8c%e6%84%8f%e5%9b%b3%e3%81%97%e3%81%9f%e9%80%9a%e3%82%8a%e3%81%ab.inp%e3%83%95%e3%82%a1%e3%82%a4%e3%83%ab%e3%81%ab%e5%8f%8d%e6%98%a0%e3%81%95%e3%82%8c%e3%81%a6%e3%81%84%e3%82%8b%e3%81%8b%e3%81%a9%e3%81%86%e3%81%8b%e3%82%92%e7%a2%ba%e8%aa%8d%e3%81%97%e3%81%9f%e3%81%84%e6%99%82%e3%81%ab%e4%bd%bf%e3%81%86%e3%82%82%e3%81%ae%e3%81%ae%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%821%e3%82%88%e3%82%8a%e5%a4%a7%e3%81%8d%e3%81%84%e5%a0%b4%e5%90%88%e3%81%ab%e3%81%af%e3%83%96%e3%83%bc%e3%83%88%e3%82%b9%e3%83%88%e3%83%a9%e3%83%83%e3%83%97%e3%81%a7%e7%b9%b0%e3%82%8a%e8%bf%94%e3%81%99%e3%81%a8%e3%81%ae%e3%81%93%e3%81%a8%e3%81%a7%e3%81%99%e3%80%82%0a%e4%b8%8a%e3%81%ae%e4%be%8b%e3%81%a7%e3%81%af%ef%bc%8c%e3%81%a8%e3%82%8a%e3%81%82%e3%81%88%e3%81%9a%e5%ae%9f%e8%a1%8c%e3%81%a7%e3%81%8d%e3%82%8c%e3%81%b0%e8%89%af%e3%81%84%e3%81%a8%e3%81%84%e3%81%86%e3%81%93%e3%81%a8%e3%81%a7%e3%83%a2%e3%83%87%e3%83%ab%e3%81%ae%e3%81%bf%e6%9b%b8%e3%81%8d%e3%81%be%e3%81%97%e3%81%9f%e3%81%8c%ef%bc%8c%e3%82%82%e3%81%86%e5%b0%91%e3%81%97%e3%81%84%e3%82%8d%e3%81%84%e3%82%8d%e3%81%a8%e6%8c%87%e5%ae%9a%e3%81%97%e3%81%9f%e3%82%82%e3%81%ae%e3%82%92%e4%bd%9c%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%be%e3%81%99%e3%80%82%0atest2%20%26lt%3b-%20mplusObject%28%20TITLE%20%3d%20%26%2334%3bThis%20is%20mplusautomation%20test%202%3b%26%2334%3b%2c%20ANALYSIS%20%3d%20%26%2334%3bESTIMATOR%20%3d%20MLR%3b%26%2334%3b%2c%20OUTPUT%20%3d%20%26%2334%3bSAMPSTAT%20STDYX%20MODINDICES%28ALL%29%3b%26%2334%3b%2c%20VARIABLE%20%3d%20%26%2334%3bUSEVARIABLES%20%3d%20A1-A5%20C1-C5%20E1-E5%20N1-N5%20O1-O5%3b%26%2334%3b%2c%20MODEL%20%3d%26%2334%3bF1%20BY%20A1-A5%2a%3b%20F2%20BY%20C1-C5%2a%3b%20F3%20BY%20E1-E5%2a%3b%20F4%20BY%20N1-N5%2a%3b%20F5%20BY%20O1-O5%2a%3b%20F1%401%20F2%401%20F3%401%20F4%401%20F5%401%3b%26%2334%3b%2c%20rdata%20%3d%20bfi%29%20res2%20%26lt%3b-%20mplusModeler%28test2%2c%20dataout%20%3d%20%26%2334%3btest2." aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2fmplusautomation%2f&t=R%e3%81%8b%e3%82%89Mplus%e3%82%92%e4%bd%bf%e3%81%86" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  Takahiro ONOSHIMA 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+<script src=/js/code-copy.js></script>
+
+
+
+  
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</html>

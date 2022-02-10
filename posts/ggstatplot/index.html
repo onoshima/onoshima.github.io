@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/font-awesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/lib/JetBrainsMono/web/woff2/JetBrainsMono-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <script type="text/javascript" src="https://latest.cactus.chat/cactus.js"></script>
+  <link rel="stylesheet" href="https://latest.cactus.chat/style.css" type="text/css">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title> ggstatsplotパッケージについて | Takahiro ONOSHIMA&#39;s website</title>
+  <link rel = 'canonical' href = 'https://onoshima.github.io/posts/ggstatplot/'>
+  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="all,follow">
+  <meta name="googlebot" content="index,follow,snippet,archive">
+  <meta property="og:title" content="ggstatsplotパッケージについて" />
+<meta property="og:description" content="ggstatsplotパッケージが出たとのことで少しだけ使ってみた記録です。使い方は以下のリンクより。
+https://github.com/IndrajeetPatil/ggstatsplot
+ggbetweenstats 群間差の比較のためのバイオリンプロットを出すときに使えます。
+library(ggplot2) library(ggstatsplot) p1 &lt;- ggbetweenstats(data=iris, x=Species, y=Sepal.Length) k=3) p1 こんな感じで，検定結果とプロットを一括でやってくれます。便利。 いろいろと細かな設定もできるようです。 p2 &lt;- ggbetweenstats(data=iris, x=Species, y=Sepal.Length, k=2 , #検定結果の小数をどこまで表示するか title=&#34;Distribution of sepal length across Iris species&#34;, plot.type=&#34;box&#34;, # デフォルトはboxviolin，片方だけにもできる pairwise.comparisons = F, #多重比較を表示しないこともできる effsize.type = &#34;biased&#34;, #効果量を偏イータにしたければbiase results.subtitle = F, # FALSEにすると検定結果をサブタイトルから消せる bf.message = F) # したの方にあるベイズファクターの表示の有無 p2 
+ggscatterstats 散布図＋ヒストグラムに無相関の検定を合わせて出力するようです。
+p3 &lt;- ggscatterstats( data = msleep, x = sleep_rem, y = awake, xlab = &#34;REM sleep (in hours)&#34;, ylab = &#34;Amount of time spent awake (in hours)&#34;, title = &#34;Understanding mammalian sleep&#34;, messages = FALSE ) p3 平均（や中央値）の線を引いたり，特定の値を上回る場合にラベルをつけたりできるみたいです。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://onoshima.github.io/posts/ggstatplot/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2020-10-18T10:57:20+09:00" />
+<meta property="article:modified_time" content="2020-10-18T10:57:20+09:00" />
+
+
+  <meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="ggstatsplotパッケージについて"/>
+<meta name="twitter:description" content="ggstatsplotパッケージが出たとのことで少しだけ使ってみた記録です。使い方は以下のリンクより。
+https://github.com/IndrajeetPatil/ggstatsplot
+ggbetweenstats 群間差の比較のためのバイオリンプロットを出すときに使えます。
+library(ggplot2) library(ggstatsplot) p1 &lt;- ggbetweenstats(data=iris, x=Species, y=Sepal.Length) k=3) p1 こんな感じで，検定結果とプロットを一括でやってくれます。便利。 いろいろと細かな設定もできるようです。 p2 &lt;- ggbetweenstats(data=iris, x=Species, y=Sepal.Length, k=2 , #検定結果の小数をどこまで表示するか title=&#34;Distribution of sepal length across Iris species&#34;, plot.type=&#34;box&#34;, # デフォルトはboxviolin，片方だけにもできる pairwise.comparisons = F, #多重比較を表示しないこともできる effsize.type = &#34;biased&#34;, #効果量を偏イータにしたければbiase results.subtitle = F, # FALSEにすると検定結果をサブタイトルから消せる bf.message = F) # したの方にあるベイズファクターの表示の有無 p2 
+ggscatterstats 散布図＋ヒストグラムに無相関の検定を合わせて出力するようです。
+p3 &lt;- ggscatterstats( data = msleep, x = sleep_rem, y = awake, xlab = &#34;REM sleep (in hours)&#34;, ylab = &#34;Amount of time spent awake (in hours)&#34;, title = &#34;Understanding mammalian sleep&#34;, messages = FALSE ) p3 平均（や中央値）の線を引いたり，特定の値を上回る場合にラベルをつけたりできるみたいです。"/>
+
+  
+  
+    
+  
+  
+  <link rel="stylesheet" href="https://onoshima.github.io/css/styles.94f653e9e151e28067a7c5dbbc4600cbd5a3c721e79faaf971e523c40f3b249b8e4f20bb57810dfffa8d559ca5c140fd56eb4cd9c0853113ad08e66afdb08bdd.css" integrity="sha512-lPZT6eFR4oBnp8XbvEYAy9WjxyHnn6r5ceUjxA87JJuOTyC7V4EN//qNVZylwUD9VutM2cCFMROtCOZq/bCL3Q=="> 
+
+  
+  
+  
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  
+
+  
+<link rel="icon" type="image/png" href="https://onoshima.github.io/images/favicon.ico" />
+
+  
+  
+</head>
+
+<body class="max-width mx-auto px3 ltr">
+  <div class="content index py4">
+
+  <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;" aria-label="Top of Page"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li>
+          <a class="icon" href=" https://onoshima.github.io/posts/gt/" aria-label="Previous">
+            <i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i>
+          </a>
+        </li>
+        
+        
+        <li>
+          <a class="icon" href="https://onoshima.github.io/posts/equalvar/" aria-label="Next">
+            <i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i>
+          </a>
+        </li>
+        
+        <li>
+          <a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+            <i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i>
+          </a>
+        </li>
+        <li>
+          <a class="icon" href="#" aria-label="Share">
+            <i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i>
+          </a>
+        </li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f" aria-label="Facebook">
+      <i class="fab fa-facebook " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&text=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6" aria-label="Twitter">
+      <i class="fab fa-twitter " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&title=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6" aria-label="Linkedin">
+      <i class="fab fa-linkedin " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&is_video=false&description=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6" aria-label="Pinterest">
+      <i class="fab fa-pinterest " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f" aria-label="Email">
+      <i class="fas fa-envelope " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&title=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6" aria-label="Pocket">
+      <i class="fab fa-get-pocket " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&title=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6" aria-label="reddit">
+      <i class="fab fa-reddit " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&name=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6&description=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%8c%e5%87%ba%e3%81%9f%e3%81%a8%e3%81%ae%e3%81%93%e3%81%a8%e3%81%a7%e5%b0%91%e3%81%97%e3%81%a0%e3%81%91%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f%e8%a8%98%e9%8c%b2%e3%81%a7%e3%81%99%e3%80%82%e4%bd%bf%e3%81%84%e6%96%b9%e3%81%af%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%83%aa%e3%83%b3%e3%82%af%e3%82%88%e3%82%8a%e3%80%82%0ahttps%3a%2f%2fgithub.com%2fIndrajeetPatil%2fggstatsplot%0aggbetweenstats%20%e7%be%a4%e9%96%93%e5%b7%ae%e3%81%ae%e6%af%94%e8%bc%83%e3%81%ae%e3%81%9f%e3%82%81%e3%81%ae%e3%83%90%e3%82%a4%e3%82%aa%e3%83%aa%e3%83%b3%e3%83%97%e3%83%ad%e3%83%83%e3%83%88%e3%82%92%e5%87%ba%e3%81%99%e3%81%a8%e3%81%8d%e3%81%ab%e4%bd%bf%e3%81%88%e3%81%be%e3%81%99%e3%80%82%0alibrary%28ggplot2%29%20library%28ggstatsplot%29%20p1%20%26lt%3b-%20ggbetweenstats%28data%3diris%2c%20x%3dSpecies%2c%20y%3dSepal.Length%29%20k%3d3%29%20p1%20%e3%81%93%e3%82%93%e3%81%aa%e6%84%9f%e3%81%98%e3%81%a7%ef%bc%8c%e6%a4%9c%e5%ae%9a%e7%b5%90%e6%9e%9c%e3%81%a8%e3%83%97%e3%83%ad%e3%83%83%e3%83%88%e3%82%92%e4%b8%80%e6%8b%ac%e3%81%a7%e3%82%84%e3%81%a3%e3%81%a6%e3%81%8f%e3%82%8c%e3%81%be%e3%81%99%e3%80%82%e4%be%bf%e5%88%a9%e3%80%82%20%e3%81%84%e3%82%8d%e3%81%84%e3%82%8d%e3%81%a8%e7%b4%b0%e3%81%8b%e3%81%aa%e8%a8%ad%e5%ae%9a%e3%82%82%e3%81%a7%e3%81%8d%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82%20p2%20%26lt%3b-%20ggbetweenstats%28data%3diris%2c%20x%3dSpecies%2c%20y%3dSepal.Length%2c%20k%3d2%20%2c%20%23%e6%a4%9c%e5%ae%9a%e7%b5%90%e6%9e%9c%e3%81%ae%e5%b0%8f%e6%95%b0%e3%82%92%e3%81%a9%e3%81%93%e3%81%be%e3%81%a7%e8%a1%a8%e7%a4%ba%e3%81%99%e3%82%8b%e3%81%8b%20title%3d%26%2334%3bDistribution%20of%20sepal%20length%20across%20Iris%20species%26%2334%3b%2c%20plot.type%3d%26%2334%3bbox%26%2334%3b%2c%20%23%20%e3%83%87%e3%83%95%e3%82%a9%e3%83%ab%e3%83%88%e3%81%afboxviolin%ef%bc%8c%e7%89%87%e6%96%b9%e3%81%a0%e3%81%91%e3%81%ab%e3%82%82%e3%81%a7%e3%81%8d%e3%82%8b%20pairwise.comparisons%20%3d%20F%2c%20%23%e5%a4%9a%e9%87%8d%e6%af%94%e8%bc%83%e3%82%92%e8%a1%a8%e7%a4%ba%e3%81%97%e3%81%aa%e3%81%84%e3%81%93%e3%81%a8%e3%82%82%e3%81%a7%e3%81%8d%e3%82%8b%20effsize.type%20%3d%20%26%2334%3bbiased%26%2334%3b%2c%20%23%e5%8a%b9%e6%9e%9c%e9%87%8f%e3%82%92%e5%81%8f%e3%82%a4%e3%83%bc%e3%82%bf%e3%81%ab%e3%81%97%e3%81%9f%e3%81%91%e3%82%8c%e3%81%b0biase%20results.subtitle%20%3d%20F%2c%20%23%20FALSE%e3%81%ab%e3%81%99%e3%82%8b%e3%81%a8%e6%a4%9c%e5%ae%9a%e7%b5%90%e6%9e%9c%e3%82%92%e3%82%b5%e3%83%96%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%81%8b%e3%82%89%e6%b6%88%e3%81%9b%e3%82%8b%20bf.message%20%3d%20F%29%20%23%20%e3%81%97%e3%81%9f%e3%81%ae%e6%96%b9%e3%81%ab%e3%81%82%e3%82%8b%e3%83%99%e3%82%a4%e3%82%ba%e3%83%95%e3%82%a1%e3%82%af%e3%82%bf%e3%83%bc%e3%81%ae%e8%a1%a8%e7%a4%ba%e3%81%ae%e6%9c%89%e7%84%a1%20p2%20%0aggscatterstats%20%e6%95%a3%e5%b8%83%e5%9b%b3%ef%bc%8b%e3%83%92%e3%82%b9%e3%83%88%e3%82%b0%e3%83%a9%e3%83%a0%e3%81%ab%e7%84%a1%e7%9b%b8%e9%96%a2%e3%81%ae%e6%a4%9c%e5%ae%9a%e3%82%92%e5%90%88%e3%82%8f%e3%81%9b%e3%81%a6%e5%87%ba%e5%8a%9b%e3%81%99%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82%0ap3%20%26lt%3b-%20ggscatterstats%28%20data%20%3d%20msleep%2c%20x%20%3d%20sleep_rem%2c%20y%20%3d%20awake%2c%20xlab%20%3d%20%26%2334%3bREM%20sleep%20%28in%20hours%29%26%2334%3b%2c%20ylab%20%3d%20%26%2334%3bAmount%20of%20time%20spent%20awake%20%28in%20hours%29%26%2334%3b%2c%20title%20%3d%20%26%2334%3bUnderstanding%20mammalian%20sleep%26%2334%3b%2c%20messages%20%3d%20FALSE%20%29%20p3%20%e5%b9%b3%e5%9d%87%ef%bc%88%e3%82%84%e4%b8%ad%e5%a4%ae%e5%80%a4%ef%bc%89%e3%81%ae%e7%b7%9a%e3%82%92%e5%bc%95%e3%81%84%e3%81%9f%e3%82%8a%ef%bc%8c%e7%89%b9%e5%ae%9a%e3%81%ae%e5%80%a4%e3%82%92%e4%b8%8a%e5%9b%9e%e3%82%8b%e5%a0%b4%e5%90%88%e3%81%ab%e3%83%a9%e3%83%99%e3%83%ab%e3%82%92%e3%81%a4%e3%81%91%e3%81%9f%e3%82%8a%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%bf%e3%81%9f%e3%81%84%e3%81%a7%e3%81%99%e3%80%82" aria-label="Tumblr">
+      <i class="fab fa-tumblr " aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&t=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6" aria-label="Hacker News">
+      <i class="fab fa-hacker-news " aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+    
+    <div id="toc">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ggbetweenstats">ggbetweenstats</a></li>
+    <li><a href="#ggscatterstats">ggscatterstats</a></li>
+  </ul>
+</nav>
+    </div>
+    
+  </span>
+</div>
+
+
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+    <header>
+      <h1 class="posttitle" itemprop="name headline">
+        ggstatsplotパッケージについて
+      </h1>
+      <div class="meta">
+        
+        <div class="postdate">
+          
+          <time datetime="2020-10-18 10:57:20 &#43;0900 JST" itemprop="datePublished">2020-10-18</time>
+          
+        </div>
+        
+        
+        
+        <div class="article-category">
+            <i class="fas fa-archive"></i>
+            
+            
+            <a class="category-link" href="/categories/stat">stat</a>
+            
+        </div>
+        
+        
+        <div class="article-tag">
+            <i class="fas fa-tag"></i>
+            
+            
+            <a class="tag-link" href="/tags/ggstatsplot" rel="tag">ggstatsplot</a>
+            
+        </div>
+        
+      </div>
+    </header>
+
+  
+    
+    <div class="content" itemprop="articleBody">
+      <p><code>ggstatsplot</code>パッケージが出たとのことで少しだけ使ってみた記録です。使い方は以下のリンクより。</p>
+<p><a href="https://github.com/IndrajeetPatil/ggstatsplot">https://github.com/IndrajeetPatil/ggstatsplot</a></p>
+<h2 id="ggbetweenstats">ggbetweenstats</h2>
+<p>群間差の比較のためのバイオリンプロットを出すときに使えます。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(ggplot2)
+<span style="color:#a6e22e">library</span>(ggstatsplot)
+p1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggbetweenstats</span>(data<span style="color:#f92672">=</span>iris,
+               x<span style="color:#f92672">=</span>Species,
+               y<span style="color:#f92672">=</span>Sepal.Length)
+               k<span style="color:#f92672">=</span><span style="color:#ae81ff">3</span>)
+p1</code></pre></div>
+<p><img src="/images/ggstatsplot1.png" alt="plot1"></p>
+<p>こんな感じで，検定結果とプロットを一括でやってくれます。便利。
+いろいろと細かな設定もできるようです。
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">p2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggbetweenstats</span>(data<span style="color:#f92672">=</span>iris,
+                     x<span style="color:#f92672">=</span>Species,
+                     y<span style="color:#f92672">=</span>Sepal.Length,
+                     k<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span> , <span style="color:#75715e">#検定結果の小数をどこまで表示するか</span>
+                     title<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Distribution of sepal length across Iris species&#34;</span>,
+                     plot.type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;box&#34;</span>, <span style="color:#75715e"># デフォルトはboxviolin，片方だけにもできる</span>
+                     pairwise.comparisons <span style="color:#f92672">=</span> F, <span style="color:#75715e">#多重比較を表示しないこともできる</span>
+                     effsize.type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;biased&#34;</span>, <span style="color:#75715e">#効果量を偏イータにしたければbiase</span>
+                     results.subtitle <span style="color:#f92672">=</span> F, <span style="color:#75715e"># FALSEにすると検定結果をサブタイトルから消せる</span>
+                     bf.message <span style="color:#f92672">=</span> F) <span style="color:#75715e"># したの方にあるベイズファクターの表示の有無</span>
+p2 </code></pre></div></p>
+<p><img src="/images/ggstatsplot2.png" alt="plot2"></p>
+<h2 id="ggscatterstats">ggscatterstats</h2>
+<p>散布図＋ヒストグラムに無相関の検定を合わせて出力するようです。</p>
+<p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">p3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggscatterstats</span>(
+  data <span style="color:#f92672">=</span> msleep,
+  x <span style="color:#f92672">=</span> sleep_rem,
+  y <span style="color:#f92672">=</span> awake,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REM sleep (in hours)&#34;</span>,
+  ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Amount of time spent awake (in hours)&#34;</span>,
+  title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Understanding mammalian sleep&#34;</span>,
+  messages <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>
+)
+p3</code></pre></div>
+<img src="/images/ggstatsplot3.png" alt="plot3"></p>
+<p>平均（や中央値）の線を引いたり，特定の値を上回る場合にラベルをつけたりできるみたいです。</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">p4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggscatterstats</span>(
+  data <span style="color:#f92672">=</span> msleep,
+  x <span style="color:#f92672">=</span> sleep_rem,
+  y <span style="color:#f92672">=</span> awake,
+  xlab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;REM sleep (in hours)&#34;</span>,
+  ylab <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Amount of time spent awake (in hours)&#34;</span>,
+  title <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Understanding mammalian sleep&#34;</span>,
+  messages <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>,
+  centrality.parameter <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;mean&#34;</span>, <span style="color:#75715e">#平均値を引く</span>
+  marginal.type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;density&#34;</span>, <span style="color:#75715e">#ヒストグラムの代わりに密度</span>
+  label.var<span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;name&#34;</span>, <span style="color:#75715e"># 各点のラベルとして設定する列名</span>
+  label.expression <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;sleep_rem&gt;6&#34;</span> <span style="color:#75715e"># ラベルをつける基準</span>
+)
+p4</code></pre></div>
+<p><img src="/images/ggstatsplot4.png" alt="plot4"></p>
+<p>まだまだ他にも機能はたくさんあるのですが，とりあえず試したものだけ。</p>
+
+    </div>
+  </article>
+
+  
+  
+
+
+
+
+
+
+  <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/profile">Profile</a></li>
+         
+          <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+          <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </div>
+
+    
+    <div id="toc-footer" style="display: none">
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#ggbetweenstats">ggbetweenstats</a></li>
+    <li><a href="#ggscatterstats">ggscatterstats</a></li>
+  </ul>
+</nav>
+    </div>
+    
+
+    <div id="share-footer" style="display: none">
+      
+      <ul>
+  
+  
+    
+  
+  
+  <li>
+    <a class="icon" href="http://www.facebook.com/sharer.php?u=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f" aria-label="Facebook">
+      <i class="fab fa-facebook fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://twitter.com/share?url=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&text=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6" aria-label="Twitter">
+      <i class="fab fa-twitter fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.linkedin.com/shareArticle?url=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&title=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6" aria-label="Linkedin">
+      <i class="fab fa-linkedin fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&is_video=false&description=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6" aria-label="Pinterest">
+      <i class="fab fa-pinterest fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="mailto:?subject=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6&body=Check out this article: https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f" aria-label="Email">
+      <i class="fas fa-envelope fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://getpocket.com/save?url=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&title=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6" aria-label="Pocket">
+      <i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://reddit.com/submit?url=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&title=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6" aria-label="reddit">
+      <i class="fab fa-reddit fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="http://www.tumblr.com/share/link?url=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&name=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6&description=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%8c%e5%87%ba%e3%81%9f%e3%81%a8%e3%81%ae%e3%81%93%e3%81%a8%e3%81%a7%e5%b0%91%e3%81%97%e3%81%a0%e3%81%91%e4%bd%bf%e3%81%a3%e3%81%a6%e3%81%bf%e3%81%9f%e8%a8%98%e9%8c%b2%e3%81%a7%e3%81%99%e3%80%82%e4%bd%bf%e3%81%84%e6%96%b9%e3%81%af%e4%bb%a5%e4%b8%8b%e3%81%ae%e3%83%aa%e3%83%b3%e3%82%af%e3%82%88%e3%82%8a%e3%80%82%0ahttps%3a%2f%2fgithub.com%2fIndrajeetPatil%2fggstatsplot%0aggbetweenstats%20%e7%be%a4%e9%96%93%e5%b7%ae%e3%81%ae%e6%af%94%e8%bc%83%e3%81%ae%e3%81%9f%e3%82%81%e3%81%ae%e3%83%90%e3%82%a4%e3%82%aa%e3%83%aa%e3%83%b3%e3%83%97%e3%83%ad%e3%83%83%e3%83%88%e3%82%92%e5%87%ba%e3%81%99%e3%81%a8%e3%81%8d%e3%81%ab%e4%bd%bf%e3%81%88%e3%81%be%e3%81%99%e3%80%82%0alibrary%28ggplot2%29%20library%28ggstatsplot%29%20p1%20%26lt%3b-%20ggbetweenstats%28data%3diris%2c%20x%3dSpecies%2c%20y%3dSepal.Length%29%20k%3d3%29%20p1%20%e3%81%93%e3%82%93%e3%81%aa%e6%84%9f%e3%81%98%e3%81%a7%ef%bc%8c%e6%a4%9c%e5%ae%9a%e7%b5%90%e6%9e%9c%e3%81%a8%e3%83%97%e3%83%ad%e3%83%83%e3%83%88%e3%82%92%e4%b8%80%e6%8b%ac%e3%81%a7%e3%82%84%e3%81%a3%e3%81%a6%e3%81%8f%e3%82%8c%e3%81%be%e3%81%99%e3%80%82%e4%be%bf%e5%88%a9%e3%80%82%20%e3%81%84%e3%82%8d%e3%81%84%e3%82%8d%e3%81%a8%e7%b4%b0%e3%81%8b%e3%81%aa%e8%a8%ad%e5%ae%9a%e3%82%82%e3%81%a7%e3%81%8d%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82%20p2%20%26lt%3b-%20ggbetweenstats%28data%3diris%2c%20x%3dSpecies%2c%20y%3dSepal.Length%2c%20k%3d2%20%2c%20%23%e6%a4%9c%e5%ae%9a%e7%b5%90%e6%9e%9c%e3%81%ae%e5%b0%8f%e6%95%b0%e3%82%92%e3%81%a9%e3%81%93%e3%81%be%e3%81%a7%e8%a1%a8%e7%a4%ba%e3%81%99%e3%82%8b%e3%81%8b%20title%3d%26%2334%3bDistribution%20of%20sepal%20length%20across%20Iris%20species%26%2334%3b%2c%20plot.type%3d%26%2334%3bbox%26%2334%3b%2c%20%23%20%e3%83%87%e3%83%95%e3%82%a9%e3%83%ab%e3%83%88%e3%81%afboxviolin%ef%bc%8c%e7%89%87%e6%96%b9%e3%81%a0%e3%81%91%e3%81%ab%e3%82%82%e3%81%a7%e3%81%8d%e3%82%8b%20pairwise.comparisons%20%3d%20F%2c%20%23%e5%a4%9a%e9%87%8d%e6%af%94%e8%bc%83%e3%82%92%e8%a1%a8%e7%a4%ba%e3%81%97%e3%81%aa%e3%81%84%e3%81%93%e3%81%a8%e3%82%82%e3%81%a7%e3%81%8d%e3%82%8b%20effsize.type%20%3d%20%26%2334%3bbiased%26%2334%3b%2c%20%23%e5%8a%b9%e6%9e%9c%e9%87%8f%e3%82%92%e5%81%8f%e3%82%a4%e3%83%bc%e3%82%bf%e3%81%ab%e3%81%97%e3%81%9f%e3%81%91%e3%82%8c%e3%81%b0biase%20results.subtitle%20%3d%20F%2c%20%23%20FALSE%e3%81%ab%e3%81%99%e3%82%8b%e3%81%a8%e6%a4%9c%e5%ae%9a%e7%b5%90%e6%9e%9c%e3%82%92%e3%82%b5%e3%83%96%e3%82%bf%e3%82%a4%e3%83%88%e3%83%ab%e3%81%8b%e3%82%89%e6%b6%88%e3%81%9b%e3%82%8b%20bf.message%20%3d%20F%29%20%23%20%e3%81%97%e3%81%9f%e3%81%ae%e6%96%b9%e3%81%ab%e3%81%82%e3%82%8b%e3%83%99%e3%82%a4%e3%82%ba%e3%83%95%e3%82%a1%e3%82%af%e3%82%bf%e3%83%bc%e3%81%ae%e8%a1%a8%e7%a4%ba%e3%81%ae%e6%9c%89%e7%84%a1%20p2%20%0aggscatterstats%20%e6%95%a3%e5%b8%83%e5%9b%b3%ef%bc%8b%e3%83%92%e3%82%b9%e3%83%88%e3%82%b0%e3%83%a9%e3%83%a0%e3%81%ab%e7%84%a1%e7%9b%b8%e9%96%a2%e3%81%ae%e6%a4%9c%e5%ae%9a%e3%82%92%e5%90%88%e3%82%8f%e3%81%9b%e3%81%a6%e5%87%ba%e5%8a%9b%e3%81%99%e3%82%8b%e3%82%88%e3%81%86%e3%81%a7%e3%81%99%e3%80%82%0ap3%20%26lt%3b-%20ggscatterstats%28%20data%20%3d%20msleep%2c%20x%20%3d%20sleep_rem%2c%20y%20%3d%20awake%2c%20xlab%20%3d%20%26%2334%3bREM%20sleep%20%28in%20hours%29%26%2334%3b%2c%20ylab%20%3d%20%26%2334%3bAmount%20of%20time%20spent%20awake%20%28in%20hours%29%26%2334%3b%2c%20title%20%3d%20%26%2334%3bUnderstanding%20mammalian%20sleep%26%2334%3b%2c%20messages%20%3d%20FALSE%20%29%20p3%20%e5%b9%b3%e5%9d%87%ef%bc%88%e3%82%84%e4%b8%ad%e5%a4%ae%e5%80%a4%ef%bc%89%e3%81%ae%e7%b7%9a%e3%82%92%e5%bc%95%e3%81%84%e3%81%9f%e3%82%8a%ef%bc%8c%e7%89%b9%e5%ae%9a%e3%81%ae%e5%80%a4%e3%82%92%e4%b8%8a%e5%9b%9e%e3%82%8b%e5%a0%b4%e5%90%88%e3%81%ab%e3%83%a9%e3%83%99%e3%83%ab%e3%82%92%e3%81%a4%e3%81%91%e3%81%9f%e3%82%8a%e3%81%a7%e3%81%8d%e3%82%8b%e3%81%bf%e3%81%9f%e3%81%84%e3%81%a7%e3%81%99%e3%80%82" aria-label="Tumblr">
+      <i class="fab fa-tumblr fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+  <li>
+    <a class="icon" href="https://news.ycombinator.com/submitlink?u=https%3a%2f%2fonoshima.github.io%2fposts%2fggstatplot%2f&t=ggstatsplot%e3%83%91%e3%83%83%e3%82%b1%e3%83%bc%e3%82%b8%e3%81%ab%e3%81%a4%e3%81%84%e3%81%a6" aria-label="Hacker News">
+      <i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i>
+    </a>
+  </li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      
+        <a id="menu-toggle" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;" aria-label="Menu">
+          <i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        
+        <a id="toc-toggle" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;" aria-label="TOC">
+          <i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        
+        <a id="share-toggle" class="icon" href="#" onclick="$('#share-footer').toggle();return false;" aria-label="Share">
+          <i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" aria-label="Top of Page">
+          <i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+
+  <footer id="footer">
+  <div class="footer-left">
+    Copyright  &copy; 2022  Takahiro ONOSHIMA 
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+        <li><a href="/">Home</a></li>
+         
+        <li><a href="/profile">Profile</a></li>
+         
+        <li><a href="https://researchmap.jp/onoshima">Works(researchmap)</a></li>
+         
+        <li><a href="/posts/">Blog</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+
+<link rel="stylesheet" href=/lib/font-awesome/css/all.min.css>
+<script src=/lib/jquery/jquery.min.js></script>
+<script src=/js/main.js></script>
+
+<script src=/js/code-copy.js></script>
+
+
+
+  
+
+
+<script>
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
+</script>
+<script type="text/javascript" id="MathJax-script" async
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+</script>
+
+</html>

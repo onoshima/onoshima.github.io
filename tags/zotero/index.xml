@@ -6,18 +6,17 @@
     <description>Recent content in zotero on Takahiro ONOSHIMA&#39;s website</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
-    <lastBuildDate>Thu, 09 Apr 2020 20:54:52 +0900</lastBuildDate>
-    
-	<atom:link href="https://onoshima.github.io/tags/zotero/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Thu, 09 Apr 2020 20:54:52 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/zotero/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Zoteroのファイル管理の覚書</title>
       <link>https://onoshima.github.io/posts/zotero/</link>
       <pubDate>Thu, 09 Apr 2020 20:54:52 +0900</pubDate>
       
       <guid>https://onoshima.github.io/posts/zotero/</guid>
-      <description></description>
+      <description>はじめに 文献管理にZoteroを使っています．ZoteroのWeb importerを使って論文をダウンロードした際に，オンラインストレージの中の特定のフォルダに整理した状態で入っているようにしたくて，いじくった際の自分用メモ．以下のサイトを参考にしています．
+Zotero で論文管理してみた話
+やったこと  ZoteroのStandaloneをダウンロードしてインストール Zotero Connecterをブラウザに追加 Zotfileのアドオンをダウンロードしてメニューバーからアドオンに追加 Google Driveなどのオンラインストレージに論文をいれたいフォルダを作る Stand alone 版の「環境設定&amp;raquo;ファイルとフォルダ」で基本フォルダに，先ほど作ったフォルダを設定 ツールから選べるZotFileの設定から，Source Folder for Attaching New Filesに先ほどのフォルダを設定，Location of Filesにも先ほどのフォルダを設定 PDFをコネクターで取り込んだ際に，一緒に取り込まれたpdfファイルを右クリックしてzotofileのメニューからRenameするとそのフォルダの中に取り込まれる  </description>
     </item>
     
   </channel>
