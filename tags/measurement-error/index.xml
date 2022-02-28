@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>measurement error on Takahiro ONOSHIMA&#39;s website</title>
+    <link>https://onoshima.github.io/tags/measurement-error/</link>
+    <description>Recent content in measurement error on Takahiro ONOSHIMA&#39;s website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Mon, 28 Feb 2022 10:30:39 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/measurement-error/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>心理学研究における測定誤差</title>
+      <link>https://onoshima.github.io/posts/schmidthunter1996/</link>
+      <pubDate>Mon, 28 Feb 2022 10:30:39 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/posts/schmidthunter1996/</guid>
+      <description>以下の論文を読んだ際のメモ。
+ Schmidt, F. L., &amp;amp; Hunter, J. E. (1996). Measurement error in psychological research: Lessons from 26 research scenarios. Psychological Methods, 1(2), 199–223. https://doi.org/10.1037/1082-989X.1.2.199
+ 論文の概要 心理学の研究における測定誤差の問題に対してどう対処するかを論じたもの。アブストラクトにも書いてあるように，抽象的な測定理論を提示しても多くの研究者の研究実践を改善するには不十分だろうということで，具体的な研究の文脈を提示し，それぞれにおける測定誤差の誤った対処と正しい対処のあり方を議論している。提示される26個の架空の（といってもおそらく今まで出会った著者らが研究を組み合わせたものかな？）研究の例は，組織・産業心理学やパーソナリティ心理学や社会心理学などで尺度を用いた研究が多いが，実験における例なども出てくる。最初の9例が希薄化の修正をしなかったことによって謝った結論を導いてしまうことについて，続く13例が修正に用いる信頼性係数を間違うことによって引き起こされる問題について，残りの4例がより複雑なケースが論じられる。
+古い論文といえば古い論文なのでこの後の議論がどう進んでいるかを追う必要があると思うが，希薄化の修正について考えるときの重要文献の一つだと思う。
+引用や感想など  [E]ven in articles in which reliabilities are reported, the majority of studies do not use those reliabilities to correct findings for the distortion produced by error of measurement (p.199).
+ この指摘はとても正しくて信頼性は報告されたらそれで終わりでその後の活用がなされていないのではないかということは感じる。この問題は岡田 (2015)がα係数を信頼性についての「「みそぎ」のための便利な道具（p.80）」と表現していることと同種のものだと思う。
+論文のいたるところ（特に後半の研究例の箇所）で，測定に際して生じている誤差の性質（random, specific, transientなものか）についての議論と，それぞれの信頼性係数がどのような誤差を考慮しているかの議論がなされていて大変勉強になる。測定の対象とするものによってによって生じやすい誤差と生じづらい誤差を把握することは信頼性の選択に必要なことだろうと思う。以下の引用では，信頼性の解釈が測定理論のみからは決めることができない点が述べられている（ここら辺の話は帰無仮説有意性検定における危険率とか効果量の実質的な解釈の話と同じことである）。
+ This scenario [シナリオ17] illustrates the important fact that substantive research findings and cumulative knowledge can modify the interpretation of reliability estimates.</description>
+    </item>
+    
+  </channel>
+</rss>
