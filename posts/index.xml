@@ -7,7 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Takahiro ONOSHIMA</copyright>
-    <lastBuildDate>Mon, 28 Feb 2022 10:30:39 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Mar 2022 14:52:47 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>αの過小推定の検討</title>
+      <link>https://onoshima.github.io/posts/osburn2000/</link>
+      <pubDate>Tue, 01 Mar 2022 14:52:47 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/posts/osburn2000/</guid>
+      <description>以下の論文を読んだメモ。心理学研究における測定誤差の論文の関連で読んだ。
+ Osburn, H. G. (2000). Coefficient alpha and related internal consistency reliability coefficients. Psychological Methods, 5(3), 343–355. https://doi.org/10.1037/1082-989X.5.3.343
+ 論文の概要 αおよび10の関連する内的一貫性の指標がどういった条件下で真の信頼性を過小推定するのかを検討した論文。方法の部分をあまり真面目に読んでいないのだが，研究の文脈にそってデモンストレーション用の母分散共分散行列を複数の条件で作り，その分散共分散行列から各信頼性係数を算出して比較した模様。結果をざっくりとまとめると，αについていえば変数が1因子の仮定を測定している場合にはロバストだが，中程度にその仮定が違反されると深刻に過小推定することが報告されている。そして，この過小推定したαを用いて希薄化の修正をした日には相関係数を過大推定することになるから気をつけようねということが書いてある。
+引用や感想など Schmidt &amp;amp; Hunter (1996)での議論に対するコメントとして以下のように書いている。
+ Finally, Schmidt and Hunter (1996), in a discussion of using various reliability coefficients in corrections for attenuation, largely ignored the tendency of coefficient alpha to underestimate the reliability because of item heterogeneity. (p.344)
+ この指摘についてはその通りで，希薄化の修正に用いる値が真値と大きく離れているのであればこうしたことも起きるだろうと思う。ただ，その後のシミュレーションの結果（や計量心理学界隈のαに対する一連の議論）を見る限りαを希薄化の修正に用いる際には，機械的に用いればよいという訳でなく，平行測定なのか，タウ等価な測定なのか，同族測定なのかを経験的にチェックしてから用いるのが良いのだろう。まぁ，こういう面倒くさい手続きがあると希薄化の修正をする人なんていなくなってしまうのかもしれないけど。
+ところで，ここでのシミュレーションは母集団についての結果はサンプリングによるブレとかは含んでいない（と思う）ので，そこらへんを含めた精緻なシミュレーションが必要でしょう（おそらく，探せば絶対にだれかがやっていると思う）。</description>
+    </item>
+    
     <item>
       <title>心理学研究における測定誤差</title>
       <link>https://onoshima.github.io/posts/schmidthunter1996/</link>
