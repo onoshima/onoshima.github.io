@@ -7,7 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Takahiro ONOSHIMA</copyright>
-    <lastBuildDate>Mon, 28 Feb 2022 10:30:39 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/reliability/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 07 Mar 2022 14:47:10 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/reliability/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>南風原(2002)の読書メモ</title>
+      <link>https://onoshima.github.io/posts/haebara2002/</link>
+      <pubDate>Mon, 07 Mar 2022 14:47:10 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/posts/haebara2002/</guid>
+      <description>以下の論文を読んだメモ。心理学研究における測定誤差の論文の関連で読み直した。
+ 南風原朝和 (2002). モデル適合度の目標適合度. 行動計量学, 29(2), 160–166. https://doi.org/10.2333/jbhmk.29.160
+ 論文の概要 同じ号の狩野論文に対するコメント論文。尺度構成において，一つの構成概念あたりの観測変数の数を多くする立場（従来の尺度構成の立場）と数を抑える立場（SEMを適用する研究に見られるもの）を対比させた上で，観測変数の数を減らすことの是非を論じている。従来の希薄化の修正は「回答の際の気の迷いや読み違えなどの瞬間的な揺れ」（論文中ではタイプ2の要因による誤差）によって生じる誤差変動を除去するものである一方で，SEMにおける希薄化の修正はそれに加えて「項目プールから尺度項目として選ばれる項目の違い」（論文中ではタイプ3の要因による誤差）も合わせて誤差要因に加えて除去しており，問題設定自体を変更していると論じている。観測変数の数を減らすことの危険性については，一般化可能性が低下する可能性があること，内容的妥当性が低下する可能性があることを指摘して，モデルの適合度の振り回される危険性を論じている。
+引用や感想など SEMの適合度による判断がp値の利用と同じで2値判断を求めがちな研究者の便利な道具になっているという指摘（p.165）はまさにその通りだと思った。似たようなことは信頼性係数についての調べ物をした際にも思ったことで（「信頼性係数の目安の出どころ」），あれも「十分な内的整合性を示した」と言えれば良しみたいなところがあると思う。
+希薄化の修正公式について「ルーチン的に適用され，修正後の値が相関係数のより良い推定値として報告されることはなかった（p.161）」と書いており，その理由として「測定誤差」「真の得点」「信頼性」 が持つ多義性が挙げられている。たしかに，何を真の得点としてみなすのか，どのタイプの測定誤差による誤差変動を除去したいかが明確でない状態でルーチン的に修正公式を適用するのは問題があるだろう。
+また，$\alpha$係数について「尺度に含まれる項目の性質によっては，かなり低い下限値を与えることがあり，coefficient of precisionの推定値としてルーチン的に利用することはできない(p.163)」と述べており，これもまたそうなのだろう。
+ここで著者は「ルーチン的」には使用できないと述べており，非ルーチン的（?）に修正公式を使うことができる可能性については言及していない。$\alpha$係数はRaykov &amp;amp; Marcoulides (2019)が論じているように，尺度の1次元性の仮定が満たされていないのであれば，$\tau$等価の仮定が満たされていなくてもひどい過小推定をしないことが知られているので，$\alpha$が過小推定しないかのチェックを行ったり（仮定の緩い$\omega$を用いたり）して，尺度の性質について吟味した上で非ルーチン的に修正公式を使うのはアリだと思うが，使用する人はあまり（というよりほとんど？）見ない。測定誤差による希薄化を無視することによるリスクと希薄化の修正に過大推定のリスクではどちらが大きいのだろうか。また，こうした議論はどの程度なされているのか。
+ちなみに，coefficient of precisionに日本語訳をあてているものがないか手元の書籍をいくつか見てみたが，そもそもこの語自体が登場する日本語文献がなかった。あたった文献が悪いのかもしれない。
+一応Lord &amp;amp; Novick (1968)ではどう説明されているかも確認しておく。初登場の記述は以下のようなもの(p.134)。
+ The correlation between truly parallel measurements taken in such a way that the person&amp;rsquo;s true score does not change between them is often called the coefficient of precision. As a reliability coeffi cient, we may write it as $$ \rho^2 _{XT} = \rho _{XX ^{&#39;} } = \sigma ^2 _{T} /\sigma ^2 _{X} = 1 - ( \sigma^2 _{E} / \sigma^2 _{X}).</description>
+    </item>
+    
     <item>
       <title>心理学研究における測定誤差</title>
       <link>https://onoshima.github.io/posts/schmidthunter1996/</link>
