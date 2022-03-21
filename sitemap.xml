@@ -2,25 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://onoshima.github.io/posts/mad/</loc>
+    <lastmod>2022-03-21T11:49:44+09:00</lastmod>
+  </url><url>
+    <loc>https://onoshima.github.io/tags/median-absolute-deviation/</loc>
+    <lastmod>2022-03-21T11:49:44+09:00</lastmod>
+  </url><url>
+    <loc>https://onoshima.github.io/posts/</loc>
+    <lastmod>2022-03-21T11:49:44+09:00</lastmod>
+  </url><url>
+    <loc>https://onoshima.github.io/tags/outlier/</loc>
+    <lastmod>2022-03-21T11:49:44+09:00</lastmod>
+  </url><url>
+    <loc>https://onoshima.github.io/tags/</loc>
+    <lastmod>2022-03-21T11:49:44+09:00</lastmod>
+  </url><url>
+    <loc>https://onoshima.github.io/</loc>
+    <lastmod>2022-03-21T11:49:44+09:00</lastmod>
+  </url><url>
     <loc>https://onoshima.github.io/categories/</loc>
     <lastmod>2022-03-07T14:47:10+09:00</lastmod>
   </url><url>
     <loc>https://onoshima.github.io/tags/measurement-error/</loc>
     <lastmod>2022-03-07T14:47:10+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/</loc>
-    <lastmod>2022-03-07T14:47:10+09:00</lastmod>
-  </url><url>
     <loc>https://onoshima.github.io/categories/reading/</loc>
     <lastmod>2022-03-07T14:47:10+09:00</lastmod>
   </url><url>
     <loc>https://onoshima.github.io/tags/reliability/</loc>
-    <lastmod>2022-03-07T14:47:10+09:00</lastmod>
-  </url><url>
-    <loc>https://onoshima.github.io/tags/</loc>
-    <lastmod>2022-03-07T14:47:10+09:00</lastmod>
-  </url><url>
-    <loc>https://onoshima.github.io/</loc>
     <lastmod>2022-03-07T14:47:10+09:00</lastmod>
   </url><url>
     <loc>https://onoshima.github.io/posts/haebara2002/</loc>

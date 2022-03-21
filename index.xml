@@ -7,7 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>ja</language>
     <copyright>Takahiro ONOSHIMA</copyright>
-    <lastBuildDate>Mon, 07 Mar 2022 14:47:10 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 21 Mar 2022 11:49:44 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>5MAD基準による外れ値の検出</title>
+      <link>https://onoshima.github.io/posts/mad/</link>
+      <pubDate>Mon, 21 Mar 2022 11:49:44 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/posts/mad/</guid>
+      <description>外れ値の検出の基準として四分位間範囲（IQR）を使って$\textrm{IQR} \times 1.5$とするものがある。Rのggplot2で箱ひげ図を描くとデフォルトでこの基準が適用されて，ヒゲからはみ出した点として描かれたはずである。
+それとは別に5MAD基準というものもあるらしい。MADというのは，$\tilde{X} = \textrm{median}(X)$を中央値として $$ \textrm{MAD} = \textrm{median}( |X_i - \tilde{X}|) $$ のことで中央値絶対偏差（median absolute deviation, あるいは「絶対中位数偏差」とも） のことである。中央値からの偏差の絶対値の中央値である。ややこしい。
+このMADを用いて，観測値$X^*$が $$ \frac{|X^{*} - \tilde{X}|}{\textrm{MAD}} &amp;gt; 5 $$ を満たす場合に外れ値としてみなすのが5MADルールだそうである。
+ちなみにRでMADを求める時にはxをデータセットとして
+mad(x, constant = 1) で求めることができる。
+参考にしたもの
+ 蓑谷千凰彦 (2009) 数理統計ハンドブック みみずく舎 p.10  </description>
+    </item>
+    
     <item>
       <title>南風原(2002)の読書メモ</title>
       <link>https://onoshima.github.io/posts/haebara2002/</link>

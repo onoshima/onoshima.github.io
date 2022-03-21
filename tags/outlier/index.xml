@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>outlier on Takahiro ONOSHIMA&#39;s website</title>
+    <link>https://onoshima.github.io/tags/outlier/</link>
+    <description>Recent content in outlier on Takahiro ONOSHIMA&#39;s website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>ja</language>
+    <copyright>Takahiro ONOSHIMA</copyright>
+    <lastBuildDate>Mon, 21 Mar 2022 11:49:44 +0900</lastBuildDate><atom:link href="https://onoshima.github.io/tags/outlier/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>5MAD基準による外れ値の検出</title>
+      <link>https://onoshima.github.io/posts/mad/</link>
+      <pubDate>Mon, 21 Mar 2022 11:49:44 +0900</pubDate>
+      
+      <guid>https://onoshima.github.io/posts/mad/</guid>
+      <description>外れ値の検出の基準として四分位間範囲（IQR）を使って$\textrm{IQR} \times 1.5$とするものがある。Rのggplot2で箱ひげ図を描くとデフォルトでこの基準が適用されて，ヒゲからはみ出した点として描かれたはずである。
+それとは別に5MAD基準というものもあるらしい。MADというのは，$\tilde{X} = \textrm{median}(X)$を中央値として $$ \textrm{MAD} = \textrm{median}( |X_i - \tilde{X}|) $$ のことで中央値絶対偏差（median absolute deviation, あるいは「絶対中位数偏差」とも） のことである。中央値からの偏差の絶対値の中央値である。ややこしい。
+このMADを用いて，観測値$X^*$が $$ \frac{|X^{*} - \tilde{X}|}{\textrm{MAD}} &amp;gt; 5 $$ を満たす場合に外れ値としてみなすのが5MADルールだそうである。
+ちなみにRでMADを求める時にはxをデータセットとして
+mad(x, constant = 1) で求めることができる。
+参考にしたもの
+ 蓑谷千凰彦 (2009) 数理統計ハンドブック みみずく舎 p.10  </description>
+    </item>
+    
+  </channel>
+</rss>
