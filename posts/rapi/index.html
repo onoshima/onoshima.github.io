@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> RからeStatのAPIを使ってみる | Takahiro ONOSHIMA&#39;s website</title>
   <link rel = 'canonical' href = 'https://onoshima.github.io/posts/rapi/'>
-  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="description" content="  愛知学院大学心理学部で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -28,8 +28,8 @@ https://qiita.com/nozma/items/9f4a638906471d125e96
 library(pacman) p_load(keyring, httr, listviewer, rlist, pipeR, dplyr, stringr, ggplot2, stringi, readr, ggthemes) keyring::key_set(&#34;e-stat&#34;) ## 統計表を検索してお目当ての表を特定 response &lt;- GET( url = &#34;https://api.e-stat.go.jp/rest/2.1/app/json/getStatsList&#34;, query = list( appId = keyring::key_get(&#34;e-stat&#34;), searchWord = &#34;障害種 AND 状況別 AND 高等部&#34; ) ) res_content &lt;- content(response) jsonedit(res_content) id_table &lt;- res_content$GET_STATS_LIST$DATALIST_INF$TABLE_INF %&gt;&gt;% list.select( id = `@id`, year = STATISTICS_NAME_SPEC$TABULATION_SUB_CATEGORY1, table_name = TITLE_SPEC$TABLE_NAME) %&gt;&gt;% list.stack() id_list &lt;- pull(id_table, id) res &lt;- tibble() for (id in id_list){ dat_year &lt;- GET( url = &#34;https://api." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/posts/rapi/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-03-07T20:58:44+09:00" />
-<meta property="article:modified_time" content="2020-03-07T20:58:44+09:00" />
+<meta property="article:published_time" content="2020-03-07T20:58:44&#43;09:00" />
+<meta property="article:modified_time" content="2020-03-07T20:58:44&#43;09:00" />
 
 
   <meta name="twitter:card" content="summary"/>
@@ -249,7 +249,7 @@ library(pacman) p_load(keyring, httr, listviewer, rlist, pipeR, dplyr, stringr, 
 <p><img src="/images/graduate_hs.png" alt="高等部卒業生の進路"></p>
 <p><img src="/images/graduate_hs_per.png" alt="高等部卒業生の進路パーセント"></p>
 <p>使ったコードは以下のもの．なぜか平成23年度から25年度はひとまとまりで提供されていたり，平成22年度とそれ以降で列名が違ったりと下処理が面倒くさかったです．</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(pacman)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(pacman)
 <span style="color:#a6e22e">p_load</span>(keyring, httr, listviewer, rlist, pipeR, dplyr, stringr, ggplot2, stringi,
        readr, ggthemes)
 keyring<span style="color:#f92672">::</span><span style="color:#a6e22e">key_set</span>(<span style="color:#e6db74">&#34;e-stat&#34;</span>)

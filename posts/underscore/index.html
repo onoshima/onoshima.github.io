@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> Hugoで記事中に数式を書く際の_問題 | Takahiro ONOSHIMA&#39;s website</title>
   <link rel = 'canonical' href = 'https://onoshima.github.io/posts/underscore/'>
-  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="description" content="  愛知学院大学心理学部で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -25,8 +25,8 @@ $$ X = X\_{1A} &#43; X\_{2A} $$ そうすると次のようにうまいこと表
 $$ X = X_{1A} &#43; X_{2A} $$" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/posts/underscore/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-02-15T16:32:13+09:00" />
-<meta property="article:modified_time" content="2020-02-15T16:32:13+09:00" />
+<meta property="article:published_time" content="2020-02-15T16:32:13&#43;09:00" />
+<meta property="article:modified_time" content="2020-02-15T16:32:13&#43;09:00" />
 
 
   <meta name="twitter:card" content="summary"/>
@@ -223,11 +223,11 @@ $$ X = X_{1A} &#43; X_{2A} $$"/>
       <p>Hugoで記事中に数式を書いているとたまにうまくいかないことがある．例えば，次のような数式を表示したいとする．</p>
 <p><img src="/images/underscore.png" alt="数式"></p>
 <p>これを，以下のように打つと</p>
-<pre tabindex="0"><code>$$ X = X_{1A} + X_{2A} $$
+<pre><code>$$ X = X_{1A} + X_{2A} $$
 </code></pre><p>こんなかんじで失敗する．</p>
 <p>$$ X = X_{1A} + X_{2A} $$</p>
 <p>これはMarkdownが先に _（アンダースコア）によって囲まれた部分をイタリックとして解釈してしまうことにより起きるらしい．これを避けるためには次のように _ をバックスラッシュでエスケープしてやるとよいらしい．</p>
-<pre tabindex="0"><code>$$ X = X\_{1A} + X\_{2A} $$
+<pre><code>$$ X = X\_{1A} + X\_{2A} $$
 </code></pre><p>そうすると次のようにうまいこと表示されているはず．</p>
 <p>$$ X = X_{1A} + X_{2A} $$</p>
 

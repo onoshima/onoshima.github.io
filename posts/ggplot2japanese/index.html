@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> ggplot2でpdfを出力する | Takahiro ONOSHIMA&#39;s website</title>
   <link rel = 'canonical' href = 'https://onoshima.github.io/posts/ggplot2japanese/'>
-  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="description" content="  愛知学院大学心理学部で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -22,8 +22,8 @@
 フォントが入っていない環境でも同じように表示するために, 以下のようにしてフォントを埋め込んでおくと良いらしい. embedFonts(&#34;figure/iris.pdf&#34;)" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/posts/ggplot2japanese/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-01-12T23:12:22+09:00" />
-<meta property="article:modified_time" content="2020-01-12T23:12:22+09:00" />
+<meta property="article:published_time" content="2020-01-12T23:12:22&#43;09:00" />
+<meta property="article:modified_time" content="2020-01-12T23:12:22&#43;09:00" />
 
 
   <meta name="twitter:card" content="summary"/>
@@ -226,7 +226,7 @@
     
     <div class="content" itemprop="articleBody">
       <h2 id="ggplot2でpdf出力">ggplot2でpdf出力</h2>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># ggplot2 pdf出力</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># ggplot2 pdf出力</span>
 <span style="color:#a6e22e">library</span>(tidyverse)
 dat <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as_tibble</span>(iris)
 
@@ -245,7 +245,7 @@ p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</s
 ※ 画像web表示のためにpng形式.</p>
 <h2 id="日本語ファイルを出力">日本語ファイルを出力</h2>
 <p>pdfで使うフォントを指定してやるとよい. pdfで何のフォントが使えるかを知りたい時は<code>names(pdfFonts())</code>とか打つと良い.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 日本語を使う</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 日本語を使う</span>
 p1 <span style="color:#f92672">&lt;-</span> p <span style="color:#f92672">+</span>
   <span style="color:#a6e22e">ggtitle</span>(<span style="color:#e6db74">&#34;日本語タイトル&#34;</span>) <span style="color:#f92672">+</span>
   <span style="color:#a6e22e">theme</span>(plot.title<span style="color:#f92672">=</span><span style="color:#a6e22e">element_text</span>(family<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Japan1GothicBBB&#34;</span>))
@@ -255,7 +255,7 @@ p1 <span style="color:#f92672">&lt;-</span> p <span style="color:#f92672">+</spa
 <p><img src="/images/iris_ja.png" alt="iris">
 ※ 画像web表示のためにpng形式.</p>
 <p>フォントが入っていない環境でも同じように表示するために, 以下のようにしてフォントを埋め込んでおくと良いらしい.
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">embedFonts</span>(<span style="color:#e6db74">&#34;figure/iris.pdf&#34;</span>)</code></pre></div></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">embedFonts</span>(<span style="color:#e6db74">&#34;figure/iris.pdf&#34;</span>)</code></pre></div></p>
 
     </div>
   </article>

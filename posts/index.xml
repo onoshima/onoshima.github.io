@@ -262,7 +262,8 @@ library(psych) data(&amp;#34;Thurstone.9&amp;#34;) R &amp;lt;- Thurstone.9     P
       
       <guid>https://onoshima.github.io/posts/omega_efacfa/</guid>
       <description>2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
-$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}+{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
+$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\
+\omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}+{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
 として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
 Revelle &amp;amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
 使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。

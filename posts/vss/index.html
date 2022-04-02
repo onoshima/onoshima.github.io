@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> 因子分析におけるMAP基準について | Takahiro ONOSHIMA&#39;s website</title>
   <link rel = 'canonical' href = 'https://onoshima.github.io/posts/vss/'>
-  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="description" content="  愛知学院大学心理学部で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -31,8 +31,8 @@ $$ f_m = \frac{\sum \sum_{i \neq j} (r ^* _{ij})^2 }{p(p-1)}　\tag{2}$$
 library(psych) data(&#34;Thurstone.9&#34;) R &lt;- Thurstone.9     Prefixes Suffixes Vocabulary Sentences First.Last FirstLetters FourLetters Completion SameorOpposite     Prefixes 1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/posts/vss/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-09-22T14:41:25+09:00" />
-<meta property="article:modified_time" content="2020-09-22T14:41:25+09:00" />
+<meta property="article:published_time" content="2020-09-22T14:41:25&#43;09:00" />
+<meta property="article:modified_time" content="2020-09-22T14:41:25&#43;09:00" />
 
 
   <meta name="twitter:card" content="summary"/>
@@ -260,7 +260,7 @@ library(psych) data(&#34;Thurstone.9&#34;) R &lt;- Thurstone.9     Prefixes Suff
 <p>として表されます。MAP基準とは，パターン行列のmの値を変えていきながらこの値を計算して，最小になる$f_m$の$m$を因子数として採択しようという方法です。</p>
 <h2 id="実際の数値例を確認">実際の数値例を確認</h2>
 <p>実際にデータを触ってみながら，手順を確認してみます。<code>psych</code>の<code>vss</code>関数の中身を覗きながら書きました。使うデータは<code>psych</code>パッケージの中に入っている<code>Thurstone.9</code>という9つのテストの相関行列です。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(psych)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(psych)
 
 <span style="color:#a6e22e">data</span>(<span style="color:#e6db74">&#34;Thurstone.9&#34;</span>)
 R <span style="color:#f92672">&lt;-</span> Thurstone.9
@@ -392,7 +392,7 @@ R <span style="color:#f92672">&lt;-</span> Thurstone.9
 </table>
 <p>とりあえず，因子数が1のときの$f_m$から求めてみましょう。
 まず，この相関行列を固有値分解して固有値ベクトルを求め，そこからパターン行列をえます。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">e <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">eigen</span>(R)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">e <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">eigen</span>(R)
 evect <span style="color:#f92672">&lt;-</span> e<span style="color:#f92672">$</span>vectors
 comp <span style="color:#f92672">&lt;-</span> evect <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">diag</span>(<span style="color:#a6e22e">sqrt</span>(e<span style="color:#f92672">$</span>values))
 <span style="color:#a6e22e">round</span>(comp, <span style="color:#ae81ff">3</span>)
@@ -407,7 +407,7 @@ comp <span style="color:#f92672">&lt;-</span> evect <span style="color:#f92672">
  [8,] <span style="color:#ae81ff">-0.787</span> <span style="color:#ae81ff">-0.369</span>  <span style="color:#ae81ff">0.041</span> <span style="color:#ae81ff">-0.063</span> <span style="color:#ae81ff">-0.027</span>  <span style="color:#ae81ff">0.094</span> <span style="color:#ae81ff">-0.035</span> <span style="color:#ae81ff">-0.475</span> <span style="color:#ae81ff">-0.054</span>
  [9,] <span style="color:#ae81ff">-0.748</span> <span style="color:#ae81ff">-0.433</span> <span style="color:#ae81ff">-0.086</span> <span style="color:#ae81ff">-0.043</span> <span style="color:#ae81ff">-0.020</span> <span style="color:#ae81ff">-0.081</span>  <span style="color:#ae81ff">0.458</span>  <span style="color:#ae81ff">0.123</span> <span style="color:#ae81ff">-0.108</span>
 </code></pre></div><p>続いて，（1）式から偏相関係数行列を求めます。$D$は対角行列ですので，$D^{-1/2}$は$D$の対角成分の平方根の逆数を対角成分に持つ対角行列です。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Cstar <span style="color:#f92672">&lt;-</span> R <span style="color:#f92672">-</span> comp[,<span style="color:#ae81ff">1</span>] <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(comp[,<span style="color:#ae81ff">1</span>])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Cstar <span style="color:#f92672">&lt;-</span> R <span style="color:#f92672">-</span> comp[,<span style="color:#ae81ff">1</span>] <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(comp[,<span style="color:#ae81ff">1</span>])
 d <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">diag</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#a6e22e">sqrt</span>(<span style="color:#a6e22e">diag</span>(Cstar)))
 Rstar <span style="color:#f92672">&lt;-</span> d <span style="color:#f92672">%*%</span> Cstar <span style="color:#f92672">%*%</span> d
 <span style="color:#a6e22e">round</span>(Rstar,<span style="color:#ae81ff">3</span>)
@@ -423,13 +423,13 @@ Rstar <span style="color:#f92672">&lt;-</span> d <span style="color:#f92672">%*%
  [8,] <span style="color:#ae81ff">-0.380</span> <span style="color:#ae81ff">-0.416</span>  <span style="color:#ae81ff">0.295</span>  <span style="color:#ae81ff">0.272</span> <span style="color:#ae81ff">-0.356</span> <span style="color:#ae81ff">-0.341</span> <span style="color:#ae81ff">-0.284</span>  <span style="color:#ae81ff">1.000</span>  <span style="color:#ae81ff">0.203</span>
  [9,] <span style="color:#ae81ff">-0.384</span> <span style="color:#ae81ff">-0.338</span>  <span style="color:#ae81ff">0.371</span>  <span style="color:#ae81ff">0.270</span> <span style="color:#ae81ff">-0.416</span> <span style="color:#ae81ff">-0.383</span> <span style="color:#ae81ff">-0.349</span>  <span style="color:#ae81ff">0.203</span>  <span style="color:#ae81ff">1.000</span>
 </code></pre></div><p>（2）式に従って，この行列の非対角要素の2乗の平均をとります。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(R)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(R)
 <span style="color:#a6e22e">diag</span>(Rstar) <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
 <span style="color:#a6e22e">sum</span>(Rstar^2)<span style="color:#f92672">/</span>(p<span style="color:#f92672">*</span>(p<span style="color:#ae81ff">-1</span>))
 [1] <span style="color:#ae81ff">0.1142189</span>
 </code></pre></div><p>ということで，因子数が1のときの$f_m$が求まりました。</p>
 <p>あとは，この手続きを因子数を増やしながら繰り返していくだけなのですが，一応因子数が2の場合もやってみましょう。といってもパターン行列は求まっているのでそこの部分を変えて計算するだけです。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Cstar2 <span style="color:#f92672">&lt;-</span> R <span style="color:#f92672">-</span> comp[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(comp[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>])
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">Cstar2 <span style="color:#f92672">&lt;-</span> R <span style="color:#f92672">-</span> comp[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>] <span style="color:#f92672">%*%</span> <span style="color:#a6e22e">t</span>(comp[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">2</span>])
 d2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">diag</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">/</span><span style="color:#a6e22e">sqrt</span>(<span style="color:#a6e22e">diag</span>(Cstar2)))
 Rstar2 <span style="color:#f92672">&lt;-</span> d2 <span style="color:#f92672">%*%</span> Cstar2 <span style="color:#f92672">%*%</span> d2
 <span style="color:#a6e22e">diag</span>(Rstar2) <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">0</span>
@@ -438,7 +438,7 @@ Rstar2 <span style="color:#f92672">&lt;-</span> d2 <span style="color:#f92672">%
 </code></pre></div><p>さて，$f_1=0.114$で$f_2=0.040$ですので，比較すると$m=2$の方が小さい値です。これをさらに先まで繰り返して，一番小さい値を出す因子数を採択することになります。</p>
 <h2 id="psychの関数">psychの関数</h2>
 <p><code>psych</code>の<code>vss</code>関数は，この手続きを全て自動でやってくれます。デフォルトでは8因子までですが，引数に<code>n=10</code>などと指定すれば，もっと多い因子数までの値を計算してくれます（あまり必要になることはないでしょうが）。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res.vss <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">vss</span>(R)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res.vss <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">vss</span>(R)
 res.vss<span style="color:#f92672">$</span>map
 [1] <span style="color:#ae81ff">0.11421886</span> <span style="color:#ae81ff">0.03953237</span> <span style="color:#ae81ff">0.06829390</span> <span style="color:#ae81ff">0.12575972</span> <span style="color:#ae81ff">0.20558816</span> <span style="color:#ae81ff">0.35901589</span> <span style="color:#ae81ff">0.54588031</span> <span style="color:#ae81ff">1.00000000</span>
 </code></pre></div><p>この中だと3つめの値が一番小さいので，3因子を選択することとなります。</p>

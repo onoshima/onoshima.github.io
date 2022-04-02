@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> 相関係数行列からクロンバックのαを求める | Takahiro ONOSHIMA&#39;s website</title>
   <link rel = 'canonical' href = 'https://onoshima.github.io/posts/cronbach/'>
-  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="description" content="  愛知学院大学心理学部で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -33,8 +33,8 @@ $$ a = \frac{n\bar{r}}{1&#43;(n-1) \bar{r}} \tag{2} $$
 ここでnは項目数で, $\bar{r}$は項目間の相関係数の平均である。さきほどのデータを用いて, 同様の結果が得られるが試してみる。相関係数行列を求めて, 上記の式に当てはめてみる。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/posts/cronbach/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2019-12-27T21:37:22+09:00" />
-<meta property="article:modified_time" content="2019-12-27T21:37:22+09:00" />
+<meta property="article:published_time" content="2019-12-27T21:37:22&#43;09:00" />
+<meta property="article:modified_time" content="2019-12-27T21:37:22&#43;09:00" />
 
 
   <meta name="twitter:card" content="summary"/>
@@ -257,14 +257,14 @@ $$ a = \frac{n\bar{r}}{1&#43;(n-1) \bar{r}} \tag{2} $$
 <p>データの中身はこんな感じ。6件法である。</p>
 <!-- raw HTML omitted -->
 <p>さて, このデータに対してクロンバックのαを求めるにはalpha()関数を用いるのだが, データが逆転項目を含んでいるのでそれを処理しなければいけない。6件法なので6から項目を引くと出てくる。ここではのちの話の都合で欠損を含むデータを除外している。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 逆転項目の処理して必要な項目だけ取り出す</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 逆転項目の処理して必要な項目だけ取り出す</span>
 new <span style="color:#f92672">&lt;-</span> dat <span style="color:#f92672">%&gt;%</span>
   <span style="color:#a6e22e">mutate</span>(A1<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span><span style="color:#f92672">-</span>A1, C4<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span><span style="color:#f92672">-</span>C4, C5<span style="color:#f92672">=</span><span style="color:#ae81ff">6</span><span style="color:#f92672">-</span>C5) <span style="color:#f92672">%&gt;%</span>
   <span style="color:#a6e22e">select</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>) <span style="color:#f92672">%&gt;%</span>
   <span style="color:#a6e22e">filter</span>(<span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A1), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A2), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A3), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A4), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(A5),
          <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C1), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C2), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C3), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C4), <span style="color:#f92672">!</span><span style="color:#a6e22e">is.na</span>(C5))</code></pre></div>
 <p>逆転項目の処理が済んだところで, alpha()関数を使ってみる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># クロンバックαを計算</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># クロンバックαを計算</span>
 res <span style="color:#f92672">&lt;-</span> psych<span style="color:#f92672">::</span><span style="color:#a6e22e">alpha</span>(new)</code></pre></div>
 <p><img src="/images/cronbach1.png" alt="cronbach1"></p>
 <p>αの値が出てくるだけでなくて, 各項目をなくした際にαがどのように変化するかの値も出てくる。これらは尺度作成の際には役に立つだろう。</p>
@@ -274,7 +274,7 @@ res <span style="color:#f92672">&lt;-</span> psych<span style="color:#f92672">::
 <p>相関係数行列からクロンバックのαは次の式で求められる。</p>
 <p>$$ a = \frac{n\bar{r}}{1+(n-1) \bar{r}} \tag{2} $$</p>
 <p>ここでnは項目数で, $\bar{r}$は項目間の相関係数の平均である。さきほどのデータを用いて, 同様の結果が得られるが試してみる。相関係数行列を求めて, 上記の式に当てはめてみる。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 相関係数からα計算計算</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 相関係数からα計算計算</span>
 cormtx <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor</span>(new[,<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">10</span>], use <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;complete.obs&#34;</span>)
 rbar <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(cormtx<span style="color:#a6e22e">[lower.tri</span>(cormtx)])
 n <span style="color:#f92672">&lt;-</span> <span style="color:#ae81ff">10</span>
@@ -283,7 +283,7 @@ alpha_computed_cormtx<span style="color:#f92672">&lt;-</span> (n <span style="co
 <span style="color:#75715e"># &gt; alpha_computed_cormtx</span>
 <span style="color:#75715e"># [1] 0.7397363</span></code></pre></div>
 <p>ここで得られた値は先ほどのalpha()関数の出力のstd.alphaという値と一致している。いつか使うかもしれないからこれを関数化しておくことにする。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 相関係数行列からαを求める感数</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># 相関係数行列からαを求める感数</span>
 alpha.cor <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(x){
   n <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ncol</span>(x)
   rbar <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mean</span>(x<span style="color:#a6e22e">[lower.tri</span>(x)])

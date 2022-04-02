@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> tidyrを使ったデータの整理 | Takahiro ONOSHIMA&#39;s website</title>
   <link rel = 'canonical' href = 'https://onoshima.github.io/posts/filter/'>
-  <meta name="description" content="  早稲田大学大学院教育学研究科で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="description" content="  愛知学院大学心理学部で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -21,8 +21,8 @@ library(tidyverse) air &lt;- airquality tidy.air &lt;- as_tibble(air) 条件に�
 ## 条件に合う行を抽出 air.May &lt;- tidy.air %&gt;% filter(Month==5) #5月のデータのみ取り出す Ozone.mean &lt;- mean(air$Ozone, na.rm=T) air.high.Ozone &lt;- tidy.air %&gt;% # オゾンが平均より高いケースを取り出す filter(Ozone &gt; Ozone.mean) air.high.Ozone.May &lt;- tidy.air %&gt;% #複合条件もOK filter(Ozone &gt; Ozone.mean, Month==5) 抽出されたケースを見ると, オゾンの値が平均（43くらい）よりも高いケースのみのデータセットが出来上がっている。" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/posts/filter/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2019-06-25T16:38:21+09:00" />
-<meta property="article:modified_time" content="2019-06-25T16:38:21+09:00" />
+<meta property="article:published_time" content="2019-06-25T16:38:21&#43;09:00" />
+<meta property="article:modified_time" content="2019-06-25T16:38:21&#43;09:00" />
 
 
   <meta name="twitter:card" content="summary"/>
@@ -220,13 +220,13 @@ library(tidyverse) air &lt;- airquality tidy.air &lt;- as_tibble(air) 条件に�
     
     <div class="content" itemprop="articleBody">
       <p>データ整理に<code>tidyverse</code>を使った際の覚書。まずデータフレームを<code>as_tibble()</code>でtidy用の形式にする。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(tidyverse)
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(tidyverse)
 
 air <span style="color:#f92672">&lt;-</span> airquality
 tidy.air <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">as_tibble</span>(air)</code></pre></div>
 <h2 id="条件に合うケースの抽出">条件に合うケースの抽出</h2>
 <p><code>filter()</code>関数を使うと良いらしい。</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">## 条件に合う行を抽出</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e">## 条件に合う行を抽出</span>
 air.May <span style="color:#f92672">&lt;-</span> tidy.air <span style="color:#f92672">%&gt;%</span>
   <span style="color:#a6e22e">filter</span>(Month<span style="color:#f92672">==</span><span style="color:#ae81ff">5</span>) <span style="color:#75715e">#5月のデータのみ取り出す</span>
 
