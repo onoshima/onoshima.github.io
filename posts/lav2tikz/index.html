@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> lavaanのアウトプットをパス図にする | Takahiro ONOSHIMA&#39;s website</title>
   <link rel = 'canonical' href = 'https://onoshima.github.io/posts/lav2tikz/'>
-  <meta name="description" content="  愛知学院大学心理学部で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="description" content="  愛知学院大学心理学部で教員をしている小野島昂洋の個人ページです。">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -26,8 +26,8 @@ $ latex res1.tex $ dvipdfmx res1.dvi 次のような結果が得られます（w
 mo1 &lt;- &#39; visual =~ x1&#43;x2&#43;x3 textual =~ x4&#43;x5&#43;x6 speed =~ x7&#43;x8&#43;x9 g =~ visual&#43;textual&#43;speed &#39; res2 &lt;- cfa(mo1, data=HolzingerSwineford1939) write(lav2tikz(res2, size=&#34;scriptsize&#34;), file=&#34;res2.tex&#34;) 結果は次の通り." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/posts/lav2tikz/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-02-08T11:57:05&#43;09:00" />
-<meta property="article:modified_time" content="2020-02-08T11:57:05&#43;09:00" />
+<meta property="article:published_time" content="2020-02-08T11:57:05+09:00" />
+<meta property="article:modified_time" content="2020-02-08T11:57:05+09:00" />
 
 
   <meta name="twitter:card" content="summary"/>
@@ -230,7 +230,7 @@ mo1 &lt;- &#39; visual =~ x1&#43;x2&#43;x3 textual =~ x4&#43;x5&#43;x6 speed =~ 
 <p><a href="http://bob3.hatenablog.com/entry/2019/02/26/183541">lavaanで作ったモデルからパス図を描く関数</a></p>
 <h2 id="使い方">使い方</h2>
 <p>みんな大好き Holzinger &amp; Swinefordのデータで試してみます. lavaanのアウトプットを関数に突っ込みます. sizeの引数にはTeXの文字サイズの記号を入れると推定値の文字サイズが変えられます.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(lavaan)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(lavaan)
 mo <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;
 </span><span style="color:#e6db74">visual =~ x1+x2+x3
 </span><span style="color:#e6db74">textual =~ x4+x5+x6
@@ -239,12 +239,12 @@ mo <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;
 res1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cfa</span>(mo, HolzingerSwineford1939)
 <span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">lav2tikz</span>(res1, size<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;scriptsize&#34;</span>), file<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;res1.tex&#34;</span>)</code></pre></div>
 <p>作業ディレクトリにres1.texファイルが作られますので, ターミナルでそこまで移動してコンパイルします.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ latex res1.tex
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ latex res1.tex
 $ dvipdfmx res1.dvi</code></pre></div>
 <p>次のような結果が得られます（webにアップロード用にpngにしていますが）.</p>
 <p><img src="/images/path_res1.png" alt="パス図1"></p>
 <p>高次因子分析のモデルも一応描画できるようにしています.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">mo1 <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">mo1 <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#39;
 </span><span style="color:#e6db74">visual =~ x1+x2+x3
 </span><span style="color:#e6db74">textual =~ x4+x5+x6
 </span><span style="color:#e6db74">speed =~ x7+x8+x9
@@ -257,7 +257,7 @@ res2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cfa</s
 <p><img src="/images/path_res2.png" alt="パス図2">　</p>
 <p>おおむね綺麗に描いてくれますが, gからtextualへのパスの矢印に因子負荷量がかぶっているなど, 一部望んだ結果が得られないところがありますので, 結果をみながらTeXファイルを微調整する必要があります. この場合だとgの位置を高くするか, 推定値の位置を高くするかでしょうか.</p>
 <p>ちなみに, 観測変数の並ぶ順番をベクトルで指定できる機能もつけてみました. crossloadingsなどがある場合に思った通りのパス図が得られなかったので.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">order <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;x1&#34;</span>,<span style="color:#e6db74">&#34;x2&#34;</span>, <span style="color:#e6db74">&#34;x3&#34;</span>, <span style="color:#e6db74">&#34;x7&#34;</span>, <span style="color:#e6db74">&#34;x4&#34;</span>, <span style="color:#e6db74">&#34;x5&#34;</span>, <span style="color:#e6db74">&#34;x6&#34;</span>, <span style="color:#e6db74">&#34;x8&#34;</span>, <span style="color:#e6db74">&#34;x9&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">order <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;x1&#34;</span>,<span style="color:#e6db74">&#34;x2&#34;</span>, <span style="color:#e6db74">&#34;x3&#34;</span>, <span style="color:#e6db74">&#34;x7&#34;</span>, <span style="color:#e6db74">&#34;x4&#34;</span>, <span style="color:#e6db74">&#34;x5&#34;</span>, <span style="color:#e6db74">&#34;x6&#34;</span>, <span style="color:#e6db74">&#34;x8&#34;</span>, <span style="color:#e6db74">&#34;x9&#34;</span>)
 <span style="color:#a6e22e">write</span>(<span style="color:#a6e22e">lav2tikz</span>(res1, size<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;scriptsize&#34;</span>, observed_order<span style="color:#f92672">=</span>order), file<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;res3.tex&#34;</span>)</code></pre></div>
 <p><img src="/images/path_res3.png" alt="パス図3"></p>
 <h2 id="ファイル">ファイル</h2>

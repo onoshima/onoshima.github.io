@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> RからMplusを使う | Takahiro ONOSHIMA&#39;s website</title>
   <link rel = 'canonical' href = 'https://onoshima.github.io/posts/mplusautomation/'>
-  <meta name="description" content="  愛知学院大学心理学部で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="description" content="  愛知学院大学心理学部で教員をしている小野島昂洋の個人ページです。">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -27,8 +27,8 @@ library(psych) library(MplusAutomation) test1 &lt;- mplusObject(MODEL =&#34;F1 B
 test2 &lt;- mplusObject( TITLE = &#34;This is mplusautomation test 2;&#34;, ANALYSIS = &#34;ESTIMATOR = MLR;&#34;, OUTPUT = &#34;SAMPSTAT STDYX MODINDICES(ALL);&#34;, VARIABLE = &#34;USEVARIABLES = A1-A5 C1-C5 E1-E5 N1-N5 O1-O5;&#34;, MODEL =&#34;F1 BY A1-A5*; F2 BY C1-C5*; F3 BY E1-E5*; F4 BY N1-N5*; F5 BY O1-O5*; F1@1 F2@1 F3@1 F4@1 F5@1;&#34;, rdata = bfi) res2 &lt;- mplusModeler(test2, dataout = &#34;test2." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/posts/mplusautomation/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2021-01-13T15:21:08&#43;09:00" />
-<meta property="article:modified_time" content="2021-01-13T15:21:08&#43;09:00" />
+<meta property="article:published_time" content="2021-01-13T15:21:08+09:00" />
+<meta property="article:modified_time" content="2021-01-13T15:21:08+09:00" />
 
 
   <meta name="twitter:card" content="summary"/>
@@ -233,7 +233,7 @@ test2 &lt;- mplusObject( TITLE = &#34;This is mplusautomation test 2;&#34;, ANAL
 <p>以下ではそのスライドを参考にしたり，パッケージのvignetteを見ながら試した記録を残します（主に将来の自分に向けて）。</p>
 <h2 id="モデルをrで書く">モデルをRで書く</h2>
 <p><code>mplusObject</code>という関数を使うと，Mplusのinputファイルを用意できるようです。以下では<code>psych</code>パッケージ所収の<code>bfi</code>データを使っていきます。とりあえず，5因子のCFAのモデルを書いてみます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(psych)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(psych)
 <span style="color:#a6e22e">library</span>(MplusAutomation)
 test1 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusObject</span>(MODEL <span style="color:#f92672">=</span><span style="color:#e6db74">&#34;F1 BY A1-A5;
 </span><span style="color:#e6db74">                    F2 BY C1-C5;
@@ -247,7 +247,7 @@ res <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusMo
 <p><code>mplusObject</code>関数の引数は，通常のMplusのsyntaxのセクションに書くような内容を書いていきます。上の例では，モデルの部分だけ書きましたが，書いていないVARIABLEのセクションなどは，MODELの部分から必要なものを選んで勝手に作ってくれているようです。</p>
 <p>こうしてできたR上のMplus Model Objectを実行するためのものが<code>mplusModeler</code>関数です。第１の引数には先ほどのMplus Model Objectを指定します。実行すると，Model Objectを元にして，同じディレクトリ内に，Mplusのinput，Mplusの実行用のデータファイル，Mplusのアウトプットが生成されます。<code>dataout</code>という引数には，Mplus実行用に生成されたデータのファイル名を指定します。このファイルでは，例えば，列名のヘッダーが削除されていたり，欠損値が「.」に置き換えられていたりと，Mplusで処理できる形にデータが変換されています。また<code>modelout</code>という引数には，モデルを実行するのに使われたMplusのインプットファイルのファイル名を渡します。<code>run</code>という引数に0を渡すとモデルは実行されず，Mplus用のデータファイルとインプットファイルだけが生成されるようです。モデルが意図した通りに.inpファイルに反映されているかどうかを確認したい時に使うもののようです。1より大きい場合にはブートストラップで繰り返すとのことです。</p>
 <p>上の例では，とりあえず実行できれば良いということでモデルのみ書きましたが，もう少しいろいろと指定したものを作ってみます。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">test2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusObject</span>(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">test2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusObject</span>(
   TITLE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;This is mplusautomation test 2;&#34;</span>,
   ANALYSIS <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ESTIMATOR = MLR;&#34;</span>,
   OUTPUT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;SAMPSTAT STDYX MODINDICES(ALL);&#34;</span>,
@@ -266,16 +266,16 @@ res2 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusM
 <p><img src="/images/mplusauto_inp.png" alt=".inpファイル"></p>
 <h2 id="結果をr上で見る">結果をR上で見る</h2>
 <p>分析したファイルの結果をみたい場合には，結果のオブジェクトを<code>summary</code>関数に渡せば良いようです。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">summary</span>(res2)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">summary</span>(res2)
 <span style="color:#75715e"># readModels(&#34;test2.out&#34;, what = &#34;summaries&#34;) アウトプットファイルを読み込ませても同じ出力が得られる</span>
 <span style="color:#75715e"># res2$results$summariesでも</span></code></pre></div>
 <p><img src="/images/mplusauto_res.png" alt="結果"></p>
 <p>推定したパラメータをみたい場合には以下のように，Rのリストオペレータを使うか，<code>readModels</code>関数にアウトプットファイルを渡すと良いようです。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res2<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>parameters
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res2<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>parameters
 <span style="color:#75715e"># readModels(&#34;test2.out&#34;, what = &#34;parameters&#34;)$parameters</span></code></pre></div>
 <h2 id="探索的因子分析の場合">探索的因子分析の場合</h2>
 <p>同じデータセットで探索的因子分析を実行してみます。1因子から10因子までを指定してやってみましょう。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">test3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusObject</span>(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">test3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusObject</span>(
   TITLE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;This is mplusautomation test 3;&#34;</span>,
   ANALYSIS <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;TYPE = EFA 1 10;
 </span><span style="color:#e6db74">              ESTIMATOR = MLR;
@@ -289,18 +289,18 @@ res3 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusM
                      dataout <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test3.tsv&#34;</span>,
                      modelout <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test3.inp&#34;</span>, run <span style="color:#f92672">=</span> <span style="color:#ae81ff">1L</span>)</code></pre></div>
 <p>結果を見る際には上と同様にsummary関数でも見れますし，以下のように必要な情報だけ引っ張って表にするとみやすくなります。
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res3<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>summaries[,<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;NumFactors&#34;</span>, <span style="color:#e6db74">&#34;ChiSqM_DF&#34;</span>, <span style="color:#e6db74">&#34;ChiSqM_Value&#34;</span>,<span style="color:#e6db74">&#34;ChiSqM_PValue&#34;</span>, 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res3<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>summaries[,<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;NumFactors&#34;</span>, <span style="color:#e6db74">&#34;ChiSqM_DF&#34;</span>, <span style="color:#e6db74">&#34;ChiSqM_Value&#34;</span>,<span style="color:#e6db74">&#34;ChiSqM_PValue&#34;</span>, 
                           <span style="color:#e6db74">&#34;CFI&#34;</span>, <span style="color:#e6db74">&#34;TLI&#34;</span>, <span style="color:#e6db74">&#34;SRMR&#34;</span>, <span style="color:#e6db74">&#34;RMSEA_Estimate&#34;</span>, <span style="color:#e6db74">&#34;AIC&#34;</span>, <span style="color:#e6db74">&#34;BIC&#34;</span>, <span style="color:#e6db74">&#34;aBIC&#34;</span>)]</code></pre></div></p>
 <p><img src="/images/mplusauto_efa.png" alt="EFAの結果"></p>
 <p>平行分析の結果は<code>gh5</code>というところに入っています。これを取り出せば以下のように平行分析のプロットもできます。
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">25</span>, res3<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>gh5<span style="color:#f92672">$</span>efa<span style="color:#f92672">$</span>eigenvalues, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;b&#34;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">plot</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">25</span>, res3<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>gh5<span style="color:#f92672">$</span>efa<span style="color:#f92672">$</span>eigenvalues, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;b&#34;</span>)
 <span style="color:#a6e22e">points</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">25</span>, res3<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>gh5<span style="color:#f92672">$</span>efa<span style="color:#f92672">$</span>parallel_average, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;b&#34;</span>, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">16</span>)
 <span style="color:#a6e22e">points</span>(<span style="color:#ae81ff">1</span><span style="color:#f92672">:</span><span style="color:#ae81ff">25</span>, res3<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>gh5<span style="color:#f92672">$</span>efa<span style="color:#f92672">$</span>parallel_ci, type <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;b&#34;</span>, pch <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>)
 <span style="color:#a6e22e">legend</span>(<span style="color:#e6db74">&#34;topright&#34;</span>, legend <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;sample&#34;</span>, <span style="color:#e6db74">&#34;parallel_average&#34;</span>, <span style="color:#e6db74">&#34;parallel_95&#34;</span>), pch <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">16</span>,<span style="color:#ae81ff">3</span>))</code></pre></div></p>
 <p><img src="/images/mplusauto_parallel.png" alt="平行分析の結果"></p>
 <h2 id="多母集団同時解析の場合">多母集団同時解析の場合</h2>
 <p>Mplusだと多母集団の同時解析も複雑な制約の掛け方でない限りコマンド1発なので簡単です（もっともRのlavaanでも簡単ですが）。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">test4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusObject</span>(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">test4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusObject</span>(
   TITLE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;This is mplusautomation test 4;&#34;</span>,
   ANALYSIS <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;ESTIMATOR = MLR;
 </span><span style="color:#e6db74">              MODEL = CONFIGURAL METRIC SCALAR;&#34;</span>,
@@ -317,14 +317,14 @@ res4 <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">mplusM
                      modelout <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test4.inp&#34;</span>, run <span style="color:#f92672">=</span> <span style="color:#ae81ff">1L</span>)
  </code></pre></div>
 <p>先ほどのように，結果から必要な情報のみ取り出して表にすると便利です。</p>
-<p><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res4<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>summaries[,<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Model&#34;</span>, <span style="color:#e6db74">&#34;ChiSqM_Value&#34;</span>, <span style="color:#e6db74">&#34;ChiSqM_DF&#34;</span>,<span style="color:#e6db74">&#34;ChiSqM_PValue&#34;</span>,
+<p><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">res4<span style="color:#f92672">$</span>results<span style="color:#f92672">$</span>summaries[,<span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#34;Model&#34;</span>, <span style="color:#e6db74">&#34;ChiSqM_Value&#34;</span>, <span style="color:#e6db74">&#34;ChiSqM_DF&#34;</span>,<span style="color:#e6db74">&#34;ChiSqM_PValue&#34;</span>,
                           <span style="color:#e6db74">&#34;CFI&#34;</span>, <span style="color:#e6db74">&#34;SRMR&#34;</span>, <span style="color:#e6db74">&#34;RMSEA_Estimate&#34;</span>, <span style="color:#e6db74">&#34;AIC&#34;</span>, <span style="color:#e6db74">&#34;BIC&#34;</span>)]</code></pre></div>
 <img src="/images/mplusauto_multigroup.png" alt="多母集団の結果"></p>
 <p>また，結果のオブジェクトの<code>results$invariance_testing</code>には，カイ二乗値の差の検定の結果が収められています。</p>
 <p><img src="/images/mplusauto_multigroup2.png" alt="多母集団の結果2"></p>
 <h2 id="mplus用のデータだけ作りたい">Mplus用のデータだけ作りたい</h2>
 <p>Mplus用のデータだけを作りたい場合には<code>prepareMplusData</code>という関数が用意されているようです。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">prepareMplusData</span>(bfi, <span style="color:#e6db74">&#34;bfi.tsv&#34;</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">prepareMplusData</span>(bfi, <span style="color:#e6db74">&#34;bfi.tsv&#34;</span>)</code></pre></div>
 <p>こうするとタブ区切りのファイルが生成されます。欠損地は「.」に置き換えられるようです。なお，<code>inpfile = TRUE</code>と指定すると，元のデータにあったファイル名が入力されたinpファイルも生成してくれますので，それをもとにMplusのsyntaxを書いていくと元のデータと同じ変数名を間違いなく使うことができるようです。<code>keepCols = c(&quot;A1&quot;, &quot;gender&quot;)</code>のようにすると必要な列のみ指定してデータファイルを生成できるみたいです。</p>
 
     </div>

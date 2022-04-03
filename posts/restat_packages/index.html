@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> RからeStatのAPIを使ってみる（その2） | Takahiro ONOSHIMA&#39;s website</title>
   <link rel = 'canonical' href = 'https://onoshima.github.io/posts/restat_packages/'>
-  <meta name="description" content="  愛知学院大学心理学部で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="description" content="  愛知学院大学心理学部で教員をしている小野島昂洋の個人ページです。">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -23,8 +23,8 @@ https://oku.edu.mie-u.ac.jp/~okumura/stat/nippon.html
 使ったコード library(pacman) p_load(estatapi, keyring,dplyr, stringr,NipponMap,RColorBrewer) key_set(&#34;e-stat&#34;) #　統計表の検索 00400304は児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査 statsList &lt;- estat_getStatsList( appId = key_get(&#34;e-stat&#34;), searchWord = &#34;&#34;, statsCode = &#34;00400304&#34; ) str(statsList) lists &lt;- statsList %&gt;% filter(str_detect(TITLE, &#34;不登校児童生徒数&#34;)) id_vector &lt;- pull(lists, &#34;@id&#34;) # メタ情報 meta_info &lt;- estat_getMetaInfo(appId = key_get(&#34;e-stat&#34;), statsDataId = id_vector[1]) names(meta_info) # 実際のデータを取得 df &lt;- estat_getStatsData( appId = key_get(&#34;e-stat&#34;), statsDataId = id_vector[1], cdCat02 = c(&#34;120&#34;, &#34;140&#34;), #小学校と中学校 cdArea = meta_info$area$&#34;@code&#34;[2:48]　#1番目は全国なので除外 ) df2017 &lt;- df %&gt;% rename(&#34;year&#34; = &#34;時間軸(年度次)&#34;) %&gt;% filter(year == &#34;2017年度&#34;, 学校種類 == &#34;小学校&#34;, cat01_code == &#34;120&#34;) df2017_jhs &lt;- df %&gt;% rename(&#34;year&#34; = &#34;時間軸(年度次)&#34;) %&gt;% filter(year == &#34;2017年度&#34;, 学校種類 == &#34;中学校&#34;, cat01_code == &#34;120&#34;) # 小学生をplot kenmei &lt;- df2017$地域 br &lt;- seq(3, 9, 1) color &lt;- brewer." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/posts/restat_packages/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-03-08T16:50:26&#43;09:00" />
-<meta property="article:modified_time" content="2020-03-08T16:50:26&#43;09:00" />
+<meta property="article:published_time" content="2020-03-08T16:50:26+09:00" />
+<meta property="article:modified_time" content="2020-03-08T16:50:26+09:00" />
 
 
   <meta name="twitter:card" content="summary"/>
@@ -237,7 +237,7 @@ https://oku.edu.mie-u.ac.jp/~okumura/stat/nippon.html
 <p><img src="/images/scref_es2017.png" alt="小学生の不登校児童">
 <img src="/images/scref_jhs2017.png" alt="中学生の不登校生徒"></p>
 <h2 id="使ったコード">使ったコード</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(pacman)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(pacman)
 <span style="color:#a6e22e">p_load</span>(estatapi, keyring,dplyr, stringr,NipponMap,RColorBrewer)
 <span style="color:#a6e22e">key_set</span>(<span style="color:#e6db74">&#34;e-stat&#34;</span>)
 

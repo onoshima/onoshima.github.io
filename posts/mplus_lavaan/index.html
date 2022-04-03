@@ -11,7 +11,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title> lavaanでMplusのカテゴリカル因子分析を再現する | Takahiro ONOSHIMA&#39;s website</title>
   <link rel = 'canonical' href = 'https://onoshima.github.io/posts/mplus_lavaan/'>
-  <meta name="description" content="  愛知学院大学心理学部で心理統計や心理測定について研究している小野島昂洋の個人ページです。">
+  <meta name="description" content="  愛知学院大学心理学部で教員をしている小野島昂洋の個人ページです。">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="all,follow">
   <meta name="googlebot" content="index,follow,snippet,archive">
@@ -22,8 +22,8 @@ library(readr) library(lavaan) bfiA &lt;- psych::bfi[1:5] bfiA &lt;- na.omit(bfi
 TITLE: test; DATA: FILE = &quot;bfiA.csv&quot;; VARIABLE: NAMES = A1-A5; USEVARIABLES = A1-A5; CATEGORICAL = A1-A5; ANALYSIS: TYPE = GENERAL; ESTIMATOR= WLSMV; MODEL: F1 BY A1-A5*; F1@1; OUTPUT: SAMPSTAT STDYX MODINDICES(ALL); 結果，モデルフィットの部分は次のような感じ．" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/posts/mplus_lavaan/" /><meta property="article:section" content="posts" />
-<meta property="article:published_time" content="2020-04-27T13:13:05&#43;09:00" />
-<meta property="article:modified_time" content="2020-04-27T13:13:05&#43;09:00" />
+<meta property="article:published_time" content="2020-04-27T13:13:05+09:00" />
+<meta property="article:modified_time" content="2020-04-27T13:13:05+09:00" />
 
 
   <meta name="twitter:card" content="summary"/>
@@ -236,7 +236,7 @@ TITLE: test; DATA: FILE = &quot;bfiA.csv&quot;; VARIABLE: NAMES = A1-A5; USEVARI
       <p>Mplusで行われたシミュレーションをRで再現しようとした際に調べたことの記録．Mplusにおける<code>ESTIMATOR=WLSMV</code>とlavaanで<code>estimator=&quot;WLSMV&quot;</code>にした際の挙動について．</p>
 <h2 id="データ">データ</h2>
 <p>Rの<code>psych</code>のパッケージに入っている<code>bfi</code>の質問紙データの一部（A1-A5の項目まで）を利用した．なぜ一部かというとMplusのデモ版だと使える変数の数に制限があるためである．とりあえずcsvにして書き出す．Mplusだとデータファイルは変数名を含めないようなので<code>col_names=FALSE</code>にする．欠損値処理についても考えないために今回はリストワイズ削除．N=2709の5項目（すべて6件法）のデータを使う．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(readr)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(readr)
 <span style="color:#a6e22e">library</span>(lavaan)
 bfiA <span style="color:#f92672">&lt;-</span> psych<span style="color:#f92672">::</span>bfi[1<span style="color:#f92672">:</span><span style="color:#ae81ff">5</span>]
 bfiA <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">na.omit</span>(bfiA)
@@ -252,7 +252,7 @@ bfiA <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">na.omi
 <span style="color:#75715e">#61623  6  6  5  6  5</span></code></pre></div>
 <h2 id="mplusでcfa">MplusでCFA</h2>
 <p>まずは，Mplusでやってみる．インプットファイルはこんな感じ．</p>
-<pre><code>TITLE: test;
+<pre tabindex="0"><code>TITLE: test;
 
 DATA:
   FILE = &quot;bfiA.csv&quot;;
@@ -273,7 +273,7 @@ MODEL:
 OUTPUT:
   SAMPSTAT STDYX MODINDICES(ALL);
 </code></pre><p>結果，モデルフィットの部分は次のような感じ．</p>
-<pre><code>MODEL FIT INFORMATION
+<pre tabindex="0"><code>MODEL FIT INFORMATION
 
 Number of Free Parameters                       30
 
@@ -313,7 +313,7 @@ Optimum Function Value for Weighted Least-Squares Estimator
 
           Value                     0.13676150D-01
 </code></pre><p>標準化された推定値は次のような感じ．</p>
-<pre><code>STDYX Standardization
+<pre tabindex="0"><code>STDYX Standardization
 
                                                     Two-Tailed
                     Estimate       S.E.  Est./S.E.    P-Value
@@ -356,12 +356,12 @@ Optimum Function Value for Weighted Least-Squares Estimator
     F1                 1.000      0.000    999.000    999.000
 </code></pre><h2 id="lavaanでcfa">lavaanでCFA</h2>
 <p>今度は同じデータを<code>lavaan::cfa</code>してみる．Mplusの結果を再現するためには<code>estimator=&quot;WLSMV&quot;にすることに加えて，</code>mimic=&ldquo;Mplus&rdquo;`にすると良いらしい．</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">mo1 <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;F1 =~ A1+A2+A3+A4+A5&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">mo1 <span style="color:#f92672">&lt;-</span> <span style="color:#e6db74">&#34;F1 =~ A1+A2+A3+A4+A5&#34;</span>
 res_lav <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cfa</span>(mo1, data<span style="color:#f92672">=</span>bfiA, ordered<span style="color:#f92672">=</span><span style="color:#a6e22e">colnames</span>(bfiA), std.lv<span style="color:#f92672">=</span><span style="color:#66d9ef">TRUE</span>,
               estimator<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;WLSMV&#34;</span>, mimic<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Mplus&#34;</span>)
 <span style="color:#a6e22e">summary</span>(res_lav, fit.measures<span style="color:#f92672">=</span>T)</code></pre></div>
 <p>まずはモデルフィット．</p>
-<pre><code>lavaan 0.6-5 ended normally after 12 iterations
+<pre tabindex="0"><code>lavaan 0.6-5 ended normally after 12 iterations
 
   Estimator                                       DWLS
   Optimization method                           NLMINB
@@ -414,7 +414,7 @@ Weighted Root Mean Square Residual:
 
 </code></pre><p>モデルフィットについてはほぼ一致していて（ずれていても.001程度），実用上問題なさそうである．ただSRMRだけMplusでは0.022でlavaanでは0.031とそこそこずれている．原因はよく分からない．</p>
 <p>次にパラメータの推定値．</p>
-<pre><code>Parameter Estimates:
+<pre tabindex="0"><code>Parameter Estimates:
 
   Information                                 Expected
   Information saturated (h1) model        Unstructured
@@ -481,7 +481,7 @@ Variances:
 <p><a href="https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf">https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf</a></p>
 <p>Mplusで古いバージョンの挙動をさせるためにはANALYSISコマンドで<code>SATTERTHWAITE=ON</code>にすると良いようだ．lavaanでこれを再現するには<code>estimator=&quot;WLSMVS&quot;</code>にすると良い．</p>
 <p>Mplusでこれを行うと次のようになる．（推定値は変わらないのでモデルフィットの部分のみ）</p>
-<pre><code>MODEL FIT INFORMATION
+<pre tabindex="0"><code>MODEL FIT INFORMATION
 
 Number of Free Parameters                       30
 
@@ -525,7 +525,7 @@ Optimum Function Value for Weighted Least-Squares Estimator
 
           Value                     0.13676150D-01
 </code></pre><p>一方lavaanで<code>estimator=&quot;WLSMVS&quot;</code>でやった結果がこちら．</p>
-<pre><code>avaan 0.6-5 ended normally after 12 iterations
+<pre tabindex="0"><code>avaan 0.6-5 ended normally after 12 iterations
 
   Estimator                                       DWLS
   Optimization method                           NLMINB
