@@ -2,268 +2,286 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://onoshima.github.io/posts/mad/</loc>
-    <lastmod>2022-03-21T11:49:44+09:00</lastmod>
+    <loc>/docs/r/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/median-absolute-deviation/</loc>
-    <lastmod>2022-03-21T11:49:44+09:00</lastmod>
+    <loc>/docs/misc/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/</loc>
-    <lastmod>2022-03-21T11:49:44+09:00</lastmod>
+    <loc>/docs/r/install_windows/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/outlier/</loc>
-    <lastmod>2022-03-21T11:49:44+09:00</lastmod>
+    <loc>/profile/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/</loc>
-    <lastmod>2022-03-21T11:49:44+09:00</lastmod>
+    <loc>/docs/r/rbasics01/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/</loc>
-    <lastmod>2022-03-21T11:49:44+09:00</lastmod>
+    <loc>/docs/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/categories/</loc>
-    <lastmod>2022-03-07T14:47:10+09:00</lastmod>
+    <loc>/docs/misc/screenshot/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/measurement-error/</loc>
-    <lastmod>2022-03-07T14:47:10+09:00</lastmod>
+    <loc>/blog/2022/03/21/5mad%E5%9F%BA%E6%BA%96%E3%81%AB%E3%82%88%E3%82%8B%E5%A4%96%E3%82%8C%E5%80%A4%E3%81%AE%E6%A4%9C%E5%87%BA/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/categories/reading/</loc>
-    <lastmod>2022-03-07T14:47:10+09:00</lastmod>
+    <loc>/tags/median-absolute-deviation/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/reliability/</loc>
-    <lastmod>2022-03-07T14:47:10+09:00</lastmod>
+    <loc>/tags/outlier/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/haebara2002/</loc>
-    <lastmod>2022-03-07T14:47:10+09:00</lastmod>
+    <loc>/tags/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/reliablity/</loc>
-    <lastmod>2022-03-01T14:52:47+09:00</lastmod>
+    <loc>/docs/misc/ethics/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/osburn2000/</loc>
-    <lastmod>2022-03-01T14:52:47+09:00</lastmod>
+    <loc>/categories/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/schmidthunter1996/</loc>
-    <lastmod>2022-02-28T10:30:39+09:00</lastmod>
+    <loc>/tags/measurement-error/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/hugo/</loc>
-    <lastmod>2022-02-09T10:42:17+09:00</lastmod>
+    <loc>/categories/reading/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/blog-renewal/</loc>
-    <lastmod>2022-02-09T10:42:17+09:00</lastmod>
+    <loc>/tags/reliability/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/monte-carlo-simulation/</loc>
-    <lastmod>2021-01-16T18:38:48+09:00</lastmod>
+    <loc>/blog/2022/03/07/%E5%8D%97%E9%A2%A8%E5%8E%9F2002%E3%81%AE%E8%AA%AD%E6%9B%B8%E3%83%A1%E3%83%A2/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/mplus/</loc>
-    <lastmod>2021-01-16T18:38:48+09:00</lastmod>
+    <loc>/tags/reliablity/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/extract_montecarlo/</loc>
-    <lastmod>2021-01-16T18:38:48+09:00</lastmod>
+    <loc>/blog/2022/03/01/%CE%B1%E3%81%AE%E9%81%8E%E5%B0%8F%E6%8E%A8%E5%AE%9A%E3%81%AE%E6%A4%9C%E8%A8%8E/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/categories/stat/</loc>
-    <lastmod>2021-01-16T18:38:48+09:00</lastmod>
+    <loc>/blog/2022/02/28/%E5%BF%83%E7%90%86%E5%AD%A6%E7%A0%94%E7%A9%B6%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E6%B8%AC%E5%AE%9A%E8%AA%A4%E5%B7%AE/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/categories/r/</loc>
-    <lastmod>2021-01-13T15:21:08+09:00</lastmod>
+    <loc>/tags/hugo/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/mplusautomation/</loc>
-    <lastmod>2021-01-13T15:21:08+09:00</lastmod>
+    <loc>/blog/2022/02/09/%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%AE%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%81%AE%E5%A4%89%E6%9B%B4/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/tidyverse-style-guide/</loc>
-    <lastmod>2020-10-24T21:23:55+09:00</lastmod>
+    <loc>/tags/monte-carlo-simulation/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/style/</loc>
-    <lastmod>2020-10-24T21:23:55+09:00</lastmod>
+    <loc>/tags/mplus/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/equalvar/</loc>
-    <lastmod>2020-10-20T11:22:38+09:00</lastmod>
+    <loc>/blog/2021/01/16/mplus%E3%81%AE%E3%83%A2%E3%83%B3%E3%83%86%E3%82%AB%E3%83%AB%E3%83%AD%E6%B3%95%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E6%95%B4%E5%BD%A2%E3%81%99%E3%82%8B%E9%96%A2%E6%95%B0/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/ggstatsplot/</loc>
-    <lastmod>2020-10-18T10:57:20+09:00</lastmod>
+    <loc>/categories/stat/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/ggstatplot/</loc>
-    <lastmod>2020-10-18T10:57:20+09:00</lastmod>
+    <loc>/categories/r/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/gt/</loc>
-    <lastmod>2020-10-08T18:31:14+09:00</lastmod>
+    <loc>/blog/2021/01/13/r%E3%81%8B%E3%82%89mplus%E3%82%92%E4%BD%BF%E3%81%86/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/gt/</loc>
-    <lastmod>2020-10-08T18:31:14+09:00</lastmod>
+    <loc>/tags/tidyverse-style-guide/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/anaconda/</loc>
-    <lastmod>2020-09-24T09:30:10+09:00</lastmod>
+    <loc>/blog/2020/10/24/tidyverse-style-guide%E3%82%92%E8%AA%AD%E3%82%93%E3%81%A7%E3%81%BF%E3%81%9F%E9%9A%9B%E3%81%AE%E3%83%A1%E3%83%A2/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/anaconda/</loc>
-    <lastmod>2020-09-24T09:30:10+09:00</lastmod>
+    <loc>/blog/2020/10/20/2%E6%AE%B5%E9%9A%8E%E6%A4%9C%E5%AE%9A%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E7%B5%B1%E8%A8%88%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8%E3%81%AE%E8%A8%98%E8%BF%B0/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/categories/python/</loc>
-    <lastmod>2020-09-24T09:30:10+09:00</lastmod>
+    <loc>/tags/ggstatsplot/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/factor-analysis/</loc>
-    <lastmod>2020-09-23T14:59:29+09:00</lastmod>
+    <loc>/blog/2020/10/18/ggstatsplot%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/factornumber/</loc>
-    <lastmod>2020-09-23T14:59:29+09:00</lastmod>
+    <loc>/tags/gt/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/parallel-analysis/</loc>
-    <lastmod>2020-09-23T10:39:35+09:00</lastmod>
+    <loc>/blog/2020/10/08/gt%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/parallel/</loc>
-    <lastmod>2020-09-23T10:39:35+09:00</lastmod>
+    <loc>/tags/anaconda/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/map/</loc>
-    <lastmod>2020-09-22T14:41:25+09:00</lastmod>
+    <loc>/blog/2020/09/24/anaconda%E3%81%AB%E3%82%88%E3%82%8B%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/vss/</loc>
-    <lastmod>2020-09-22T14:41:25+09:00</lastmod>
+    <loc>/categories/python/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/coefficient-omega/</loc>
-    <lastmod>2020-09-16T15:13:32+09:00</lastmod>
+    <loc>/tags/factor-analysis/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/omega_efacfa/</loc>
-    <lastmod>2020-09-16T15:13:32+09:00</lastmod>
+    <loc>/blog/2020/09/23/%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E5%9B%A0%E5%AD%90%E6%95%B0%E3%81%AE%E9%81%B8%E6%8A%9E%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E8%A8%98%E8%BF%B0/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/lavaan/</loc>
-    <lastmod>2020-04-27T13:13:05+09:00</lastmod>
+    <loc>/tags/parallel-analysis/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/mplus_lavaan/</loc>
-    <lastmod>2020-04-27T13:13:05+09:00</lastmod>
+    <loc>/blog/2020/09/23/%E6%8E%A2%E7%B4%A2%E7%9A%84%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%81%AE%E9%9A%9B%E3%81%AE%E5%B9%B3%E8%A1%8C%E5%88%86%E6%9E%90%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/sem/</loc>
-    <lastmod>2020-04-27T13:13:05+09:00</lastmod>
+    <loc>/tags/map/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/wlsmv/</loc>
-    <lastmod>2020-04-27T13:13:05+09:00</lastmod>
+    <loc>/blog/2020/09/22/%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8Bmap%E5%9F%BA%E6%BA%96%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/nonnormal/</loc>
-    <lastmod>2020-04-24T10:27:42+09:00</lastmod>
+    <loc>/tags/coefficient-omega/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/nonnormal-distribution/</loc>
-    <lastmod>2020-04-24T10:27:42+09:00</lastmod>
+    <loc>/blog/2020/09/16/efa%E3%81%8B%E3%82%89%E8%A8%88%E7%AE%97%E3%81%97%E3%81%9F%CF%89%E3%81%A8cfa%E3%81%8B%E3%82%89%E8%A8%88%E7%AE%97%E3%81%97%E3%81%9F%CF%89/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/stat/</loc>
-    <lastmod>2020-04-16T20:04:15+09:00</lastmod>
+    <loc>/tags/lavaan/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/wlsmv/</loc>
-    <lastmod>2020-04-16T20:04:15+09:00</lastmod>
+    <loc>/blog/2020/04/27/lavaan%E3%81%A7mplus%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%82%AB%E3%83%AB%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%82%92%E5%86%8D%E7%8F%BE%E3%81%99%E3%82%8B/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/stat/wlsmv/</loc>
-    <lastmod>2020-04-16T20:04:15+09:00</lastmod>
+    <loc>/tags/sem/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/categories/others/</loc>
-    <lastmod>2020-04-09T20:54:52+09:00</lastmod>
+    <loc>/tags/wlsmv/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/zotero/</loc>
-    <lastmod>2020-04-09T20:54:52+09:00</lastmod>
+    <loc>/blog/2020/04/24/non-normal%E3%81%AA%E4%B9%B1%E6%95%B0%E3%82%92%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%82%E3%82%8C%E3%81%93%E3%82%8C/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/zotero/</loc>
-    <lastmod>2020-04-09T20:54:52+09:00</lastmod>
+    <loc>/tags/nonnormal-distribution/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/api/</loc>
-    <lastmod>2020-03-08T16:50:26+09:00</lastmod>
+    <loc>/blog/2020/04/16/%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%82%AB%E3%83%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92lavaan%E3%81%A7sem%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AE%E7%B4%B0%E3%81%8B%E3%81%84%E8%A9%B1/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/e-stat/</loc>
-    <lastmod>2020-03-08T16:50:26+09:00</lastmod>
+    <loc>/categories/others/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/restat_packages/</loc>
-    <lastmod>2020-03-08T16:50:26+09:00</lastmod>
+    <loc>/tags/zotero/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/rapi/</loc>
-    <lastmod>2020-03-07T20:58:44+09:00</lastmod>
+    <loc>/blog/2020/04/09/zotero%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E7%AE%A1%E7%90%86%E3%81%AE%E8%A6%9A%E6%9B%B8/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/macmini/</loc>
-    <lastmod>2020-02-22T13:05:54+09:00</lastmod>
+    <loc>/tags/api/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/nunnally/</loc>
-    <lastmod>2020-02-17T20:43:28+09:00</lastmod>
+    <loc>/tags/e-stat/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/underscore/</loc>
-    <lastmod>2020-02-15T16:32:13+09:00</lastmod>
+    <loc>/blog/2020/03/08/r%E3%81%8B%E3%82%89estat%E3%81%AEapi%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B%E3%81%9D%E3%81%AE2/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/git/</loc>
-    <lastmod>2020-02-11T17:30:47+09:00</lastmod>
+    <loc>/blog/2020/03/07/r%E3%81%8B%E3%82%89estat%E3%81%AEapi%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/git_use/</loc>
-    <lastmod>2020-02-11T17:30:47+09:00</lastmod>
+    <loc>/blog/2020/02/22/mac-mini%E3%81%AB%E8%B2%B7%E3%81%84%E6%8F%9B%E3%81%88%E3%81%A6%E3%82%84%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/lav2tikz/</loc>
-    <lastmod>2020-02-08T11:57:05+09:00</lastmod>
+    <loc>/blog/2020/02/17/%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%9B%AE%E5%AE%89%E3%81%AE%E5%87%BA%E3%81%A9%E3%81%93%E3%82%8D/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/tikz/</loc>
-    <lastmod>2020-02-02T19:01:51+09:00</lastmod>
+    <loc>/blog/2020/02/15/hugo%E3%81%A7%E8%A8%98%E4%BA%8B%E4%B8%AD%E3%81%AB%E6%95%B0%E5%BC%8F%E3%82%92%E6%9B%B8%E3%81%8F%E9%9A%9B%E3%81%AE_%E5%95%8F%E9%A1%8C/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/prepost2/</loc>
-    <lastmod>2020-02-01T20:09:15+09:00</lastmod>
+    <loc>/tags/git/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/zettlr/</loc>
-    <lastmod>2020-02-01T18:17:51+09:00</lastmod>
+    <loc>/blog/2020/02/11/git%E3%81%A7%E4%B8%80%E9%83%A8%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E7%89%B9%E5%AE%9A%E3%81%AE%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%81%AB%E6%88%BB%E3%81%99%E3%81%A8%E3%81%8D/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/github/</loc>
-    <lastmod>2020-01-25T14:04:09+09:00</lastmod>
+    <loc>/blog/2020/02/08/lavaan%E3%81%AE%E3%82%A2%E3%82%A6%E3%83%88%E3%83%97%E3%83%83%E3%83%88%E3%82%92%E3%83%91%E3%82%B9%E5%9B%B3%E3%81%AB%E3%81%99%E3%82%8B/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/rstudio/</loc>
-    <lastmod>2020-01-25T14:04:09+09:00</lastmod>
+    <loc>/blog/2020/02/02/tikz%E3%81%A7%E9%81%8A%E3%82%93%E3%81%A7%E3%81%BF%E3%81%9F/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/rstudiogithub/</loc>
-    <lastmod>2020-01-25T14:04:09+09:00</lastmod>
+    <loc>/blog/2020/02/01/%E7%B6%9A2%E7%BE%A4%E3%81%AE%E3%83%97%E3%83%AA%E3%83%9D%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AB%E9%96%A2%E3%81%97%E3%81%A6/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/ggplot2/</loc>
-    <lastmod>2020-01-12T23:12:22+09:00</lastmod>
+    <loc>/blog/2020/02/01/zettlr%E9%96%A2%E4%BF%82%E3%81%AE%E5%82%99%E5%BF%98%E9%8C%B2/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/ggplot2japanese/</loc>
-    <lastmod>2020-01-12T23:12:22+09:00</lastmod>
+    <loc>/tags/github/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/pdf/</loc>
-    <lastmod>2020-01-12T23:12:22+09:00</lastmod>
+    <loc>/tags/rstudio/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/cronbachs-alpha/</loc>
-    <lastmod>2019-12-27T21:37:22+09:00</lastmod>
+    <loc>/blog/2020/01/25/rstudio%E3%81%A7github%E3%81%AE%E9%8D%B5%E8%AA%8D%E8%A8%BC%E8%A8%AD%E5%AE%9A/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/cronbach/</loc>
-    <lastmod>2019-12-27T21:37:22+09:00</lastmod>
+    <loc>/tags/ggplot2/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/prepost/</loc>
-    <lastmod>2019-12-21T16:12:33+09:00</lastmod>
+    <loc>/blog/2020/01/12/ggplot2%E3%81%A7pdf%E3%82%92%E5%87%BA%E5%8A%9B%E3%81%99%E3%82%8B/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/pdf/</loc>
-    <lastmod>2019-07-30T18:20:19+09:00</lastmod>
+    <loc>/tags/pdf/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/apply/</loc>
-    <lastmod>2019-07-26T13:47:56+09:00</lastmod>
+    <loc>/tags/cronbachs-alpha/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/r/</loc>
-    <lastmod>2019-07-26T13:47:56+09:00</lastmod>
+    <loc>/blog/2019/12/27/%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E8%A1%8C%E5%88%97%E3%81%8B%E3%82%89%E3%82%AF%E3%83%AD%E3%83%B3%E3%83%90%E3%83%83%E3%82%AF%E3%81%AE%CE%B1%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/laaply/</loc>
-    <lastmod>2019-07-26T13:47:56+09:00</lastmod>
+    <loc>/blog/2019/12/21/2%E7%BE%A4%E3%81%AE%E3%83%97%E3%83%AA%E3%83%9D%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AB%E9%96%A2%E3%81%97%E3%81%A6/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/bootstrap/</loc>
-    <lastmod>2019-07-03T07:10:40+09:00</lastmod>
+    <loc>/blog/2019/07/30/r%E3%81%A7%E3%83%99%E3%82%AF%E3%82%BF%E7%94%BB%E5%83%8F%E3%82%92%E4%BD%9C%E3%82%8B%E9%9A%9B%E3%81%AE%E3%83%A1%E3%83%A2/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/boot/</loc>
-    <lastmod>2019-07-03T07:10:40+09:00</lastmod>
+    <loc>/tags/apply/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/filter/</loc>
-    <lastmod>2019-06-25T16:38:21+09:00</lastmod>
+    <loc>/tags/r/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/tidyverse/</loc>
-    <lastmod>2019-06-25T16:38:21+09:00</lastmod>
+    <loc>/blog/2019/07/26/r%E3%81%AElapply%E9%96%A2%E6%95%B0%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%83%A1%E3%83%A2/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/tags/tetrachoric-correlation/</loc>
-    <lastmod>2019-06-19T21:59:21+09:00</lastmod>
+    <loc>/tags/bootstrap/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/190619tetra/</loc>
-    <lastmod>2019-06-19T21:59:21+09:00</lastmod>
+    <loc>/blog/2019/07/03/%E3%83%96%E3%83%BC%E3%83%88%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E8%AA%BF%E3%81%B9%E3%82%82%E3%81%AE/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/190618everitt/</loc>
-    <lastmod>2019-06-18T15:10:22+09:00</lastmod>
+    <loc>/blog/2019/06/25/tidyr%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E6%95%B4%E7%90%86/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/190618cisco/</loc>
-    <lastmod>2019-06-18T10:48:11+09:00</lastmod>
+    <loc>/tags/tidyverse/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/posts/test/</loc>
-    <lastmod>2019-06-13T20:37:10+09:00</lastmod>
+    <loc>/tags/tetrachoric-correlation/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url><url>
-    <loc>https://onoshima.github.io/profile/</loc>
-    <lastmod>2019-01-11T18:58:53+09:00</lastmod>
+    <loc>/blog/2019/06/19/%E3%83%86%E3%83%88%E3%83%A9%E3%82%B3%E3%83%AA%E3%83%83%E3%82%AF%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B%E9%96%A2%E6%95%B0%E3%81%AE%E8%87%AA%E4%BD%9C/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
+  </url><url>
+    <loc>/blog/2019/06/18/%E3%83%86%E3%83%88%E3%83%A9%E3%82%B3%E3%83%AA%E3%83%83%E3%82%AF%E7%9B%B8%E9%96%A2%E3%81%AE%E5%88%9D%E6%9C%9F/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
+  </url><url>
+    <loc>/blog/2019/06/18/ubuntu-18.04%E3%81%ABciscoanyconnect%E3%82%92%E5%85%A5%E3%82%8C%E3%81%9F%E3%81%A8%E3%81%8D%E3%81%AE%E3%83%A1%E3%83%A2/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
+  </url><url>
+    <loc>/blog/2019/06/13/test/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
+  </url><url>
+    <loc>/search/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
+  </url><url>
+    <loc>/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
+  </url><url>
+    <loc>/blog/</loc>
+    <lastmod>2023-02-25T12:11:31+09:00</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,544 @@
+<!doctype html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="generator" content="Hugo 0.110.0">
+<meta name="robots" content="index, follow">
+
+
+<link rel="shortcut icon" href="/favicons/favicon.ico" >
+<link rel="apple-touch-icon" href="/favicons/apple-touch-icon-180x180.png" sizes="180x180">
+<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/favicons/android-36x36.png" sizes="36x36">
+<link rel="icon" type="image/png" href="/favicons/android-48x48.png" sizes="48x48">
+<link rel="icon" type="image/png" href="/favicons/android-72x72.png" sizes="72x72">
+<link rel="icon" type="image/png" href="/favicons/android-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
+<link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
+
+<title>テトラコリック相関係数を求める関数の自作 | Onoshima&#39;s website</title>
+<meta name="description" content="先日テトラコリック相関係数を求める方法についての記事を書いた。
+テトラコリック相関の初期
+それに基づいてRでテトラコリック相関係数を求める関数を自作した。
+Rでの関数化 作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということをorder=という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。
+tetrachoric &amp;lt;- function(cor.table, order=6){ #必要な数値を代入 N &amp;lt;- sum(cor.table) prop.bd &amp;lt;- colSums(prop.table(cor.table))[2] prop.cd &amp;lt;- rowSums(prop.table(cor.table))[2] h &amp;lt;- qnorm(prop.bd, lower.tail = F) H &amp;lt;- dnorm(h) k &amp;lt;- qnorm(prop.cd, lower.tail = F) K &amp;lt;- dnorm(k) tau &amp;lt;- numeric(order) theta &amp;lt;- numeric(order) v_bar &amp;lt;- numeric(order) w_bar &amp;lt;- numeric(order) #テトラコリック関数 for(n in 1:order){ if(n==1){ v_bar[n] &amp;lt;- h w_bar[n] &amp;lt;- k tau[n] &amp;lt;- H theta[n] &amp;lt;- K } else if (n==2){ v_bar[n] &amp;lt;- h^2-1 w_bar[n] &amp;lt;- k^2-1 tau[n] &amp;lt;- H*h/sqrt(2) theta[n] &amp;lt;- K*k/sqrt(2) } else { v_bar[n] &amp;lt;- h * v_bar[n-1] - (n-1) * v_bar[n-2] w_bar[n] &amp;lt;- k * w_bar[n-1] - (n-1) * w_bar[n-2] tau[n] &amp;lt;- H*v_bar[n-1]/sqrt(factorial(n)) theta[n] &amp;lt;- K*w_bar[n-1]/sqrt(factorial(n)) } } # 相関を計算 coef_vec &amp;lt;- c(prop.">
+<meta property="og:title" content="テトラコリック相関係数を求める関数の自作" />
+<meta property="og:description" content="先日テトラコリック相関係数を求める方法についての記事を書いた。
+テトラコリック相関の初期
+それに基づいてRでテトラコリック相関係数を求める関数を自作した。
+Rでの関数化 作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということをorder=という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。
+tetrachoric &lt;- function(cor.table, order=6){ #必要な数値を代入 N &lt;- sum(cor.table) prop.bd &lt;- colSums(prop.table(cor.table))[2] prop.cd &lt;- rowSums(prop.table(cor.table))[2] h &lt;- qnorm(prop.bd, lower.tail = F) H &lt;- dnorm(h) k &lt;- qnorm(prop.cd, lower.tail = F) K &lt;- dnorm(k) tau &lt;- numeric(order) theta &lt;- numeric(order) v_bar &lt;- numeric(order) w_bar &lt;- numeric(order) #テトラコリック関数 for(n in 1:order){ if(n==1){ v_bar[n] &lt;- h w_bar[n] &lt;- k tau[n] &lt;- H theta[n] &lt;- K } else if (n==2){ v_bar[n] &lt;- h^2-1 w_bar[n] &lt;- k^2-1 tau[n] &lt;- H*h/sqrt(2) theta[n] &lt;- K*k/sqrt(2) } else { v_bar[n] &lt;- h * v_bar[n-1] - (n-1) * v_bar[n-2] w_bar[n] &lt;- k * w_bar[n-1] - (n-1) * w_bar[n-2] tau[n] &lt;- H*v_bar[n-1]/sqrt(factorial(n)) theta[n] &lt;- K*w_bar[n-1]/sqrt(factorial(n)) } } # 相関を計算 coef_vec &lt;- c(prop." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="/blog/2019/06/19/%E3%83%86%E3%83%88%E3%83%A9%E3%82%B3%E3%83%AA%E3%83%83%E3%82%AF%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B%E9%96%A2%E6%95%B0%E3%81%AE%E8%87%AA%E4%BD%9C/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2019-06-19T21:59:21+09:00" />
+<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="name" content="テトラコリック相関係数を求める関数の自作">
+<meta itemprop="description" content="先日テトラコリック相関係数を求める方法についての記事を書いた。
+テトラコリック相関の初期
+それに基づいてRでテトラコリック相関係数を求める関数を自作した。
+Rでの関数化 作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということをorder=という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。
+tetrachoric &lt;- function(cor.table, order=6){ #必要な数値を代入 N &lt;- sum(cor.table) prop.bd &lt;- colSums(prop.table(cor.table))[2] prop.cd &lt;- rowSums(prop.table(cor.table))[2] h &lt;- qnorm(prop.bd, lower.tail = F) H &lt;- dnorm(h) k &lt;- qnorm(prop.cd, lower.tail = F) K &lt;- dnorm(k) tau &lt;- numeric(order) theta &lt;- numeric(order) v_bar &lt;- numeric(order) w_bar &lt;- numeric(order) #テトラコリック関数 for(n in 1:order){ if(n==1){ v_bar[n] &lt;- h w_bar[n] &lt;- k tau[n] &lt;- H theta[n] &lt;- K } else if (n==2){ v_bar[n] &lt;- h^2-1 w_bar[n] &lt;- k^2-1 tau[n] &lt;- H*h/sqrt(2) theta[n] &lt;- K*k/sqrt(2) } else { v_bar[n] &lt;- h * v_bar[n-1] - (n-1) * v_bar[n-2] w_bar[n] &lt;- k * w_bar[n-1] - (n-1) * w_bar[n-2] tau[n] &lt;- H*v_bar[n-1]/sqrt(factorial(n)) theta[n] &lt;- K*w_bar[n-1]/sqrt(factorial(n)) } } # 相関を計算 coef_vec &lt;- c(prop."><meta itemprop="datePublished" content="2019-06-19T21:59:21+09:00" />
+<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="wordCount" content="240">
+<meta itemprop="keywords" content="tetrachoric correlation,R," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="テトラコリック相関係数を求める関数の自作"/>
+<meta name="twitter:description" content="先日テトラコリック相関係数を求める方法についての記事を書いた。
+テトラコリック相関の初期
+それに基づいてRでテトラコリック相関係数を求める関数を自作した。
+Rでの関数化 作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということをorder=という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。
+tetrachoric &lt;- function(cor.table, order=6){ #必要な数値を代入 N &lt;- sum(cor.table) prop.bd &lt;- colSums(prop.table(cor.table))[2] prop.cd &lt;- rowSums(prop.table(cor.table))[2] h &lt;- qnorm(prop.bd, lower.tail = F) H &lt;- dnorm(h) k &lt;- qnorm(prop.cd, lower.tail = F) K &lt;- dnorm(k) tau &lt;- numeric(order) theta &lt;- numeric(order) v_bar &lt;- numeric(order) w_bar &lt;- numeric(order) #テトラコリック関数 for(n in 1:order){ if(n==1){ v_bar[n] &lt;- h w_bar[n] &lt;- k tau[n] &lt;- H theta[n] &lt;- K } else if (n==2){ v_bar[n] &lt;- h^2-1 w_bar[n] &lt;- k^2-1 tau[n] &lt;- H*h/sqrt(2) theta[n] &lt;- K*k/sqrt(2) } else { v_bar[n] &lt;- h * v_bar[n-1] - (n-1) * v_bar[n-2] w_bar[n] &lt;- k * w_bar[n-1] - (n-1) * w_bar[n-2] tau[n] &lt;- H*v_bar[n-1]/sqrt(factorial(n)) theta[n] &lt;- K*w_bar[n-1]/sqrt(factorial(n)) } } # 相関を計算 coef_vec &lt;- c(prop."/>
+
+
+
+
+<link rel="preload" href="/scss/main.min.dab844e01a0fafa262a2cd44c03b96dd6baa73f492cf00d362ae9a6827cb4a1b.css" as="style">
+<link href="/scss/main.min.dab844e01a0fafa262a2cd44c03b96dd6baa73f492cf00d362ae9a6827cb4a1b.css" rel="stylesheet" integrity="">
+
+<script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK"
+  crossorigin="anonymous"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-00000000-0"></script>
+<script>
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+	gtag('config', 'UA-00000000-0');
+}
+</script>
+  </head>
+  <body class="td-page td-blog">
+    <header>
+      <nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar">
+  <a class="navbar-brand" href="/"><span class="navbar-brand__logo navbar-logo"><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500"><g><path style="fill:#fff" d="M116.8525 421.9722c-5.7041.0-10.3442-4.3127-10.3442-9.6129V88.183c0-5.3002 4.6401-9.6117 10.3442-9.6117H320.858c3.0347.0 9.3959.5498 11.7506 2.6302l.3545.3442 58.905 63.2912c2.3101 2.491 2.9202 8.4928 2.9202 11.3184v256.2039c0 5.3002-4.6407 9.6129-10.3436 9.6129H116.8525z"/><g><g><g><path style="fill:#767676" d="M384.4445 423.2066H116.852c-6.3839.0-11.5786-4.8658-11.5786-10.8474V88.1831c0-5.9804 5.1947-10.8461 11.5786-10.8461h204.0062c.377.0 9.2786.0329 12.568 2.9389l.3947.3833 58.9508 63.337c3.2135 3.4652 3.2514 11.7924 3.2514 12.1593v256.2036C396.0231 418.3408 390.8284 423.2066 384.4445 423.2066zM116.5079 411.9189c.0848.0278.1999.0531.3441.0531h267.5925c.1442.0.2581-.0253.3441-.0531V156.1556c-.0076-.9033-.3593-3.7347-.7034-5.0037l-57.6527-61.9416c-1.4651-.3176-4.4533-.6389-5.5742-.6389H116.852c-.143.0-.2594.024-.3441.0531V411.9189zm267.4533-261.149zM327.0321 89.371v.0013V89.371z"/></g></g></g><g><g><path style="fill:#5b7fc0" d="M189.0874 210.1754l.0012-.0012c7.7751.0012 15.0295 4.1862 18.932 10.9234 1.9177 3.3159 2.9305 7.1011 2.9293 10.9378.0 5.8394-2.2733 11.3304-6.4032 15.4604-4.1288 4.1288-9.6186 6.4032-15.458 6.4032s-11.328-2.2733-15.458-6.4032-6.4032-9.6186-6.4056-15.4628c.0012-6.025 2.454-11.4897 6.4116-15.4473C177.5953 212.627 183.0601 210.1742 189.0874 210.1754zm7.993 21.8576c.0012-1.4042-.3687-2.7868-1.063-3.9887-1.4293-2.4684-4.0833-3.9995-6.9299-4.0019-4.4077.0024-7.993 3.5877-7.993 7.993.0 2.1356.832 4.1431 2.3427 5.6539 1.5083 1.5083 3.5159 2.3403 5.6503 2.3415 2.1356.0 4.1443-.8308 5.6539-2.3403S197.0816 234.1722 197.0804 232.033z"/><path style="opacity:.3;fill:#fff" d="M189.0898 210.176c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3136 2.9377 7.0988 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8066-21.8612-21.8613.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 212.6276 183.0612 210.176 189.0898 210.176zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 236.239 197.0839 234.2399 197.0839 232.0372z"/><g><defs><path id="SVGID_1_" d="M194.7376 237.6875c-1.4461 1.4461-3.4452 2.3439-5.6479 2.3439-4.4077-.0024-7.9918-3.5865-7.9942-7.9942.0024-4.4125 3.5937-7.999 7.9942-7.9942 2.8443.0 5.497 1.5323 6.924 3.9983.6991 1.2067 1.0702 2.5881 1.0702 3.9959C197.0839 234.2399 196.1861 236.239 194.7376 237.6875z"/></defs><clipPath id="SVGID_2_"><use xlink:href="#SVGID_1_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_2_);fill:#fff" d="M190.0704 225.0237c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9546.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.663-2.8588-6.116.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C193.7885 225.7247 191.9774 225.0237 190.0704 225.0237z"/><path style="opacity:.13;clip-path:url(#SVGID_2_);fill:#020202" d="M190.0704 225.0237c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9546.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.663-2.8588-6.116.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C193.7885 225.7247 191.9774 225.0237 190.0704 225.0237z"/></g><g><defs><path id="SVGID_3_" d="M189.0898 210.176c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3136 2.9377 7.0988 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8066-21.8612-21.8613.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 212.6276 183.0612 210.176 189.0898 210.176zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 236.239 197.0839 234.2399 197.0839 232.0372z"/></defs><clipPath id="SVGID_4_"><use xlink:href="#SVGID_3_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_4_);fill:#5b7fc0" d="M172.6595 215.6045c-3.96 3.96-6.4116 9.4235-6.4116 15.452-.0024 12.0547 9.8066 21.8636 21.8613 21.8612 12.0547.0024 21.8636-9.797 21.8613-21.8612.0024-3.8475-1.0151-7.6326-2.9353-10.9462-3.8977-6.7324-11.1497-10.9151-18.926-10.9151C182.0806 209.1953 176.6171 211.647 172.6595 215.6045z"/></g></g><rect x="198.8952" y="225.1043" style="fill:#5b7fc0" width="122.6266" height="13.8671"/></g><g><path style="fill:#d95140" d="M189.0874 155.7611l.0012-.0012c7.7751.0012 15.0295 4.1862 18.932 10.9234 1.9177 3.3159 2.9305 7.1011 2.9293 10.9378.0 5.8394-2.2733 11.3304-6.4032 15.4604-4.1288 4.1288-9.6186 6.4032-15.458 6.4032s-11.328-2.2733-15.458-6.4032-6.4032-9.6186-6.4056-15.4628c.0012-6.0249 2.454-11.4897 6.4116-15.4473C177.5953 158.2128 183.0601 155.7599 189.0874 155.7611zm7.993 21.8577c.0012-1.4042-.3687-2.7868-1.063-3.9887-1.4293-2.4684-4.0833-3.9995-6.9299-4.0019-4.4077.0024-7.993 3.5877-7.993 7.993.0 2.1356.832 4.1431 2.3427 5.6539 1.5083 1.5083 3.5159 2.3403 5.6503 2.3415 2.1356.0 4.1443-.8308 5.6539-2.3403C196.2508 181.7667 197.0816 179.758 197.0804 177.6188z"/><path style="opacity:.3;fill:#fff" d="M189.0898 155.7617c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3135 2.9377 7.0987 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8066-21.8612-21.8613.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 158.2134 183.0612 155.7617 189.0898 155.7617zm7.9941 21.8613c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 181.8248 197.0839 179.8256 197.0839 177.623z"/><g><defs><path id="SVGID_5_" d="M194.7376 183.2733c-1.4461 1.4461-3.4452 2.3439-5.6479 2.3439-4.4077-.0024-7.9918-3.5865-7.9942-7.9942.0024-4.4125 3.5937-7.9989 7.9942-7.9942 2.8443.0 5.497 1.5323 6.924 3.9983.6991 1.2067 1.0702 2.5881 1.0702 3.9959C197.0839 179.8256 196.1861 181.8248 194.7376 183.2733z"/></defs><clipPath id="SVGID_6_"><use xlink:href="#SVGID_5_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_6_);fill:#fff" d="M190.0704 170.6095c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9546.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.663-2.8588-6.116.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C193.7885 171.3104 191.9774 170.6095 190.0704 170.6095z"/><path style="opacity:.13;clip-path:url(#SVGID_6_);fill:#020202" d="M190.0704 170.6095c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9546.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.663-2.8588-6.116.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C193.7885 171.3104 191.9774 170.6095 190.0704 170.6095z"/></g><g><defs><path id="SVGID_7_" d="M189.0898 155.7617c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3135 2.9377 7.0987 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8066-21.8612-21.8613.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 158.2134 183.0612 155.7617 189.0898 155.7617zm7.9941 21.8613c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 181.8248 197.0839 179.8256 197.0839 177.623z"/></defs><clipPath id="SVGID_8_"><use xlink:href="#SVGID_7_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_8_);fill:#d95140" d="M172.6595 161.1903c-3.96 3.96-6.4116 9.4235-6.4116 15.452-.0024 12.0547 9.8066 21.8636 21.8613 21.8613 12.0547.0024 21.8636-9.797 21.8613-21.8613.0024-3.8474-1.0151-7.6326-2.9353-10.9462-3.8977-6.7324-11.1497-10.9151-18.926-10.9151C182.0806 154.7811 176.6171 157.2327 172.6595 161.1903z"/></g><rect x="198.8952" y="170.69" style="fill:#d95140" width="122.6266" height="13.8671"/></g><g><g><path style="fill:#56a55c" d="M189.5379 264.6147l.0012-.0012c7.7751.0012 15.0294 4.1862 18.932 10.9235 1.9177 3.3159 2.9305 7.1011 2.9293 10.9378.0 5.8394-2.2733 11.3304-6.4032 15.4604-4.1288 4.1288-9.6186 6.4032-15.458 6.4032-5.8394.0-11.3281-2.2733-15.458-6.4032-4.13-4.13-6.4032-9.6186-6.4056-15.4628.0012-6.0249 2.454-11.4897 6.4116-15.4472C178.0458 267.0663 183.5105 264.6135 189.5379 264.6147zm7.993 21.8576c.0012-1.4042-.3687-2.7868-1.063-3.9887-1.4293-2.4684-4.0833-3.9995-6.9299-4.0019-4.4077.0024-7.993 3.5877-7.993 7.993.0 2.1356.832 4.1431 2.3427 5.6538 1.5083 1.5083 3.5159 2.3403 5.6503 2.3415 2.1356.0 4.1443-.8308 5.6539-2.3403C196.7013 290.6202 197.5321 288.6115 197.5309 286.4723z"/><path style="opacity:.3;fill:#fff" d="M189.5403 264.6153c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3135 2.9377 7.0987 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8065-21.8612-21.8613.0-6.0285 2.4516-11.492 6.4116-15.452C178.0482 267.0669 183.5117 264.6153 189.5403 264.6153zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9941.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.6366 290.6783 197.5344 288.6792 197.5344 286.4765z"/><g><defs><path id="SVGID_9_" d="M195.1881 292.1268c-1.4461 1.4461-3.4452 2.3439-5.6479 2.3439-4.4077-.0024-7.9918-3.5865-7.9942-7.9942.0024-4.4125 3.5937-7.9989 7.9942-7.9941 2.8443.0 5.497 1.5323 6.924 3.9983.6991 1.2067 1.0702 2.5881 1.0702 3.9959C197.5344 288.6792 196.6366 290.6783 195.1881 292.1268z"/></defs><clipPath id="SVGID_10_"><use xlink:href="#SVGID_9_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_10_);fill:#fff" d="M190.5209 279.463c-4.4005-.0048-7.9918 3.5817-7.9942 7.9941.0011 1.9547.7088 3.7452 1.8782 5.1354-1.7446-1.4674-2.8575-3.6631-2.8588-6.1161.0024-4.4125 3.5936-7.999 7.9942-7.9941 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C194.239 280.164 192.4279 279.463 190.5209 279.463z"/><path style="opacity:.13;clip-path:url(#SVGID_10_);fill:#020202" d="M190.5209 279.463c-4.4005-.0048-7.9918 3.5817-7.9942 7.9941.0011 1.9547.7088 3.7452 1.8782 5.1354-1.7446-1.4674-2.8575-3.6631-2.8588-6.1161.0024-4.4125 3.5936-7.999 7.9942-7.9941 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C194.239 280.164 192.4279 279.463 190.5209 279.463z"/></g><g><defs><path id="SVGID_11_" d="M189.5403 264.6153c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3135 2.9377 7.0987 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8065-21.8612-21.8613.0-6.0285 2.4516-11.492 6.4116-15.452C178.0482 267.0669 183.5117 264.6153 189.5403 264.6153zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9941.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.6366 290.6783 197.5344 288.6792 197.5344 286.4765z"/></defs><clipPath id="SVGID_12_"><use xlink:href="#SVGID_11_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_12_);fill:#56a55c" d="M173.11 270.0439c-3.96 3.96-6.4116 9.4235-6.4116 15.452-.0024 12.0547 9.8066 21.8636 21.8613 21.8613 12.0547.0024 21.8636-9.797 21.8613-21.8613.0024-3.8474-1.0151-7.6326-2.9353-10.9462-3.8977-6.7325-11.1497-10.9151-18.926-10.9151C182.5311 263.6346 177.0676 266.0863 173.11 270.0439z"/></g></g><rect x="199.3456" y="279.5436" style="fill:#56a55c" width="122.6266" height="13.8671"/></g><g><g><path style="fill:#f1bc42" d="M189.0874 318.7208l.0012-.0012c7.7751.0012 15.0295 4.1862 18.932 10.9234 1.9177 3.3159 2.9305 7.1011 2.9293 10.9378.0 5.8394-2.2733 11.3305-6.4032 15.4604-4.1288 4.1288-9.6186 6.4032-15.458 6.4032s-11.328-2.2733-15.458-6.4032-6.4032-9.6186-6.4056-15.4628c.0012-6.025 2.454-11.4897 6.4116-15.4472C177.5953 321.1724 183.0601 318.7196 189.0874 318.7208zm7.993 21.8576c.0012-1.4042-.3687-2.7868-1.063-3.9887-1.4293-2.4684-4.0833-3.9995-6.9299-4.0019-4.4077.0024-7.993 3.5877-7.993 7.993.0 2.1356.832 4.1431 2.3427 5.6539 1.5083 1.5083 3.5159 2.3403 5.6503 2.3415 2.1356.0 4.1443-.8308 5.6539-2.3403S197.0816 342.7176 197.0804 340.5784z"/><path style="opacity:.3;fill:#fff" d="M189.0898 318.7214c7.7763.0 15.0283 4.1826 18.926 10.915 1.9201 3.3136 2.9377 7.0988 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8612-12.0547.0024-21.8636-9.8065-21.8612-21.8612.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 321.173 183.0612 318.7214 189.0898 318.7214zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 344.7844 197.0839 342.7853 197.0839 340.5826z"/><g><defs><path id="SVGID_13_" d="M194.7376 346.2329c-1.4461 1.4461-3.4452 2.3439-5.6479 2.3439-4.4077-.0024-7.9918-3.5865-7.9942-7.9942.0024-4.4125 3.5937-7.999 7.9942-7.9942 2.8443.0 5.497 1.5323 6.924 3.9983.6991 1.2067 1.0702 2.5881 1.0702 3.9959C197.0839 342.7853 196.1861 344.7844 194.7376 346.2329z"/></defs><clipPath id="SVGID_14_"><use xlink:href="#SVGID_13_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_14_);fill:#fff" d="M190.0704 333.5691c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9547.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.6631-2.8588-6.1161.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0834 6.1218 2.8788C193.7885 334.2701 191.9774 333.5691 190.0704 333.5691z"/><path style="opacity:.13;clip-path:url(#SVGID_14_);fill:#020202" d="M190.0704 333.5691c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9547.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.6631-2.8588-6.1161.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0834 6.1218 2.8788C193.7885 334.2701 191.9774 333.5691 190.0704 333.5691z"/></g><g><defs><path id="SVGID_15_" d="M189.0898 318.7214c7.7763.0 15.0283 4.1826 18.926 10.915 1.9201 3.3136 2.9377 7.0988 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8612-12.0547.0024-21.8636-9.8065-21.8612-21.8612.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 321.173 183.0612 318.7214 189.0898 318.7214zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 344.7844 197.0839 342.7853 197.0839 340.5826z"/></defs><clipPath id="SVGID_16_"><use xlink:href="#SVGID_15_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_16_);fill:#f1bc42" d="M172.6595 324.15c-3.96 3.96-6.4116 9.4235-6.4116 15.452-.0024 12.0547 9.8066 21.8636 21.8613 21.8612 12.0547.0024 21.8636-9.797 21.8613-21.8612.0024-3.8474-1.0151-7.6327-2.9353-10.9462-3.8977-6.7324-11.1497-10.9151-18.926-10.9151C182.0806 317.7407 176.6171 320.1924 172.6595 324.15z"/></g></g><rect x="198.8952" y="333.6497" style="fill:#f1bc42" width="122.6266" height="13.8671"/></g></g></svg></span><span class="navbar-brand__name">Onoshima&#39;s website</span></a>
+  <div class="td-navbar-nav-scroll ml-md-auto" id="main_navbar">
+    <ul class="navbar-nav mt-2 mt-lg-0">
+      <li class="nav-item mr-4 mb-2 mb-lg-0">
+        <a class="nav-link" href="/profile/"><span>プロフィール</span></a>
+      </li>
+      <li class="nav-item mr-4 mb-2 mb-lg-0">
+        <a class="nav-link" href="/docs/"><span>資料</span></a>
+      </li>
+      <li class="nav-item mr-4 mb-2 mb-lg-0">
+        <a class="nav-link active" href="/blog/"><span class="active">ブログ</span></a>
+      </li>
+      </ul>
+  </div>
+  <div class="navbar-nav d-none d-lg-block">
+    <div class="td-search">
+  <div class="td-search__icon"></div>
+  <input type="search" class="td-search__input form-control td-search-input" placeholder="Search this site…" aria-label="Search this site…" autocomplete="off">
+</div>
+
+  </div>
+</nav>
+    </header>
+    <div class="container-fluid td-outer">
+      <div class="td-main">
+        <div class="row flex-xl-nowrap">
+          <aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none">
+            
+<div id="td-sidebar-menu" class="td-sidebar__inner">
+  <div id="content-mobile">
+  <form class="td-sidebar__search d-flex align-items-center">
+    <div class="td-search">
+  <div class="td-search__icon"></div>
+  <input type="search" class="td-search__input form-control td-search-input" placeholder="Search this site…" aria-label="Search this site…" autocomplete="off">
+</div>
+
+    <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-section-nav" aria-expanded="false" aria-label="Toggle section navigation">
+    </button>
+  </form>
+  </div>
+  <div id="content-desktop"></div>
+  <nav class="collapse td-sidebar-nav" id="td-section-nav">
+    <ul class="td-sidebar-nav__section pr-md-3 ul-0">
+      <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-blog-li">
+  <a href="/blog/" title="Docsy Blog" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-blog"><span class="">ブログ</span></a>
+  <ul class="ul-1">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog202203215made59fbae6ba96e381abe38288e3828be5a496e3828ce580a4e381aee6a49ce587ba-li">
+  <a href="/blog/2022/03/21/5mad%E5%9F%BA%E6%BA%96%E3%81%AB%E3%82%88%E3%82%8B%E5%A4%96%E3%82%8C%E5%80%A4%E3%81%AE%E6%A4%9C%E5%87%BA/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog202203215made59fbae6ba96e381abe38288e3828be5a496e3828ce580a4e381aee6a49ce587ba"><span class="">5MAD基準による外れ値の検出</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20220307e58d97e9a2a8e58e9f2002e381aee8aaade69bb8e383a1e383a2-li">
+  <a href="/blog/2022/03/07/%E5%8D%97%E9%A2%A8%E5%8E%9F2002%E3%81%AE%E8%AA%AD%E6%9B%B8%E3%83%A1%E3%83%A2/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20220307e58d97e9a2a8e58e9f2002e381aee8aaade69bb8e383a1e383a2"><span class="">南風原(2002)の読書メモ</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20220301ceb1e381aee9818ee5b08fe68ea8e5ae9ae381aee6a49ce8a88e-li">
+  <a href="/blog/2022/03/01/%CE%B1%E3%81%AE%E9%81%8E%E5%B0%8F%E6%8E%A8%E5%AE%9A%E3%81%AE%E6%A4%9C%E8%A8%8E/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20220301ceb1e381aee9818ee5b08fe68ea8e5ae9ae381aee6a49ce8a88e"><span class="">αの過小推定の検討</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20220228e5bf83e79086e5ada6e7a094e7a9b6e381abe3818ae38191e3828be6b8ace5ae9ae8aaa4e5b7ae-li">
+  <a href="/blog/2022/02/28/%E5%BF%83%E7%90%86%E5%AD%A6%E7%A0%94%E7%A9%B6%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E6%B8%AC%E5%AE%9A%E8%AA%A4%E5%B7%AE/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20220228e5bf83e79086e5ada6e7a094e7a9b6e381abe3818ae38191e3828be6b8ace5ae9ae8aaa4e5b7ae"><span class="">心理学研究における測定誤差</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20220209e3839be383bce383a0e3839ae383bce382b8e381aee38387e382b6e382a4e383b3e381aee5a489e69bb4-li">
+  <a href="/blog/2022/02/09/%E3%83%9B%E3%83%BC%E3%83%A0%E3%83%9A%E3%83%BC%E3%82%B8%E3%81%AE%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%81%AE%E5%A4%89%E6%9B%B4/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20220209e3839be383bce383a0e3839ae383bce382b8e381aee38387e382b6e382a4e383b3e381aee5a489e69bb4"><span class="">ホームページのデザインの変更</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20210116mpluse381aee383a2e383b3e38386e382abe383abe383ade6b395e381aee7b590e69e9ce38292e695b4e5bda2e38199e3828be996a2e695b0-li">
+  <a href="/blog/2021/01/16/mplus%E3%81%AE%E3%83%A2%E3%83%B3%E3%83%86%E3%82%AB%E3%83%AB%E3%83%AD%E6%B3%95%E3%81%AE%E7%B5%90%E6%9E%9C%E3%82%92%E6%95%B4%E5%BD%A2%E3%81%99%E3%82%8B%E9%96%A2%E6%95%B0/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20210116mpluse381aee383a2e383b3e38386e382abe383abe383ade6b395e381aee7b590e69e9ce38292e695b4e5bda2e38199e3828be996a2e695b0"><span class="">Mplusのモンテカルロ法の結果を整形する関数</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20210113re3818be38289mpluse38292e4bdbfe38186-li">
+  <a href="/blog/2021/01/13/r%E3%81%8B%E3%82%89mplus%E3%82%92%E4%BD%BF%E3%81%86/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20210113re3818be38289mpluse38292e4bdbfe38186"><span class="">RからMplusを使う</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20201024tidyverse-style-guidee38292e8aaade38293e381a7e381bfe3819fe99a9be381aee383a1e383a2-li">
+  <a href="/blog/2020/10/24/tidyverse-style-guide%E3%82%92%E8%AA%AD%E3%82%93%E3%81%A7%E3%81%BF%E3%81%9F%E9%9A%9B%E3%81%AE%E3%83%A1%E3%83%A2/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20201024tidyverse-style-guidee38292e8aaade38293e381a7e381bfe3819fe99a9be381aee383a1e383a2"><span class="">tidyverse style guideを読んでみた際のメモ</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog202010202e6aeb5e99a8ee6a49ce5ae9ae381abe381a4e38184e381a6e381aee7b5b1e8a888e381aee69599e7a791e69bb8e381aee8a898e8bfb0-li">
+  <a href="/blog/2020/10/20/2%E6%AE%B5%E9%9A%8E%E6%A4%9C%E5%AE%9A%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E7%B5%B1%E8%A8%88%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8%E3%81%AE%E8%A8%98%E8%BF%B0/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog202010202e6aeb5e99a8ee6a49ce5ae9ae381abe381a4e38184e381a6e381aee7b5b1e8a888e381aee69599e7a791e69bb8e381aee8a898e8bfb0"><span class="">2段階検定についての統計の教科書の記述</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20201018ggstatsplote38391e38383e382b1e383bce382b8e381abe381a4e38184e381a6-li">
+  <a href="/blog/2020/10/18/ggstatsplot%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20201018ggstatsplote38391e38383e382b1e383bce382b8e381abe381a4e38184e381a6"><span class="">ggstatsplotパッケージについて</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20201008gte38391e38383e382b1e383bce382b8e381abe381a4e38184e381a6-li">
+  <a href="/blog/2020/10/08/gt%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20201008gte38391e38383e382b1e383bce382b8e381abe381a4e38184e381a6"><span class="">gtパッケージについて</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200924anacondae381abe38288e3828be792b0e5a283e8a8ade5ae9a-li">
+  <a href="/blog/2020/09/24/anaconda%E3%81%AB%E3%82%88%E3%82%8B%E7%92%B0%E5%A2%83%E8%A8%AD%E5%AE%9A/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200924anacondae381abe38288e3828be792b0e5a283e8a8ade5ae9a"><span class="">Anacondaによる環境設定</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200923e59ba0e5ad90e58886e69e90e381aee69599e7a791e69bb8e381abe3818ae38191e3828be59ba0e5ad90e695b0e381aee981b8e68a9ee381abe381a4e38184e381a6e381aee8a898e8bfb0-li">
+  <a href="/blog/2020/09/23/%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%81%AE%E6%95%99%E7%A7%91%E6%9B%B8%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8B%E5%9B%A0%E5%AD%90%E6%95%B0%E3%81%AE%E9%81%B8%E6%8A%9E%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E8%A8%98%E8%BF%B0/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200923e59ba0e5ad90e58886e69e90e381aee69599e7a791e69bb8e381abe3818ae38191e3828be59ba0e5ad90e695b0e381aee981b8e68a9ee381abe381a4e38184e381a6e381aee8a898e8bfb0"><span class="">因子分析の教科書における因子数の選択についての記述</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200923e68ea2e7b4a2e79a84e59ba0e5ad90e58886e69e90e381aee99a9be381aee5b9b3e8a18ce58886e69e90e381abe381a4e38184e381a6-li">
+  <a href="/blog/2020/09/23/%E6%8E%A2%E7%B4%A2%E7%9A%84%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%81%AE%E9%9A%9B%E3%81%AE%E5%B9%B3%E8%A1%8C%E5%88%86%E6%9E%90%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200923e68ea2e7b4a2e79a84e59ba0e5ad90e58886e69e90e381aee99a9be381aee5b9b3e8a18ce58886e69e90e381abe381a4e38184e381a6"><span class="">探索的因子分析の際の平行分析について</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200922e59ba0e5ad90e58886e69e90e381abe3818ae38191e3828bmape59fbae6ba96e381abe381a4e38184e381a6-li">
+  <a href="/blog/2020/09/22/%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8Bmap%E5%9F%BA%E6%BA%96%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200922e59ba0e5ad90e58886e69e90e381abe3818ae38191e3828bmape59fbae6ba96e381abe381a4e38184e381a6"><span class="">因子分析におけるMAP基準について</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200916efae3818be38289e8a888e7ae97e38197e3819fcf89e381a8cfae3818be38289e8a888e7ae97e38197e3819fcf89-li">
+  <a href="/blog/2020/09/16/efa%E3%81%8B%E3%82%89%E8%A8%88%E7%AE%97%E3%81%97%E3%81%9F%CF%89%E3%81%A8cfa%E3%81%8B%E3%82%89%E8%A8%88%E7%AE%97%E3%81%97%E3%81%9F%CF%89/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200916efae3818be38289e8a888e7ae97e38197e3819fcf89e381a8cfae3818be38289e8a888e7ae97e38197e3819fcf89"><span class="">EFAから計算したωとCFAから計算したω</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200427lavaane381a7mpluse381aee382abe38386e382b4e383aae382abe383abe59ba0e5ad90e58886e69e90e38292e5868de78fbee38199e3828b-li">
+  <a href="/blog/2020/04/27/lavaan%E3%81%A7mplus%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%82%AB%E3%83%AB%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%82%92%E5%86%8D%E7%8F%BE%E3%81%99%E3%82%8B/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200427lavaane381a7mpluse381aee382abe38386e382b4e383aae382abe383abe59ba0e5ad90e58886e69e90e38292e5868de78fbee38199e3828b"><span class="">lavaanでMplusのカテゴリカル因子分析を再現する</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200424non-normale381aae4b9b1e695b0e38292e799bae7949fe38199e3828be38391e38383e382b1e383bce382b8e38182e3828ce38193e3828c-li">
+  <a href="/blog/2020/04/24/non-normal%E3%81%AA%E4%B9%B1%E6%95%B0%E3%82%92%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%82%E3%82%8C%E3%81%93%E3%82%8C/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200424non-normale381aae4b9b1e695b0e38292e799bae7949fe38199e3828be38391e38383e382b1e383bce382b8e38182e3828ce38193e3828c"><span class="">non-normalな乱数を発生するパッケージあれこれ</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200416e382abe38386e382b4e383aae382abe383abe38387e383bce382bfe38292lavaane381a7seme38199e3828be99a9be381aee7b4b0e3818be38184e8a9b1-li">
+  <a href="/blog/2020/04/16/%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%82%AB%E3%83%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92lavaan%E3%81%A7sem%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AE%E7%B4%B0%E3%81%8B%E3%81%84%E8%A9%B1/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200416e382abe38386e382b4e383aae382abe383abe38387e383bce382bfe38292lavaane381a7seme38199e3828be99a9be381aee7b4b0e3818be38184e8a9b1"><span class="">カテゴリカルデータをlavaanでSEMする際の細かい話</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200409zoteroe381aee38395e382a1e382a4e383abe7aea1e79086e381aee8a69ae69bb8-li">
+  <a href="/blog/2020/04/09/zotero%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E7%AE%A1%E7%90%86%E3%81%AE%E8%A6%9A%E6%9B%B8/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200409zoteroe381aee38395e382a1e382a4e383abe7aea1e79086e381aee8a69ae69bb8"><span class="">Zoteroのファイル管理の覚書</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200308re3818be38289estate381aeapie38292e4bdbfe381a3e381a6e381bfe3828be3819de381ae2-li">
+  <a href="/blog/2020/03/08/r%E3%81%8B%E3%82%89estat%E3%81%AEapi%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B%E3%81%9D%E3%81%AE2/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200308re3818be38289estate381aeapie38292e4bdbfe381a3e381a6e381bfe3828be3819de381ae2"><span class="">RからeStatのAPIを使ってみる（その2）</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200307re3818be38289estate381aeapie38292e4bdbfe381a3e381a6e381bfe3828b-li">
+  <a href="/blog/2020/03/07/r%E3%81%8B%E3%82%89estat%E3%81%AEapi%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E3%81%BF%E3%82%8B/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200307re3818be38289estate381aeapie38292e4bdbfe381a3e381a6e381bfe3828b"><span class="">RからeStatのAPIを使ってみる</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200222mac-minie381abe8b2b7e38184e68f9be38188e381a6e38284e381a3e3819fe38193e381a8-li">
+  <a href="/blog/2020/02/22/mac-mini%E3%81%AB%E8%B2%B7%E3%81%84%E6%8F%9B%E3%81%88%E3%81%A6%E3%82%84%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200222mac-minie381abe8b2b7e38184e68f9be38188e381a6e38284e381a3e3819fe38193e381a8"><span class="">Mac miniに買い換えてやったこと</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200217e4bfa1e9a0bce680a7e4bf82e695b0e381aee79baee5ae89e381aee587bae381a9e38193e3828d-li">
+  <a href="/blog/2020/02/17/%E4%BF%A1%E9%A0%BC%E6%80%A7%E4%BF%82%E6%95%B0%E3%81%AE%E7%9B%AE%E5%AE%89%E3%81%AE%E5%87%BA%E3%81%A9%E3%81%93%E3%82%8D/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200217e4bfa1e9a0bce680a7e4bf82e695b0e381aee79baee5ae89e381aee587bae381a9e38193e3828d"><span class="">信頼性係数の目安の出どころ</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200215hugoe381a7e8a898e4ba8be4b8ade381abe695b0e5bc8fe38292e69bb8e3818fe99a9be381ae_e5958fe9a18c-li">
+  <a href="/blog/2020/02/15/hugo%E3%81%A7%E8%A8%98%E4%BA%8B%E4%B8%AD%E3%81%AB%E6%95%B0%E5%BC%8F%E3%82%92%E6%9B%B8%E3%81%8F%E9%9A%9B%E3%81%AE_%E5%95%8F%E9%A1%8C/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200215hugoe381a7e8a898e4ba8be4b8ade381abe695b0e5bc8fe38292e69bb8e3818fe99a9be381ae_e5958fe9a18c"><span class="">Hugoで記事中に数式を書く際の_問題</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200211gite381a7e4b880e983a8e381aee38395e382a1e382a4e383abe38292e789b9e5ae9ae381aee382b3e3839fe38383e38388e381abe688bbe38199e381a8e3818d-li">
+  <a href="/blog/2020/02/11/git%E3%81%A7%E4%B8%80%E9%83%A8%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%82%92%E7%89%B9%E5%AE%9A%E3%81%AE%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%81%AB%E6%88%BB%E3%81%99%E3%81%A8%E3%81%8D/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200211gite381a7e4b880e983a8e381aee38395e382a1e382a4e383abe38292e789b9e5ae9ae381aee382b3e3839fe38383e38388e381abe688bbe38199e381a8e3818d"><span class="">gitで一部のファイルを特定のコミットに戻すとき</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200208lavaane381aee382a2e382a6e38388e38397e38383e38388e38292e38391e382b9e59bb3e381abe38199e3828b-li">
+  <a href="/blog/2020/02/08/lavaan%E3%81%AE%E3%82%A2%E3%82%A6%E3%83%88%E3%83%97%E3%83%83%E3%83%88%E3%82%92%E3%83%91%E3%82%B9%E5%9B%B3%E3%81%AB%E3%81%99%E3%82%8B/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200208lavaane381aee382a2e382a6e38388e38397e38383e38388e38292e38391e382b9e59bb3e381abe38199e3828b"><span class="">lavaanのアウトプットをパス図にする</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200202tikze381a7e9818ae38293e381a7e381bfe3819f-li">
+  <a href="/blog/2020/02/02/tikz%E3%81%A7%E9%81%8A%E3%82%93%E3%81%A7%E3%81%BF%E3%81%9F/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200202tikze381a7e9818ae38293e381a7e381bfe3819f"><span class="">TikZで遊んでみた</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200201e7b69a2e7bea4e381aee38397e383aae3839de382b9e38388e38387e383bce382bfe381abe996a2e38197e381a6-li">
+  <a href="/blog/2020/02/01/%E7%B6%9A2%E7%BE%A4%E3%81%AE%E3%83%97%E3%83%AA%E3%83%9D%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AB%E9%96%A2%E3%81%97%E3%81%A6/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200201e7b69a2e7bea4e381aee38397e383aae3839de382b9e38388e38387e383bce382bfe381abe996a2e38197e381a6"><span class="">続・2群のプリポストデータに関して</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200201zettlre996a2e4bf82e381aee58299e5bf98e98cb2-li">
+  <a href="/blog/2020/02/01/zettlr%E9%96%A2%E4%BF%82%E3%81%AE%E5%82%99%E5%BF%98%E9%8C%B2/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200201zettlre996a2e4bf82e381aee58299e5bf98e98cb2"><span class="">Zettlr関係の備忘録</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200125rstudioe381a7githube381aee98db5e8aa8de8a8bce8a8ade5ae9a-li">
+  <a href="/blog/2020/01/25/rstudio%E3%81%A7github%E3%81%AE%E9%8D%B5%E8%AA%8D%E8%A8%BC%E8%A8%AD%E5%AE%9A/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200125rstudioe381a7githube381aee98db5e8aa8de8a8bce8a8ade5ae9a"><span class="">RstudioでGithubの鍵認証設定</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200112ggplot2e381a7pdfe38292e587bae58a9be38199e3828b-li">
+  <a href="/blog/2020/01/12/ggplot2%E3%81%A7pdf%E3%82%92%E5%87%BA%E5%8A%9B%E3%81%99%E3%82%8B/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200112ggplot2e381a7pdfe38292e587bae58a9be38199e3828b"><span class="">ggplot2でpdfを出力する</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20191227e79bb8e996a2e4bf82e695b0e8a18ce58897e3818be38289e382afe383ade383b3e38390e38383e382afe381aeceb1e38292e6b182e38281e3828b-li">
+  <a href="/blog/2019/12/27/%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E8%A1%8C%E5%88%97%E3%81%8B%E3%82%89%E3%82%AF%E3%83%AD%E3%83%B3%E3%83%90%E3%83%83%E3%82%AF%E3%81%AE%CE%B1%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20191227e79bb8e996a2e4bf82e695b0e8a18ce58897e3818be38289e382afe383ade383b3e38390e38383e382afe381aeceb1e38292e6b182e38281e3828b"><span class="">相関係数行列からクロンバックのαを求める</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog201912212e7bea4e381aee38397e383aae3839de382b9e38388e38387e383bce382bfe381abe996a2e38197e381a6-li">
+  <a href="/blog/2019/12/21/2%E7%BE%A4%E3%81%AE%E3%83%97%E3%83%AA%E3%83%9D%E3%82%B9%E3%83%88%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AB%E9%96%A2%E3%81%97%E3%81%A6/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog201912212e7bea4e381aee38397e383aae3839de382b9e38388e38387e383bce382bfe381abe996a2e38197e381a6"><span class="">2群のプリポストデータに関して</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20190730re381a7e38399e382afe382bfe794bbe5838fe38292e4bd9ce3828be99a9be381aee383a1e383a2-li">
+  <a href="/blog/2019/07/30/r%E3%81%A7%E3%83%99%E3%82%AF%E3%82%BF%E7%94%BB%E5%83%8F%E3%82%92%E4%BD%9C%E3%82%8B%E9%9A%9B%E3%81%AE%E3%83%A1%E3%83%A2/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20190730re381a7e38399e382afe382bfe794bbe5838fe38292e4bd9ce3828be99a9be381aee383a1e383a2"><span class="">Rでベクタ画像を作る際のメモ</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20190726re381aelapplye996a2e695b0e381abe996a2e38199e3828be383a1e383a2-li">
+  <a href="/blog/2019/07/26/r%E3%81%AElapply%E9%96%A2%E6%95%B0%E3%81%AB%E9%96%A2%E3%81%99%E3%82%8B%E3%83%A1%E3%83%A2/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20190726re381aelapplye996a2e695b0e381abe996a2e38199e3828be383a1e383a2"><span class="">Rのlapply関数に関するメモ</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20190703e38396e383bce38388e382b9e38388e383a9e38383e38397e381abe381a4e38184e381a6e381aee8aabfe381b9e38282e381ae-li">
+  <a href="/blog/2019/07/03/%E3%83%96%E3%83%BC%E3%83%88%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E8%AA%BF%E3%81%B9%E3%82%82%E3%81%AE/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20190703e38396e383bce38388e382b9e38388e383a9e38383e38397e381abe381a4e38184e381a6e381aee8aabfe381b9e38282e381ae"><span class="">ブートストラップについての調べもの</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20190625tidyre38292e4bdbfe381a3e3819fe38387e383bce382bfe381aee695b4e79086-li">
+  <a href="/blog/2019/06/25/tidyr%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E6%95%B4%E7%90%86/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20190625tidyre38292e4bdbfe381a3e3819fe38387e383bce382bfe381aee695b4e79086"><span class="">tidyrを使ったデータの整理</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-blog20190619e38386e38388e383a9e382b3e383aae38383e382afe79bb8e996a2e4bf82e695b0e38292e6b182e38281e3828be996a2e695b0e381aee887aae4bd9c-li">
+  <a href="/blog/2019/06/19/%E3%83%86%E3%83%88%E3%83%A9%E3%82%B3%E3%83%AA%E3%83%83%E3%82%AF%E7%9B%B8%E9%96%A2%E4%BF%82%E6%95%B0%E3%82%92%E6%B1%82%E3%82%81%E3%82%8B%E9%96%A2%E6%95%B0%E3%81%AE%E8%87%AA%E4%BD%9C/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-blog20190619e38386e38388e383a9e382b3e383aae38383e382afe79bb8e996a2e4bf82e695b0e38292e6b182e38281e3828be996a2e695b0e381aee887aae4bd9c"><span class="td-sidebar-nav-active-item">テトラコリック相関係数を求める関数の自作</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20190618e38386e38388e383a9e382b3e383aae38383e382afe79bb8e996a2e381aee5889de69c9f-li">
+  <a href="/blog/2019/06/18/%E3%83%86%E3%83%88%E3%83%A9%E3%82%B3%E3%83%AA%E3%83%83%E3%82%AF%E7%9B%B8%E9%96%A2%E3%81%AE%E5%88%9D%E6%9C%9F/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20190618e38386e38388e383a9e382b3e383aae38383e382afe79bb8e996a2e381aee5889de69c9f"><span class="">テトラコリック相関の初期</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20190618ubuntu-1804e381abciscoanyconnecte38292e585a5e3828ce3819fe381a8e3818de381aee383a1e383a2-li">
+  <a href="/blog/2019/06/18/ubuntu-18.04%E3%81%ABciscoanyconnect%E3%82%92%E5%85%A5%E3%82%8C%E3%81%9F%E3%81%A8%E3%81%8D%E3%81%AE%E3%83%A1%E3%83%A2/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20190618ubuntu-1804e381abciscoanyconnecte38292e585a5e3828ce3819fe381a8e3818de381aee383a1e383a2"><span class="">Ubuntu 18.04にCiscoAnyconnectを入れたときのメモ</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20190613test-li">
+  <a href="/blog/2019/06/13/test/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20190613test"><span class="">Test</span></a>
+</li>
+  </ul>
+</li>
+    </ul>
+  </nav>
+</div>
+
+          </aside>
+          <aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none">
+            
+<div class="td-page-meta ml-2 pb-1 pt-2 mb-0">
+
+</div>
+
+            <div class="td-toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li><a href="#rでの関数化">Rでの関数化</a></li>
+    <li><a href="#性能評価の数値実験">性能評価の数値実験</a></li>
+  </ul>
+</nav>
+      </div>
+    
+            
+
+	
+		
+			
+				
+			
+			
+
+
+
+  
+  
+    <div class="taxonomy taxonomy-terms-cloud taxo-tags">
+      
+        <h5 class="taxonomy-title">Tag Cloud</h5>
+      
+      <ul class="taxonomy-terms">
+        
+          <li><a class="taxonomy-term" href="/tags/anaconda/" data-taxonomy-term="anaconda"><span class="taxonomy-label">Anaconda</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/api/" data-taxonomy-term="api"><span class="taxonomy-label">api</span><span class="taxonomy-count">2</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/apply/" data-taxonomy-term="apply"><span class="taxonomy-label">apply</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/bootstrap/" data-taxonomy-term="bootstrap"><span class="taxonomy-label">bootstrap</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/coefficient-omega/" data-taxonomy-term="coefficient-omega"><span class="taxonomy-label">coefficient omega</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/cronbachs-alpha/" data-taxonomy-term="cronbachs-alpha"><span class="taxonomy-label">Cronbach&#39;s alpha</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/e-stat/" data-taxonomy-term="e-stat"><span class="taxonomy-label">e-Stat</span><span class="taxonomy-count">2</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/factor-analysis/" data-taxonomy-term="factor-analysis"><span class="taxonomy-label">factor analysis</span><span class="taxonomy-count">3</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/ggplot2/" data-taxonomy-term="ggplot2"><span class="taxonomy-label">ggplot2</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/ggstatsplot/" data-taxonomy-term="ggstatsplot"><span class="taxonomy-label">ggstatsplot</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/git/" data-taxonomy-term="git"><span class="taxonomy-label">git</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/github/" data-taxonomy-term="github"><span class="taxonomy-label">gitHub</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/gt/" data-taxonomy-term="gt"><span class="taxonomy-label">gt</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/hugo/" data-taxonomy-term="hugo"><span class="taxonomy-label">Hugo</span><span class="taxonomy-count">2</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/lavaan/" data-taxonomy-term="lavaan"><span class="taxonomy-label">lavaan</span><span class="taxonomy-count">2</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/map/" data-taxonomy-term="map"><span class="taxonomy-label">MAP</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/measurement-error/" data-taxonomy-term="measurement-error"><span class="taxonomy-label">measurement error</span><span class="taxonomy-count">3</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/median-absolute-deviation/" data-taxonomy-term="median-absolute-deviation"><span class="taxonomy-label">median absolute deviation</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/monte-carlo-simulation/" data-taxonomy-term="monte-carlo-simulation"><span class="taxonomy-label">Monte Carlo Simulation</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/mplus/" data-taxonomy-term="mplus"><span class="taxonomy-label">Mplus</span><span class="taxonomy-count">2</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/nonnormal-distribution/" data-taxonomy-term="nonnormal-distribution"><span class="taxonomy-label">nonnormal distribution</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/outlier/" data-taxonomy-term="outlier"><span class="taxonomy-label">outlier</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/parallel-analysis/" data-taxonomy-term="parallel-analysis"><span class="taxonomy-label">parallel analysis</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/pdf/" data-taxonomy-term="pdf"><span class="taxonomy-label">pdf</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span><span class="taxonomy-count">4</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/reliability/" data-taxonomy-term="reliability"><span class="taxonomy-label">reliability</span><span class="taxonomy-count">5</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/reliablity/" data-taxonomy-term="reliablity"><span class="taxonomy-label">reliablity</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/rstudio/" data-taxonomy-term="rstudio"><span class="taxonomy-label">Rstudio</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/sem/" data-taxonomy-term="sem"><span class="taxonomy-label">SEM</span><span class="taxonomy-count">2</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/tetrachoric-correlation/" data-taxonomy-term="tetrachoric-correlation"><span class="taxonomy-label">tetrachoric correlation</span><span class="taxonomy-count">2</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/tidyverse/" data-taxonomy-term="tidyverse"><span class="taxonomy-label">tidyverse</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/tidyverse-style-guide/" data-taxonomy-term="tidyverse-style-guide"><span class="taxonomy-label">tidyverse style guide</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/wlsmv/" data-taxonomy-term="wlsmv"><span class="taxonomy-label">WLSMV</span><span class="taxonomy-count">2</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/tags/zotero/" data-taxonomy-term="zotero"><span class="taxonomy-label">zotero</span><span class="taxonomy-count">1</span></a></li>
+        
+      </ul>
+    </div>
+  
+
+		
+			
+				
+			
+			
+
+
+
+  
+  
+    <div class="taxonomy taxonomy-terms-cloud taxo-categories">
+      
+        <h5 class="taxonomy-title">Categories</h5>
+      
+      <ul class="taxonomy-terms">
+        
+          <li><a class="taxonomy-term" href="/categories/others/" data-taxonomy-term="others"><span class="taxonomy-label">others</span><span class="taxonomy-count">6</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/categories/python/" data-taxonomy-term="python"><span class="taxonomy-label">python</span><span class="taxonomy-count">1</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/categories/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span><span class="taxonomy-count">19</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/categories/reading/" data-taxonomy-term="reading"><span class="taxonomy-label">reading</span><span class="taxonomy-count">3</span></a></li>
+        
+          <li><a class="taxonomy-term" href="/categories/stat/" data-taxonomy-term="stat"><span class="taxonomy-label">stat</span><span class="taxonomy-count">20</span></a></li>
+        
+      </ul>
+    </div>
+  
+
+		
+	
+
+          </aside>
+          <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
+            
+<div class="td-content">
+	<h1>テトラコリック相関係数を求める関数の自作</h1>
+	
+	<div class="td-byline mb-4">
+		
+		<time datetime="2019-06-19" class="text-muted">Wednesday, June 19, 2019</time>
+	</div>
+	<header class="article-meta">
+		
+
+  
+    
+      
+
+
+<div class="taxonomy taxonomy-terms-article taxo-tags">
+  <h5 class="taxonomy-title">Tags:</h5>
+  <ul class="taxonomy-terms">
+    
+      <li><a class="taxonomy-term" href="/tags/tetrachoric-correlation/" data-taxonomy-term="tetrachoric-correlation"><span class="taxonomy-label">tetrachoric correlation</span></a></li>
+    
+      <li><a class="taxonomy-term" href="/tags/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span></a></li>
+    
+  </ul>
+</div>
+
+    
+      
+
+
+<div class="taxonomy taxonomy-terms-article taxo-categories">
+  <h5 class="taxonomy-title">Categories:</h5>
+  <ul class="taxonomy-terms">
+    
+      <li><a class="taxonomy-term" href="/categories/stat/" data-taxonomy-term="stat"><span class="taxonomy-label">stat</span></a></li>
+    
+  </ul>
+</div>
+
+    
+  
+
+		
+	</header>
+	<p>先日テトラコリック相関係数を求める方法についての記事を書いた。</p>
+<p><a href="https://onoshima.github.io/stat/190618everitt/">テトラコリック相関の初期</a></p>
+<p>それに基づいてRでテトラコリック相関係数を求める関数を自作した。</p>
+<h2 id="rでの関数化">Rでの関数化</h2>
+<p>作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということを<code>order=</code>という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#000">tetrachoric</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">function</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cor.table</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">order</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#0000cf;font-weight:bold">6</span><span style="color:#000;font-weight:bold">){</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8f5902;font-style:italic">#必要な数値を代入</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">N</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cor.table</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">prop.bd</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">colSums</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">prop.table</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cor.table</span><span style="color:#000;font-weight:bold">))</span><span style="color:#000">[2]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">prop.cd</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">rowSums</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">prop.table</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">cor.table</span><span style="color:#000;font-weight:bold">))</span><span style="color:#000">[2]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">h</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">qnorm</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">prop.bd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">lower.tail</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">F</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">H</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">dnorm</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">h</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">k</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">qnorm</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">prop.cd</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">lower.tail</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#3465a4">F</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">K</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">dnorm</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">k</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">tau</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">numeric</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">order</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">theta</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">numeric</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">order</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">v_bar</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">numeric</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">order</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">w_bar</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">numeric</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">order</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8f5902;font-style:italic">#テトラコリック関数</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">for</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">n</span> <span style="color:#000">in</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#ce5c00;font-weight:bold">:</span><span style="color:#000">order</span><span style="color:#000;font-weight:bold">){</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000">if</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">n</span><span style="color:#ce5c00;font-weight:bold">==</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">){</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#000">v_bar[n]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">h</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#000">w_bar[n]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">k</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#000">tau[n]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">H</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#000">theta[n]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">K</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span> <span style="color:#000">else</span> <span style="color:#000">if </span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">n</span><span style="color:#ce5c00;font-weight:bold">==</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">){</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#000">v_bar[n]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">h^2</span><span style="color:#0000cf;font-weight:bold">-1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#000">w_bar[n]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">k^2</span><span style="color:#0000cf;font-weight:bold">-1</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#000">tau[n]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">H</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">h</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">sqrt</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#000">theta[n]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">K</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">k</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">sqrt</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span> <span style="color:#000">else</span> <span style="color:#000;font-weight:bold">{</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#000">v_bar[n]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">h</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">v_bar[n</span><span style="color:#0000cf;font-weight:bold">-1</span><span style="color:#000">]</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">n</span><span style="color:#0000cf;font-weight:bold">-1</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">v_bar[n</span><span style="color:#0000cf;font-weight:bold">-2</span><span style="color:#000">]</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#000">w_bar[n]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">k</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">w_bar[n</span><span style="color:#0000cf;font-weight:bold">-1</span><span style="color:#000">]</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">n</span><span style="color:#0000cf;font-weight:bold">-1</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">w_bar[n</span><span style="color:#0000cf;font-weight:bold">-2</span><span style="color:#000">]</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#000">tau[n]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span>  <span style="color:#000">H</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">v_bar[n</span><span style="color:#0000cf;font-weight:bold">-1</span><span style="color:#000">]</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">sqrt</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">factorial</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">n</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#000">theta[n]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">K</span><span style="color:#ce5c00;font-weight:bold">*</span><span style="color:#000">w_bar[n</span><span style="color:#0000cf;font-weight:bold">-1</span><span style="color:#000">]</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">sqrt</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">factorial</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">n</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000;font-weight:bold">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#8f5902;font-style:italic"># 相関を計算</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">coef_vec</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">prop.bd</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">prop.cd</span> <span style="color:#ce5c00;font-weight:bold">-</span> <span style="color:#000">cor.table[2</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000">]</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">N</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">tau</span> <span style="color:#ce5c00;font-weight:bold">*</span> <span style="color:#000">theta</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">res</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">Re</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">polyroot</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">coef_vec</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000">[1]</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">return</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">res</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span></span></span></code></pre></div>
+<h2 id="性能評価の数値実験">性能評価の数値実験</h2>
+<p>この関数がどの程度正確に相関係数を推定できるか実験してみる。母相関を0.8とする2変量標準正規分布からN=1000の乱数を発生させて, それを $ h=0.3, k=-0.2 $ の閾値でそれぞれ2値化する。たとえば, 身長と体重の2変量が, それぞれ【高い,低い】【重い,軽い】のように2値データとして手に入った状態を想定すると良い。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#000">library</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">mvtnorm</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">dat</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">rmvnorm</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1000</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">mean</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#000">sigma</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">matrix</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">0.8</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">0.8</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">),</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">height</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">cut</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">dat[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000">]</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">breaks</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#204a87;font-weight:bold">Inf</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">0.3</span><span style="color:#000;font-weight:bold">,</span><span style="color:#204a87;font-weight:bold">Inf</span><span style="color:#000;font-weight:bold">),</span><span style="color:#000">labels</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;低い&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;高い&#34;</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">weight</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">cut</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">dat[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000">]</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">breaks</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#204a87;font-weight:bold">Inf</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">-0.2</span><span style="color:#000;font-weight:bold">,</span><span style="color:#204a87;font-weight:bold">Inf</span><span style="color:#000;font-weight:bold">),</span><span style="color:#000">labels</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;軽い&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;重い&#34;</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># こんな感じの相関表になる</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">table</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">height</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">weight</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#000">weight</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">height</span> 軽い 重い
+</span></span><span style="display:flex;"><span>  低い  <span style="color:#0000cf;font-weight:bold">400</span>  <span style="color:#0000cf;font-weight:bold">237</span>
+</span></span><span style="display:flex;"><span>  高い   <span style="color:#0000cf;font-weight:bold">27</span>  <span style="color:#0000cf;font-weight:bold">336</span></span></span></code></pre></div>
+<p>このような2値データのペアの相関係数を計算すると当然離散化前より絶対値が低下していることがわかるが, テトラコリック相関係数ではもとの値に近い値を推定できている。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#000">cor</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">dat[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000">]</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">dat[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000">]</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#8f5902;font-style:italic"># 離散化前の相関</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">[1]</span> <span style="color:#0000cf;font-weight:bold">0.7930115</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">cor</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">as.numeric</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">height</span><span style="color:#000;font-weight:bold">),</span><span style="color:#000">as.numeric</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">weight</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># 離散化後の相関</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">[1]</span> <span style="color:#0000cf;font-weight:bold">0.4956164</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">tetrachoric</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">table</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">height</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">weight</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#8f5902;font-style:italic"># テトラコリック相関</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">[1]</span> <span style="color:#0000cf;font-weight:bold">0.7463495</span>
+</span></span><span style="display:flex;"><span> </span></span></code></pre></div>
+<p>さて, これと同様の手続きを10000回繰り返し, テトラコリック相関係数はどの程度もとの相関を再現できるかを以下のコードで確かめた。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">## 繰り返しの回数</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">n.iteration</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#0000cf;font-weight:bold">10000</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">##保存用ベクトル</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">tetra</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">numeric</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">n.iteration</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">cont</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">numeric</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">n.iteration</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">pearson</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">numeric</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">n.iteration</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#000">for</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">ite</span> <span style="color:#000">in</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#ce5c00;font-weight:bold">:</span><span style="color:#000">n.iteration</span><span style="color:#000;font-weight:bold">){</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">dat</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">rmvnorm</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1000</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">mean</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#000">sigma</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">matrix</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">0.8</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">0.8</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">),</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">height</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">cut</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">dat[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000">]</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">breaks</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#204a87;font-weight:bold">Inf</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">0.3</span><span style="color:#000;font-weight:bold">,</span><span style="color:#204a87;font-weight:bold">Inf</span><span style="color:#000;font-weight:bold">),</span><span style="color:#000">labels</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;低い&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;高い&#34;</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">weight</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">cut</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">dat[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">2</span><span style="color:#000">]</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">breaks</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#ce5c00;font-weight:bold">-</span><span style="color:#204a87;font-weight:bold">Inf</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">-0.2</span><span style="color:#000;font-weight:bold">,</span><span style="color:#204a87;font-weight:bold">Inf</span><span style="color:#000;font-weight:bold">),</span><span style="color:#000">labels</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;軽い&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;重い&#34;</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">cont[ite]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">cor</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">dat</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000">[2</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000">]</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">pearson[ite]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">cor</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">as.numeric</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">height</span><span style="color:#000;font-weight:bold">),</span><span style="color:#000">as.numeric</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">weight</span><span style="color:#000;font-weight:bold">))</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#000">tetra[ite]</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">tetrachoric</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">table</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">height</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">weight</span><span style="color:#000;font-weight:bold">))</span>  
+</span></span><span style="display:flex;"><span><span style="color:#000;font-weight:bold">}</span></span></span></code></pre></div>
+<p>結果は次の画像の通りである。
+<img src="/images/tetra_res.png" alt="数値実験結果"></p>
+<p>図中のContというのが連続変量のまま相関係数を計算したもの, Pearsonが離散化した変数でそのままピアソンの積率相関を求めたもの, Tetraがテトラコリック相関係数を求めたものである。TetraとPearsonを比べると, Pearsonが0.5-06付近まで相関係数の絶対値が低下しているのに対して, Tetraは母相関である0.8のあたりを概ね正確に推定していることがわかる。</p>
+
+	
+
+	<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
+  <li>
+    <a href="/blog/2019/06/18/%E3%83%86%E3%83%88%E3%83%A9%E3%82%B3%E3%83%AA%E3%83%83%E3%82%AF%E7%9B%B8%E9%96%A2%E3%81%AE%E5%88%9D%E6%9C%9F/" aria-label="Previous - テトラコリック相関の初期" class="btn btn-primary"><span class="mr-1">←</span>Previous</a>
+  </li>
+  <li>
+    <a href="/blog/2019/06/25/tidyr%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E3%83%87%E3%83%BC%E3%82%BF%E3%81%AE%E6%95%B4%E7%90%86/" aria-label="Next - tidyrを使ったデータの整理" class="btn btn-primary">Next<span class="ml-1">→</span></a>
+  </li>
+</ul>
+
+</div>
+
+
+          </main>
+        </div>
+      </div>
+      
+<footer class="bg-dark py-5 row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 text-xs-center order-sm-2">
+        
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3">
+        
+      </div>
+      <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
+        <small class="text-white">&copy; 2023 Takahiro Onoshima All Rights Reserved</small>
+        
+	
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    </div>
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.css"
+    integrity="sha512-vJqxkZ+Sugf/6WRlpcxN01qVfX/29hF6qc33eHF1va3NgoV+U+wCi+uTAsQ10sDoGyBxHLdaHvGwDlV3yVYboA==" crossorigin="anonymous">
+
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/katex.min.js"
+    integrity="sha512-5ufNcHqOYgilGEHPfuRIQ5B/vDS1M8+UC+DESZ5CwVgGTg+b2Ol/15rYL/GiCWJ/Sx8oVo0FPFok1dPk8U9INQ=="
+    crossorigin="anonymous"></script>
+
+
+<script defer src='https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js'
+    integrity='sha512-ZA/RPrAo88DlwRnnoNVqKINnQNcWERzRK03PDaA4GIJiVZvGFIWQbdWCsUebMZfkWohnfngsDjXzU6PokO4jGw==' crossorigin='anonymous'
+    onload='renderMathInElement(document.body, {"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":true,"left":"\\[","right":"\\]"}],"errorcolor":"#CD5C5C","throwonerror":false});'></script>
+<script src="/js/main.min.be25a680a0d95dc8b5d6664622e2134aa894220e2f224ef609e00f633a3a1b32.js" integrity="sha256-viWmgKDZXci11mZGIuITSqiUIg4vIk72CeAPYzo6GzI=" crossorigin="anonymous"></script>
+<script src='/js/tabpane-persist.js'></script>
+
+  </body>
+</html>
