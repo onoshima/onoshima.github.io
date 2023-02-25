@@ -27,7 +27,7 @@ https://style.tidyverse.org/package-files.html#names-1
 https://style.tidyverse.org/package-files.html#names-1
 ファイル名 空白いれない 意味あるものにする 番号順にしたいなら，1xxx,2xxxxでなくて01xxx,02xxxのように0つめる 内部の構造 # plot data &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-みたいに区切る package読み込むときはファイルの最初でまとめて 変数名 変数名は小文字のみ，意味の区切りは_でつなげる 変数名は名詞で関数名は動詞 cとかTとか一般的な関数や変数に代入しない 空白 ,のあとはスペース入れる ()の前後にスペース入れない ifとかforとかん()の前後はスペース入れる funcutionの()の後にはスペース入れる {{}}の中にはスペース入れる =とか&lt;-とかの前後にはスペース入れる 片側の~式はスペース入れない（複雑だとスペース入れる） =の位置を揃えるための追加のスペースはOK 関数 データの引数名は省略，他は書く 制御フロー {は行の最後にあるべき 中身は2文字のインデント }は行の最初にあるべき とってもシンプルだったら落として1行でも可 switchでは，各要素1行，フォールスルーエラーを書く 長い行 80文字を超えない 関数名が長いなら，改行して1行ずつ，引数の指定する。 引数を意味の繋がりで行にまとめても良い セミコロン 行の終わりで使わない。1行に2つのコマンドを詰め込まない 変数の代入に=を使わない&lt;-を使う データ 文字列ベクトルは&quot;&ldquo;にする。&lsquo;&lsquo;は事情がない限り使わない。 論理値ベクトルはT，FよりもTRUE，FALSE推奨 コメント #とスペースで始める コメントをつける必要がある場合にはまずコードが明確にならないかを検討する コメントの方が長いならRmarkdownを使う 関数 return()は関数内の早い段階の場合のみ使う。最後の式が評価されるのだから return使うときには独立した１つの行に コメント（関数） - 何をやっているかでなく，なぜやっているかを書く - 文の形で書く。2文以上あるときだけピリオド パイプ %&gt;%使うと流れがわかりやすい %&gt;%の前にはスペース，改行して使う。空白は2文字。 magrittrは()を省略できるけどするな ggplot ggplotの&#43;は基本%&gt;%と同じように使う dplyrの%&gt;%と合わせて使うなら，さらに深いインデントにしない（インデントのレベルは1まで） ggplot関数の内部でデータの操作もできるけどしない。ggplotに渡す前にデータの操作をしておく " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="/blog/2020/10/24/tidyverse-style-guide%E3%82%92%E8%AA%AD%E3%82%93%E3%81%A7%E3%81%BF%E3%81%9F%E9%9A%9B%E3%81%AE%E3%83%A1%E3%83%A2/" /><meta property="article:section" content="blog" />
+<meta property="og:url" content="https://onoshima.github.io/blog/2020/10/24/tidyverse-style-guide%E3%82%92%E8%AA%AD%E3%82%93%E3%81%A7%E3%81%BF%E3%81%9F%E9%9A%9B%E3%81%AE%E3%83%A1%E3%83%A2/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2020-10-24T21:23:55+09:00" />
 <meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
 <meta itemprop="name" content="tidyverse style guideを読んでみた際のメモ">
@@ -230,73 +230,73 @@ if (!doNotTrack) {
       
       <ul class="taxonomy-terms">
         
-          <li><a class="taxonomy-term" href="/tags/anaconda/" data-taxonomy-term="anaconda"><span class="taxonomy-label">Anaconda</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/anaconda/" data-taxonomy-term="anaconda"><span class="taxonomy-label">Anaconda</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/api/" data-taxonomy-term="api"><span class="taxonomy-label">api</span><span class="taxonomy-count">2</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/api/" data-taxonomy-term="api"><span class="taxonomy-label">api</span><span class="taxonomy-count">2</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/apply/" data-taxonomy-term="apply"><span class="taxonomy-label">apply</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/apply/" data-taxonomy-term="apply"><span class="taxonomy-label">apply</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/bootstrap/" data-taxonomy-term="bootstrap"><span class="taxonomy-label">bootstrap</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/bootstrap/" data-taxonomy-term="bootstrap"><span class="taxonomy-label">bootstrap</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/coefficient-omega/" data-taxonomy-term="coefficient-omega"><span class="taxonomy-label">coefficient omega</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/coefficient-omega/" data-taxonomy-term="coefficient-omega"><span class="taxonomy-label">coefficient omega</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/cronbachs-alpha/" data-taxonomy-term="cronbachs-alpha"><span class="taxonomy-label">Cronbach&#39;s alpha</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/cronbachs-alpha/" data-taxonomy-term="cronbachs-alpha"><span class="taxonomy-label">Cronbach&#39;s alpha</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/e-stat/" data-taxonomy-term="e-stat"><span class="taxonomy-label">e-Stat</span><span class="taxonomy-count">2</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/e-stat/" data-taxonomy-term="e-stat"><span class="taxonomy-label">e-Stat</span><span class="taxonomy-count">2</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/factor-analysis/" data-taxonomy-term="factor-analysis"><span class="taxonomy-label">factor analysis</span><span class="taxonomy-count">3</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/factor-analysis/" data-taxonomy-term="factor-analysis"><span class="taxonomy-label">factor analysis</span><span class="taxonomy-count">3</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/ggplot2/" data-taxonomy-term="ggplot2"><span class="taxonomy-label">ggplot2</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/ggplot2/" data-taxonomy-term="ggplot2"><span class="taxonomy-label">ggplot2</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/ggstatsplot/" data-taxonomy-term="ggstatsplot"><span class="taxonomy-label">ggstatsplot</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/ggstatsplot/" data-taxonomy-term="ggstatsplot"><span class="taxonomy-label">ggstatsplot</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/git/" data-taxonomy-term="git"><span class="taxonomy-label">git</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/git/" data-taxonomy-term="git"><span class="taxonomy-label">git</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/github/" data-taxonomy-term="github"><span class="taxonomy-label">gitHub</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/github/" data-taxonomy-term="github"><span class="taxonomy-label">gitHub</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/gt/" data-taxonomy-term="gt"><span class="taxonomy-label">gt</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/gt/" data-taxonomy-term="gt"><span class="taxonomy-label">gt</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/hugo/" data-taxonomy-term="hugo"><span class="taxonomy-label">Hugo</span><span class="taxonomy-count">2</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/hugo/" data-taxonomy-term="hugo"><span class="taxonomy-label">Hugo</span><span class="taxonomy-count">2</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/lavaan/" data-taxonomy-term="lavaan"><span class="taxonomy-label">lavaan</span><span class="taxonomy-count">2</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/lavaan/" data-taxonomy-term="lavaan"><span class="taxonomy-label">lavaan</span><span class="taxonomy-count">2</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/map/" data-taxonomy-term="map"><span class="taxonomy-label">MAP</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/map/" data-taxonomy-term="map"><span class="taxonomy-label">MAP</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/measurement-error/" data-taxonomy-term="measurement-error"><span class="taxonomy-label">measurement error</span><span class="taxonomy-count">3</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/measurement-error/" data-taxonomy-term="measurement-error"><span class="taxonomy-label">measurement error</span><span class="taxonomy-count">3</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/median-absolute-deviation/" data-taxonomy-term="median-absolute-deviation"><span class="taxonomy-label">median absolute deviation</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/median-absolute-deviation/" data-taxonomy-term="median-absolute-deviation"><span class="taxonomy-label">median absolute deviation</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/monte-carlo-simulation/" data-taxonomy-term="monte-carlo-simulation"><span class="taxonomy-label">Monte Carlo Simulation</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/monte-carlo-simulation/" data-taxonomy-term="monte-carlo-simulation"><span class="taxonomy-label">Monte Carlo Simulation</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/mplus/" data-taxonomy-term="mplus"><span class="taxonomy-label">Mplus</span><span class="taxonomy-count">2</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/mplus/" data-taxonomy-term="mplus"><span class="taxonomy-label">Mplus</span><span class="taxonomy-count">2</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/nonnormal-distribution/" data-taxonomy-term="nonnormal-distribution"><span class="taxonomy-label">nonnormal distribution</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/nonnormal-distribution/" data-taxonomy-term="nonnormal-distribution"><span class="taxonomy-label">nonnormal distribution</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/outlier/" data-taxonomy-term="outlier"><span class="taxonomy-label">outlier</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/outlier/" data-taxonomy-term="outlier"><span class="taxonomy-label">outlier</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/parallel-analysis/" data-taxonomy-term="parallel-analysis"><span class="taxonomy-label">parallel analysis</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/parallel-analysis/" data-taxonomy-term="parallel-analysis"><span class="taxonomy-label">parallel analysis</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/pdf/" data-taxonomy-term="pdf"><span class="taxonomy-label">pdf</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/pdf/" data-taxonomy-term="pdf"><span class="taxonomy-label">pdf</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span><span class="taxonomy-count">4</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span><span class="taxonomy-count">4</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/reliability/" data-taxonomy-term="reliability"><span class="taxonomy-label">reliability</span><span class="taxonomy-count">5</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/reliability/" data-taxonomy-term="reliability"><span class="taxonomy-label">reliability</span><span class="taxonomy-count">5</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/reliablity/" data-taxonomy-term="reliablity"><span class="taxonomy-label">reliablity</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/reliablity/" data-taxonomy-term="reliablity"><span class="taxonomy-label">reliablity</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/rstudio/" data-taxonomy-term="rstudio"><span class="taxonomy-label">Rstudio</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/rstudio/" data-taxonomy-term="rstudio"><span class="taxonomy-label">Rstudio</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/sem/" data-taxonomy-term="sem"><span class="taxonomy-label">SEM</span><span class="taxonomy-count">2</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/sem/" data-taxonomy-term="sem"><span class="taxonomy-label">SEM</span><span class="taxonomy-count">2</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/tetrachoric-correlation/" data-taxonomy-term="tetrachoric-correlation"><span class="taxonomy-label">tetrachoric correlation</span><span class="taxonomy-count">2</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/tetrachoric-correlation/" data-taxonomy-term="tetrachoric-correlation"><span class="taxonomy-label">tetrachoric correlation</span><span class="taxonomy-count">2</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/tidyverse/" data-taxonomy-term="tidyverse"><span class="taxonomy-label">tidyverse</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/tidyverse/" data-taxonomy-term="tidyverse"><span class="taxonomy-label">tidyverse</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/tidyverse-style-guide/" data-taxonomy-term="tidyverse-style-guide"><span class="taxonomy-label">tidyverse style guide</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/tidyverse-style-guide/" data-taxonomy-term="tidyverse-style-guide"><span class="taxonomy-label">tidyverse style guide</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/wlsmv/" data-taxonomy-term="wlsmv"><span class="taxonomy-label">WLSMV</span><span class="taxonomy-count">2</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/wlsmv/" data-taxonomy-term="wlsmv"><span class="taxonomy-label">WLSMV</span><span class="taxonomy-count">2</span></a></li>
         
-          <li><a class="taxonomy-term" href="/tags/zotero/" data-taxonomy-term="zotero"><span class="taxonomy-label">zotero</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/zotero/" data-taxonomy-term="zotero"><span class="taxonomy-label">zotero</span><span class="taxonomy-count">1</span></a></li>
         
       </ul>
     </div>
@@ -318,15 +318,15 @@ if (!doNotTrack) {
       
       <ul class="taxonomy-terms">
         
-          <li><a class="taxonomy-term" href="/categories/others/" data-taxonomy-term="others"><span class="taxonomy-label">others</span><span class="taxonomy-count">6</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/others/" data-taxonomy-term="others"><span class="taxonomy-label">others</span><span class="taxonomy-count">6</span></a></li>
         
-          <li><a class="taxonomy-term" href="/categories/python/" data-taxonomy-term="python"><span class="taxonomy-label">python</span><span class="taxonomy-count">1</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/python/" data-taxonomy-term="python"><span class="taxonomy-label">python</span><span class="taxonomy-count">1</span></a></li>
         
-          <li><a class="taxonomy-term" href="/categories/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span><span class="taxonomy-count">19</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span><span class="taxonomy-count">19</span></a></li>
         
-          <li><a class="taxonomy-term" href="/categories/reading/" data-taxonomy-term="reading"><span class="taxonomy-label">reading</span><span class="taxonomy-count">3</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/reading/" data-taxonomy-term="reading"><span class="taxonomy-label">reading</span><span class="taxonomy-count">3</span></a></li>
         
-          <li><a class="taxonomy-term" href="/categories/stat/" data-taxonomy-term="stat"><span class="taxonomy-label">stat</span><span class="taxonomy-count">20</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/stat/" data-taxonomy-term="stat"><span class="taxonomy-label">stat</span><span class="taxonomy-count">20</span></a></li>
         
       </ul>
     </div>
@@ -357,7 +357,7 @@ if (!doNotTrack) {
   <h5 class="taxonomy-title">Tags:</h5>
   <ul class="taxonomy-terms">
     
-      <li><a class="taxonomy-term" href="/tags/tidyverse-style-guide/" data-taxonomy-term="tidyverse-style-guide"><span class="taxonomy-label">tidyverse style guide</span></a></li>
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/tidyverse-style-guide/" data-taxonomy-term="tidyverse-style-guide"><span class="taxonomy-label">tidyverse style guide</span></a></li>
     
   </ul>
 </div>
@@ -370,7 +370,7 @@ if (!doNotTrack) {
   <h5 class="taxonomy-title">Categories:</h5>
   <ul class="taxonomy-terms">
     
-      <li><a class="taxonomy-term" href="/categories/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span></a></li>
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span></a></li>
     
   </ul>
 </div>
@@ -531,7 +531,7 @@ if (!doNotTrack) {
 <script defer src='https://cdn.jsdelivr.net/npm/katex@0.15.1/dist/contrib/auto-render.min.js'
     integrity='sha512-ZA/RPrAo88DlwRnnoNVqKINnQNcWERzRK03PDaA4GIJiVZvGFIWQbdWCsUebMZfkWohnfngsDjXzU6PokO4jGw==' crossorigin='anonymous'
     onload='renderMathInElement(document.body, {"delimiters":[{"display":true,"left":"$$","right":"$$"},{"display":false,"left":"$","right":"$"},{"display":false,"left":"\\(","right":"\\)"},{"display":true,"left":"\\[","right":"\\]"}],"errorcolor":"#CD5C5C","throwonerror":false});'></script>
-<script src="/js/main.min.be25a680a0d95dc8b5d6664622e2134aa894220e2f224ef609e00f633a3a1b32.js" integrity="sha256-viWmgKDZXci11mZGIuITSqiUIg4vIk72CeAPYzo6GzI=" crossorigin="anonymous"></script>
+<script src="/js/main.min.a9d544618468739c905464ec26de763314a8209eaabb487eef2a0026b190a7b8.js" integrity="sha256-qdVEYYRoc5yQVGTsJt52MxSoIJ6qu0h&#43;7yoAJrGQp7g=" crossorigin="anonymous"></script>
 <script src='/js/tabpane-persist.js'></script>
 
   </body>
