@@ -18,49 +18,41 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>EFAから計算したωとCFAから計算したω | Onoshima&#39;s website</title>
-<meta name="description" content="2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
-$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}&#43;{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
-として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
-Revelle &amp;amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
-使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。
-https://www.personality-project.org/r/html/bifactor.html
-探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
-library(lavaan) library(psych) library(knitr) data(&amp;#34;Thurstone&amp;#34;) res_efa &amp;lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3)) g F1* F2* F3* h2 u2 p2 Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615 Vocabulary 0.726 0.553 0.042 -0.022 0.835 0.165 0.631 Sent.Completion 0.">
-<meta property="og:title" content="EFAから計算したωとCFAから計算したω" />
-<meta property="og:description" content="2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
-$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}&#43;{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
-として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
-Revelle &amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
-使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。
-https://www.personality-project.org/r/html/bifactor.html
-探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
-library(lavaan) library(psych) library(knitr) data(&#34;Thurstone&#34;) res_efa &lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3)) g F1* F2* F3* h2 u2 p2 Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615 Vocabulary 0.726 0.553 0.042 -0.022 0.835 0.165 0.631 Sent.Completion 0." />
+<title>日本心理学会執筆・投稿の手びき2022年版用のCSLファイル | Onoshima&#39;s website</title>
+<meta name="description" content="学科の仕事の関係で日本心理学会執筆・投稿の手びき 2022 年版を何回か読み直す機会がありました。
+読んでいる内に心理学研究用のCSLファイルがあると便利なのではと思い，CSLの勉強がてら勢いで作ってみました。以下のリンクからダウンロードできます。
+jpa2022csl
+技術的に色々と難しいところもあり，けっこう苦戦したのですが，とりあえず手びきの中で例示されているものについては望んだアウトプットが得られるものが完成したので一応公開しておきます。CSLの意図する使い方をかなり無視して改造したもので，かつ，様々な文献のエントリに対して網羅的にチェックを行なっている訳ではないので，使用している内にどこかで不具合があるかもしれません。
+作ってみた感想としてPandocで参考文献が辛い話 (PandocとZoteroで参考文献：余談編)に書いてあることと同じ印象で，CSLは日本語圏の情報があまりなく，和文処理で苦戦するという点でなかなかにつらいものがありました。
+なお，アウトプットがLaTeXによるPDFファイルであることが決まっている場合には芝田征司先生が作成された大変完成度の高いbiblatex-jpa 日本心理学会風文献スタイル（2022年版)というものがあるのでそちらを使うことをお勧めします。">
+<meta property="og:title" content="日本心理学会執筆・投稿の手びき2022年版用のCSLファイル" />
+<meta property="og:description" content="学科の仕事の関係で日本心理学会執筆・投稿の手びき 2022 年版を何回か読み直す機会がありました。
+読んでいる内に心理学研究用のCSLファイルがあると便利なのではと思い，CSLの勉強がてら勢いで作ってみました。以下のリンクからダウンロードできます。
+jpa2022csl
+技術的に色々と難しいところもあり，けっこう苦戦したのですが，とりあえず手びきの中で例示されているものについては望んだアウトプットが得られるものが完成したので一応公開しておきます。CSLの意図する使い方をかなり無視して改造したもので，かつ，様々な文献のエントリに対して網羅的にチェックを行なっている訳ではないので，使用している内にどこかで不具合があるかもしれません。
+作ってみた感想としてPandocで参考文献が辛い話 (PandocとZoteroで参考文献：余談編)に書いてあることと同じ印象で，CSLは日本語圏の情報があまりなく，和文処理で苦戦するという点でなかなかにつらいものがありました。
+なお，アウトプットがLaTeXによるPDFファイルであることが決まっている場合には芝田征司先生が作成された大変完成度の高いbiblatex-jpa 日本心理学会風文献スタイル（2022年版)というものがあるのでそちらを使うことをお勧めします。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://onoshima.github.io/blog/2020/09/16/efa%E3%81%8B%E3%82%89%E8%A8%88%E7%AE%97%E3%81%97%E3%81%9F%CF%89%E3%81%A8cfa%E3%81%8B%E3%82%89%E8%A8%88%E7%AE%97%E3%81%97%E3%81%9F%CF%89/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2020-09-16T15:13:32+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
-<meta itemprop="name" content="EFAから計算したωとCFAから計算したω">
-<meta itemprop="description" content="2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
-$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}&#43;{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
-として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
-Revelle &amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
-使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。
-https://www.personality-project.org/r/html/bifactor.html
-探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
-library(lavaan) library(psych) library(knitr) data(&#34;Thurstone&#34;) res_efa &lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3)) g F1* F2* F3* h2 u2 p2 Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615 Vocabulary 0.726 0.553 0.042 -0.022 0.835 0.165 0.631 Sent.Completion 0."><meta itemprop="datePublished" content="2020-09-16T15:13:32+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
-<meta itemprop="wordCount" content="422">
-<meta itemprop="keywords" content="coefficient omega,reliability," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="EFAから計算したωとCFAから計算したω"/>
-<meta name="twitter:description" content="2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
-$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}&#43;{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
-として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
-Revelle &amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
-使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。
-https://www.personality-project.org/r/html/bifactor.html
-探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
-library(lavaan) library(psych) library(knitr) data(&#34;Thurstone&#34;) res_efa &lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3)) g F1* F2* F3* h2 u2 p2 Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615 Vocabulary 0.726 0.553 0.042 -0.022 0.835 0.165 0.631 Sent.Completion 0."/>
+<meta property="og:url" content="https://onoshima.github.io/blog/2023/03/01/%E6%97%A5%E6%9C%AC%E5%BF%83%E7%90%86%E5%AD%A6%E4%BC%9A%E5%9F%B7%E7%AD%86%E6%8A%95%E7%A8%BF%E3%81%AE%E6%89%8B%E3%81%B3%E3%81%8D2022%E5%B9%B4%E7%89%88%E7%94%A8%E3%81%AEcsl%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-03-01T12:07:00+09:00" />
+<meta property="article:modified_time" content="2023-03-01T12:07:00+09:00" />
+<meta itemprop="name" content="日本心理学会執筆・投稿の手びき2022年版用のCSLファイル">
+<meta itemprop="description" content="学科の仕事の関係で日本心理学会執筆・投稿の手びき 2022 年版を何回か読み直す機会がありました。
+読んでいる内に心理学研究用のCSLファイルがあると便利なのではと思い，CSLの勉強がてら勢いで作ってみました。以下のリンクからダウンロードできます。
+jpa2022csl
+技術的に色々と難しいところもあり，けっこう苦戦したのですが，とりあえず手びきの中で例示されているものについては望んだアウトプットが得られるものが完成したので一応公開しておきます。CSLの意図する使い方をかなり無視して改造したもので，かつ，様々な文献のエントリに対して網羅的にチェックを行なっている訳ではないので，使用している内にどこかで不具合があるかもしれません。
+作ってみた感想としてPandocで参考文献が辛い話 (PandocとZoteroで参考文献：余談編)に書いてあることと同じ印象で，CSLは日本語圏の情報があまりなく，和文処理で苦戦するという点でなかなかにつらいものがありました。
+なお，アウトプットがLaTeXによるPDFファイルであることが決まっている場合には芝田征司先生が作成された大変完成度の高いbiblatex-jpa 日本心理学会風文献スタイル（2022年版)というものがあるのでそちらを使うことをお勧めします。"><meta itemprop="datePublished" content="2023-03-01T12:07:00+09:00" />
+<meta itemprop="dateModified" content="2023-03-01T12:07:00+09:00" />
+<meta itemprop="wordCount" content="10">
+<meta itemprop="keywords" content="CSL," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="日本心理学会執筆・投稿の手びき2022年版用のCSLファイル"/>
+<meta name="twitter:description" content="学科の仕事の関係で日本心理学会執筆・投稿の手びき 2022 年版を何回か読み直す機会がありました。
+読んでいる内に心理学研究用のCSLファイルがあると便利なのではと思い，CSLの勉強がてら勢いで作ってみました。以下のリンクからダウンロードできます。
+jpa2022csl
+技術的に色々と難しいところもあり，けっこう苦戦したのですが，とりあえず手びきの中で例示されているものについては望んだアウトプットが得られるものが完成したので一応公開しておきます。CSLの意図する使い方をかなり無視して改造したもので，かつ，様々な文献のエントリに対して網羅的にチェックを行なっている訳ではないので，使用している内にどこかで不具合があるかもしれません。
+作ってみた感想としてPandocで参考文献が辛い話 (PandocとZoteroで参考文献：余談編)に書いてあることと同じ印象で，CSLは日本語圏の情報があまりなく，和文処理で苦戦するという点でなかなかにつらいものがありました。
+なお，アウトプットがLaTeXによるPDFファイルであることが決まっている場合には芝田征司先生が作成された大変完成度の高いbiblatex-jpa 日本心理学会風文献スタイル（2022年版)というものがあるのでそちらを使うことをお勧めします。"/>
 
 
 
@@ -132,8 +124,8 @@ if (!doNotTrack) {
       <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-blog-li">
   <a href="/blog/" title="ブログ記事" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-blog"><span class="">ブログ</span></a>
   <ul class="ul-1">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230301e697a5e69cace5bf83e79086e5ada6e4bc9ae59fb7e7ad86e68a95e7a8bfe381aee6898be381b3e3818d2022e5b9b4e78988e794a8e381aecsle38395e382a1e382a4e383ab-li">
-  <a href="/blog/2023/03/01/%E6%97%A5%E6%9C%AC%E5%BF%83%E7%90%86%E5%AD%A6%E4%BC%9A%E5%9F%B7%E7%AD%86%E6%8A%95%E7%A8%BF%E3%81%AE%E6%89%8B%E3%81%B3%E3%81%8D2022%E5%B9%B4%E7%89%88%E7%94%A8%E3%81%AEcsl%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20230301e697a5e69cace5bf83e79086e5ada6e4bc9ae59fb7e7ad86e68a95e7a8bfe381aee6898be381b3e3818d2022e5b9b4e78988e794a8e381aecsle38395e382a1e382a4e383ab"><span class="">日本心理学会執筆・投稿の手びき2022年版用のCSLファイル</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-blog20230301e697a5e69cace5bf83e79086e5ada6e4bc9ae59fb7e7ad86e68a95e7a8bfe381aee6898be381b3e3818d2022e5b9b4e78988e794a8e381aecsle38395e382a1e382a4e383ab-li">
+  <a href="/blog/2023/03/01/%E6%97%A5%E6%9C%AC%E5%BF%83%E7%90%86%E5%AD%A6%E4%BC%9A%E5%9F%B7%E7%AD%86%E6%8A%95%E7%A8%BF%E3%81%AE%E6%89%8B%E3%81%B3%E3%81%8D2022%E5%B9%B4%E7%89%88%E7%94%A8%E3%81%AEcsl%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-blog20230301e697a5e69cace5bf83e79086e5ada6e4bc9ae59fb7e7ad86e68a95e7a8bfe381aee6898be381b3e3818d2022e5b9b4e78988e794a8e381aecsle38395e382a1e382a4e383ab"><span class="td-sidebar-nav-active-item">日本心理学会執筆・投稿の手びき2022年版用のCSLファイル</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog202203215made59fbae6ba96e381abe38288e3828be5a496e3828ce580a4e381aee6a49ce587ba-li">
   <a href="/blog/2022/03/21/5mad%E5%9F%BA%E6%BA%96%E3%81%AB%E3%82%88%E3%82%8B%E5%A4%96%E3%82%8C%E5%80%A4%E3%81%AE%E6%A4%9C%E5%87%BA/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog202203215made59fbae6ba96e381abe38288e3828be5a496e3828ce580a4e381aee6a49ce587ba"><span class="">5MAD基準による外れ値の検出</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20220307e58d97e9a2a8e58e9f2002e381aee8aaade69bb8e383a1e383a2-li">
@@ -164,8 +156,8 @@ if (!doNotTrack) {
   <a href="/blog/2020/09/23/%E6%8E%A2%E7%B4%A2%E7%9A%84%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%81%AE%E9%9A%9B%E3%81%AE%E5%B9%B3%E8%A1%8C%E5%88%86%E6%9E%90%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200923e68ea2e7b4a2e79a84e59ba0e5ad90e58886e69e90e381aee99a9be381aee5b9b3e8a18ce58886e69e90e381abe381a4e38184e381a6"><span class="">探索的因子分析の際の平行分析について</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200922e59ba0e5ad90e58886e69e90e381abe3818ae38191e3828bmape59fbae6ba96e381abe381a4e38184e381a6-li">
   <a href="/blog/2020/09/22/%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8Bmap%E5%9F%BA%E6%BA%96%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200922e59ba0e5ad90e58886e69e90e381abe3818ae38191e3828bmape59fbae6ba96e381abe381a4e38184e381a6"><span class="">因子分析におけるMAP基準について</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-blog20200916efae3818be38289e8a888e7ae97e38197e3819fcf89e381a8cfae3818be38289e8a888e7ae97e38197e3819fcf89-li">
-  <a href="/blog/2020/09/16/efa%E3%81%8B%E3%82%89%E8%A8%88%E7%AE%97%E3%81%97%E3%81%9F%CF%89%E3%81%A8cfa%E3%81%8B%E3%82%89%E8%A8%88%E7%AE%97%E3%81%97%E3%81%9F%CF%89/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-blog20200916efae3818be38289e8a888e7ae97e38197e3819fcf89e381a8cfae3818be38289e8a888e7ae97e38197e3819fcf89"><span class="td-sidebar-nav-active-item">EFAから計算したωとCFAから計算したω</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200916efae3818be38289e8a888e7ae97e38197e3819fcf89e381a8cfae3818be38289e8a888e7ae97e38197e3819fcf89-li">
+  <a href="/blog/2020/09/16/efa%E3%81%8B%E3%82%89%E8%A8%88%E7%AE%97%E3%81%97%E3%81%9F%CF%89%E3%81%A8cfa%E3%81%8B%E3%82%89%E8%A8%88%E7%AE%97%E3%81%97%E3%81%9F%CF%89/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200916efae3818be38289e8a888e7ae97e38197e3819fcf89e381a8cfae3818be38289e8a888e7ae97e38197e3819fcf89"><span class="">EFAから計算したωとCFAから計算したω</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200427lavaane381a7mpluse381aee382abe38386e382b4e383aae382abe383abe59ba0e5ad90e58886e69e90e38292e5868de78fbee38199e3828b-li">
   <a href="/blog/2020/04/27/lavaan%E3%81%A7mplus%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%82%AB%E3%83%AB%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%82%92%E5%86%8D%E7%8F%BE%E3%81%99%E3%82%8B/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200427lavaane381a7mpluse381aee382abe38386e382b4e383aae382abe383abe59ba0e5ad90e58886e69e90e38292e5868de78fbee38199e3828b"><span class="">lavaanでMplusのカテゴリカル因子分析を再現する</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200424non-normale381aae4b9b1e695b0e38292e799bae7949fe38199e3828be38391e38383e382b1e383bce382b8e38182e3828ce38193e3828c-li">
@@ -232,18 +224,7 @@ if (!doNotTrack) {
 
 </div>
 
-            <div class="td-toc">
-        <nav id="TableOfContents">
-  <ul>
-    <li><a href="#2つのω係数について">2つのω係数について</a></li>
-    <li><a href="#探索的因子分析による方法">探索的因子分析による方法</a></li>
-    <li><a href="#確認的因子分析による方法">確認的因子分析による方法</a></li>
-    <li><a href="#omegasem関数について">omegaSem関数について</a></li>
-    <li><a href="#参考">参考</a></li>
-  </ul>
-</nav>
-      </div>
-    
+            
             
 
 	
@@ -374,11 +355,11 @@ if (!doNotTrack) {
           <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
             
 <div class="td-content">
-	<h1>EFAから計算したωとCFAから計算したω</h1>
+	<h1>日本心理学会執筆・投稿の手びき2022年版用のCSLファイル</h1>
 	
 	<div class="td-byline mb-4">
 		
-		<time datetime="2020-09-16" class="text-muted">Wednesday, September 16, 2020</time>
+		<time datetime="2023-03-01" class="text-muted">Wednesday, March 01, 2023</time>
 	</div>
 	<header class="article-meta">
 		
@@ -392,9 +373,7 @@ if (!doNotTrack) {
   <h5 class="taxonomy-title">Tags:</h5>
   <ul class="taxonomy-terms">
     
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/coefficient-omega/" data-taxonomy-term="coefficient-omega"><span class="taxonomy-label">coefficient omega</span></a></li>
-    
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/reliability/" data-taxonomy-term="reliability"><span class="taxonomy-label">reliability</span></a></li>
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/csl/" data-taxonomy-term="csl"><span class="taxonomy-label">CSL</span></a></li>
     
   </ul>
 </div>
@@ -407,9 +386,7 @@ if (!doNotTrack) {
   <h5 class="taxonomy-title">Categories:</h5>
   <ul class="taxonomy-terms">
     
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span></a></li>
-    
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/stat/" data-taxonomy-term="stat"><span class="taxonomy-label">stat</span></a></li>
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/others/" data-taxonomy-term="others"><span class="taxonomy-label">others</span></a></li>
     
   </ul>
 </div>
@@ -419,281 +396,21 @@ if (!doNotTrack) {
 
 		
 	</header>
-	<h2 id="2つのω係数について">2つのω係数について</h2>
-<p>信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ</p>
-<p>$$
-\omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\
-\omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}+{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)}
-$$</p>
-<p>として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。</p>
-<p>Revelle &amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。</p>
-<p>使うデータは<code>Psych</code>パッケージに入ってる<code>Thurstone</code>というデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。</p>
-<p><a href="https://www.personality-project.org/r/html/bifactor.html">https://www.personality-project.org/r/html/bifactor.html</a></p>
-<h2 id="探索的因子分析による方法">探索的因子分析による方法</h2>
-<p>まずは，探索的因子分析でやってみる。<code>psych</code>所収の<code>omega</code>関数を使う。とても簡単。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#000">library</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">lavaan</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">library</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">psych</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">library</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">knitr</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">data</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Thurstone&#34;</span><span style="color:#000;font-weight:bold">)</span> 
-</span></span><span style="display:flex;"><span><span style="color:#000">res_efa</span>  <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">omega</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">Thurstone</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">kable</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">round</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">res_efa</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">schmid</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">sl</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">))</span></span></span></code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:right">g</th>
-<th style="text-align:right">F1*</th>
-<th style="text-align:right">F2*</th>
-<th style="text-align:right">F3*</th>
-<th style="text-align:right">h2</th>
-<th style="text-align:right">u2</th>
-<th style="text-align:right">p2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Sentences</td>
-<td style="text-align:right">0.709</td>
-<td style="text-align:right">0.560</td>
-<td style="text-align:right">-0.022</td>
-<td style="text-align:right">0.030</td>
-<td style="text-align:right">0.817</td>
-<td style="text-align:right">0.183</td>
-<td style="text-align:right">0.615</td>
-</tr>
-<tr>
-<td style="text-align:left">Vocabulary</td>
-<td style="text-align:right">0.726</td>
-<td style="text-align:right">0.553</td>
-<td style="text-align:right">0.042</td>
-<td style="text-align:right">-0.022</td>
-<td style="text-align:right">0.835</td>
-<td style="text-align:right">0.165</td>
-<td style="text-align:right">0.631</td>
-</tr>
-<tr>
-<td style="text-align:left">Sent.Completion</td>
-<td style="text-align:right">0.683</td>
-<td style="text-align:right">0.521</td>
-<td style="text-align:right">0.020</td>
-<td style="text-align:right">0.004</td>
-<td style="text-align:right">0.738</td>
-<td style="text-align:right">0.262</td>
-<td style="text-align:right">0.632</td>
-</tr>
-<tr>
-<td style="text-align:left">First.Letters</td>
-<td style="text-align:right">0.646</td>
-<td style="text-align:right">-0.001</td>
-<td style="text-align:right">0.558</td>
-<td style="text-align:right">0.002</td>
-<td style="text-align:right">0.729</td>
-<td style="text-align:right">0.271</td>
-<td style="text-align:right">0.573</td>
-</tr>
-<tr>
-<td style="text-align:left">Four.Letter.Words</td>
-<td style="text-align:right">0.622</td>
-<td style="text-align:right">-0.011</td>
-<td style="text-align:right">0.489</td>
-<td style="text-align:right">0.076</td>
-<td style="text-align:right">0.632</td>
-<td style="text-align:right">0.368</td>
-<td style="text-align:right">0.613</td>
-</tr>
-<tr>
-<td style="text-align:left">Suffixes</td>
-<td style="text-align:right">0.558</td>
-<td style="text-align:right">0.112</td>
-<td style="text-align:right">0.409</td>
-<td style="text-align:right">-0.060</td>
-<td style="text-align:right">0.495</td>
-<td style="text-align:right">0.505</td>
-<td style="text-align:right">0.629</td>
-</tr>
-<tr>
-<td style="text-align:left">Letter.Series</td>
-<td style="text-align:right">0.587</td>
-<td style="text-align:right">0.019</td>
-<td style="text-align:right">-0.009</td>
-<td style="text-align:right">0.617</td>
-<td style="text-align:right">0.725</td>
-<td style="text-align:right">0.275</td>
-<td style="text-align:right">0.475</td>
-</tr>
-<tr>
-<td style="text-align:left">Pedigrees</td>
-<td style="text-align:right">0.577</td>
-<td style="text-align:right">0.238</td>
-<td style="text-align:right">-0.033</td>
-<td style="text-align:right">0.339</td>
-<td style="text-align:right">0.505</td>
-<td style="text-align:right">0.495</td>
-<td style="text-align:right">0.659</td>
-</tr>
-<tr>
-<td style="text-align:left">Letter.Group</td>
-<td style="text-align:right">0.541</td>
-<td style="text-align:right">-0.037</td>
-<td style="text-align:right">0.139</td>
-<td style="text-align:right">0.459</td>
-<td style="text-align:right">0.524</td>
-<td style="text-align:right">0.476</td>
-<td style="text-align:right">0.558</td>
-</tr>
-</tbody>
-</table>
-<p>次のようなパス図も一緒に吐き出す。</p>
-<p><img src="/images/omega_efacfa.png" alt="パス図"></p>
-<p>ω係数は，$\omega_h = 0.74$と$\omega_t = 0.93$とのことである。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span> <span style="color:#000">Total</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">General</span> <span style="color:#000">and</span> <span style="color:#000">Subset</span> <span style="color:#000">omega</span> <span style="color:#000">for</span> <span style="color:#000">each</span> <span style="color:#000">subset</span>
-</span></span><span style="display:flex;"><span>                                                 <span style="color:#000">g</span>  <span style="color:#000">F1</span><span style="color:#ce5c00;font-weight:bold">*</span>  <span style="color:#000">F2</span><span style="color:#ce5c00;font-weight:bold">*</span>  <span style="color:#000">F3</span><span style="color:#ce5c00;font-weight:bold">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Omega</span> <span style="color:#000">total</span> <span style="color:#000">for</span> <span style="color:#000">total</span> <span style="color:#000">scores</span> <span style="color:#000">and</span> <span style="color:#000">subscales</span>    <span style="color:#0000cf;font-weight:bold">0.93</span> <span style="color:#0000cf;font-weight:bold">0.92</span> <span style="color:#0000cf;font-weight:bold">0.83</span> <span style="color:#0000cf;font-weight:bold">0.79</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Omega</span> <span style="color:#000">general</span> <span style="color:#000">for</span> <span style="color:#000">total</span> <span style="color:#000">scores</span> <span style="color:#000">and</span> <span style="color:#000">subscales</span>  <span style="color:#0000cf;font-weight:bold">0.74</span> <span style="color:#0000cf;font-weight:bold">0.58</span> <span style="color:#0000cf;font-weight:bold">0.50</span> <span style="color:#0000cf;font-weight:bold">0.47</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Omega</span> <span style="color:#000">group</span> <span style="color:#000">for</span> <span style="color:#000">total</span> <span style="color:#000">scores</span> <span style="color:#000">and</span> <span style="color:#000">subscales</span>    <span style="color:#0000cf;font-weight:bold">0.16</span> <span style="color:#0000cf;font-weight:bold">0.34</span> <span style="color:#0000cf;font-weight:bold">0.32</span> <span style="color:#0000cf;font-weight:bold">0.32</span></span></span></code></pre></div>
-<p>これは先ほどの，SL変換後の因子負荷量から式通りに計算すると出てくる値である。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#000">VarX</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">Thurstone</span><span style="color:#000;font-weight:bold">)</span> 
-</span></span><span style="display:flex;"><span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">res_efa</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">schmid</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">sl[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;g&#34;</span><span style="color:#000">]</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">A</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">res_efa</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">schmid</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">sl[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;F1*&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;F2*&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;F3*&#34;</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000">]</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume1</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">%*%</span> <span style="color:#000">t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">A</span> <span style="color:#ce5c00;font-weight:bold">%*%</span> <span style="color:#000">t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">A</span><span style="color:#000;font-weight:bold">))</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume2</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">%*%</span> <span style="color:#000">t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">))</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume1</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">VarX</span>
-</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">#[1] 0.9308199</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume2</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">VarX</span>
-</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">#[1] 0.7360703</span></span></span></code></pre></div>
-<h2 id="確認的因子分析による方法">確認的因子分析による方法</h2>
-<p>続いて確認的因子分析による方法を試してみる。<code>lavaan</code>でCFAをして因子負荷量行列を取り出す。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#000">mo</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span><span style="color:#4e9a06">&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">g =~ Sentences+Vocabulary+Sent.Completion+First.Letters+Four.Letter.Words+Suffixes+Letter.Series+Pedigrees+Letter.Group
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">F1 =~ Sentences+Vocabulary+Sent.Completion
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">F2 =~ First.Letters+Four.Letter.Words+Suffixes
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">F3 =~ Letter.Series+Pedigrees+Letter.Group
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">res_cfa</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">cfa</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">mo</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">sample.cov</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">Thurstone</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">orthogonal</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#3465a4">T</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">sample.nobs</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">213</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">lambda</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">inspect</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">res_cfa</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">what</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;std&#34;</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">lambda</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">kable</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">round</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">lambda</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">))</span></span></span></code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:right">g</th>
-<th style="text-align:right">F1</th>
-<th style="text-align:right">F2</th>
-<th style="text-align:right">F3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Sentences</td>
-<td style="text-align:right">0.768</td>
-<td style="text-align:right">0.488</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.000</td>
-</tr>
-<tr>
-<td style="text-align:left">Vocabulary</td>
-<td style="text-align:right">0.791</td>
-<td style="text-align:right">0.452</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.000</td>
-</tr>
-<tr>
-<td style="text-align:left">Sent.Completion</td>
-<td style="text-align:right">0.754</td>
-<td style="text-align:right">0.404</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.000</td>
-</tr>
-<tr>
-<td style="text-align:left">First.Letters</td>
-<td style="text-align:right">0.608</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.614</td>
-<td style="text-align:right">0.000</td>
-</tr>
-<tr>
-<td style="text-align:left">Four.Letter.Words</td>
-<td style="text-align:right">0.597</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.506</td>
-<td style="text-align:right">0.000</td>
-</tr>
-<tr>
-<td style="text-align:left">Suffixes</td>
-<td style="text-align:right">0.572</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.394</td>
-<td style="text-align:right">0.000</td>
-</tr>
-<tr>
-<td style="text-align:left">Letter.Series</td>
-<td style="text-align:right">0.567</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.727</td>
-</tr>
-<tr>
-<td style="text-align:left">Pedigrees</td>
-<td style="text-align:right">0.662</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.247</td>
-</tr>
-<tr>
-<td style="text-align:left">Letter.Group</td>
-<td style="text-align:right">0.530</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.409</td>
-</tr>
-</tbody>
-</table>
-<p>この推定値を使って，先ほどと同様にωを計算する。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">lambda[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;g&#34;</span><span style="color:#000">]</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">A</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">lambda[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;F1&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;F2&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;F3&#34;</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000">]</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume1</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">%*%</span> <span style="color:#000">t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">A</span> <span style="color:#ce5c00;font-weight:bold">%*%</span> <span style="color:#000">t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">A</span><span style="color:#000;font-weight:bold">))</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume2</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">%*%</span> <span style="color:#000">t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">))</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume1</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">VarX</span>
-</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">#[1] 0.9278556</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume2</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">VarX</span>
-</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">#[1] 0.7891304</span></span></span></code></pre></div>
-<p>ω係数は，$\omega_h = 0.79$と$\omega_t = 0.93$とのことである。$\omega_h$については，EFAで計算した場合より若干高い値である。
-この結果は，Revelle &amp; Condon(2019)が次のように言っている通り。</p>
-<blockquote>
-<p>The bifactor solution (g) tends to produce slightly larger estimates than the Schmid-Leiman procedure(h) because it forces all the cross loadings of the lower level factors to be 0 (p.9).</p>
-</blockquote>
-<h2 id="omegasem関数について">omegaSem関数について</h2>
-<p>ところで<code>psych</code>には<code>omegaSem</code>という関数があり，直接的に確認的因子分析に基づくωを計算できるようである。
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#000">omegaSem</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">Thurstone</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">n.obs</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#0000cf;font-weight:bold">213</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Total</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">General</span> <span style="color:#000">and</span> <span style="color:#000">Subset</span> <span style="color:#000">omega</span> <span style="color:#000">for</span> <span style="color:#000">each</span> <span style="color:#000">subset</span>
-</span></span><span style="display:flex;"><span>                                                 <span style="color:#000">g</span>  <span style="color:#000">F1</span><span style="color:#ce5c00;font-weight:bold">*</span>  <span style="color:#000">F2</span><span style="color:#ce5c00;font-weight:bold">*</span>  <span style="color:#000">F3</span><span style="color:#ce5c00;font-weight:bold">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Omega</span> <span style="color:#000">total</span> <span style="color:#000">for</span> <span style="color:#000">total</span> <span style="color:#000">scores</span> <span style="color:#000">and</span> <span style="color:#000">subscales</span>    <span style="color:#0000cf;font-weight:bold">0.93</span> <span style="color:#0000cf;font-weight:bold">0.92</span> <span style="color:#0000cf;font-weight:bold">0.82</span> <span style="color:#0000cf;font-weight:bold">0.80</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Omega</span> <span style="color:#000">general</span> <span style="color:#000">for</span> <span style="color:#000">total</span> <span style="color:#000">scores</span> <span style="color:#000">and</span> <span style="color:#000">subscales</span>  <span style="color:#0000cf;font-weight:bold">0.79</span> <span style="color:#0000cf;font-weight:bold">0.69</span> <span style="color:#0000cf;font-weight:bold">0.48</span> <span style="color:#0000cf;font-weight:bold">0.50</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Omega</span> <span style="color:#000">group</span> <span style="color:#000">for</span> <span style="color:#000">total</span> <span style="color:#000">scores</span> <span style="color:#000">and</span> <span style="color:#000">subscales</span>    <span style="color:#0000cf;font-weight:bold">0.14</span> <span style="color:#0000cf;font-weight:bold">0.23</span> <span style="color:#0000cf;font-weight:bold">0.35</span> <span style="color:#0000cf;font-weight:bold">0.31</span></span></span></code></pre></div></p>
-<p>関数の中身をしっかり覗いた訳ではないから詳しくは分からないが，どうやら<code>omega</code>関数でSL変換による因子負荷量を得たあとに，その因子負荷量をもとにlavaanのモデル式を自動で書き出して，lavaanに突っ込んでいるようである。お手軽だけれどもCFAのモデルが変なモデルになっていないか確認しないと痛い目をみそうである（もっとも<code>omegaSem</code>関数を使うとパス図が描かれるからそこでチェックすれば良いだけの話だけど）</p>
-<h2 id="参考">参考</h2>
-<p>Revelle, W., &amp; Condon, D. M. (2019, August 5). Reliability From α to ω: A Tutorial. Psychological
-Assessment. Advance online publication. <a href="http://dx.doi.org/10.1037/pas0000754">http://dx.doi.org/10.1037/pas0000754</a></p>
+	<p>学科の仕事の関係で日本心理学会<a href="https://psych.or.jp/manual/">執筆・投稿の手びき 2022 年版</a>を何回か読み直す機会がありました。</p>
+<p>読んでいる内に心理学研究用のCSLファイルがあると便利なのではと思い，CSLの勉強がてら勢いで作ってみました。以下のリンクからダウンロードできます。</p>
+<p><a href="https://github.com/onoshima/jpa2022csl">jpa2022csl</a></p>
+<p>技術的に色々と難しいところもあり，けっこう苦戦したのですが，とりあえず手びきの中で例示されているものについては望んだアウトプットが得られるものが完成したので一応公開しておきます。CSLの意図する使い方をかなり無視して改造したもので，かつ，様々な文献のエントリに対して網羅的にチェックを行なっている訳ではないので，使用している内にどこかで不具合があるかもしれません。</p>
+<p>作ってみた感想として<a href="https://zenn.dev/sky_y/articles/pandoc-advent-2020-bib3">Pandocで参考文献が辛い話 (PandocとZoteroで参考文献：余談編)</a>に書いてあることと同じ印象で，CSLは日本語圏の情報があまりなく，和文処理で苦戦するという点でなかなかにつらいものがありました。</p>
+<p>なお，アウトプットがLaTeXによるPDFファイルであることが決まっている場合には芝田征司先生が作成された大変完成度の高い<a href="https://github.com/sbtseiji/jjpsycls/tree/main">biblatex-jpa 日本心理学会風文献スタイル（2022年版)</a>というものがあるのでそちらを使うことをお勧めします。</p>
 
 	
 
 	<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
   <li>
-    <a href="/blog/2020/04/27/lavaan%E3%81%A7mplus%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%82%AB%E3%83%AB%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%82%92%E5%86%8D%E7%8F%BE%E3%81%99%E3%82%8B/" aria-label="Previous - lavaanでMplusのカテゴリカル因子分析を再現する" class="btn btn-primary"><span class="mr-1">←</span>Previous</a>
+    <a href="/blog/2022/03/21/5mad%E5%9F%BA%E6%BA%96%E3%81%AB%E3%82%88%E3%82%8B%E5%A4%96%E3%82%8C%E5%80%A4%E3%81%AE%E6%A4%9C%E5%87%BA/" aria-label="Previous - 5MAD基準による外れ値の検出" class="btn btn-primary"><span class="mr-1">←</span>Previous</a>
   </li>
   <li>
-    <a href="/blog/2020/09/22/%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8Bmap%E5%9F%BA%E6%BA%96%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6/" aria-label="Next - 因子分析におけるMAP基準について" class="btn btn-primary">Next<span class="ml-1">→</span></a>
+    <a class="btn btn-primary disabled">Next<span class="ml-1">→</span></a>
   </li>
 </ul>
 
