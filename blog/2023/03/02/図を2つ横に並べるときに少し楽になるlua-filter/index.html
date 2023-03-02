@@ -18,37 +18,29 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>カテゴリカルデータをlavaanでSEMする際の細かい話 | Onoshima&#39;s website</title>
-<meta name="description" content="lavaanでカテゴリカルデータのSEMをする際には，orederedの引数にカテゴリカルなデータの変数名を指定する．推定はデフォルトではWLSMVらしい．
-WLSMVというのはそもそも，estimatorのみを指している訳でなく，estimatorがDWLSで，robust標準誤差を用いて，平均と分散を調整したテスト統計量を使う3点セットのことらしいのだが，Mplusでデフォルトの推定WLSMVなため業界ではこの呼び名で定着したそうだ．
-Mplusはversionが1から5までとversion6以降ではWLSMVの指す意味が違うそうである．lavaanを使ってversion5までのWLSMVを再現するには，estimator=&amp;quot;DWSL&amp;quot;, se=&amp;quot;standard&amp;quot;, test=&amp;quot;Sattertwaite&amp;quot;の3点セットなのだが，ver6以降のWLSMVはestimator=&amp;quot;DWSL&amp;quot;, se=&amp;quot;standard&amp;quot;, test=&amp;quot;scaled.shifted&amp;quot;だそうだ．個別に指定してもよいし，estimator=&amp;quot;WLSMV&amp;quot;とすればver6以降に，estimator=&amp;quot;WLSMVS&amp;quot;とすればver5までのと同じ方法になるようだ．とある推定の結果を一致させたかったときにつまづいたので記録を残しておく．
-【参考】
-https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf">
-<meta property="og:title" content="カテゴリカルデータをlavaanでSEMする際の細かい話" />
-<meta property="og:description" content="lavaanでカテゴリカルデータのSEMをする際には，orederedの引数にカテゴリカルなデータの変数名を指定する．推定はデフォルトではWLSMVらしい．
-WLSMVというのはそもそも，estimatorのみを指している訳でなく，estimatorがDWLSで，robust標準誤差を用いて，平均と分散を調整したテスト統計量を使う3点セットのことらしいのだが，Mplusでデフォルトの推定WLSMVなため業界ではこの呼び名で定着したそうだ．
-Mplusはversionが1から5までとversion6以降ではWLSMVの指す意味が違うそうである．lavaanを使ってversion5までのWLSMVを再現するには，estimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;Sattertwaite&quot;の3点セットなのだが，ver6以降のWLSMVはestimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;scaled.shifted&quot;だそうだ．個別に指定してもよいし，estimator=&quot;WLSMV&quot;とすればver6以降に，estimator=&quot;WLSMVS&quot;とすればver5までのと同じ方法になるようだ．とある推定の結果を一致させたかったときにつまづいたので記録を残しておく．
-【参考】
-https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf" />
+<title>図を2つ横に並べるときに少し楽になるlua-filter | Onoshima&#39;s website</title>
+<meta name="description" content="ここのところPandocのlua filterについて少し勉強したのでその練習として作ったもの。
+入力ファイルをmarkdownにして独立したパラグラフに![caption1](images/fig1.png){#fig:fig1}![caption2](images/fig2.png){#fig:fig2}のようにスペースを空けずに画像を並べてPandocでLaTeXに変換すると，次のように変換するフィルターです。 画像と画像の間にスペースを含むと機能しません。
+\begin{figure}[htbp] \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption1}\label{fig:fig1} \includegraphics[keepaspectratio, scale=0.8]{images/fig1.png} \end{minipage} \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption2}\label{fig:fig2} \includegraphics[keepaspectratio, scale=0.8]{images/fig2.png} \end{minipage} \end{figure} figure-side-by-side.lua">
+<meta property="og:title" content="図を2つ横に並べるときに少し楽になるlua-filter" />
+<meta property="og:description" content="ここのところPandocのlua filterについて少し勉強したのでその練習として作ったもの。
+入力ファイルをmarkdownにして独立したパラグラフに![caption1](images/fig1.png){#fig:fig1}![caption2](images/fig2.png){#fig:fig2}のようにスペースを空けずに画像を並べてPandocでLaTeXに変換すると，次のように変換するフィルターです。 画像と画像の間にスペースを含むと機能しません。
+\begin{figure}[htbp] \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption1}\label{fig:fig1} \includegraphics[keepaspectratio, scale=0.8]{images/fig1.png} \end{minipage} \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption2}\label{fig:fig2} \includegraphics[keepaspectratio, scale=0.8]{images/fig2.png} \end{minipage} \end{figure} figure-side-by-side.lua" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://onoshima.github.io/blog/2020/04/16/%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%82%AB%E3%83%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92lavaan%E3%81%A7sem%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AE%E7%B4%B0%E3%81%8B%E3%81%84%E8%A9%B1/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2020-04-16T20:04:15+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
-<meta itemprop="name" content="カテゴリカルデータをlavaanでSEMする際の細かい話">
-<meta itemprop="description" content="lavaanでカテゴリカルデータのSEMをする際には，orederedの引数にカテゴリカルなデータの変数名を指定する．推定はデフォルトではWLSMVらしい．
-WLSMVというのはそもそも，estimatorのみを指している訳でなく，estimatorがDWLSで，robust標準誤差を用いて，平均と分散を調整したテスト統計量を使う3点セットのことらしいのだが，Mplusでデフォルトの推定WLSMVなため業界ではこの呼び名で定着したそうだ．
-Mplusはversionが1から5までとversion6以降ではWLSMVの指す意味が違うそうである．lavaanを使ってversion5までのWLSMVを再現するには，estimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;Sattertwaite&quot;の3点セットなのだが，ver6以降のWLSMVはestimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;scaled.shifted&quot;だそうだ．個別に指定してもよいし，estimator=&quot;WLSMV&quot;とすればver6以降に，estimator=&quot;WLSMVS&quot;とすればver5までのと同じ方法になるようだ．とある推定の結果を一致させたかったときにつまづいたので記録を残しておく．
-【参考】
-https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf"><meta itemprop="datePublished" content="2020-04-16T20:04:15+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
-<meta itemprop="wordCount" content="9">
-<meta itemprop="keywords" content="lavaan,WLSMV,SEM," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="カテゴリカルデータをlavaanでSEMする際の細かい話"/>
-<meta name="twitter:description" content="lavaanでカテゴリカルデータのSEMをする際には，orederedの引数にカテゴリカルなデータの変数名を指定する．推定はデフォルトではWLSMVらしい．
-WLSMVというのはそもそも，estimatorのみを指している訳でなく，estimatorがDWLSで，robust標準誤差を用いて，平均と分散を調整したテスト統計量を使う3点セットのことらしいのだが，Mplusでデフォルトの推定WLSMVなため業界ではこの呼び名で定着したそうだ．
-Mplusはversionが1から5までとversion6以降ではWLSMVの指す意味が違うそうである．lavaanを使ってversion5までのWLSMVを再現するには，estimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;Sattertwaite&quot;の3点セットなのだが，ver6以降のWLSMVはestimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;scaled.shifted&quot;だそうだ．個別に指定してもよいし，estimator=&quot;WLSMV&quot;とすればver6以降に，estimator=&quot;WLSMVS&quot;とすればver5までのと同じ方法になるようだ．とある推定の結果を一致させたかったときにつまづいたので記録を残しておく．
-【参考】
-https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf"/>
+<meta property="og:url" content="https://onoshima.github.io/blog/2023/03/02/%E5%9B%B3%E3%82%922%E3%81%A4%E6%A8%AA%E3%81%AB%E4%B8%A6%E3%81%B9%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E5%B0%91%E3%81%97%E6%A5%BD%E3%81%AB%E3%81%AA%E3%82%8Blua-filter/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-03-02T17:43:18+09:00" />
+<meta property="article:modified_time" content="2023-03-02T17:43:18+09:00" />
+<meta itemprop="name" content="図を2つ横に並べるときに少し楽になるlua-filter">
+<meta itemprop="description" content="ここのところPandocのlua filterについて少し勉強したのでその練習として作ったもの。
+入力ファイルをmarkdownにして独立したパラグラフに![caption1](images/fig1.png){#fig:fig1}![caption2](images/fig2.png){#fig:fig2}のようにスペースを空けずに画像を並べてPandocでLaTeXに変換すると，次のように変換するフィルターです。 画像と画像の間にスペースを含むと機能しません。
+\begin{figure}[htbp] \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption1}\label{fig:fig1} \includegraphics[keepaspectratio, scale=0.8]{images/fig1.png} \end{minipage} \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption2}\label{fig:fig2} \includegraphics[keepaspectratio, scale=0.8]{images/fig2.png} \end{minipage} \end{figure} figure-side-by-side.lua"><meta itemprop="datePublished" content="2023-03-02T17:43:18+09:00" />
+<meta itemprop="dateModified" content="2023-03-02T17:43:18+09:00" />
+<meta itemprop="wordCount" content="19">
+<meta itemprop="keywords" content="lua," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="図を2つ横に並べるときに少し楽になるlua-filter"/>
+<meta name="twitter:description" content="ここのところPandocのlua filterについて少し勉強したのでその練習として作ったもの。
+入力ファイルをmarkdownにして独立したパラグラフに![caption1](images/fig1.png){#fig:fig1}![caption2](images/fig2.png){#fig:fig2}のようにスペースを空けずに画像を並べてPandocでLaTeXに変換すると，次のように変換するフィルターです。 画像と画像の間にスペースを含むと機能しません。
+\begin{figure}[htbp] \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption1}\label{fig:fig1} \includegraphics[keepaspectratio, scale=0.8]{images/fig1.png} \end{minipage} \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption2}\label{fig:fig2} \includegraphics[keepaspectratio, scale=0.8]{images/fig2.png} \end{minipage} \end{figure} figure-side-by-side.lua"/>
 
 
 
@@ -120,8 +112,8 @@ if (!doNotTrack) {
       <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-blog-li">
   <a href="/blog/" title="ブログ記事" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-blog"><span class="">ブログ</span></a>
   <ul class="ul-1">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230302e59bb3e382922e381a4e6a8aae381abe4b8a6e381b9e3828be381a8e3818de381abe5b091e38197e6a5bde381abe381aae3828blua-filter-li">
-  <a href="/blog/2023/03/02/%E5%9B%B3%E3%82%922%E3%81%A4%E6%A8%AA%E3%81%AB%E4%B8%A6%E3%81%B9%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E5%B0%91%E3%81%97%E6%A5%BD%E3%81%AB%E3%81%AA%E3%82%8Blua-filter/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20230302e59bb3e382922e381a4e6a8aae381abe4b8a6e381b9e3828be381a8e3818de381abe5b091e38197e6a5bde381abe381aae3828blua-filter"><span class="">図を2つ横に並べるときに少し楽になるlua-filter</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-blog20230302e59bb3e382922e381a4e6a8aae381abe4b8a6e381b9e3828be381a8e3818de381abe5b091e38197e6a5bde381abe381aae3828blua-filter-li">
+  <a href="/blog/2023/03/02/%E5%9B%B3%E3%82%922%E3%81%A4%E6%A8%AA%E3%81%AB%E4%B8%A6%E3%81%B9%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E5%B0%91%E3%81%97%E6%A5%BD%E3%81%AB%E3%81%AA%E3%82%8Blua-filter/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-blog20230302e59bb3e382922e381a4e6a8aae381abe4b8a6e381b9e3828be381a8e3818de381abe5b091e38197e6a5bde381abe381aae3828blua-filter"><span class="td-sidebar-nav-active-item">図を2つ横に並べるときに少し楽になるlua-filter</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230301i-te79bb8e996a2e381abe381a4e38184e381a6e381aee383a1e383a2-li">
   <a href="/blog/2023/03/01/i-t%E7%9B%B8%E9%96%A2%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E3%83%A1%E3%83%A2/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20230301i-te79bb8e996a2e381abe381a4e38184e381a6e381aee383a1e383a2"><span class="">I-T相関についてのメモ</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230301e697a5e69cace5bf83e79086e5ada6e4bc9ae59fb7e7ad86e68a95e7a8bfe381aee6898be381b3e3818d2022e5b9b4e78988e794a8e381aecsle38395e382a1e382a4e383ab-li">
@@ -162,8 +154,8 @@ if (!doNotTrack) {
   <a href="/blog/2020/04/27/lavaan%E3%81%A7mplus%E3%81%AE%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%82%AB%E3%83%AB%E5%9B%A0%E5%AD%90%E5%88%86%E6%9E%90%E3%82%92%E5%86%8D%E7%8F%BE%E3%81%99%E3%82%8B/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200427lavaane381a7mpluse381aee382abe38386e382b4e383aae382abe383abe59ba0e5ad90e58886e69e90e38292e5868de78fbee38199e3828b"><span class="">lavaanでMplusのカテゴリカル因子分析を再現する</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200424non-normale381aae4b9b1e695b0e38292e799bae7949fe38199e3828be38391e38383e382b1e383bce382b8e38182e3828ce38193e3828c-li">
   <a href="/blog/2020/04/24/non-normal%E3%81%AA%E4%B9%B1%E6%95%B0%E3%82%92%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%82%E3%82%8C%E3%81%93%E3%82%8C/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200424non-normale381aae4b9b1e695b0e38292e799bae7949fe38199e3828be38391e38383e382b1e383bce382b8e38182e3828ce38193e3828c"><span class="">non-normalな乱数を発生するパッケージあれこれ</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-blog20200416e382abe38386e382b4e383aae382abe383abe38387e383bce382bfe38292lavaane381a7seme38199e3828be99a9be381aee7b4b0e3818be38184e8a9b1-li">
-  <a href="/blog/2020/04/16/%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%82%AB%E3%83%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92lavaan%E3%81%A7sem%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AE%E7%B4%B0%E3%81%8B%E3%81%84%E8%A9%B1/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-blog20200416e382abe38386e382b4e383aae382abe383abe38387e383bce382bfe38292lavaane381a7seme38199e3828be99a9be381aee7b4b0e3818be38184e8a9b1"><span class="td-sidebar-nav-active-item">カテゴリカルデータをlavaanでSEMする際の細かい話</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200416e382abe38386e382b4e383aae382abe383abe38387e383bce382bfe38292lavaane381a7seme38199e3828be99a9be381aee7b4b0e3818be38184e8a9b1-li">
+  <a href="/blog/2020/04/16/%E3%82%AB%E3%83%86%E3%82%B4%E3%83%AA%E3%82%AB%E3%83%AB%E3%83%87%E3%83%BC%E3%82%BF%E3%82%92lavaan%E3%81%A7sem%E3%81%99%E3%82%8B%E9%9A%9B%E3%81%AE%E7%B4%B0%E3%81%8B%E3%81%84%E8%A9%B1/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200416e382abe38386e382b4e383aae382abe383abe38387e383bce382bfe38292lavaane381a7seme38199e3828be99a9be381aee7b4b0e3818be38184e8a9b1"><span class="">カテゴリカルデータをlavaanでSEMする際の細かい話</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200409zoteroe381aee38395e382a1e382a4e383abe7aea1e79086e381aee8a69ae69bb8-li">
   <a href="/blog/2020/04/09/zotero%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E7%AE%A1%E7%90%86%E3%81%AE%E8%A6%9A%E6%9B%B8/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200409zoteroe381aee38395e382a1e382a4e383abe7aea1e79086e381aee8a69ae69bb8"><span class="">Zoteroのファイル管理の覚書</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200308re3818be38289estate381aeapie38292e4bdbfe381a3e381a6e381bfe3828be3819de381ae2-li">
@@ -361,11 +353,11 @@ if (!doNotTrack) {
           <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
             
 <div class="td-content">
-	<h1>カテゴリカルデータをlavaanでSEMする際の細かい話</h1>
+	<h1>図を2つ横に並べるときに少し楽になるlua-filter</h1>
 	
 	<div class="td-byline mb-4">
 		
-		<time datetime="2020-04-16" class="text-muted">Thursday, April 16, 2020</time>
+		<time datetime="2023-03-02" class="text-muted">Thursday, March 02, 2023</time>
 	</div>
 	<header class="article-meta">
 		
@@ -379,11 +371,7 @@ if (!doNotTrack) {
   <h5 class="taxonomy-title">Tags:</h5>
   <ul class="taxonomy-terms">
     
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/lavaan/" data-taxonomy-term="lavaan"><span class="taxonomy-label">lavaan</span></a></li>
-    
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/wlsmv/" data-taxonomy-term="wlsmv"><span class="taxonomy-label">WLSMV</span></a></li>
-    
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/sem/" data-taxonomy-term="sem"><span class="taxonomy-label">SEM</span></a></li>
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/lua/" data-taxonomy-term="lua"><span class="taxonomy-label">lua</span></a></li>
     
   </ul>
 </div>
@@ -396,7 +384,7 @@ if (!doNotTrack) {
   <h5 class="taxonomy-title">Categories:</h5>
   <ul class="taxonomy-terms">
     
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/stat/" data-taxonomy-term="stat"><span class="taxonomy-label">stat</span></a></li>
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/others/" data-taxonomy-term="others"><span class="taxonomy-label">others</span></a></li>
     
   </ul>
 </div>
@@ -406,20 +394,31 @@ if (!doNotTrack) {
 
 		
 	</header>
-	<p>lavaanでカテゴリカルデータのSEMをする際には，<code>oredered</code>の引数にカテゴリカルなデータの変数名を指定する．推定はデフォルトでは<code>WLSMV</code>らしい．</p>
-<p><code>WLSMV</code>というのはそもそも，estimatorのみを指している訳でなく，estimatorがDWLSで，robust標準誤差を用いて，平均と分散を調整したテスト統計量を使う3点セットのことらしいのだが，Mplusでデフォルトの推定<code>WLSMV</code>なため業界ではこの呼び名で定着したそうだ．</p>
-<p>Mplusはversionが1から5までとversion6以降ではWLSMVの指す意味が違うそうである．lavaanを使ってversion5までのWLSMVを再現するには，<code>estimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;Sattertwaite&quot;</code>の3点セットなのだが，ver6以降のWLSMVは<code>estimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;scaled.shifted&quot;</code>だそうだ．個別に指定してもよいし，<code>estimator=&quot;WLSMV&quot;</code>とすればver6以降に，<code>estimator=&quot;WLSMVS&quot;</code>とすればver5までのと同じ方法になるようだ．とある推定の結果を一致させたかったときにつまづいたので記録を残しておく．</p>
-<p>【参考】</p>
-<p><a href="https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf">https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf</a></p>
+	<p>ここのところPandocのlua filterについて少し勉強したのでその練習として作ったもの。</p>
+<p>入力ファイルをmarkdownにして独立したパラグラフに<code>![caption1](images/fig1.png){#fig:fig1}![caption2](images/fig2.png){#fig:fig2}</code>のようにスペースを空けずに画像を並べてPandocでLaTeXに変換すると，次のように変換するフィルターです。
+画像と画像の間にスペースを含むと機能しません。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">\begin</span><span style="color:#204a87">{</span>figure<span style="color:#204a87">}</span>[htbp]
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">\begin</span><span style="color:#204a87">{</span>minipage<span style="color:#204a87">}</span>[b]<span style="color:#204a87">{</span>0.45<span style="color:#204a87;font-weight:bold">\linewidth</span><span style="color:#204a87">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\centering</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\caption</span><span style="color:#204a87">{</span>caption1<span style="color:#204a87">}</span><span style="color:#204a87;font-weight:bold">\label</span><span style="color:#204a87">{</span>fig:fig1<span style="color:#204a87">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\includegraphics</span><span style="color:#c4a000">[keepaspectratio, scale=0.8]</span><span style="color:#204a87">{</span>images/fig1.png<span style="color:#204a87">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">\end</span><span style="color:#204a87">{</span>minipage<span style="color:#204a87">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">\begin</span><span style="color:#204a87">{</span>minipage<span style="color:#204a87">}</span>[b]<span style="color:#204a87">{</span>0.45<span style="color:#204a87;font-weight:bold">\linewidth</span><span style="color:#204a87">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\centering</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\caption</span><span style="color:#204a87">{</span>caption2<span style="color:#204a87">}</span><span style="color:#204a87;font-weight:bold">\label</span><span style="color:#204a87">{</span>fig:fig2<span style="color:#204a87">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\includegraphics</span><span style="color:#c4a000">[keepaspectratio, scale=0.8]</span><span style="color:#204a87">{</span>images/fig2.png<span style="color:#204a87">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">\end</span><span style="color:#204a87">{</span>minipage<span style="color:#204a87">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">\end</span><span style="color:#204a87">{</span>figure<span style="color:#204a87">}</span>
+</span></span></code></pre></div><p><a href="https://github.com/onoshima/lua-filters/blob/main/lua/figure-side-by-side.lua">figure-side-by-side.lua</a></p>
 
 	
 
 	<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
   <li>
-    <a href="/blog/2020/04/09/zotero%E3%81%AE%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E7%AE%A1%E7%90%86%E3%81%AE%E8%A6%9A%E6%9B%B8/" aria-label="Previous - Zoteroのファイル管理の覚書" class="btn btn-primary"><span class="mr-1">←</span>Previous</a>
+    <a href="/blog/2023/03/01/i-t%E7%9B%B8%E9%96%A2%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%E3%81%AE%E3%83%A1%E3%83%A2/" aria-label="Previous - I-T相関についてのメモ" class="btn btn-primary"><span class="mr-1">←</span>Previous</a>
   </li>
   <li>
-    <a href="/blog/2020/04/24/non-normal%E3%81%AA%E4%B9%B1%E6%95%B0%E3%82%92%E7%99%BA%E7%94%9F%E3%81%99%E3%82%8B%E3%83%91%E3%83%83%E3%82%B1%E3%83%BC%E3%82%B8%E3%81%82%E3%82%8C%E3%81%93%E3%82%8C/" aria-label="Next - non-normalな乱数を発生するパッケージあれこれ" class="btn btn-primary">Next<span class="ml-1">→</span></a>
+    <a class="btn btn-primary disabled">Next<span class="ml-1">→</span></a>
   </li>
 </ul>
 
