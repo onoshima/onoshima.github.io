@@ -21,26 +21,26 @@
 <title>図を2つ横に並べるときに少し楽になるlua-filter | Onoshima&#39;s website</title>
 <meta name="description" content="ここのところPandocのlua filterについて少し勉強したのでその練習として作ったもの。
 入力ファイルをmarkdownにして独立したパラグラフに![caption1](images/fig1.png){#fig:fig1}![caption2](images/fig2.png){#fig:fig2}のようにスペースを空けずに画像を並べてPandocでLaTeXに変換すると，次のように変換するフィルターです。 画像と画像の間にスペースを含むと機能しません。
-\begin{figure}[htbp] \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption1}\label{fig:fig1} \includegraphics[keepaspectratio, scale=0.8]{images/fig1.png} \end{minipage} \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption2}\label{fig:fig2} \includegraphics[keepaspectratio, scale=0.8]{images/fig2.png} \end{minipage} \end{figure} figure-side-by-side.lua">
+\begin{figure}[htbp] \begin{minipage}[b]{0.45\columnwidth} \centering \caption{caption1}\label{fig:fig1} \includegraphics[keepaspectratio, width=\columnwidth]{images/fig1.png} \end{minipage} \begin{minipage}[b]{0.45\columnwidth} \centering \caption{caption2}\label{fig:fig2} \includegraphics[keepaspectratio, width=\columnwidth]{images/fig2.png} \end{minipage} \end{figure} figure-side-by-side.lua">
 <meta property="og:title" content="図を2つ横に並べるときに少し楽になるlua-filter" />
 <meta property="og:description" content="ここのところPandocのlua filterについて少し勉強したのでその練習として作ったもの。
 入力ファイルをmarkdownにして独立したパラグラフに![caption1](images/fig1.png){#fig:fig1}![caption2](images/fig2.png){#fig:fig2}のようにスペースを空けずに画像を並べてPandocでLaTeXに変換すると，次のように変換するフィルターです。 画像と画像の間にスペースを含むと機能しません。
-\begin{figure}[htbp] \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption1}\label{fig:fig1} \includegraphics[keepaspectratio, scale=0.8]{images/fig1.png} \end{minipage} \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption2}\label{fig:fig2} \includegraphics[keepaspectratio, scale=0.8]{images/fig2.png} \end{minipage} \end{figure} figure-side-by-side.lua" />
+\begin{figure}[htbp] \begin{minipage}[b]{0.45\columnwidth} \centering \caption{caption1}\label{fig:fig1} \includegraphics[keepaspectratio, width=\columnwidth]{images/fig1.png} \end{minipage} \begin{minipage}[b]{0.45\columnwidth} \centering \caption{caption2}\label{fig:fig2} \includegraphics[keepaspectratio, width=\columnwidth]{images/fig2.png} \end{minipage} \end{figure} figure-side-by-side.lua" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2023/03/02/%E5%9B%B3%E3%82%922%E3%81%A4%E6%A8%AA%E3%81%AB%E4%B8%A6%E3%81%B9%E3%82%8B%E3%81%A8%E3%81%8D%E3%81%AB%E5%B0%91%E3%81%97%E6%A5%BD%E3%81%AB%E3%81%AA%E3%82%8Blua-filter/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2023-03-02T17:43:18+09:00" />
-<meta property="article:modified_time" content="2023-03-02T17:43:18+09:00" />
+<meta property="article:modified_time" content="2023-03-02T17:59:37+09:00" />
 <meta itemprop="name" content="図を2つ横に並べるときに少し楽になるlua-filter">
 <meta itemprop="description" content="ここのところPandocのlua filterについて少し勉強したのでその練習として作ったもの。
 入力ファイルをmarkdownにして独立したパラグラフに![caption1](images/fig1.png){#fig:fig1}![caption2](images/fig2.png){#fig:fig2}のようにスペースを空けずに画像を並べてPandocでLaTeXに変換すると，次のように変換するフィルターです。 画像と画像の間にスペースを含むと機能しません。
-\begin{figure}[htbp] \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption1}\label{fig:fig1} \includegraphics[keepaspectratio, scale=0.8]{images/fig1.png} \end{minipage} \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption2}\label{fig:fig2} \includegraphics[keepaspectratio, scale=0.8]{images/fig2.png} \end{minipage} \end{figure} figure-side-by-side.lua"><meta itemprop="datePublished" content="2023-03-02T17:43:18+09:00" />
-<meta itemprop="dateModified" content="2023-03-02T17:43:18+09:00" />
+\begin{figure}[htbp] \begin{minipage}[b]{0.45\columnwidth} \centering \caption{caption1}\label{fig:fig1} \includegraphics[keepaspectratio, width=\columnwidth]{images/fig1.png} \end{minipage} \begin{minipage}[b]{0.45\columnwidth} \centering \caption{caption2}\label{fig:fig2} \includegraphics[keepaspectratio, width=\columnwidth]{images/fig2.png} \end{minipage} \end{figure} figure-side-by-side.lua"><meta itemprop="datePublished" content="2023-03-02T17:43:18+09:00" />
+<meta itemprop="dateModified" content="2023-03-02T17:59:37+09:00" />
 <meta itemprop="wordCount" content="19">
 <meta itemprop="keywords" content="lua," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="図を2つ横に並べるときに少し楽になるlua-filter"/>
 <meta name="twitter:description" content="ここのところPandocのlua filterについて少し勉強したのでその練習として作ったもの。
 入力ファイルをmarkdownにして独立したパラグラフに![caption1](images/fig1.png){#fig:fig1}![caption2](images/fig2.png){#fig:fig2}のようにスペースを空けずに画像を並べてPandocでLaTeXに変換すると，次のように変換するフィルターです。 画像と画像の間にスペースを含むと機能しません。
-\begin{figure}[htbp] \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption1}\label{fig:fig1} \includegraphics[keepaspectratio, scale=0.8]{images/fig1.png} \end{minipage} \begin{minipage}[b]{0.45\linewidth} \centering \caption{caption2}\label{fig:fig2} \includegraphics[keepaspectratio, scale=0.8]{images/fig2.png} \end{minipage} \end{figure} figure-side-by-side.lua"/>
+\begin{figure}[htbp] \begin{minipage}[b]{0.45\columnwidth} \centering \caption{caption1}\label{fig:fig1} \includegraphics[keepaspectratio, width=\columnwidth]{images/fig1.png} \end{minipage} \begin{minipage}[b]{0.45\columnwidth} \centering \caption{caption2}\label{fig:fig2} \includegraphics[keepaspectratio, width=\columnwidth]{images/fig2.png} \end{minipage} \end{figure} figure-side-by-side.lua"/>
 
 
 
@@ -398,15 +398,15 @@ if (!doNotTrack) {
 <p>入力ファイルをmarkdownにして独立したパラグラフに<code>![caption1](images/fig1.png){#fig:fig1}![caption2](images/fig2.png){#fig:fig2}</code>のようにスペースを空けずに画像を並べてPandocでLaTeXに変換すると，次のように変換するフィルターです。
 画像と画像の間にスペースを含むと機能しません。</p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-latex" data-lang="latex"><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">\begin</span><span style="color:#204a87">{</span>figure<span style="color:#204a87">}</span>[htbp]
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">\begin</span><span style="color:#204a87">{</span>minipage<span style="color:#204a87">}</span>[b]<span style="color:#204a87">{</span>0.45<span style="color:#204a87;font-weight:bold">\linewidth</span><span style="color:#204a87">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">\begin</span><span style="color:#204a87">{</span>minipage<span style="color:#204a87">}</span>[b]<span style="color:#204a87">{</span>0.45<span style="color:#204a87;font-weight:bold">\columnwidth</span><span style="color:#204a87">}</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\centering</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\caption</span><span style="color:#204a87">{</span>caption1<span style="color:#204a87">}</span><span style="color:#204a87;font-weight:bold">\label</span><span style="color:#204a87">{</span>fig:fig1<span style="color:#204a87">}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\includegraphics</span><span style="color:#c4a000">[keepaspectratio, scale=0.8]</span><span style="color:#204a87">{</span>images/fig1.png<span style="color:#204a87">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\includegraphics</span><span style="color:#c4a000">[keepaspectratio, width=\columnwidth]</span><span style="color:#204a87">{</span>images/fig1.png<span style="color:#204a87">}</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">\end</span><span style="color:#204a87">{</span>minipage<span style="color:#204a87">}</span>
-</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">\begin</span><span style="color:#204a87">{</span>minipage<span style="color:#204a87">}</span>[b]<span style="color:#204a87">{</span>0.45<span style="color:#204a87;font-weight:bold">\linewidth</span><span style="color:#204a87">}</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">\begin</span><span style="color:#204a87">{</span>minipage<span style="color:#204a87">}</span>[b]<span style="color:#204a87">{</span>0.45<span style="color:#204a87;font-weight:bold">\columnwidth</span><span style="color:#204a87">}</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\centering</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\caption</span><span style="color:#204a87">{</span>caption2<span style="color:#204a87">}</span><span style="color:#204a87;font-weight:bold">\label</span><span style="color:#204a87">{</span>fig:fig2<span style="color:#204a87">}</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\includegraphics</span><span style="color:#c4a000">[keepaspectratio, scale=0.8]</span><span style="color:#204a87">{</span>images/fig2.png<span style="color:#204a87">}</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#204a87;font-weight:bold">\includegraphics</span><span style="color:#c4a000">[keepaspectratio, width=\columnwidth]</span><span style="color:#204a87">{</span>images/fig2.png<span style="color:#204a87">}</span>
 </span></span><span style="display:flex;"><span>  <span style="color:#204a87;font-weight:bold">\end</span><span style="color:#204a87">{</span>minipage<span style="color:#204a87">}</span>
 </span></span><span style="display:flex;"><span><span style="color:#204a87;font-weight:bold">\end</span><span style="color:#204a87">{</span>figure<span style="color:#204a87">}</span>
 </span></span></code></pre></div><p><a href="https://github.com/onoshima/lua-filters/blob/main/lua/figure-side-by-side.lua">figure-side-by-side.lua</a></p>
