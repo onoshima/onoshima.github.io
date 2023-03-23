@@ -99,7 +99,9 @@ if (!doNotTrack) {
       <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-blog-li">
   <a href="/blog/" title="ブログ記事" class="align-left pl-0 active td-sidebar-link td-sidebar-link__section tree-root" id="m-blog"><span class="td-sidebar-nav-active-item">ブログ</span></a>
   <ul class="ul-1">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230306202303-dcer-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230323202303-sidecar-li">
+  <a href="/blog/2023/03/23/202303-sidecar/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20230323202303-sidecar"><span class="">iPadがSidecar接続できない問題</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230306202303-dcer-li">
   <a href="/blog/2023/03/06/202303-dcer/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20230306202303-dcer"><span class="">ACERとMCERとDCER</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230302202303-lua-side-by-side-li">
   <a href="/blog/2023/03/02/202303-lua-side-by-side/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20230302202303-lua-side-by-side"><span class="">図を2つ横に並べるときに少し楽になるlua-filter</span></a>
@@ -293,6 +295,8 @@ if (!doNotTrack) {
         
           <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/sem/" data-taxonomy-term="sem"><span class="taxonomy-label">SEM</span><span class="taxonomy-count">2</span></a></li>
         
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/sidecar/" data-taxonomy-term="sidecar"><span class="taxonomy-label">Sidecar</span><span class="taxonomy-count">1</span></a></li>
+        
           <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/tetrachoric-correlation/" data-taxonomy-term="tetrachoric-correlation"><span class="taxonomy-label">tetrachoric correlation</span><span class="taxonomy-count">2</span></a></li>
         
           <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/tidyverse/" data-taxonomy-term="tidyverse"><span class="taxonomy-label">tidyverse</span><span class="taxonomy-count">1</span></a></li>
@@ -323,7 +327,7 @@ if (!doNotTrack) {
       
       <ul class="taxonomy-terms">
         
-          <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/others/" data-taxonomy-term="others"><span class="taxonomy-label">others</span><span class="taxonomy-count">8</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/others/" data-taxonomy-term="others"><span class="taxonomy-label">others</span><span class="taxonomy-count">9</span></a></li>
         
           <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/python/" data-taxonomy-term="python"><span class="taxonomy-label">python</span><span class="taxonomy-count">1</span></a></li>
         
@@ -352,6 +356,60 @@ if (!doNotTrack) {
 			
 			<h2>Posts in 2021</h2>
 			<ul class="list-unstyled mt-4">
+				
+				<li class="media mb-4">
+					<div class="media-body">
+						<h5 class="mt-0 mb-1"><a href="/blog/2021/01/16/extract_montecarlo/">Mplusのモンテカルロ法の結果を整形する関数</a></h5>
+						<p class="mb-2 mb-md-3"><small class="text-muted">Saturday, January 16, 2021 in ブログ</small></p>
+						<header class="article-meta">
+							
+
+  
+    
+      
+
+
+<div class="taxonomy taxonomy-terms-article taxo-tags">
+  <h5 class="taxonomy-title">Tags:</h5>
+  <ul class="taxonomy-terms">
+    
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/monte-carlo-simulation/" data-taxonomy-term="monte-carlo-simulation"><span class="taxonomy-label">Monte Carlo Simulation</span></a></li>
+    
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/mplus/" data-taxonomy-term="mplus"><span class="taxonomy-label">Mplus</span></a></li>
+    
+  </ul>
+</div>
+
+    
+      
+
+
+<div class="taxonomy taxonomy-terms-article taxo-categories">
+  <h5 class="taxonomy-title">Categories:</h5>
+  <ul class="taxonomy-terms">
+    
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/stat/" data-taxonomy-term="stat"><span class="taxonomy-label">stat</span></a></li>
+    
+  </ul>
+</div>
+
+    
+  
+
+							
+						</header>
+						
+
+
+
+
+
+						<p class="pt-0 mt-0">要約 Mplusのモンテカルロ法の書く繰り返しのパラメータや適合度を整形する関数を書きました。Mplusの.outファイルのパスと各パラメータが保存されたテキストファイルのパスを引数に渡して使います。
+extract_montecarlo(filename=&#34;mplus.out&#34;, represult = &#34;represults.txt&#34;) 次のように，ヘッダー付きのデータフレームを出力します。
+使いたい人がいるかはわかりませんが，一番最後にコードを置いておきま …</p>
+						<p class="pt-0"><a href="/blog/2021/01/16/extract_montecarlo/" aria-label="Read more - Mplusのモンテカルロ法の結果を整形する関数">Read more</a></p>
+					</div>
+				</li>
 				
 				<li class="media mb-4">
 					<div class="media-body">
@@ -812,62 +870,6 @@ Brown (2006) Brown, T. A. (2006). Confirmatory factor analysis for applied resea
 MAP基準とは MAPはMinimum average partical correlationの略です。オリジナルはVelicer（1976）による次の論文です。https://doi-org/10.1007/BF02293557
 $p$個の観測変数の相関行列を$R$とします。サイズは$p \times p$です。主成分分析の …</p>
 						<p class="pt-0"><a href="/blog/2020/09/22/vss/" aria-label="Read more - 因子分析におけるMAP基準について">Read more</a></p>
-					</div>
-				</li>
-				
-				<li class="media mb-4">
-					<div class="media-body">
-						<h5 class="mt-0 mb-1"><a href="/blog/2020/09/16/omega_efacfa/">EFAから計算したωとCFAから計算したω</a></h5>
-						<p class="mb-2 mb-md-3"><small class="text-muted">Wednesday, September 16, 2020 in ブログ</small></p>
-						<header class="article-meta">
-							
-
-  
-    
-      
-
-
-<div class="taxonomy taxonomy-terms-article taxo-tags">
-  <h5 class="taxonomy-title">Tags:</h5>
-  <ul class="taxonomy-terms">
-    
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/coefficient-omega/" data-taxonomy-term="coefficient-omega"><span class="taxonomy-label">coefficient omega</span></a></li>
-    
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/reliability/" data-taxonomy-term="reliability"><span class="taxonomy-label">reliability</span></a></li>
-    
-  </ul>
-</div>
-
-    
-      
-
-
-<div class="taxonomy taxonomy-terms-article taxo-categories">
-  <h5 class="taxonomy-title">Categories:</h5>
-  <ul class="taxonomy-terms">
-    
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span></a></li>
-    
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/stat/" data-taxonomy-term="stat"><span class="taxonomy-label">stat</span></a></li>
-    
-  </ul>
-</div>
-
-    
-  
-
-							
-						</header>
-						
-
-
-
-
-
-						<p class="pt-0 mt-0">2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
-$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}+{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
-として表される。${\bf c}$は一般因子の因 …</p>
-						<p class="pt-0"><a href="/blog/2020/09/16/omega_efacfa/" aria-label="Read more - EFAから計算したωとCFAから計算したω">Read more</a></p>
 					</div>
 				</li>
 				

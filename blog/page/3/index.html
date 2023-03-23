@@ -99,7 +99,9 @@ if (!doNotTrack) {
       <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-blog-li">
   <a href="/blog/" title="ブログ記事" class="align-left pl-0 active td-sidebar-link td-sidebar-link__section tree-root" id="m-blog"><span class="td-sidebar-nav-active-item">ブログ</span></a>
   <ul class="ul-1">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230306202303-dcer-li">
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230323202303-sidecar-li">
+  <a href="/blog/2023/03/23/202303-sidecar/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20230323202303-sidecar"><span class="">iPadがSidecar接続できない問題</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230306202303-dcer-li">
   <a href="/blog/2023/03/06/202303-dcer/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20230306202303-dcer"><span class="">ACERとMCERとDCER</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230302202303-lua-side-by-side-li">
   <a href="/blog/2023/03/02/202303-lua-side-by-side/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20230302202303-lua-side-by-side"><span class="">図を2つ横に並べるときに少し楽になるlua-filter</span></a>
@@ -293,6 +295,8 @@ if (!doNotTrack) {
         
           <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/sem/" data-taxonomy-term="sem"><span class="taxonomy-label">SEM</span><span class="taxonomy-count">2</span></a></li>
         
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/sidecar/" data-taxonomy-term="sidecar"><span class="taxonomy-label">Sidecar</span><span class="taxonomy-count">1</span></a></li>
+        
           <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/tetrachoric-correlation/" data-taxonomy-term="tetrachoric-correlation"><span class="taxonomy-label">tetrachoric correlation</span><span class="taxonomy-count">2</span></a></li>
         
           <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/tidyverse/" data-taxonomy-term="tidyverse"><span class="taxonomy-label">tidyverse</span><span class="taxonomy-count">1</span></a></li>
@@ -323,7 +327,7 @@ if (!doNotTrack) {
       
       <ul class="taxonomy-terms">
         
-          <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/others/" data-taxonomy-term="others"><span class="taxonomy-label">others</span><span class="taxonomy-count">8</span></a></li>
+          <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/others/" data-taxonomy-term="others"><span class="taxonomy-label">others</span><span class="taxonomy-count">9</span></a></li>
         
           <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/python/" data-taxonomy-term="python"><span class="taxonomy-label">python</span><span class="taxonomy-count">1</span></a></li>
         
@@ -352,6 +356,62 @@ if (!doNotTrack) {
 			
 			<h2>Posts in 2020</h2>
 			<ul class="list-unstyled mt-4">
+				
+				<li class="media mb-4">
+					<div class="media-body">
+						<h5 class="mt-0 mb-1"><a href="/blog/2020/09/16/omega_efacfa/">EFAから計算したωとCFAから計算したω</a></h5>
+						<p class="mb-2 mb-md-3"><small class="text-muted">Wednesday, September 16, 2020 in ブログ</small></p>
+						<header class="article-meta">
+							
+
+  
+    
+      
+
+
+<div class="taxonomy taxonomy-terms-article taxo-tags">
+  <h5 class="taxonomy-title">Tags:</h5>
+  <ul class="taxonomy-terms">
+    
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/coefficient-omega/" data-taxonomy-term="coefficient-omega"><span class="taxonomy-label">coefficient omega</span></a></li>
+    
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/reliability/" data-taxonomy-term="reliability"><span class="taxonomy-label">reliability</span></a></li>
+    
+  </ul>
+</div>
+
+    
+      
+
+
+<div class="taxonomy taxonomy-terms-article taxo-categories">
+  <h5 class="taxonomy-title">Categories:</h5>
+  <ul class="taxonomy-terms">
+    
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span></a></li>
+    
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/stat/" data-taxonomy-term="stat"><span class="taxonomy-label">stat</span></a></li>
+    
+  </ul>
+</div>
+
+    
+  
+
+							
+						</header>
+						
+
+
+
+
+
+						<p class="pt-0 mt-0">2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
+$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}+{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
+として表される。${\bf c}$は一般因子の因 …</p>
+						<p class="pt-0"><a href="/blog/2020/09/16/omega_efacfa/" aria-label="Read more - EFAから計算したωとCFAから計算したω">Read more</a></p>
+					</div>
+				</li>
 				
 				<li class="media mb-4">
 					<div class="media-body">
@@ -833,50 +893,6 @@ $$ X = X_{1A} + X_{2A} $$
 これはMarkdownが先に _（アンダースコア）によって囲まれた部分をイタリックとして解釈してしまうことにより起きるらしい．これを避けるためには次のように _ をバックスラッシュでエスケープしてやるとよいらしい．
 $$ X = …</p>
 						<p class="pt-0"><a href="/blog/2020/02/15/underscore/" aria-label="Read more - Hugoで記事中に数式を書く際の_問題">Read more</a></p>
-					</div>
-				</li>
-				
-				<li class="media mb-4">
-					<div class="media-body">
-						<h5 class="mt-0 mb-1"><a href="/blog/2020/02/11/git_use/">gitで一部のファイルを特定のコミットに戻すとき</a></h5>
-						<p class="mb-2 mb-md-3"><small class="text-muted">Tuesday, February 11, 2020 in ブログ</small></p>
-						<header class="article-meta">
-							
-
-  
-    
-      
-
-
-<div class="taxonomy taxonomy-terms-article taxo-tags">
-  <h5 class="taxonomy-title">Tags:</h5>
-  <ul class="taxonomy-terms">
-    
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/git/" data-taxonomy-term="git"><span class="taxonomy-label">git</span></a></li>
-    
-  </ul>
-</div>
-
-    
-      
-
-
-    
-  
-
-							
-						</header>
-						
-
-
-
-
-
-						<p class="pt-0 mt-0">備忘録．なぜか知らないけれど，全然違うファイルを別のファイルに上書き保存してしまったときに調べた．
-git log #戻したいコミット番号を得る git checkout [コミット番号] [ファイルパス] 参考
-https://qiita.com/ritukiii/items/5bc8f74dbf4dc5d1384c
-</p>
-						<p class="pt-0"><a href="/blog/2020/02/11/git_use/" aria-label="Read more - gitで一部のファイルを特定のコミットに戻すとき">Read more</a></p>
 					</div>
 				</li>
 				
