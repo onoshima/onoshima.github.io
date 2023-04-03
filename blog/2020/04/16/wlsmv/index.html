@@ -33,14 +33,14 @@ https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf"
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2020/04/16/wlsmv/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2020-04-16T20:04:15+09:00" />
-<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:33:57+09:00" />
 <meta itemprop="name" content="カテゴリカルデータをlavaanでSEMする際の細かい話">
 <meta itemprop="description" content="lavaanでカテゴリカルデータのSEMをする際には，orederedの引数にカテゴリカルなデータの変数名を指定する．推定はデフォルトではWLSMVらしい．
 WLSMVというのはそもそも，estimatorのみを指している訳でなく，estimatorがDWLSで，robust標準誤差を用いて，平均と分散を調整したテスト統計量を使う3点セットのことらしいのだが，Mplusでデフォルトの推定WLSMVなため業界ではこの呼び名で定着したそうだ．
 Mplusはversionが1から5までとversion6以降ではWLSMVの指す意味が違うそうである．lavaanを使ってversion5までのWLSMVを再現するには，estimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;Sattertwaite&quot;の3点セットなのだが，ver6以降のWLSMVはestimator=&quot;DWSL&quot;, se=&quot;standard&quot;, test=&quot;scaled.shifted&quot;だそうだ．個別に指定してもよいし，estimator=&quot;WLSMV&quot;とすればver6以降に，estimator=&quot;WLSMVS&quot;とすればver5までのと同じ方法になるようだ．とある推定の結果を一致させたかったときにつまづいたので記録を残しておく．
 【参考】
 https://personality-project.org/r/tutorials/summerschool.14/rosseel_sem_cat.pdf"><meta itemprop="datePublished" content="2020-04-16T20:04:15+09:00" />
-<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:33:57+09:00" />
 <meta itemprop="wordCount" content="9">
 <meta itemprop="keywords" content="lavaan,WLSMV,SEM," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="カテゴリカルデータをlavaanでSEMする際の細かい話"/>
