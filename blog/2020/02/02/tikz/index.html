@@ -37,7 +37,7 @@ https://tex.stackexchange.com/questions/397610/latent-variable-model-with-tikz
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2020/02/02/tikz/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2020-02-02T19:01:51+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="TikZで遊んでみた">
 <meta itemprop="description" content="きれいなパス図を描きたいと思ってTikZを試してみたときの記録．
 TikZとは LaTeXで動くパッケージで図形をコマンドで描けるものらしい．以下のサイトが日本語で簡単な説明している．
@@ -46,7 +46,7 @@ https://guides.lib.kyushu-u.ac.jp/c.php?g=774891&amp;p=5559083
 https://tex.stackexchange.com/questions/397610/latent-variable-model-with-tikz
 因子分析のパス図を書いてみる とりあえず\nodeやら\drawやら\pathやらで必要なものを定義して，あとは[ ]に必要なオプションを入れて微調整する感じ．繰り返し処理とかを使えば，もっと短くなるらしいが，とりあえず最初なのでとりあえずコピペ多用でやってみた．lavaanのパッケージにも入っている有名な知能検査の因子分析のもの．
 \documentclass[tikz,border=10pt]{standalone} \usetikzlibrary{shapes, arrows} \begin{document} \begin{tikzpicture} % node ovserved \node (X1) at (0,0) [rectangle, draw]{$X_1$}; \node (X2) at (1,0) [rectangle, draw]{$X_2$}; \node (X3) at (2,0) [rectangle, draw]{$X_3$}; \node (X4) at (3,0) [rectangle, draw]{$X_4$}; \node (X5) at (4,0) [rectangle, draw]{$X_5$}; \node (X6) at (5,0) [rectangle, draw]{$X_6$}; \node (X7) at (6,0) [rectangle, draw]{$X_7$}; \node (X8) at (7,0) [rectangle, draw]{$X_8$}; \node (X9) at (8,0) [rectangle, draw]{$X_9$}; % node latene \node (visual) at (1,1."><meta itemprop="datePublished" content="2020-02-02T19:01:51+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="322">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="TikZで遊んでみた"/>

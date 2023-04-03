@@ -31,13 +31,13 @@ TITLE: test; DATA: FILE = &#34;bfiA.csv&#34;; VARIABLE: NAMES = A1-A5; USEVARIAB
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2020/04/27/mplus_lavaan/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2020-04-27T13:13:05+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="lavaanでMplusのカテゴリカル因子分析を再現する">
 <meta itemprop="description" content="Mplusで行われたシミュレーションをRで再現しようとした際に調べたことの記録．MplusにおけるESTIMATOR=WLSMVとlavaanでestimator=&quot;WLSMV&quot;にした際の挙動について．
 データ Rのpsychのパッケージに入っているbfiの質問紙データの一部（A1-A5の項目まで）を利用した．なぜ一部かというとMplusのデモ版だと使える変数の数に制限があるためである．とりあえずcsvにして書き出す．Mplusだとデータファイルは変数名を含めないようなのでcol_names=FALSEにする．欠損値処理についても考えないために今回はリストワイズ削除．N=2709の5項目（すべて6件法）のデータを使う．
 library(readr) library(lavaan) bfiA &lt;- psych::bfi[1:5] bfiA &lt;- na.omit(bfiA) write_csv(bfiA, &#34;bfiA.csv&#34;, col_names = FALSE) head(bfiA) # A1 A2 A3 A4 A5 #61617 2 4 3 4 4 #61618 2 4 5 2 5 #1620 5 4 5 4 4 #61621 4 4 6 5 5 #61622 2 3 3 4 5 #61623 6 6 5 6 5 MplusでCFA まずは，Mplusでやってみる．インプットファイルはこんな感じ．
 TITLE: test; DATA: FILE = &#34;bfiA.csv&#34;; VARIABLE: NAMES = A1-A5; USEVARIABLES = A1-A5; CATEGORICAL = A1-A5; ANALYSIS: TYPE = GENERAL; ESTIMATOR= WLSMV; MODEL: F1 BY A1-A5*; F1@1; OUTPUT: SAMPSTAT STDYX MODINDICES(ALL); 結果，モデルフィットの部分は次のような感じ．"><meta itemprop="datePublished" content="2020-04-27T13:13:05+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="1126">
 <meta itemprop="keywords" content="SEM,lavaan,Mplus,WLSMV," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="lavaanでMplusのカテゴリカル因子分析を再現する"/>

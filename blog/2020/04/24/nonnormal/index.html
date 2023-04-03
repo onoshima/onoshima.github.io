@@ -41,7 +41,7 @@ p_load(SimMultiCorrData) samplesize &lt;- 1000 dat1 &lt;- nonnormvar1(method=&#3
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2020/04/24/nonnormal/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2020-04-24T10:27:42+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="non-normalな乱数を発生するパッケージあれこれ">
 <meta itemprop="description" content="はじめに Rは基本のパッケージに様々な確率分布の乱数を発生させる関数が備わっているが，研究の都合で正規分布に従わない歪んだデータを発生させる必要がでてきたので，Rで歪んだデータの乱数を発生させる際に使えるパッケージをいくつか試してみた．
 fungible まずはfungibleというパッケージに入っているmonte1という関数．変数の数，サンプルサイズ，母相関行列，歪度のベクトル，尖度のベクトルなど必要な情報を入れると，指定した通りの標準化された多変量の歪んだ乱数を生成してくれる．
@@ -52,7 +52,7 @@ https://link.springer.com/article/10.1007/BF02293687
 SimMultiCorrData 次はSimMultiCorrDataというパッケージに入っているnonnormvar1という関数では1変量の歪んだ乱数を生成することができる．引数には，FleishmanかPolynomialのどちらの方法か，平均，分散，歪度，尖度のほか，サンプルサイズや，seedを指定できる．デフォルトでは平均=0で分散=1である．
 p_load(SimMultiCorrData) samplesize &lt;- 1000 dat1 &lt;- nonnormvar1(method=&#34;Fleishman&#34;, skews=-0.6, skurts=0,n=samplesize) dat2 &lt;- nonnormvar1(method=&#34;Fleishman&#34;, skews=0, skurts=1.25,n=samplesize) この関数で発生させた乱数のデータは$continuous_variableに入っており，要約統計量は$summary_continuousにまとまっており，狙い通りの変数ができたかどうかの確認ができて便利である．
 ちなみに引数でmethod=&quot;Polynomial&quot;を指定すると次の論文の手順で乱数を生成するようである．"><meta itemprop="datePublished" content="2020-04-24T10:27:42+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="158">
 <meta itemprop="keywords" content="nonnormal distribution," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="non-normalな乱数を発生するパッケージあれこれ"/>

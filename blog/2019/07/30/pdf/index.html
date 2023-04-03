@@ -41,7 +41,7 @@ R による EPS 画像の作成とその LATEX への取り込み" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2019/07/30/pdf/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2019-07-30T18:20:19+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="Rでベクタ画像を作る際のメモ">
 <meta itemprop="description" content="Rでベクタ画像を作成する際に色々調べたメモ。
 ベクタ画像の作り方 postscriptでデバイスを開いて次のようにすると良い。
@@ -52,7 +52,7 @@ postscriptでどんなフォントが使えるかが知りたければ, &lsquo;p
 postscript(&#34;eps_sample4.eps&#34;, width=7, height=7, paper=&#34;special&#34;, onefile = F, horizontal = F, family=&#34;Japan1&#34;) plot(1:10, main=&#34;日本語のフォント&#34;) dev.off() フォントの埋め込み こうして作られたepsファイルはフォントが埋め込まれていないため, 当該のフォントが入っていない環境では表示されなくなってしまう。そこで出来上がった画像にフォントを埋め込む必要がある。といっても、関数一発でできるので難しいことはない。
 embedFonts(&#34;eps_sample1.eps&#34;, format = &#34;eps2write&#34;) 参考にしたサイト Rのポストスクリプト画像（eps・psファイル）出力
 R による EPS 画像の作成とその LATEX への取り込み"><meta itemprop="datePublished" content="2019-07-30T18:20:19+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="54">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Rでベクタ画像を作る際のメモ"/>

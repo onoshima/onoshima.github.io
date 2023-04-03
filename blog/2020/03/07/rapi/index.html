@@ -43,7 +43,7 @@ library(pacman) p_load(keyring, httr, listviewer, rlist, pipeR, dplyr, stringr, 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2020/03/07/rapi/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2020-03-07T20:58:44+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="RからeStatのAPIを使ってみる">
 <meta itemprop="description" content="Rからe-StatのAPIを使ったときのメモ．以下のサイトの言う通りにやってみただけ．
 https://qiita.com/nozma/items/f88f5cc60ab63461deae
@@ -55,7 +55,7 @@ https://qiita.com/nozma/items/9f4a638906471d125e96
 特別支援学校高等部の進路 試しに，文科省の「学校基本調査」から特別支援学校高等部で知的障害の進路の情報をとって，グラフにしてみたのがこちら．統計表をダウンロードしてからdplyrを使って整形していく流れ．実際の数と割合をグラフにしてみた．
 使ったコードは以下のもの．なぜか平成23年度から25年度はひとまとまりで提供されていたり，平成22年度とそれ以降で列名が違ったりと下処理が面倒くさかったです．
 library(pacman) p_load(keyring, httr, listviewer, rlist, pipeR, dplyr, stringr, ggplot2, stringi, readr, ggthemes) keyring::key_set(&#34;e-stat&#34;) ## 統計表を検索してお目当ての表を特定 response &lt;- GET( url = &#34;https://api.e-stat.go.jp/rest/2.1/app/json/getStatsList&#34;, query = list( appId = keyring::key_get(&#34;e-stat&#34;), searchWord = &#34;障害種 AND 状況別 AND 高等部&#34; ) ) res_content &lt;- content(response) jsonedit(res_content) id_table &lt;- res_content$GET_STATS_LIST$DATALIST_INF$TABLE_INF %&gt;&gt;% list.select( id = `@id`, year = STATISTICS_NAME_SPEC$TABULATION_SUB_CATEGORY1, table_name = TITLE_SPEC$TABLE_NAME) %&gt;&gt;% list.stack() id_list &lt;- pull(id_table, id) res &lt;- tibble() for (id in id_list){ dat_year &lt;- GET( url = &#34;https://api."><meta itemprop="datePublished" content="2020-03-07T20:58:44+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="274">
 <meta itemprop="keywords" content="e-Stat,api," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="RからeStatのAPIを使ってみる"/>

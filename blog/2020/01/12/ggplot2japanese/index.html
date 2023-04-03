@@ -31,13 +31,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2020/01/12/ggplot2japanese/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2020-01-12T23:12:22+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="ggplot2でpdfを出力する">
 <meta itemprop="description" content="ggplot2でpdf出力 # ggplot2 pdf出力 library(tidyverse) dat &lt;- as_tibble(iris) dat_long &lt;- dat %&gt;% gather(key=&#34;part&#34;, value=&#34;value&#34;,-Species) %&gt;% mutate(part = as.factor(part)) p &lt;- ggplot(dat_long, aes(x=Species, y=value, fill=Species)) &#43; geom_boxplot() &#43; facet_wrap(~part) # pdfに出力 pdf(&#34;figure/iris.pdf&#34;, width=7, height=7) print(p) dev.off() ※ 画像web表示のためにpng形式.
 日本語ファイルを出力 pdfで使うフォントを指定してやるとよい. pdfで何のフォントが使えるかを知りたい時はnames(pdfFonts())とか打つと良い.
 # 日本語を使う p1 &lt;- p &#43; ggtitle(&#34;日本語タイトル&#34;) &#43; theme(plot.title=element_text(family=&#34;Japan1GothicBBB&#34;)) pdf(&#34;figure/iris_ja.pdf&#34;, width=7, height=7) print(p1) dev.off() ※ 画像web表示のためにpng形式.
 フォントが入っていない環境でも同じように表示するために, 以下のようにしてフォントを埋め込んでおくと良いらしい. embedFonts(&#34;figure/iris.pdf&#34;)"><meta itemprop="datePublished" content="2020-01-12T23:12:22+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="59">
 <meta itemprop="keywords" content="ggplot2,pdf," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ggplot2でpdfを出力する"/>

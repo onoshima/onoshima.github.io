@@ -39,7 +39,7 @@ mo1 &lt;- &#39; visual =~ x1&#43;x2&#43;x3 textual =~ x4&#43;x5&#43;x6 speed =~ 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2020/02/08/lav2tikz/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2020-02-08T11:57:05+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="lavaanのアウトプットをパス図にする">
 <meta itemprop="description" content="はじめに RでSEMをやるときはlavaanをよく使うのですがその結果を綺麗なパス図にしたいということで関数を作りました. lavaanのアウトプットを突っ込むとTikZで描画するためのTeXファイルを吐き出す関数です. 構造方程式を含むもの（フルSEMとか呼ばれるのかな？）には対応しておらず, CFAをそれっぽく出すだけの機能しかありませんが&hellip;
 インターネットには有難い情報を提供している方がいるもので, 作る際にはbob3さんの以下のブログが参考になりました.
@@ -49,7 +49,7 @@ library(lavaan) mo &lt;- &#39; visual =~ x1&#43;x2&#43;x3 textual =~ x4&#43;x5&#
 $ latex res1.tex $ dvipdfmx res1.dvi 次のような結果が得られます（webにアップロード用にpngにしていますが）.
 高次因子分析のモデルも一応描画できるようにしています.
 mo1 &lt;- &#39; visual =~ x1&#43;x2&#43;x3 textual =~ x4&#43;x5&#43;x6 speed =~ x7&#43;x8&#43;x9 g =~ visual&#43;textual&#43;speed &#39; res2 &lt;- cfa(mo1, data=HolzingerSwineford1939) write(lav2tikz(res2, size=&#34;scriptsize&#34;), file=&#34;res2.tex&#34;) 結果は次の通り."><meta itemprop="datePublished" content="2020-02-08T11:57:05+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="103">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="lavaanのアウトプットをパス図にする"/>

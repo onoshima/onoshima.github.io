@@ -39,7 +39,7 @@ skim_type skim_variable n_missing complete_rate numeric.mean numeric.sd numeric.
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2019/12/27/cronbach/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2019-12-27T21:37:22+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="相関係数行列からクロンバックのαを求める">
 <meta itemprop="description" content="尺度の作成論文などでは信頼性係数が報告される。信頼性係数には様々な種類があるが, その中でもっともよく使われるのがクロンバックのαである。クロンバックのαは次の計算式で求められる。
 $$ a = \frac{n}{n-1} \left( 1- \frac{\Sigma^n _{i=1}Var(X_i)}{Var(X)}\right) \tag{1} $$
@@ -49,7 +49,7 @@ http://www.okadajp.org/RWiki/?%CE%B1%E4%BF%82%E6%95%B0%EF%BC%8C%E4%BF%A1%E9%A0%B
 とりあえずここではpsychパッケージに含まれるalpha()関数を使ってみることにする。データは同じパッケージに含まれるbfiを用いる。このデータはビッグファイブ理論が想定する因子を測定する質問紙で1因子につき5項目合計25項目からなる。サンプルサイズは2800である。今回は最初の10項目だけ使う。
 データの中身はこんな感じ。6件法である。
 skim_type skim_variable n_missing complete_rate numeric.mean numeric.sd numeric.hist numeric A1 16 0.9942857 2.413434 1.407737 ▇▂▂▁▁ numeric A2 27 0.9903571 4.802380 1.172020 ▂▁▅▇▇ numeric A3 26 0.9907143 4.603821 1.301834 ▂▂▅▇▆ numeric A4 19 0.9932143 4.699748 1.479633 ▂▁▃▅▇ numeric A5 16 0.9942857 4.560345 1.258512 ▂▂▅▇▆ numeric C1 21 0.9925000 4.502339 1.241347 ▂▂▅▇▅ numeric C2 24 0."><meta itemprop="datePublished" content="2019-12-27T21:37:22+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="202">
 <meta itemprop="keywords" content="reliability,Cronbach&#39;s alpha," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="相関係数行列からクロンバックのαを求める"/>

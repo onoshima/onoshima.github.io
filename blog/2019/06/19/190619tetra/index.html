@@ -33,14 +33,14 @@ tetrachoric &lt;- function(cor.table, order=6){ #必要な数値を代入 N &lt;
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2019/06/19/190619tetra/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2019-06-19T21:59:21+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="テトラコリック相関係数を求める関数の自作">
 <meta itemprop="description" content="先日テトラコリック相関係数を求める方法についての記事を書いた。
 テトラコリック相関の初期
 それに基づいてRでテトラコリック相関係数を求める関数を自作した。
 Rでの関数化 作った関数は以下の通り。引数には2×2の相関表を指定する。途中のテトラコリック関数（？）で何次まで計算するかということをorder=という引数で指定する。デフォルトは論文に掲載されていたものと同じ6にしてある。
 tetrachoric &lt;- function(cor.table, order=6){ #必要な数値を代入 N &lt;- sum(cor.table) prop.bd &lt;- colSums(prop.table(cor.table))[2] prop.cd &lt;- rowSums(prop.table(cor.table))[2] h &lt;- qnorm(prop.bd, lower.tail = F) H &lt;- dnorm(h) k &lt;- qnorm(prop.cd, lower.tail = F) K &lt;- dnorm(k) tau &lt;- numeric(order) theta &lt;- numeric(order) v_bar &lt;- numeric(order) w_bar &lt;- numeric(order) #テトラコリック関数 for(n in 1:order){ if(n==1){ v_bar[n] &lt;- h w_bar[n] &lt;- k tau[n] &lt;- H theta[n] &lt;- K } else if (n==2){ v_bar[n] &lt;- h^2-1 w_bar[n] &lt;- k^2-1 tau[n] &lt;- H*h/sqrt(2) theta[n] &lt;- K*k/sqrt(2) } else { v_bar[n] &lt;- h * v_bar[n-1] - (n-1) * v_bar[n-2] w_bar[n] &lt;- k * w_bar[n-1] - (n-1) * w_bar[n-2] tau[n] &lt;- H*v_bar[n-1]/sqrt(factorial(n)) theta[n] &lt;- K*w_bar[n-1]/sqrt(factorial(n)) } } # 相関を計算 coef_vec &lt;- c(prop."><meta itemprop="datePublished" content="2019-06-19T21:59:21+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="240">
 <meta itemprop="keywords" content="tetrachoric correlation,R," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="テトラコリック相関係数を求める関数の自作"/>

@@ -37,7 +37,7 @@ library(boot) foo &lt;- function(d,k){ median." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2019/07/03/boot/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2019-07-03T07:10:40+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="ブートストラップについての調べもの">
 <meta itemprop="description" content="Rでブートストラップについて調べたときの記録。
 ブートストラップとは 大雑把に言えば, 統計量とかの分布を調べたりするために1つの標本から新しい標本（ブートストラップ標本）を何個も作ることのようだ。パラメトリックとノンパラメトリックがある。
@@ -46,7 +46,7 @@ library(boot) foo &lt;- function(d,k){ median." />
 # もとの標本 original &lt;- state.x77[,&#34;Income&#34;] # 元の標本から復元抽出する回数 num.bs.sample &lt;- 1000 # 結果を保存するようベクトル median.vector &lt;- numeric(num.bs.sample) mean.vector &lt;- numeric(num.bs.sample) for (i in 1:num.bs.sample){ median.vector[i] &lt;- median(sample(original, length(original), replace=TRUE)) mean.vector[i] &lt;- mean(sample(original, length(original), replace=T)) } # 結果の図示 boxplot(median.vector, mean.vector, names=c(&#34;Median&#34;,&#34;Mean&#34;), horizontal = T, las=T, xlab=&#34;Income&#34;) 結果は次のとおりである。これを使うと中央値の経験的な分布なども求められる。
 bootパッケージによるブートストラップ 毎回, 自分で繰り返しのループを書くのも面倒であろうということでbootという便利なパッケージがある。boot(もとの標本, 統計量を求める関数, ブートストラップ標本数)のように使う使うらしい。同じデータでやってみよう。
 library(boot) foo &lt;- function(d,k){ median."><meta itemprop="datePublished" content="2019-07-03T07:10:40+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="120">
 <meta itemprop="keywords" content="R,bootstrap," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ブートストラップについての調べもの"/>

@@ -29,12 +29,12 @@ library(tidyverse) air &lt;- airquality tidy.air &lt;- as_tibble(air) 条件に�
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2019/06/25/filter/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2019-06-25T16:38:21+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="tidyrを使ったデータの整理">
 <meta itemprop="description" content="データ整理にtidyverseを使った際の覚書。まずデータフレームをas_tibble()でtidy用の形式にする。
 library(tidyverse) air &lt;- airquality tidy.air &lt;- as_tibble(air) 条件に合うケースの抽出 filter()関数を使うと良いらしい。
 ## 条件に合う行を抽出 air.May &lt;- tidy.air %&gt;% filter(Month==5) #5月のデータのみ取り出す Ozone.mean &lt;- mean(air$Ozone, na.rm=T) air.high.Ozone &lt;- tidy.air %&gt;% # オゾンが平均より高いケースを取り出す filter(Ozone &gt; Ozone.mean) air.high.Ozone.May &lt;- tidy.air %&gt;% #複合条件もOK filter(Ozone &gt; Ozone.mean, Month==5) 抽出されたケースを見ると, オゾンの値が平均（43くらい）よりも高いケースのみのデータセットが出来上がっている。"><meta itemprop="datePublished" content="2019-06-25T16:38:21+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="42">
 <meta itemprop="keywords" content="tidyverse,R," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="tidyrを使ったデータの整理"/>

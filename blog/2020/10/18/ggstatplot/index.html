@@ -33,14 +33,14 @@ p3 &lt;- ggscatterstats( data = msleep, x = sleep_rem, y = awake, xlab = &#34;RE
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2020/10/18/ggstatplot/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2020-10-18T10:57:20+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="ggstatsplotパッケージについて">
 <meta itemprop="description" content="ggstatsplotパッケージが出たとのことで少しだけ使ってみた記録です。使い方は以下のリンクより。
 https://github.com/IndrajeetPatil/ggstatsplot
 ggbetweenstats 群間差の比較のためのバイオリンプロットを出すときに使えます。
 library(ggplot2) library(ggstatsplot) p1 &lt;- ggbetweenstats(data=iris, x=Species, y=Sepal.Length, k=3 ) p1 こんな感じで，検定結果とプロットを一括でやってくれます。便利。 いろいろと細かな設定もできるようです。 p2 &lt;- ggbetweenstats(data=iris, x=Species, y=Sepal.Length, k=2 , #検定結果の小数をどこまで表示するか title=&#34;Distribution of sepal length across Iris species&#34;, plot.type=&#34;box&#34;, # デフォルトはboxviolin，片方だけにもできる pairwise.comparisons = F, #多重比較を表示しないこともできる effsize.type = &#34;biased&#34;, #効果量を偏イータにしたければbiase results.subtitle = F, # FALSEにすると検定結果をサブタイトルから消せる bf.message = F) # したの方にあるベイズファクターの表示の有無 p2 ggscatterstats 散布図＋ヒストグラムに無相関の検定を合わせて出力するようです。
 p3 &lt;- ggscatterstats( data = msleep, x = sleep_rem, y = awake, xlab = &#34;REM sleep (in hours)&#34;, ylab = &#34;Amount of time spent awake (in hours)&#34;, title = &#34;Understanding mammalian sleep&#34;, messages = FALSE ) p3 平均（や中央値）の線を引いたり，特定の値を上回る場合にラベルをつけたりできるみたいです。"><meta itemprop="datePublished" content="2020-10-18T10:57:20+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="148">
 <meta itemprop="keywords" content="ggstatsplot," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="ggstatsplotパッケージについて"/>

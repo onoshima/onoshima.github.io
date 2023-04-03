@@ -49,7 +49,7 @@ library(psych) data(&#34;Thurstone.9&#34;) R &lt;- Thurstone.9 Prefixes Suffixes
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2020/09/22/vss/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2020-09-22T14:41:25+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="因子分析におけるMAP基準について">
 <meta itemprop="description" content="はじめに 探索的因子分析において，因子数を決める際にはさまざまな基準があるのですが，その中にMAP基準というものがあります。必要があって調べた際のメモを残しておきます。
 MAP基準とは MAPはMinimum average partical correlationの略です。オリジナルはVelicer（1976）による次の論文です。https://doi-org/10.1007/BF02293557
@@ -64,7 +64,7 @@ $$ f_m = \frac{\sum \sum_{i \neq j} (r ^* _{ij})^2 }{p(p-1)}　\tag{2}$$
 として表されます。MAP基準とは，パターン行列のmの値を変えていきながらこの値を計算して，最小になる$f_m$の$m$を因子数として採択しようという方法です。
 実際の数値例を確認 実際にデータを触ってみながら，手順を確認してみます。psychのvss関数の中身を覗きながら書きました。使うデータはpsychパッケージの中に入っているThurstone.9という9つのテストの相関行列です。
 library(psych) data(&#34;Thurstone.9&#34;) R &lt;- Thurstone.9 Prefixes Suffixes Vocabulary Sentences First.Last FirstLetters FourLetters Completion SameorOpposite Prefixes 1.000 0.554 0.227 0."><meta itemprop="datePublished" content="2020-09-22T14:41:25+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="440">
 <meta itemprop="keywords" content="MAP,factor analysis," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="因子分析におけるMAP基準について"/>

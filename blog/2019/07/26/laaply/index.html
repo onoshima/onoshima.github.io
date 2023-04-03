@@ -39,7 +39,7 @@ t.loop &lt;- proc.time() x &lt;- list() for (i in 1:100000){ x[[i]] &lt;- list(m
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2019/07/26/laaply/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2019-07-26T13:47:56+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="Rのlapply関数に関するメモ">
 <meta itemprop="description" content="lapplyおよびparallelパッケージのmclapplyについて調べた際の記録。
 lapplyとは Rで同一の関数を複数のオブジェクトを対象に行うときには, forで繰り返しのループで書くよりも, apply()ファミリーを用いて並列的に処理したほうが早いと言われる。lapplyは, 与えられたリストに対して同一の関数を適用する。lapplyだと戻り値はリストで, sapplyだと戻り値はベクトルである。
@@ -49,7 +49,7 @@ x &lt;- list(rnorm(10), rnorm(100), rnorm(1000)) lapply(x, mean) # 戻り値は�
 replist &lt;- parallel::mclapply(1:1000, function(x){ replicates &lt;- list(mean(rnorm(10)), mean(rnorm(100)),mean(rnorm(1000))) }) 戻り値はネストされたリストである。例えば, ネストされたリストを次のように行列の形に直せば, 異なるサンプルサイズにおける標本平均値のばらつきなども分かる。
 replicates &lt;- matrix(unlist(replist), 1000, 3, byrow=T) boxplot(replicates, names=c(&#34;size10&#34;, &#34;size100&#34;, &#34;size1000&#34;)) 速度の比較 本当にforのループよりも早いか調べてみる。今の処理を100,000回繰り返してみて速度を測ることにする。
 t.loop &lt;- proc.time() x &lt;- list() for (i in 1:100000){ x[[i]] &lt;- list(mean(rnorm(10)), mean(rnorm(100)), mean(rnorm(1000))) } t.loop &lt;- proc."><meta itemprop="datePublished" content="2019-07-26T13:47:56+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="93">
 <meta itemprop="keywords" content="R,apply," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Rのlapply関数に関するメモ"/>

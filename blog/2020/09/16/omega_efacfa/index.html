@@ -39,7 +39,7 @@ library(lavaan) library(psych) library(knitr) data(&#34;Thurstone&#34;) res_efa 
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2020/09/16/omega_efacfa/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2020-09-16T15:13:32+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="EFAから計算したωとCFAから計算したω">
 <meta itemprop="description" content="2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
 $$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}&#43;{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
@@ -49,7 +49,7 @@ Revelle &amp; Condon（2019）によると，これらの推定値を得る方�
 https://www.personality-project.org/r/html/bifactor.html
 探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
 library(lavaan) library(psych) library(knitr) data(&#34;Thurstone&#34;) res_efa &lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3)) g F1* F2* F3* h2 u2 p2 Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615 Vocabulary 0.726 0.553 0.042 -0.022 0.835 0.165 0.631 Sent.Completion 0."><meta itemprop="datePublished" content="2020-09-16T15:13:32+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="422">
 <meta itemprop="keywords" content="coefficient omega,reliability," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="EFAから計算したωとCFAから計算したω"/>

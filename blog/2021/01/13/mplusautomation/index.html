@@ -41,7 +41,7 @@ test2 &lt;- mplusObject( TITLE = &#34;This is mplusautomation test 2;&#34;, ANAL
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2021/01/13/mplusautomation/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2021-01-13T15:21:08+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="RからMplusを使う">
 <meta itemprop="description" content="構造方程式モデリングのためのソフトウェアと言えばMplusです。Mplusはシンタックスも簡単で計算も早くてとても良いソフトウェアですがアウトプットが見辛い上に，モデルの数だけインプットとアウトプットのファイルが増えていくのでごちゃつきます。また，私だけかもしれませんが，あとで解析をやりなおそうと思った際に，どのファイルを使ったのか分からなくなりがちです。
 そこで，MplusをRから使えるパッケージとしてMplusAutomationというものがあります。日本語で解説している資料としては徳岡先生（高松大）によるものあり大変参考になります。
@@ -52,7 +52,7 @@ library(psych) library(MplusAutomation) test1 &lt;- mplusObject(MODEL =&#34;F1 B
 こうしてできたR上のMplus Model Objectを実行するためのものがmplusModeler関数です。第１の引数には先ほどのMplus Model Objectを指定します。実行すると，Model Objectを元にして，同じディレクトリ内に，Mplusのinput，Mplusの実行用のデータファイル，Mplusのアウトプットが生成されます。dataoutという引数には，Mplus実行用に生成されたデータのファイル名を指定します。このファイルでは，例えば，列名のヘッダーが削除されていたり，欠損値が「.」に置き換えられていたりと，Mplusで処理できる形にデータが変換されています。またmodeloutという引数には，モデルを実行するのに使われたMplusのインプットファイルのファイル名を渡します。runという引数に0を渡すとモデルは実行されず，Mplus用のデータファイルとインプットファイルだけが生成されるようです。モデルが意図した通りに.inpファイルに反映されているかどうかを確認したい時に使うもののようです。1より大きい場合にはブートストラップで繰り返すとのことです。
 上の例では，とりあえず実行できれば良いということでモデルのみ書きましたが，もう少しいろいろと指定したものを作ってみます。
 test2 &lt;- mplusObject( TITLE = &#34;This is mplusautomation test 2;&#34;, ANALYSIS = &#34;ESTIMATOR = MLR;&#34;, OUTPUT = &#34;SAMPSTAT STDYX MODINDICES(ALL);&#34;, VARIABLE = &#34;USEVARIABLES = A1-A5 C1-C5 E1-E5 N1-N5 O1-O5;&#34;, MODEL =&#34;F1 BY A1-A5*; F2 BY C1-C5*; F3 BY E1-E5*; F4 BY N1-N5*; F5 BY O1-O5*; F1@1 F2@1 F3@1 F4@1 F5@1;&#34;, rdata = bfi) res2 &lt;- mplusModeler(test2, dataout = &#34;test2."><meta itemprop="datePublished" content="2021-01-13T15:21:08+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="326">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="RからMplusを使う"/>

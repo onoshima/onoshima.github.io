@@ -33,14 +33,14 @@ https://oku.edu.mie-u.ac.jp/~okumura/stat/nippon.html
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2020/03/08/restat_packages/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2020-03-08T16:50:26+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="RからeStatのAPIを使ってみる（その2）">
 <meta itemprop="description" content="はじめに Rからe-Statを使うお勉強の記録．@yutannihilation さん作成のestatapiというパッケージがあり，それを使ったらとても楽だった．使い方は以下のページに書いてある．
 https://qiita.com/kazutan/items/9c0b2dd0f055fde45cda
 不登校の児童生徒の数 今回は，文部科学省の「児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査」という調査を使ってみて，都道府県別1000人あたりの不登校児童の数をグラフにしてみた．日本地図については谷村先生作成のNipponMapというパッケージを使った．使い方は以下のサイトを参考にした．
 https://oku.edu.mie-u.ac.jp/~okumura/stat/nippon.html
 使ったコード library(pacman) p_load(estatapi, keyring,dplyr, stringr,NipponMap,RColorBrewer) key_set(&#34;e-stat&#34;) #　統計表の検索 00400304は児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査 statsList &lt;- estat_getStatsList( appId = key_get(&#34;e-stat&#34;), searchWord = &#34;&#34;, statsCode = &#34;00400304&#34; ) str(statsList) lists &lt;- statsList %&gt;% filter(str_detect(TITLE, &#34;不登校児童生徒数&#34;)) id_vector &lt;- pull(lists, &#34;@id&#34;) # メタ情報 meta_info &lt;- estat_getMetaInfo(appId = key_get(&#34;e-stat&#34;), statsDataId = id_vector[1]) names(meta_info) # 実際のデータを取得 df &lt;- estat_getStatsData( appId = key_get(&#34;e-stat&#34;), statsDataId = id_vector[1], cdCat02 = c(&#34;120&#34;, &#34;140&#34;), #小学校と中学校 cdArea = meta_info$area$&#34;@code&#34;[2:48]　#1番目は全国なので除外 ) df2017 &lt;- df %&gt;% rename(&#34;year&#34; = &#34;時間軸(年度次)&#34;) %&gt;% filter(year == &#34;2017年度&#34;, 学校種類 == &#34;小学校&#34;, cat01_code == &#34;120&#34;) df2017_jhs &lt;- df %&gt;% rename(&#34;year&#34; = &#34;時間軸(年度次)&#34;) %&gt;% filter(year == &#34;2017年度&#34;, 学校種類 == &#34;中学校&#34;, cat01_code == &#34;120&#34;) # 小学生をplot kenmei &lt;- df2017$地域 br &lt;- seq(3, 9, 1) color &lt;- brewer."><meta itemprop="datePublished" content="2020-03-08T16:50:26+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="202">
 <meta itemprop="keywords" content="e-Stat,API," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="RからeStatのAPIを使ってみる（その2）"/>

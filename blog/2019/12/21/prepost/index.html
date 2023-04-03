@@ -39,7 +39,7 @@ sub group pre post 1 control 35 40 2 control 40 23 8 control 47 33 9 exp 35 36 1
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2019/12/21/prepost/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2019-12-21T16:12:33+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="2群のプリポストデータに関して">
 <meta itemprop="description" content="2群のプリポストデータ 理由はよくわからないのだけれど, 知り合いから2群のプリポストデータの分析について聞かれることが多い。何かしらの介入の効果を検討したいらしく、統制群と介入群の2つに分けて, それぞれの群で介入前と介入後のデータを取るみたいな状況を想定しているようだ。
 こうした場合に適切な分析手法については吉田（2006）が論じており, （1）ポスト-プリの差得点を取り, その差得点（変化量）を従属変数としてt検定を行う, （2）プリ得点を共変量とした共分散分析（ANCOVA）を行う, の2種類が推奨されている。
@@ -49,7 +49,7 @@ http://www.cc.aoyama.ac.jp/~t41338/lecture/aoyama/stat2e/stat2e_top.html
 データの中身の一部を取りだすとこんな感じである。1列目に被験者番号, 2列目に群の情報, 3列目にプリ得点, 4列目にポスト得点。なんの介入なのかは知らないけれどこんな形でデータが得られたとする。統制群と介入群は8名ずつである。
 sub group pre post 1 control 35 40 2 control 40 23 8 control 47 33 9 exp 35 36 15 exp 42 52 16 exp 42 52 箱ひげ図で表してみると次の通り。
 # データセットをlong型にして必要な列をfactorに変換 dat.long&lt;- dat %&gt;% gather(key = time, value = value, -c(group,sub)) %&gt;% mutate(sub = as.factor(sub),group = as.factor(group), time= factor(time, levels=c(&#34;pre&#34;,&#34;post&#34;))) ## データの可視化 ggplot(data=dat."><meta itemprop="datePublished" content="2019-12-21T16:12:33+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="141">
 <meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="2群のプリポストデータに関して"/>

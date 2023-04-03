@@ -37,7 +37,7 @@ mad(x, constant = 1) で求めることができる。
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2022/03/21/mad/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2022-03-21T11:49:44+09:00" />
-<meta property="article:modified_time" content="2023-02-25T12:11:31+09:00" />
+<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="name" content="5MAD基準による外れ値の検出">
 <meta itemprop="description" content="外れ値の検出の基準として四分位間範囲（IQR）を使って$\textrm{IQR} \times 1.5$とするものがある。Rのggplot2で箱ひげ図を描くとデフォルトでこの基準が適用されて，ヒゲからはみ出した点として描かれたはずである。
 それとは別に5MAD基準というものもあるらしい。MADというのは，$\tilde{X} = \textrm{median}(X)$を中央値として $$ \textrm{MAD} = \textrm{median}( |X_i - \tilde{X}|) $$ のことで中央値絶対偏差（median absolute deviation, あるいは「絶対中位数偏差」とも） のことである。中央値からの偏差の絶対値の中央値である。ややこしい。
@@ -46,7 +46,7 @@ mad(x, constant = 1) で求めることができる。
 mad(x, constant = 1) で求めることができる。
 参考にしたもの
 蓑谷千凰彦 (2009) 数理統計ハンドブック みみずく舎 p.10 "><meta itemprop="datePublished" content="2022-03-21T11:49:44+09:00" />
-<meta itemprop="dateModified" content="2023-02-25T12:11:31+09:00" />
+<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
 <meta itemprop="wordCount" content="40">
 <meta itemprop="keywords" content="median absolute deviation,outlier," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="5MAD基準による外れ値の検出"/>
