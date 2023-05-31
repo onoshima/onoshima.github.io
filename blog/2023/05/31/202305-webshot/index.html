@@ -18,49 +18,45 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>EFAから計算したωとCFAから計算したω | Onoshima&#39;s website</title>
-<meta name="description" content="2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
-$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}&#43;{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
-として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
-Revelle &amp;amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
-使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。
-https://www.personality-project.org/r/html/bifactor.html
-探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
-library(lavaan) library(psych) library(knitr) data(&amp;#34;Thurstone&amp;#34;) res_efa &amp;lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3)) g F1* F2* F3* h2 u2 p2 Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615 Vocabulary 0.726 0.553 0.042 -0.022 0.835 0.165 0.631 Sent.Completion 0.">
-<meta property="og:title" content="EFAから計算したωとCFAから計算したω" />
-<meta property="og:description" content="2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
-$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}&#43;{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
-として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
-Revelle &amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
-使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。
-https://www.personality-project.org/r/html/bifactor.html
-探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
-library(lavaan) library(psych) library(knitr) data(&#34;Thurstone&#34;) res_efa &lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3)) g F1* F2* F3* h2 u2 p2 Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615 Vocabulary 0.726 0.553 0.042 -0.022 0.835 0.165 0.631 Sent.Completion 0." />
+<title>webshot2でEdgeを使う | Onoshima&#39;s website</title>
+<meta name="description" content="Rでスクリーンショットをとるパッケージにwebshot2がある。 パッケージのページによるとchromoteのパッケージを呼び出してChromeを動かしているようだ。 そこには次のようにも書かれている。
+You also need to have the Chrome browser installed on your system. You can also use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera.
+ということで試しにEdgeで動かしてみることにする
+Edgeのパスを確認 私はMacを使っている。 Edgeの本体は「アプリケーション &amp;gt; Edge &amp;gt; Contents &amp;gt; MacOS」と辿ったところにある。 パスだと「/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge」である。
+環境変数にこのパスを設定 先に述べたようにwebshot2はchromoteのパッケージを通してChromeを動かしている。 Rのコンソールでchromote::find_chrome()と打つと，初期ではGoogle Chromeがある場所を指すようになっている。 例えば私の環境だと何も設定しないと次のような返り値である。
+chromote::find_chrome() # [1] &amp;#34;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&amp;#34; chromote::find_chrome()という関数の中身を覗くと&amp;quot;CHROMOTE_CHROME&amp;quot;という環境変数の値が空でない場合には，その環境変数に設定されたパスを返すようである。 この返り値がchromoteの各所で使われている。 したがって環境変数に&amp;quot;CHROMOTE_CHROME&amp;quot;にEdgeのパスを指定しておけばEdgeで動く。
+Sys.setenv(CHROMOTE_CHROME = &amp;#34;/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge&amp;#34;) chromote::find_chrome() # [1] &amp;#34;/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge&amp;#34; 実際にこのように設定するとPCにChromeが入っていなくともEdgeが入っていればwebshot2は正しく動作するようである。">
+<meta property="og:title" content="webshot2でEdgeを使う" />
+<meta property="og:description" content="Rでスクリーンショットをとるパッケージにwebshot2がある。 パッケージのページによるとchromoteのパッケージを呼び出してChromeを動かしているようだ。 そこには次のようにも書かれている。
+You also need to have the Chrome browser installed on your system. You can also use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera.
+ということで試しにEdgeで動かしてみることにする
+Edgeのパスを確認 私はMacを使っている。 Edgeの本体は「アプリケーション &gt; Edge &gt; Contents &gt; MacOS」と辿ったところにある。 パスだと「/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge」である。
+環境変数にこのパスを設定 先に述べたようにwebshot2はchromoteのパッケージを通してChromeを動かしている。 Rのコンソールでchromote::find_chrome()と打つと，初期ではGoogle Chromeがある場所を指すようになっている。 例えば私の環境だと何も設定しないと次のような返り値である。
+chromote::find_chrome() # [1] &#34;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&#34; chromote::find_chrome()という関数の中身を覗くと&quot;CHROMOTE_CHROME&quot;という環境変数の値が空でない場合には，その環境変数に設定されたパスを返すようである。 この返り値がchromoteの各所で使われている。 したがって環境変数に&quot;CHROMOTE_CHROME&quot;にEdgeのパスを指定しておけばEdgeで動く。
+Sys.setenv(CHROMOTE_CHROME = &#34;/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge&#34;) chromote::find_chrome() # [1] &#34;/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge&#34; 実際にこのように設定するとPCにChromeが入っていなくともEdgeが入っていればwebshot2は正しく動作するようである。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://onoshima.github.io/blog/2020/09/16/omega_efacfa/" /><meta property="article:section" content="blog" />
-<meta property="article:published_time" content="2020-09-16T15:13:32+09:00" />
-<meta property="article:modified_time" content="2023-04-03T21:25:09+09:00" />
-<meta itemprop="name" content="EFAから計算したωとCFAから計算したω">
-<meta itemprop="description" content="2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
-$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}&#43;{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
-として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
-Revelle &amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
-使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。
-https://www.personality-project.org/r/html/bifactor.html
-探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
-library(lavaan) library(psych) library(knitr) data(&#34;Thurstone&#34;) res_efa &lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3)) g F1* F2* F3* h2 u2 p2 Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615 Vocabulary 0.726 0.553 0.042 -0.022 0.835 0.165 0.631 Sent.Completion 0."><meta itemprop="datePublished" content="2020-09-16T15:13:32+09:00" />
-<meta itemprop="dateModified" content="2023-04-03T21:25:09+09:00" />
-<meta itemprop="wordCount" content="422">
-<meta itemprop="keywords" content="coefficient omega,reliability," /><meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="EFAから計算したωとCFAから計算したω"/>
-<meta name="twitter:description" content="2つのω係数について 信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ
-$$ \omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\ \omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}&#43;{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)} $$
-として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。
-Revelle &amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。
-使うデータはPsychパッケージに入ってるThurstoneというデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。
-https://www.personality-project.org/r/html/bifactor.html
-探索的因子分析による方法 まずは，探索的因子分析でやってみる。psych所収のomega関数を使う。とても簡単。
-library(lavaan) library(psych) library(knitr) data(&#34;Thurstone&#34;) res_efa &lt;- omega(Thurstone) kable(round(res_efa$schmid$sl,3)) g F1* F2* F3* h2 u2 p2 Sentences 0.709 0.560 -0.022 0.030 0.817 0.183 0.615 Vocabulary 0.726 0.553 0.042 -0.022 0.835 0.165 0.631 Sent.Completion 0."/>
+<meta property="og:url" content="https://onoshima.github.io/blog/2023/05/31/202305-webshot/" /><meta property="article:section" content="blog" />
+<meta property="article:published_time" content="2023-05-31T21:40:27+09:00" />
+<meta property="article:modified_time" content="2023-05-31T21:40:27+09:00" />
+<meta itemprop="name" content="webshot2でEdgeを使う">
+<meta itemprop="description" content="Rでスクリーンショットをとるパッケージにwebshot2がある。 パッケージのページによるとchromoteのパッケージを呼び出してChromeを動かしているようだ。 そこには次のようにも書かれている。
+You also need to have the Chrome browser installed on your system. You can also use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera.
+ということで試しにEdgeで動かしてみることにする
+Edgeのパスを確認 私はMacを使っている。 Edgeの本体は「アプリケーション &gt; Edge &gt; Contents &gt; MacOS」と辿ったところにある。 パスだと「/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge」である。
+環境変数にこのパスを設定 先に述べたようにwebshot2はchromoteのパッケージを通してChromeを動かしている。 Rのコンソールでchromote::find_chrome()と打つと，初期ではGoogle Chromeがある場所を指すようになっている。 例えば私の環境だと何も設定しないと次のような返り値である。
+chromote::find_chrome() # [1] &#34;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&#34; chromote::find_chrome()という関数の中身を覗くと&quot;CHROMOTE_CHROME&quot;という環境変数の値が空でない場合には，その環境変数に設定されたパスを返すようである。 この返り値がchromoteの各所で使われている。 したがって環境変数に&quot;CHROMOTE_CHROME&quot;にEdgeのパスを指定しておけばEdgeで動く。
+Sys.setenv(CHROMOTE_CHROME = &#34;/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge&#34;) chromote::find_chrome() # [1] &#34;/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge&#34; 実際にこのように設定するとPCにChromeが入っていなくともEdgeが入っていればwebshot2は正しく動作するようである。"><meta itemprop="datePublished" content="2023-05-31T21:40:27+09:00" />
+<meta itemprop="dateModified" content="2023-05-31T21:40:27+09:00" />
+<meta itemprop="wordCount" content="72">
+<meta itemprop="keywords" content="R,webshot2," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="webshot2でEdgeを使う"/>
+<meta name="twitter:description" content="Rでスクリーンショットをとるパッケージにwebshot2がある。 パッケージのページによるとchromoteのパッケージを呼び出してChromeを動かしているようだ。 そこには次のようにも書かれている。
+You also need to have the Chrome browser installed on your system. You can also use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera.
+ということで試しにEdgeで動かしてみることにする
+Edgeのパスを確認 私はMacを使っている。 Edgeの本体は「アプリケーション &gt; Edge &gt; Contents &gt; MacOS」と辿ったところにある。 パスだと「/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge」である。
+環境変数にこのパスを設定 先に述べたようにwebshot2はchromoteのパッケージを通してChromeを動かしている。 Rのコンソールでchromote::find_chrome()と打つと，初期ではGoogle Chromeがある場所を指すようになっている。 例えば私の環境だと何も設定しないと次のような返り値である。
+chromote::find_chrome() # [1] &#34;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&#34; chromote::find_chrome()という関数の中身を覗くと&quot;CHROMOTE_CHROME&quot;という環境変数の値が空でない場合には，その環境変数に設定されたパスを返すようである。 この返り値がchromoteの各所で使われている。 したがって環境変数に&quot;CHROMOTE_CHROME&quot;にEdgeのパスを指定しておけばEdgeで動く。
+Sys.setenv(CHROMOTE_CHROME = &#34;/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge&#34;) chromote::find_chrome() # [1] &#34;/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge&#34; 実際にこのように設定するとPCにChromeが入っていなくともEdgeが入っていればwebshot2は正しく動作するようである。"/>
 
 
 
@@ -132,8 +128,8 @@ if (!doNotTrack) {
       <li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id="m-blog-li">
   <a href="/blog/" title="ブログ記事" class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id="m-blog"><span class="">ブログ</span></a>
   <ul class="ul-1">
-    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230531202305-webshot-li">
-  <a href="/blog/2023/05/31/202305-webshot/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20230531202305-webshot"><span class="">webshot2でEdgeを使う</span></a>
+    <li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-blog20230531202305-webshot-li">
+  <a href="/blog/2023/05/31/202305-webshot/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-blog20230531202305-webshot"><span class="td-sidebar-nav-active-item">webshot2でEdgeを使う</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230410202304-cohend-li">
   <a href="/blog/2023/04/10/202304-cohend/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20230410202304-cohend"><span class="">2群の平均値差の効果量について</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20230403202304-booklet-li">
@@ -180,8 +176,8 @@ if (!doNotTrack) {
   <a href="/blog/2020/09/23/parallel/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200923parallel"><span class="">探索的因子分析の際の平行分析について</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200922vss-li">
   <a href="/blog/2020/09/22/vss/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200922vss"><span class="">因子分析におけるMAP基準について</span></a>
-</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id="m-blog20200916omega_efacfa-li">
-  <a href="/blog/2020/09/16/omega_efacfa/" class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id="m-blog20200916omega_efacfa"><span class="td-sidebar-nav-active-item">EFAから計算したωとCFAから計算したω</span></a>
+</li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200916omega_efacfa-li">
+  <a href="/blog/2020/09/16/omega_efacfa/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200916omega_efacfa"><span class="">EFAから計算したωとCFAから計算したω</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200427mplus_lavaan-li">
   <a href="/blog/2020/04/27/mplus_lavaan/" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id="m-blog20200427mplus_lavaan"><span class="">lavaanでMplusのカテゴリカル因子分析を再現する</span></a>
 </li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id="m-blog20200424nonnormal-li">
@@ -249,11 +245,8 @@ if (!doNotTrack) {
             <div class="td-toc">
         <nav id="TableOfContents">
   <ul>
-    <li><a href="#2つのω係数について">2つのω係数について</a></li>
-    <li><a href="#探索的因子分析による方法">探索的因子分析による方法</a></li>
-    <li><a href="#確認的因子分析による方法">確認的因子分析による方法</a></li>
-    <li><a href="#omegasem関数について">omegaSem関数について</a></li>
-    <li><a href="#参考">参考</a></li>
+    <li><a href="#edgeのパスを確認">Edgeのパスを確認</a></li>
+    <li><a href="#環境変数にこのパスを設定">環境変数にこのパスを設定</a></li>
   </ul>
 </nav>
       </div>
@@ -408,11 +401,11 @@ if (!doNotTrack) {
           <main class="col-12 col-md-9 col-xl-8 pl-md-5 pr-md-4" role="main">
             
 <div class="td-content">
-	<h1>EFAから計算したωとCFAから計算したω</h1>
+	<h1>webshot2でEdgeを使う</h1>
 	
 	<div class="td-byline mb-4">
 		
-		<time datetime="2020-09-16" class="text-muted">Wednesday, September 16, 2020</time>
+		<time datetime="2023-05-31" class="text-muted">Wednesday, May 31, 2023</time>
 	</div>
 	<header class="article-meta">
 		
@@ -426,9 +419,9 @@ if (!doNotTrack) {
   <h5 class="taxonomy-title">Tags:</h5>
   <ul class="taxonomy-terms">
     
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/coefficient-omega/" data-taxonomy-term="coefficient-omega"><span class="taxonomy-label">coefficient omega</span></a></li>
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span></a></li>
     
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/reliability/" data-taxonomy-term="reliability"><span class="taxonomy-label">reliability</span></a></li>
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/tags/webshot2/" data-taxonomy-term="webshot2"><span class="taxonomy-label">webshot2</span></a></li>
     
   </ul>
 </div>
@@ -441,9 +434,7 @@ if (!doNotTrack) {
   <h5 class="taxonomy-title">Categories:</h5>
   <ul class="taxonomy-terms">
     
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/r/" data-taxonomy-term="r"><span class="taxonomy-label">R</span></a></li>
-    
-      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/stat/" data-taxonomy-term="stat"><span class="taxonomy-label">stat</span></a></li>
+      <li><a class="taxonomy-term" href="https://onoshima.github.io/categories/others/" data-taxonomy-term="others"><span class="taxonomy-label">others</span></a></li>
     
   </ul>
 </div>
@@ -453,281 +444,39 @@ if (!doNotTrack) {
 
 		
 	</header>
-	<h2 id="2つのω係数について">2つのω係数について</h2>
-<p>信頼性係数の1つであるω係数は$\omega_h$と$\omega_t$があって，それぞれ</p>
-<p>$$
-\omega_h = \frac{{\bf 1^{\prime} c c^{\prime} 1}}{{\rm Var}(X)} \\
-\omega_t = \frac{{\bf 1^{\prime} c c^{\prime} 1}+{\bf 1^{\prime} A A^{\prime} 1}}{{\rm Var}(X)}
-$$</p>
-<p>として表される。${\bf c}$は一般因子の因子負荷量ベクトルで，${\bf A}$は群因子の因子負荷量行列である。</p>
-<p>Revelle &amp; Condon（2019）によると，これらの推定値を得る方法は，（1）EFAで高次因子モデルの因子負荷量を得てその結果にScmidt-Leiman変換をかける方法と，（2）CFAで直接的に双因子モデルを指定して推定値を得る方法がある。ここでは，Rで実際にその2つをやってみてどのような違いがあるかを検討する。</p>
-<p>使うデータは<code>Psych</code>パッケージに入ってる<code>Thurstone</code>というデータ（相関行列）。9つのテストのデータで，3つの因子（1）Verbal Comprehension,（2）Word Fluency, （3）Reasoningにまとまるようである。サンプルサイズは213らしい。</p>
-<p><a href="https://www.personality-project.org/r/html/bifactor.html">https://www.personality-project.org/r/html/bifactor.html</a></p>
-<h2 id="探索的因子分析による方法">探索的因子分析による方法</h2>
-<p>まずは，探索的因子分析でやってみる。<code>psych</code>所収の<code>omega</code>関数を使う。とても簡単。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#000">library</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">lavaan</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">library</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">psych</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">library</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">knitr</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">data</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Thurstone&#34;</span><span style="color:#000;font-weight:bold">)</span> 
-</span></span><span style="display:flex;"><span><span style="color:#000">res_efa</span>  <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">omega</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">Thurstone</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">kable</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">round</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">res_efa</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">schmid</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">sl</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">))</span></span></span></code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:right">g</th>
-<th style="text-align:right">F1*</th>
-<th style="text-align:right">F2*</th>
-<th style="text-align:right">F3*</th>
-<th style="text-align:right">h2</th>
-<th style="text-align:right">u2</th>
-<th style="text-align:right">p2</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Sentences</td>
-<td style="text-align:right">0.709</td>
-<td style="text-align:right">0.560</td>
-<td style="text-align:right">-0.022</td>
-<td style="text-align:right">0.030</td>
-<td style="text-align:right">0.817</td>
-<td style="text-align:right">0.183</td>
-<td style="text-align:right">0.615</td>
-</tr>
-<tr>
-<td style="text-align:left">Vocabulary</td>
-<td style="text-align:right">0.726</td>
-<td style="text-align:right">0.553</td>
-<td style="text-align:right">0.042</td>
-<td style="text-align:right">-0.022</td>
-<td style="text-align:right">0.835</td>
-<td style="text-align:right">0.165</td>
-<td style="text-align:right">0.631</td>
-</tr>
-<tr>
-<td style="text-align:left">Sent.Completion</td>
-<td style="text-align:right">0.683</td>
-<td style="text-align:right">0.521</td>
-<td style="text-align:right">0.020</td>
-<td style="text-align:right">0.004</td>
-<td style="text-align:right">0.738</td>
-<td style="text-align:right">0.262</td>
-<td style="text-align:right">0.632</td>
-</tr>
-<tr>
-<td style="text-align:left">First.Letters</td>
-<td style="text-align:right">0.646</td>
-<td style="text-align:right">-0.001</td>
-<td style="text-align:right">0.558</td>
-<td style="text-align:right">0.002</td>
-<td style="text-align:right">0.729</td>
-<td style="text-align:right">0.271</td>
-<td style="text-align:right">0.573</td>
-</tr>
-<tr>
-<td style="text-align:left">Four.Letter.Words</td>
-<td style="text-align:right">0.622</td>
-<td style="text-align:right">-0.011</td>
-<td style="text-align:right">0.489</td>
-<td style="text-align:right">0.076</td>
-<td style="text-align:right">0.632</td>
-<td style="text-align:right">0.368</td>
-<td style="text-align:right">0.613</td>
-</tr>
-<tr>
-<td style="text-align:left">Suffixes</td>
-<td style="text-align:right">0.558</td>
-<td style="text-align:right">0.112</td>
-<td style="text-align:right">0.409</td>
-<td style="text-align:right">-0.060</td>
-<td style="text-align:right">0.495</td>
-<td style="text-align:right">0.505</td>
-<td style="text-align:right">0.629</td>
-</tr>
-<tr>
-<td style="text-align:left">Letter.Series</td>
-<td style="text-align:right">0.587</td>
-<td style="text-align:right">0.019</td>
-<td style="text-align:right">-0.009</td>
-<td style="text-align:right">0.617</td>
-<td style="text-align:right">0.725</td>
-<td style="text-align:right">0.275</td>
-<td style="text-align:right">0.475</td>
-</tr>
-<tr>
-<td style="text-align:left">Pedigrees</td>
-<td style="text-align:right">0.577</td>
-<td style="text-align:right">0.238</td>
-<td style="text-align:right">-0.033</td>
-<td style="text-align:right">0.339</td>
-<td style="text-align:right">0.505</td>
-<td style="text-align:right">0.495</td>
-<td style="text-align:right">0.659</td>
-</tr>
-<tr>
-<td style="text-align:left">Letter.Group</td>
-<td style="text-align:right">0.541</td>
-<td style="text-align:right">-0.037</td>
-<td style="text-align:right">0.139</td>
-<td style="text-align:right">0.459</td>
-<td style="text-align:right">0.524</td>
-<td style="text-align:right">0.476</td>
-<td style="text-align:right">0.558</td>
-</tr>
-</tbody>
-</table>
-<p>次のようなパス図も一緒に吐き出す。</p>
-<p><img src="/images/omega_efacfa.png" alt="パス図"></p>
-<p>ω係数は，$\omega_h = 0.74$と$\omega_t = 0.93$とのことである。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span> <span style="color:#000">Total</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">General</span> <span style="color:#000">and</span> <span style="color:#000">Subset</span> <span style="color:#000">omega</span> <span style="color:#000">for</span> <span style="color:#000">each</span> <span style="color:#000">subset</span>
-</span></span><span style="display:flex;"><span>                                                 <span style="color:#000">g</span>  <span style="color:#000">F1</span><span style="color:#ce5c00;font-weight:bold">*</span>  <span style="color:#000">F2</span><span style="color:#ce5c00;font-weight:bold">*</span>  <span style="color:#000">F3</span><span style="color:#ce5c00;font-weight:bold">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Omega</span> <span style="color:#000">total</span> <span style="color:#000">for</span> <span style="color:#000">total</span> <span style="color:#000">scores</span> <span style="color:#000">and</span> <span style="color:#000">subscales</span>    <span style="color:#0000cf;font-weight:bold">0.93</span> <span style="color:#0000cf;font-weight:bold">0.92</span> <span style="color:#0000cf;font-weight:bold">0.83</span> <span style="color:#0000cf;font-weight:bold">0.79</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Omega</span> <span style="color:#000">general</span> <span style="color:#000">for</span> <span style="color:#000">total</span> <span style="color:#000">scores</span> <span style="color:#000">and</span> <span style="color:#000">subscales</span>  <span style="color:#0000cf;font-weight:bold">0.74</span> <span style="color:#0000cf;font-weight:bold">0.58</span> <span style="color:#0000cf;font-weight:bold">0.50</span> <span style="color:#0000cf;font-weight:bold">0.47</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Omega</span> <span style="color:#000">group</span> <span style="color:#000">for</span> <span style="color:#000">total</span> <span style="color:#000">scores</span> <span style="color:#000">and</span> <span style="color:#000">subscales</span>    <span style="color:#0000cf;font-weight:bold">0.16</span> <span style="color:#0000cf;font-weight:bold">0.34</span> <span style="color:#0000cf;font-weight:bold">0.32</span> <span style="color:#0000cf;font-weight:bold">0.32</span></span></span></code></pre></div>
-<p>これは先ほどの，SL変換後の因子負荷量から式通りに計算すると出てくる値である。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#000">VarX</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">Thurstone</span><span style="color:#000;font-weight:bold">)</span> 
-</span></span><span style="display:flex;"><span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">res_efa</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">schmid</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">sl[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;g&#34;</span><span style="color:#000">]</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">A</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">res_efa</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">schmid</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">sl[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;F1*&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;F2*&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;F3*&#34;</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000">]</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume1</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">%*%</span> <span style="color:#000">t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">A</span> <span style="color:#ce5c00;font-weight:bold">%*%</span> <span style="color:#000">t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">A</span><span style="color:#000;font-weight:bold">))</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume2</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">%*%</span> <span style="color:#000">t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">))</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume1</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">VarX</span>
-</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">#[1] 0.9308199</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume2</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">VarX</span>
-</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">#[1] 0.7360703</span></span></span></code></pre></div>
-<h2 id="確認的因子分析による方法">確認的因子分析による方法</h2>
-<p>続いて確認的因子分析による方法を試してみる。<code>lavaan</code>でCFAをして因子負荷量行列を取り出す。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#000">mo</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span><span style="color:#4e9a06">&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">g =~ Sentences+Vocabulary+Sent.Completion+First.Letters+Four.Letter.Words+Suffixes+Letter.Series+Pedigrees+Letter.Group
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">F1 =~ Sentences+Vocabulary+Sent.Completion
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">F2 =~ First.Letters+Four.Letter.Words+Suffixes
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">F3 =~ Letter.Series+Pedigrees+Letter.Group
-</span></span></span><span style="display:flex;"><span><span style="color:#4e9a06">&#34;</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">res_cfa</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">cfa</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">mo</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">sample.cov</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#000">Thurstone</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">orthogonal</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#3465a4">T</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">sample.nobs</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">213</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">lambda</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">inspect</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">res_cfa</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">what</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#4e9a06">&#34;std&#34;</span><span style="color:#000;font-weight:bold">)</span><span style="color:#ce5c00;font-weight:bold">$</span><span style="color:#000">lambda</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">kable</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">round</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">lambda</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">3</span><span style="color:#000;font-weight:bold">))</span></span></span></code></pre></div>
-<table>
-<thead>
-<tr>
-<th style="text-align:left"></th>
-<th style="text-align:right">g</th>
-<th style="text-align:right">F1</th>
-<th style="text-align:right">F2</th>
-<th style="text-align:right">F3</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Sentences</td>
-<td style="text-align:right">0.768</td>
-<td style="text-align:right">0.488</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.000</td>
-</tr>
-<tr>
-<td style="text-align:left">Vocabulary</td>
-<td style="text-align:right">0.791</td>
-<td style="text-align:right">0.452</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.000</td>
-</tr>
-<tr>
-<td style="text-align:left">Sent.Completion</td>
-<td style="text-align:right">0.754</td>
-<td style="text-align:right">0.404</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.000</td>
-</tr>
-<tr>
-<td style="text-align:left">First.Letters</td>
-<td style="text-align:right">0.608</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.614</td>
-<td style="text-align:right">0.000</td>
-</tr>
-<tr>
-<td style="text-align:left">Four.Letter.Words</td>
-<td style="text-align:right">0.597</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.506</td>
-<td style="text-align:right">0.000</td>
-</tr>
-<tr>
-<td style="text-align:left">Suffixes</td>
-<td style="text-align:right">0.572</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.394</td>
-<td style="text-align:right">0.000</td>
-</tr>
-<tr>
-<td style="text-align:left">Letter.Series</td>
-<td style="text-align:right">0.567</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.727</td>
-</tr>
-<tr>
-<td style="text-align:left">Pedigrees</td>
-<td style="text-align:right">0.662</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.247</td>
-</tr>
-<tr>
-<td style="text-align:left">Letter.Group</td>
-<td style="text-align:right">0.530</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.000</td>
-<td style="text-align:right">0.409</td>
-</tr>
-</tbody>
-</table>
-<p>この推定値を使って，先ほどと同様にωを計算する。</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">lambda[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;g&#34;</span><span style="color:#000">]</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">A</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">lambda[</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;F1&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;F2&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;F3&#34;</span><span style="color:#000;font-weight:bold">)</span><span style="color:#000">]</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume1</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">%*%</span> <span style="color:#000">t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">))</span> <span style="color:#ce5c00;font-weight:bold">+</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">A</span> <span style="color:#ce5c00;font-weight:bold">%*%</span> <span style="color:#000">t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">A</span><span style="color:#000;font-weight:bold">))</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume2</span> <span style="color:#ce5c00;font-weight:bold">&lt;-</span> <span style="color:#000">sum</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span> <span style="color:#ce5c00;font-weight:bold">%*%</span> <span style="color:#000">t</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">c</span><span style="color:#000;font-weight:bold">))</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume1</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">VarX</span>
-</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">#[1] 0.9278556</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">nume2</span><span style="color:#ce5c00;font-weight:bold">/</span><span style="color:#000">VarX</span>
-</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic">#[1] 0.7891304</span></span></span></code></pre></div>
-<p>ω係数は，$\omega_h = 0.79$と$\omega_t = 0.93$とのことである。$\omega_h$については，EFAで計算した場合より若干高い値である。
-この結果は，Revelle &amp; Condon(2019)が次のように言っている通り。</p>
+	<p>Rでスクリーンショットをとるパッケージにwebshot2がある。
+<a href="https://rstudio.github.io/webshot2/">パッケージのページ</a>によるとchromoteのパッケージを呼び出してChromeを動かしているようだ。
+そこには次のようにも書かれている。</p>
 <blockquote>
-<p>The bifactor solution (g) tends to produce slightly larger estimates than the Schmid-Leiman procedure(h) because it forces all the cross loadings of the lower level factors to be 0 (p.9).</p>
+<p>You also need to have the Chrome browser installed on your system. You can also use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera.</p>
 </blockquote>
-<h2 id="omegasem関数について">omegaSem関数について</h2>
-<p>ところで<code>psych</code>には<code>omegaSem</code>という関数があり，直接的に確認的因子分析に基づくωを計算できるようである。
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span> 
-</span></span><span style="display:flex;"><span><span style="color:#000">omegaSem</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">Thurstone</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">n.obs</span><span style="color:#ce5c00;font-weight:bold">=</span><span style="color:#0000cf;font-weight:bold">213</span><span style="color:#000;font-weight:bold">)</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Total</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">General</span> <span style="color:#000">and</span> <span style="color:#000">Subset</span> <span style="color:#000">omega</span> <span style="color:#000">for</span> <span style="color:#000">each</span> <span style="color:#000">subset</span>
-</span></span><span style="display:flex;"><span>                                                 <span style="color:#000">g</span>  <span style="color:#000">F1</span><span style="color:#ce5c00;font-weight:bold">*</span>  <span style="color:#000">F2</span><span style="color:#ce5c00;font-weight:bold">*</span>  <span style="color:#000">F3</span><span style="color:#ce5c00;font-weight:bold">*</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Omega</span> <span style="color:#000">total</span> <span style="color:#000">for</span> <span style="color:#000">total</span> <span style="color:#000">scores</span> <span style="color:#000">and</span> <span style="color:#000">subscales</span>    <span style="color:#0000cf;font-weight:bold">0.93</span> <span style="color:#0000cf;font-weight:bold">0.92</span> <span style="color:#0000cf;font-weight:bold">0.82</span> <span style="color:#0000cf;font-weight:bold">0.80</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Omega</span> <span style="color:#000">general</span> <span style="color:#000">for</span> <span style="color:#000">total</span> <span style="color:#000">scores</span> <span style="color:#000">and</span> <span style="color:#000">subscales</span>  <span style="color:#0000cf;font-weight:bold">0.79</span> <span style="color:#0000cf;font-weight:bold">0.69</span> <span style="color:#0000cf;font-weight:bold">0.48</span> <span style="color:#0000cf;font-weight:bold">0.50</span>
-</span></span><span style="display:flex;"><span><span style="color:#000">Omega</span> <span style="color:#000">group</span> <span style="color:#000">for</span> <span style="color:#000">total</span> <span style="color:#000">scores</span> <span style="color:#000">and</span> <span style="color:#000">subscales</span>    <span style="color:#0000cf;font-weight:bold">0.14</span> <span style="color:#0000cf;font-weight:bold">0.23</span> <span style="color:#0000cf;font-weight:bold">0.35</span> <span style="color:#0000cf;font-weight:bold">0.31</span></span></span></code></pre></div></p>
-<p>関数の中身をしっかり覗いた訳ではないから詳しくは分からないが，どうやら<code>omega</code>関数でSL変換による因子負荷量を得たあとに，その因子負荷量をもとにlavaanのモデル式を自動で書き出して，lavaanに突っ込んでいるようである。お手軽だけれどもCFAのモデルが変なモデルになっていないか確認しないと痛い目をみそうである（もっとも<code>omegaSem</code>関数を使うとパス図が描かれるからそこでチェックすれば良いだけの話だけど）</p>
-<h2 id="参考">参考</h2>
-<p>Revelle, W., &amp; Condon, D. M. (2019, August 5). Reliability From α to ω: A Tutorial. Psychological
-Assessment. Advance online publication. <a href="http://dx.doi.org/10.1037/pas0000754">http://dx.doi.org/10.1037/pas0000754</a></p>
+<p>ということで試しにEdgeで動かしてみることにする</p>
+<h2 id="edgeのパスを確認">Edgeのパスを確認</h2>
+<p>私はMacを使っている。
+Edgeの本体は「<strong>アプリケーション &gt; Edge &gt; Contents &gt; MacOS</strong>」と辿ったところにある。
+パスだと「/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge」である。</p>
+<h2 id="環境変数にこのパスを設定">環境変数にこのパスを設定</h2>
+<p>先に述べたようにwebshot2はchromoteのパッケージを通してChromeを動かしている。
+Rのコンソールで<code>chromote::find_chrome()</code>と打つと，初期ではGoogle Chromeがある場所を指すようになっている。
+例えば私の環境だと何も設定しないと次のような返り値である。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#000">chromote</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">find_chrome</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># [1] &#34;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&#34;</span>
+</span></span></code></pre></div><p><code>chromote::find_chrome()</code>という関数の中身を覗くと<code>&quot;CHROMOTE_CHROME&quot;</code>という環境変数の値が空でない場合には，その環境変数に設定されたパスを返すようである。
+この返り値がchromoteの各所で使われている。
+したがって環境変数に<code>&quot;CHROMOTE_CHROME&quot;</code>にEdgeのパスを指定しておけばEdgeで動く。</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-r" data-lang="r"><span style="display:flex;"><span><span style="color:#000">Sys.setenv</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">CHROMOTE_CHROME</span> <span style="color:#ce5c00;font-weight:bold">=</span> <span style="color:#4e9a06">&#34;/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge&#34;</span><span style="color:#000;font-weight:bold">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#000">chromote</span><span style="color:#ce5c00;font-weight:bold">::</span><span style="color:#000">find_chrome</span><span style="color:#000;font-weight:bold">()</span>
+</span></span><span style="display:flex;"><span><span style="color:#8f5902;font-style:italic"># [1] &#34;/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge&#34;</span>
+</span></span></code></pre></div><p>実際にこのように設定するとPCにChromeが入っていなくともEdgeが入っていればwebshot2は正しく動作するようである。</p>
 
 	
 
 	<ul class="list-unstyled d-flex justify-content-between align-items-center mb-0 pt-5">
   <li>
-    <a href="/blog/2020/04/27/mplus_lavaan/" aria-label="Previous - lavaanでMplusのカテゴリカル因子分析を再現する" class="btn btn-primary"><span class="mr-1">←</span>Previous</a>
+    <a href="/blog/2023/04/10/202304-cohend/" aria-label="Previous - 2群の平均値差の効果量について" class="btn btn-primary"><span class="mr-1">←</span>Previous</a>
   </li>
   <li>
-    <a href="/blog/2020/09/22/vss/" aria-label="Next - 因子分析におけるMAP基準について" class="btn btn-primary">Next<span class="ml-1">→</span></a>
+    <a class="btn btn-primary disabled">Next<span class="ml-1">→</span></a>
   </li>
 </ul>
 
