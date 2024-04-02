@@ -37,7 +37,7 @@ Sys.setenv(CHROMOTE_CHROME = &#34;/Applications/Microsoft Edge.app/Contents/MacO
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://onoshima.github.io/blog/2023/05/31/202305-webshot/" /><meta property="article:section" content="blog" />
 <meta property="article:published_time" content="2023-05-31T21:40:27+09:00" />
-<meta property="article:modified_time" content="2023-05-31T22:08:56+09:00" />
+<meta property="article:modified_time" content="2024-04-02T13:44:30+09:00" />
 <meta itemprop="name" content="webshot2でEdgeを使う">
 <meta itemprop="description" content="Rでスクリーンショットをとるパッケージにwebshot2がある。 パッケージのページによるとchromoteのパッケージを呼び出してChromeを動かしているようだ。 そこには次のようにも書かれている。
 You also need to have the Chrome browser installed on your system. You can also use other browsers based on Chromium, such as Chromium itself, Edge, Vivaldi, Brave, or Opera.
@@ -46,7 +46,7 @@ Edgeのパスを確認 私はMacを使っている。 Edgeの本体は「アプ�
 環境変数にこのパスを設定 先に述べたようにwebshot2はchromoteのパッケージを通してChromeを動かしている。 Rのコンソールでchromote::find_chrome()と打つと，初期ではGoogle Chromeがある場所を指すようになっている。 例えば私の環境だと何も設定しないと次のような返り値である。
 chromote::find_chrome() # [1] &#34;/Applications/Google Chrome.app/Contents/MacOS/Google Chrome&#34; chromote::find_chrome()という関数の中身を覗くと&quot;CHROMOTE_CHROME&quot;という環境変数の値が空でない場合には，その環境変数に設定されたパスを返すようである。 この返り値がchromoteの各所で使われている。 したがって環境変数に&quot;CHROMOTE_CHROME&quot;にEdgeのパスを指定しておけばEdgeで動く。
 Sys.setenv(CHROMOTE_CHROME = &#34;/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge&#34;) chromote::find_chrome() # [1] &#34;/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge&#34; 実際にこのように設定するとPCにChromeが入っていなくともEdgeが入っていればwebshot2は正しく動作するようである。"><meta itemprop="datePublished" content="2023-05-31T21:40:27+09:00" />
-<meta itemprop="dateModified" content="2023-05-31T22:08:56+09:00" />
+<meta itemprop="dateModified" content="2024-04-02T13:44:30+09:00" />
 <meta itemprop="wordCount" content="72">
 <meta itemprop="keywords" content="R,webshot2," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="webshot2でEdgeを使う"/>
@@ -61,8 +61,8 @@ Sys.setenv(CHROMOTE_CHROME = &#34;/Applications/Microsoft Edge.app/Contents/MacO
 
 
 
-<link rel="preload" href="/scss/main.scss" as="style">
-<link href="/scss/main.scss" rel="stylesheet" integrity="">
+<link rel="preload" href="/scss/main.min.dab844e01a0fafa262a2cd44c03b96dd6baa73f492cf00d362ae9a6827cb4a1b.css" as="style">
+<link href="/scss/main.min.dab844e01a0fafa262a2cd44c03b96dd6baa73f492cf00d362ae9a6827cb4a1b.css" rel="stylesheet" integrity="">
 
 <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
