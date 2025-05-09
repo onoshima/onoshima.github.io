@@ -337,11 +337,12 @@ footer small {
   font-size: 22px;
   color: var(--main-color);
   border-bottom: var(--main-color) solid 3px;
-  margin-left: auto;
-  margin-right: auto;
+  /*margin-left: auto;
+  margin-right: auto;*/
 }
 .subpage h3 {
   font-size: 16px;
+  padding-left: 14px;
   margin-bottom: 0;
   color: #333;
 }
@@ -370,7 +371,7 @@ footer small {
 }
 
 .subpage-container section {
-  width: 80%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 30px;
@@ -411,18 +412,14 @@ footer small {
   padding-right: 0.5em;
 }
 .subpage-container dt {
-  padding-left: 1em;
-  font-weight: 400;
-}
-.subpage-links dt {
-  font-weight: 400;
-}
-.subpage-container dd {
-  margin-left: 2em;
-}
-.profile-info dt {
+  padding-left: 0.5em;
   font-weight: 700;
 }
+
+.subpage-container dd {
+  margin-left: 1.5em;
+}
+
 
 /* ------------- 資料ページ固有 -------------*/
 
