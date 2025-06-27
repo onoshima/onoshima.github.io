@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>画面サイズ確認用ページ | Onoshima&apos;s website</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700&display=swap">
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="../js/script.js"></script>
+</head>
+<body class="subpage">
+  <header>
+    <a class="header-logo" href="../index.html">Onoshima's website</a>
+    <button class="header-button"><span class="icon"></span></button>
+    <nav class="header-gnav">
+      <ul>
+        <li><a href="../index.html">トップページ</a></li>
+        <li><a href="./index.html">プロフィール</a></li>
+        <li><a href="../resource/index.html">資料</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <h1>画面サイズ確認用ページ</h1>
+    <div class="subpage-container">
+      <section>
+        <p>スマホの画面サイズを実機で確認したいことがあって作りました。
+          JavaScriptのwindowオブジェクトのプロパティの値を表示します。</p>
+        <button id="getSize">画面サイズを取得</button>
+        <ul>
+          <li>幅
+            <ol>
+              <li>screen.width: <span id="sw"></span></li>
+              <li>screen.availWidth: <span id="availw"></span></li>
+              <li>window.innerWidth: <span id="innerw"></span></li>
+              <li>window.outerWidth: <span id="outerw"></span></li>
+            </ol>
+          </li>
+          <li>高さ
+            <ol>
+              <li>screen.height: <span id="sh"></span></li>
+              <li>screen.availHeight: <span id="availh"></span></li>
+              <li>window.innerHeight: <span id="innerh"></span></li>
+              <li>window.outerHeight: <span id="outerh"></span></li>
+            </ol>
+          </li>
+        </ul>
+        <script>
+          const button = document.getElementById("getSize");
+          const span_sw = document.getElementById('sw');
+          const span_availw = document.getElementById('availw');
+          const span_innerw = document.getElementById('innerw');
+          const span_outerw = document.getElementById('outerw');
+          const span_sh = document.getElementById('sh');
+          const span_availh = document.getElementById('availh');
+          const span_innerh = document.getElementById('innerh');
+          const span_outerh = document.getElementById('outerh');
+
+          button.addEventListener("click", (event) => {
+            span_sw.textContent = `${window.screen.width}`;
+            span_availw.textContent = `${window.screen.availWidth}`;
+            span_innerw.textContent = `${window.innerWidth}`;
+            span_outerw.textContent = `${window.outerWidth}`;
+            span_sh.textContent = `${window.screen.height}`;
+            span_availh.textContent = `${window.screen.availHeight}`;
+            span_innerh.textContent = `${window.innerHeight}`;
+            span_outerh.textContent = `${window.outerHeight}`;
+          });
+        </script>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <small>&copy; 2024 Takahiro Onoshima All Rights Reserved</small>
+  </footer>
+</body>
+</html>
