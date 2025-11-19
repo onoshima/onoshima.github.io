@@ -291,12 +291,12 @@ body.open {
 }
 .news-link::before {
   display: inline-block;
-  content: "[";
+  content: "［";
   text-decoration: none;
 }
 .news-link::after {
   display: inline-block;
-  content: "]";
+  content: "］";
   text-decoration: none;
 }
 
